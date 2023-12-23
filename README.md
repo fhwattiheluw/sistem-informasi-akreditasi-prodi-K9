@@ -1,5 +1,5 @@
 # sistem informasi akreditasi prodi K9
- sistem informasi akreditasi prodi K9
+ sistem informasi akreditasi prodi dengan Kriteria 9
 # Jurnal relevan
 * https://ojs.unikom.ac.id/index.php/jamika/article/view/1030/779
 * https://www.jppipa.unram.ac.id/index.php/jpmpi/article/view/523/356
