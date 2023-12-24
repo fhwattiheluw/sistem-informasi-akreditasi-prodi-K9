@@ -34,7 +34,7 @@
             </div>
             <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
               <span class="font-weight-semibold mb-1 mt-2 text-center">Antonio Olson</span>
-              <span class="text-secondary icon-sm text-center">$3499.00</span>
+              <span class="text-secondary icon-sm text-center">Fakultas</span>
             </div>
           </a>
         </li>
@@ -97,7 +97,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria2">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.2 Tata Pamong, Tata Kelola, dan Kerjasama</span>
           </a>
