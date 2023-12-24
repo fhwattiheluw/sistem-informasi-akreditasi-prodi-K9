@@ -103,43 +103,43 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria3">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.3 Mahasiswa</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria4">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.4 Sumber Daya Manusia</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria5">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.5 Keuangan, Sarana, dan Prasarana</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria6">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.6 Pendidikan</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria7">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.7 Penelitian</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria8">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.8 Pengabdian kepada Masyarakat</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/kriteria9">
             <i class="mdi mdi-table-edit menu-icon"></i>
             <span class="menu-title">C.9 Luaran dan Capaian Tridharma</span>
           </a>

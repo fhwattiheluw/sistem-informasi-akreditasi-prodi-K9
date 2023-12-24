@@ -36,3 +36,24 @@ Route::get('/datakeuangan', [DataKeuanganController::class, 'index']);
 
 // kriteria 2
 Route::get('/kriteria2', [TabelC2Controller::class, 'index']);
+
+// kriteria 3
+Route::get('/kriteria3', [TabelC3Controller::class, 'index']);
+
+// kriteria 4
+Route::get('/kriteria4', [TabelC4Controller::class, 'index']);
+
+// kriteria 5
+Route::get('/kriteria5', [TabelC5Controller::class, 'index']);
+
+// kriteria 6
+Route::get('/kriteria6', [TabelC6Controller::class, 'index']);
+
+// kriteria 7
+Route::get('/kriteria7', [TabelC7Controller::class, 'index']);
+
+// kriteria 8
+Route::get('/kriteria8', [TabelC8Controller::class, 'index']);
+
+// kriteria 9
+Route::get('/kriteria9', [TabelC9Controller::class, 'index']);
