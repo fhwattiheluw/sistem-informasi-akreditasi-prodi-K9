@@ -15,6 +15,7 @@ class TabelC4Controller extends Controller
     public function index()
     {
         //
+        return view('kriteria.c4.index');
     }
 
     /**

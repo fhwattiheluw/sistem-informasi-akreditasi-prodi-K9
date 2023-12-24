@@ -15,6 +15,7 @@ class TabelC8Controller extends Controller
     public function index()
     {
         //
+        return view('kriteria.c8.index');
     }
 
     /**

@@ -15,6 +15,7 @@ class TabelC7Controller extends Controller
     public function index()
     {
         //
+        return view('kriteria.c7.index');
     }
 
     /**

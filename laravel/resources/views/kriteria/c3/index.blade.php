@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.2 Tata Pamong, Tata Kelola, dan Kerjasama</p>
+          <p class="m-0">C.3 Mahasiswa</p>
         </a>
       </div>
 
@@ -22,36 +22,32 @@
   <div class="row">
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Pendidikan</h5>
+          <h5 class="card-title">Tabel Mahasiswa Reguler</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Penelitian</h5>
+          <h5 class="card-title">Tabel Calon Mahasiswa Dalam Negeri </h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Pengabdian kepada Masyarakat (PkM)</h5>
+          <h5 class="card-title">Tabel Calon Mahasiswa Luar Negeri</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Pengembangan Kelembagaan: SDM, Sarana/Prasarana, Publikasi, HKI, Paten, Teknologi Pembelajaran, dll.</h5>
+          <h5 class="card-title">Tabel Program layanan dan pembinaan minat, bakat, penalaran, kesejahteraan, dan keprofesian mahasiswa</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>

@@ -22,36 +22,32 @@
   <div class="row">
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Pendidikan</h5>
+          <h5 class="card-title">Data Kerja Sama - Bidang Pendidikan</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Penelitian</h5>
+          <h5 class="card-title">Data Kerja Sama - Bidang Penelitian</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Pengabdian kepada Masyarakat (PkM)</h5>
+          <h5 class="card-title">Data Kerja Sama - Bidang Pengabdian kepada Masyarakat (PkM)</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
-        <h5 class="card-header">Tabel 2.2.2 Data Kerja Sama</h5>
         <div class="card-body">
-          <h5 class="card-title">Bidang Pengembangan Kelembagaan: SDM, Sarana/Prasarana, Publikasi, HKI, Paten, Teknologi Pembelajaran, dll.</h5>
+          <h5 class="card-title">Data Kerja Sama - Bidang Pengembangan Kelembagaan: SDM, Sarana/Prasarana, Publikasi, HKI, Paten, Teknologi Pembelajaran, dll.</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>

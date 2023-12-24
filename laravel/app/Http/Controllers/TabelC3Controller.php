@@ -15,6 +15,7 @@ class TabelC3Controller extends Controller
     public function index()
     {
         //
+        return view('kriteria.c3.index');
     }
 
     /**

@@ -15,6 +15,7 @@ class TabelC9Controller extends Controller
     public function index()
     {
         //
+        return view('kriteria.c9.index');
     }
 
     /**
