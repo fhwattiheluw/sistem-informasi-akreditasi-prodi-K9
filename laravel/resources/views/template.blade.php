@@ -44,7 +44,7 @@
             <!-- <img class="sidebar-brand-logo" src="/assets/images/logo.svg" alt="" /> -->
             <!-- <img class="sidebar-brand-logomini" src="/assets/images/logo-mini.svg" alt="" /> -->
             <h3 class="sidebar-brand-logo">AkreSmart</h3>
-            <div class="small font-weight-light pt-1">Data Kuantitatif laporan evaluasi diri</div>
+            <div class="small font-weight-light pt-1">Instrumen APS versi 4.0</div>
           </a>
           <form class="d-flex align-items-center" action="#">
             <div class="input-group">
