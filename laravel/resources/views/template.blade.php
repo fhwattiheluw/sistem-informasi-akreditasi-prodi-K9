@@ -4,7 +4,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Plus Admin</title>
+  <title>Sistem informasi laporan evaluasi diri</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
@@ -19,7 +19,8 @@
   <!-- Layout styles -->
   <link rel="stylesheet" href="/assets/css/demo_1/style.css" />
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="/assets/images/favicon.png" />
+  <link rel="shortcut icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEweNHo97nHl3B-gQnvmWrzEbDPVPRu4HtHVe9okR-DUVS7Sfj3kfI3w4esGZp9VGsYcoUu2COT1Khu-OvQQfKjJ6-SuykTXR4j8_mIae3zHkS-5XzGZUs-pKF4tM1c9S6q_t3dpFVnah24b5b_0n9p4E8IXcTQCyFLpygD_fMCDC6cId6rf_qOqFE/s320/GKL16_Logo%20IAIN%20Ambon%20-%20Koleksilogo.com.jpg" />
+  @yield('css')
 </head>
 <body>
   <div class="container-scroller">
@@ -149,13 +150,13 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="pages/icons/mdi.html">
+          <a class="nav-link" href="/akun/index">
             <i class="mdi mdi-account-multiple menu-icon"></i>
             <span class="menu-title">Akun Pengguna</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pages/icons/mdi.html">
+          <a class="nav-link" href="/akun/show">
             <i class="mdi mdi-account-card-details menu-icon"></i>
             <span class="menu-title">Info Akun</span>
           </a>

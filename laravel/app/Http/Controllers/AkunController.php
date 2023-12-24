@@ -15,6 +15,8 @@ class AkunController extends Controller
     public function index()
     {
         //
+        return view('akun.manag_akun');
+
     }
 
     /**
@@ -47,6 +49,7 @@ class AkunController extends Controller
     public function show(akun $akun)
     {
         //
+        return view('akun.detail');
     }
 
     /**

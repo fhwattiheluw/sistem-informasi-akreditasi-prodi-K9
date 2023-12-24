@@ -1,5 +1,13 @@
 @extends('template')
 
+@section('css')
+<style media="screen">
+.table td {
+    padding: 1px;
+}
+</style>
+@endsection
+
 @section('content-wrapper')
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
@@ -43,7 +51,7 @@
                         </thead>
                         <tbody style="text-align: center;">
                           @for ($i = 0; $i < 5; $i++)
-                          <tr>
+                          <tr >
                             <td style="font-weight: bold;">2023</td>
                             <td><a href="#">2023</a></td>
                             <td><a href="#">2023</a></td>
@@ -51,8 +59,8 @@
                             <td><a href="#">2023</a></td>
                             <td><a href="#">2023</a></td>
                             <td>
-                              <button type="button" class="btn btn-primary btn-sm"><i class="mdi mdi-table-edit" style="font-size:small"></i></button>
-                              <button type="button" class="btn btn-danger btn-sm"><i class="mdi mdi-delete icon" style="font-size:small"></i> </button>
+                              <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                              <button type="button" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </button>
                             </td>
                           </tr>
                           @endfor

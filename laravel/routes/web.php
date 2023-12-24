@@ -12,6 +12,7 @@ use App\Http\Controllers\TabelC6Controller;
 use App\Http\Controllers\TabelC7Controller;
 use App\Http\Controllers\TabelC8Controller;
 use App\Http\Controllers\TabelC9Controller;
+use App\Http\Controllers\AkunController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ use App\Http\Controllers\TabelC9Controller;
 Route::get('/',[DashboardController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+// page akun
+Route::get('/akun/show', [AkunController::class, 'show']);
+Route::get('/akun/index', [AkunController::class, 'index']);
 
 // data informasi prodi
 Route::get('/dataprodi', [DataProgramStudiController::class, 'index']);
