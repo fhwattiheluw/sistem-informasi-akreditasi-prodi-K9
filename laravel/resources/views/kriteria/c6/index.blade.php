@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.3 Mahasiswa</p>
+          <p class="m-0">C.6 Pendidikan</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Mahasiswa Reguler</h5>
+          <h5 class="card-title">Tabel Mata Kuliah, CPL, dan Perangkat Pembelajaran</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
@@ -31,7 +31,7 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Calon Mahasiswa Dalam Negeri </h5>
+          <h5 class="card-title">Tabel Integrasi Hasil Penelitian dan PkM dalam Proses Pembelajaran</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
@@ -39,7 +39,7 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Calon Mahasiswa Luar Negeri</h5>
+          <h5 class="card-title">Tabel Jumlah Mahasiswa Bimbingan dan Frekuensi Pertemuan</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
@@ -47,7 +47,31 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Program layanan dan pembinaan minat, bakat, penalaran, kesejahteraan, dan keprofesian mahasiswa</h5>
+          <h5 class="card-title">Tabel Jumlah Mahasiswa Bimbingan Magang Kependidikan dan Frekuensi Pertemuan</h5>
+          <a href="#" class="btn btn-primary">Go</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Kegiatan Akademik di Luar Perkuliahan</h5>
+          <a href="#" class="btn btn-primary">Go</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Dosen Tamu dan Tenaga Ahli</h5>
+          <a href="#" class="btn btn-primary">Go</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Kepuasan Mahasiswa</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>

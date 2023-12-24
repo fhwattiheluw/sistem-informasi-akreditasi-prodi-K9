@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.3 Mahasiswa</p>
+          <p class="m-0">C.5 Keuangan, Sarana, dan Prasarana</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Mahasiswa Reguler</h5>
+          <h5 class="card-title">Tabel Pemerolehan Dana</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
@@ -31,7 +31,7 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Calon Mahasiswa Dalam Negeri </h5>
+          <h5 class="card-title">Tabel Penggunaan Dana</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
@@ -39,7 +39,7 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Calon Mahasiswa Luar Negeri</h5>
+          <h5 class="card-title">Tabel Dana Penelitian</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
@@ -47,7 +47,23 @@
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Program layanan dan pembinaan minat, bakat, penalaran, kesejahteraan, dan keprofesian mahasiswa</h5>
+          <h5 class="card-title">Tabel Dana PkM</h5>
+          <a href="#" class="btn btn-primary">Go</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Data Prasarana Pendidikan</h5>
+          <a href="#" class="btn btn-primary">Go</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Data Sarana Pendidikan</h5>
           <a href="#" class="btn btn-primary">Go</a>
         </div>
       </div>
