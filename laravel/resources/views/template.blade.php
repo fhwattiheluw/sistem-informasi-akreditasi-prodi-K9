@@ -175,12 +175,12 @@
             <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a>
           </div>
           <ul class="navbar-nav">
-                        <li class="nav-item ">
-                          <a class="nav-link"href="#" data-toggle="dropdown" aria-expanded="false">
-IAIN AMBON
-                          </a>
-                        </li>
-                      </ul>
+            <li class="nav-item ">
+              <a class="nav-link"href="#" data-toggle="dropdown" aria-expanded="false">
+                IAIN AMBON
+              </a>
+            </li>
+          </ul>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-logout d-none d-md-block mr-3">
               <a class="nav-link" href="#">logout</a>

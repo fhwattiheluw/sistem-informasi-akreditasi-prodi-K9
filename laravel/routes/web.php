@@ -13,6 +13,7 @@ use App\Http\Controllers\TabelC7Controller;
 use App\Http\Controllers\TabelC8Controller;
 use App\Http\Controllers\TabelC9Controller;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\AutentikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ use App\Http\Controllers\AkunController;
 |
 */
 
-Route::get('/',[DashboardController::class, 'index']);
+Route::get('/',[AutentikasiController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
