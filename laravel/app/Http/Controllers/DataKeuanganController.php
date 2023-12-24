@@ -14,7 +14,7 @@ class DataKeuanganController extends Controller
      */
     public function index()
     {
-        //
+        return view('kriteria.dataKeuangan.index');
     }
 
     /**

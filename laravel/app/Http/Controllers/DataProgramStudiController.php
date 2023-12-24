@@ -14,7 +14,7 @@ class DataProgramStudiController extends Controller
      */
     public function index()
     {
-        //
+        return view('kriteria.dataProdi.index');
     }
 
     /**
