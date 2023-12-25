@@ -36,9 +36,12 @@ Route::get('/akun/index', [AkunController::class, 'index']);
 
 // data informasi prodi
 Route::get('/dataprodi', [DataProgramStudiController::class, 'index']);
+Route::get('/dataprodi/edit', [DataProgramStudiController::class, 'edit']);
 
 // data keuangan
 Route::get('/datakeuangan', [DataKeuanganController::class, 'index']);
+Route::get('/datakeuangan/create', [DataKeuanganController::class, 'create']);
+
 
 // kriteria 2
 Route::get('/kriteria2', [TabelC2Controller::class, 'index']);

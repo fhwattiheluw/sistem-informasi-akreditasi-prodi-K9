@@ -58,6 +58,7 @@ class DataProgramStudiController extends Controller
     public function edit(dataProgramStudi $dataProgramStudi)
     {
         //
+        return view('kriteria.dataprodi.form');
     }
 
     /**

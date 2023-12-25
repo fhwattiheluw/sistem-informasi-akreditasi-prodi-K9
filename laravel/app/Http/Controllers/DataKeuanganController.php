@@ -25,6 +25,7 @@ class DataKeuanganController extends Controller
     public function create()
     {
         //
+        return view('kriteria.dataKeuangan.form');
     }
 
     /**
@@ -58,6 +59,7 @@ class DataKeuanganController extends Controller
     public function edit(dataKeuangan $dataKeuangan)
     {
         //
+
     }
 
     /**
