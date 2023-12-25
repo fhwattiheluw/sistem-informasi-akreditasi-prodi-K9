@@ -61,7 +61,7 @@
                 <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
                 <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
                 <td>
-                  <a href="/datakeuangan/create">
+                  <a href="/datakeuangan/edit">
                   <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                 </a>
                   <a type="button" href="/" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>

@@ -46,14 +46,14 @@
             <h3 class="sidebar-brand-logo">AkreSmart</h3>
             <div class="small font-weight-light pt-1">LAMDIK	Versi 1.0	20220313</div>
           </a>
-          <form class="d-flex align-items-center" action="#">
+          <!-- <form class="d-flex align-items-center" action="#">
             <div class="input-group">
               <div class="input-group-prepend">
                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
               </div>
               <input type="text" class="form-control border-0" placeholder="Search" />
             </div>
-          </form>
+          </form> -->
         </li>
         <li class="pt-2 pb-1">
           <span class="nav-item-head">Menu</span>

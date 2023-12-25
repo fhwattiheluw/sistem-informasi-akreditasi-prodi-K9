@@ -59,7 +59,7 @@ class DataKeuanganController extends Controller
     public function edit(dataKeuangan $dataKeuangan)
     {
         //
-
+        return view('kriteria.dataKeuangan.form');
     }
 
     /**

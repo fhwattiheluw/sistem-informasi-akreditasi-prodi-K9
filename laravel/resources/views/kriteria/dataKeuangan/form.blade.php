@@ -26,7 +26,13 @@
       <form class="card" action="#" method="GET" >
         @csrf
         <div class="card-body">
-          <h4 class="card-title">Tambah Data Kuantitatif Di Unit Pengelola Program Studi (UPPS) - Keuangan</h4>
+          <h4 class="card-title">
+            @if (Request::segment(2) === 'create')
+            Tambah data
+            @elseif (Request::segment(2) === 'edit')
+            Edit data
+            @endif
+            - Kuantitatif Di Unit Pengelola Program Studi (UPPS) - Keuangan</h4>
           <!-- <p class="card-description"> Add class <code>.table</code> -->
         </p>
         <div class="table-responsive">
@@ -84,7 +90,7 @@
 
               <tr>
                 <td >
-                  <button type="submit" class="btn btn-primary mr-2"> Tambah data </button>
+                  <button type="submit" class="btn btn-primary mr-2"> Submit</button>
                 </td>
                 <td>
                   <a href="/datakeuangan" class="btn btn-light">

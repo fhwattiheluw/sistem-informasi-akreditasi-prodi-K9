@@ -27,21 +27,31 @@ use App\Http\Controllers\AutentikasiController;
 */
 
 Route::get('/',[AutentikasiController::class, 'index']);
-
+// ====================================
+// dashboard
+// ====================================
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/dashboard/edit', [DashboardController::class, 'edit']);
 
-// page akun
+// ====================================
+// akun
+// ====================================
 Route::get('/akun/show', [AkunController::class, 'show']);
 Route::get('/akun/index', [AkunController::class, 'index']);
 
-// data informasi prodi
+// ====================================
+//  informasi prodi
+// ====================================
+
 Route::get('/dataprodi', [DataProgramStudiController::class, 'index']);
 Route::get('/dataprodi/edit', [DataProgramStudiController::class, 'edit']);
 
+// ====================================
 // data keuangan
+// ====================================
 Route::get('/datakeuangan', [DataKeuanganController::class, 'index']);
 Route::get('/datakeuangan/create', [DataKeuanganController::class, 'create']);
+Route::get('/datakeuangan/edit', [DataKeuanganController::class, 'edit']);
 
 // ====================================
 // kriteria 2

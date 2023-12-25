@@ -33,128 +33,117 @@
           <table class="table">
             <tbody>
               <tr>
-                <td style="font-weight:bold">Jenis program</td>
+                <td style="font-weight:bold">Nama Program Studi</td>
+                <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold">Peringkat Akreditasi PS</td>
                 <td>
                   <div class="form-group row" style="margin: 0px; padding:0px;">
                     <div class="col">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="jenis_program" id="jenis_program" value="" > Sarjana <i class="input-helper"></i></label>
+                          <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value="" > C <i class="input-helper"></i></label>
                         </div>
                       </div>
                       <div class="col">
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="jenis_program" id="jenis_program" value=""> Magister <i class="input-helper"></i></label>
+                            <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> B <i class="input-helper"></i></label>
                           </div>
                         </div>
                         <div class="col">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="jenis_program" id="jenis_program" value=""> Doktor <i class="input-helper"></i></label>
+                              <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> A <i class="input-helper"></i></label>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="font-weight:bold">Nama program studi</td>
-                      <td>
-                        <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Nama program studi">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="font-weight:bold">Status/Peringkat</td>
-                      <td>
-                        <div class="form-group row" style="margin: 0px; padding:0px;">
                           <div class="col">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value="" > C <i class="input-helper"></i></label>
+                                <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> BAIK <i class="input-helper"></i></label>
                               </div>
                             </div>
                             <div class="col">
                               <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> B <i class="input-helper"></i></label>
+                                  <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> BAIK SEKALI <i class="input-helper"></i></label>
                                 </div>
                               </div>
                               <div class="col">
                                 <div class="form-check">
                                   <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> A <i class="input-helper"></i></label>
+                                    <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> UNGGUL <i class="input-helper"></i></label>
                                   </div>
                                 </div>
-                                <div class="col">
-                                  <div class="form-check">
-                                    <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> BAIK <i class="input-helper"></i></label>
-                                    </div>
-                                  </div>
-                                  <div class="col">
-                                    <div class="form-check">
-                                      <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> BAIK SEKALI <i class="input-helper"></i></label>
-                                      </div>
-                                    </div>
-                                    <div class="col">
-                                      <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> UNGGUL <i class="input-helper"></i></label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Nomor SK</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Nomor SK"></td>
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Tanggal SK</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Ketik Tanggal SK"></td>
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Tgl. Kadaluarsa</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Tanggal Kadaluarsa"></td>
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Jumlah Mahasiswa saat TS</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Jumlah Mahasiswa saat TS"></td>
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Jumlah DTPS saat TS</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Jumlah DTPS saat TS"></td>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Nomor SK Akreditasi</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Tanggal Kadaluwarsa</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Nama Unit Pengelola</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Nama Perguruan Tinggi</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Alamat</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Nomor Telpon</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Email</td>
+                            <td><input type="email" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Website</td>
+                            <td><input type="url" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">TS *)
+                              <br>
+                              <small style="color:red;">*) TS = Tahun akademik penuh terakhir saat pengajuan usulan akreditasi
+                              </small>
+                            </td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Nama Pengusul</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight:bold">Tanggal</td>
+                            <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Belum di isi"></td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <button type="submit" class="btn btn-primary mr-2"> Perbaharui </button>
+                              <a href="/dashboard" class="btn btn-light">
+                                Cancel
+                              </a>
+                            </td>
 
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Rerata IPK</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Rerata IPK"></td>
-
-                                </tr>
-                                <tr>
-                                  <td style="font-weight:bold">Rerata masa studi</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Rerata masa studi"></td>
-                                </tr>
-                                <tr>
-                                  <td >
-                                    <button type="submit" class="btn btn-primary mr-2"> Perbaharui </button>
-                                  </td>
-                                  <td>
-                                    <a href="/dataprodi" class="btn btn-light">
-                                      Cancel
-                                    </a>
-                                  </td>
-
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </form>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <!-- last row starts here -->
+                </form>
+              </div>
+            </div>
+            <!-- last row starts here -->
 
-                </div>
-                @endsection
+          </div>
+          @endsection
