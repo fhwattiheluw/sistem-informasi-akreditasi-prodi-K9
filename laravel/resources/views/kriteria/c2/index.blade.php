@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Kerja Sama - Bidang Pendidikan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria2/bidang_pendidikan" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Kerja Sama - Bidang Penelitian</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria2/bidang_penelitian" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Kerja Sama - Bidang Pengabdian kepada Masyarakat (PkM)</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria2/bidang_pkm" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Data Kerja Sama - Bidang Pengembangan Kelembagaan: SDM, Sarana/Prasarana, Publikasi, HKI, Paten, Teknologi Pembelajaran, dll.</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria2/bidang_pengembangan_kelembagaan" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

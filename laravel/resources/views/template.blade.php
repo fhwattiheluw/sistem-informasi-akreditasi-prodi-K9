@@ -44,7 +44,7 @@
             <!-- <img class="sidebar-brand-logo" src="/assets/images/logo.svg" alt="" /> -->
             <!-- <img class="sidebar-brand-logomini" src="/assets/images/logo-mini.svg" alt="" /> -->
             <h3 class="sidebar-brand-logo">AkreSmart</h3>
-            <div class="small font-weight-light pt-1">Instrumen APS versi 4.0</div>
+            <div class="small font-weight-light pt-1">LAMDIK	Versi 1.0	20220313</div>
           </a>
           <form class="d-flex align-items-center" action="#">
             <div class="input-group">
@@ -59,31 +59,10 @@
           <span class="nav-item-head">Menu</span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">
+          <a class="nav-link" href="/dashboard">
             <i class="mdi mdi-compass-outline menu-icon"></i>
             <span class="menu-title">Dashboard</span>
           </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="mdi mdi-book-open-page-variant menu-icon"></i>
-            <span class="menu-title">Simulasi penilaian</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="mdi mdi-book menu-icon"></i>
-            <span class="menu-title">Eksport tabel LKPS</span>
-          </a>
-        </li>
-        <li  class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="mdi mdi-book-open menu-icon"></i>
-            <span class="menu-title">Eksport evaluasi diri</span>
-          </a>
-        </li>
-        <li class="pt-2 pb-1">
-          <span class="nav-item-head">Data Kuantitatif LED</span>
         </li>
         <li  class="nav-item">
           <a class="nav-link" href="/dataprodi">
@@ -97,52 +76,56 @@
             <span class="menu-title">Keuangan</span>
           </a>
         </li>
+        <li class="pt-2 pb-1">
+          <span class="nav-item-head">DATA KUANTITATIF LED</span>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link" href="/kriteria2">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.2 Tata Pamong, Tata Kelola, dan Kerjasama</span>
+            <span class="menu-title">K.2 Tata Pamong, Tata Kelola, dan Kerjasama</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria3">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.3 Mahasiswa</span>
+            <span class="menu-title">K.3 Mahasiswa</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria4">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.4 Sumber Daya Manusia</span>
+            <span class="menu-title">K.4 Sumber Daya Manusia</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria5">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.5 Keuangan, Sarana, dan Prasarana</span>
+            <span class="menu-title">K.5 Keuangan, Sarana, dan Prasarana</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria6">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.6 Pendidikan</span>
+            <span class="menu-title">K.6 Pendidikan</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria7">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.7 Penelitian</span>
+            <span class="menu-title">K.7 Penelitian</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria8">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.8 Pengabdian kepada Masyarakat</span>
+            <span class="menu-title">K.8 Pengabdian kepada Masyarakat</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/kriteria9">
             <i class="mdi mdi-table-edit menu-icon"></i>
-            <span class="menu-title">C.9 Luaran dan Capaian Tridharma</span>
+            <span class="menu-title">K.9 Luaran dan Capaian Tridharma</span>
           </a>
         </li>
         <li class="pt-2 pb-1">

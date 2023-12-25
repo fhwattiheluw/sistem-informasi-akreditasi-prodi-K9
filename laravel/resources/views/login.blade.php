@@ -17,7 +17,7 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 text-center mb-5">
-          <h2 class="heading-section">Instrumen Akreditasi Program Studi (IAPS) versi 4.0</h2>
+          <h2 class="heading-section">Instrumen Akreditasi Program Studi (IAPS) <br> LAMDIK untuk program Sarjana</h2>
         </div>
       </div>
       <div class="row justify-content-center">

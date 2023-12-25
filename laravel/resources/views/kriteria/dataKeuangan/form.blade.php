@@ -35,7 +35,7 @@
               <tr >
                 <th style="font-weight:bold">Item</th>
                 <th style="font-weight:bold">Data</th>
-                <th style="font-weight:bold">Bukti</th>
+                <th style="font-weight:bold">Tautan</th>
               </tr>
             </thead>
             <tbody>

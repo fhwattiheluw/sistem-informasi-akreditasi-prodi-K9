@@ -55,7 +55,7 @@
               @for ($i = 0; $i < 5; $i++)
               <tr >
                 <td style="font-weight: bold;">{{$i}}</td>
-                <td>3 <span class="badge badge-danger" style="font-size:small;">Link masih kosong</span></td>
+                <td>3 <span class="badge badge-danger" style="font-size:small;">Tautan kosong</span></td>
                 <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
                 <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
                 <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
