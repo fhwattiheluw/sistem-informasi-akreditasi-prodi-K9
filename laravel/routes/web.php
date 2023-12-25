@@ -43,8 +43,9 @@ Route::get('/akun/index', [AkunController::class, 'index']);
 //  informasi prodi
 // ====================================
 
-Route::get('/dataprodi', [DataProgramStudiController::class, 'index']);
-Route::get('/dataprodi/edit', [DataProgramStudiController::class, 'edit']);
+Route::get('/dataprodi', [DataProgramStudiController::class, 'index'])->name('dataprodi.index');
+Route::get('/dataprodi/edit', [DataProgramStudiController::class, 'edit'])->name('dataprodi.edit');
+Route::put('/dataprodi/{id}', [DataProgramStudiController::class, 'update'])->name('dataprodi.update');
 
 // ====================================
 // data keuangan

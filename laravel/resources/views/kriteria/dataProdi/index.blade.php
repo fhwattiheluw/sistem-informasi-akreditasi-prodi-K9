@@ -5,7 +5,9 @@
   <div class="page-header flex-wrap">
     <div class="header-left">
       <a href="/dataprodi/edit">
-        <button  type="button" class="btn btn-primary mb-2 mb-md-0 mr-2 ">Ubah data program studi </button>
+        @if($prodi)
+          <button  type="button" class="btn btn-primary mb-2 mb-md-0 mr-2 ">Ubah Data Program Studi</button>
+        @endif
       </a>
       <!-- <button class="btn btn-outline-primary bg-white mb-2 mb-md-0"> Import documents </button> -->
     </div>
@@ -35,43 +37,43 @@
                 <tbody>
                   <tr>
                     <td style="font-weight:bold">Jenis program</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->jenis}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Nama program studi</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->nama}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Status/Peringkat</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->status_peringkat}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Nomor SK</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->nomor_sk}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Tanggal SK</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->tanggal_sk}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Tgl. Kadaluarsa</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->tanggal_kadaluarsa}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Jumlah Mahasiswa saat TS</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->jumlah_mhs_ts}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Jumlah DTPS saat TS</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->jumlah_dtps_ts}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Rerata IPK</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->rerata_ipk}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Rerata masa studi</td>
-                    <td>53275531</td>
+                    <td>{{$prodi->rerata_masa_studi}}</td>
                   </tr>
                 </tbody>
               </table>

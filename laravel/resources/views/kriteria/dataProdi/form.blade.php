@@ -23,11 +23,21 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
-      <form class="card" action="#" method="GET" >
+      <form class="card" action="{{ route('dataprodi.update', ['id' => Crypt::encryptString($item->id)]) }}" method="post">
         @csrf
+        @method('PUT')
         <div class="card-body">
           <h4 class="card-title">Data Program Studi</h4>
           <!-- <p class="card-description"> Add class <code>.table</code> -->
+          @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: red;">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+          @endif
         </p>
         <div class="table-responsive">
           <table class="table">
@@ -39,19 +49,19 @@
                     <div class="col">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="jenis_program" id="jenis_program" value="" > Sarjana <i class="input-helper"></i></label>
+                          <input type="radio" class="form-check-input" name="jenis" id="jenis" value="s1" @if($item->jenis == 's1') checked @endif > Sarjana <i class="input-helper"></i></label>
                         </div>
                       </div>
                       <div class="col">
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="jenis_program" id="jenis_program" value=""> Magister <i class="input-helper"></i></label>
+                            <input type="radio" class="form-check-input" name="jenis" id="jenis" value="s2" @if($item->jenis == 's2') checked @endif> Magister <i class="input-helper"></i></label>
                           </div>
                         </div>
                         <div class="col">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="jenis_program" id="jenis_program" value=""> Doktor <i class="input-helper"></i></label>
+                              <input type="radio" class="form-check-input" name="jenis" id="jenis" value="s3" @if($item->jenis == 's3') checked @endif> Doktor <i class="input-helper"></i></label>
                             </div>
                           </div>
                         </div>
@@ -60,7 +70,7 @@
                     <tr>
                       <td style="font-weight:bold">Nama program studi</td>
                       <td>
-                        <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Nama program studi">
+                        <input type="text" name="nama" class="form-control" id="exampleInputUsername1" placeholder="Ketik Nama program studi" value="{{$item->nama}}">
                       </td>
                     </tr>
                     <tr>
@@ -70,37 +80,37 @@
                           <div class="col">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value="" > C <i class="input-helper"></i></label>
+                                <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="C" @if($item->status_peringkat == 'C') checked @endif> C <i class="input-helper"></i></label>
                               </div>
                             </div>
                             <div class="col">
                               <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> B <i class="input-helper"></i></label>
+                                  <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="B" @if($item->status_peringkat == 'B') checked @endif> B <i class="input-helper"></i></label>
                                 </div>
                               </div>
                               <div class="col">
                                 <div class="form-check">
                                   <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> A <i class="input-helper"></i></label>
+                                    <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="A" @if($item->status_peringkat == 'A') checked @endif> A <i class="input-helper"></i></label>
                                   </div>
                                 </div>
                                 <div class="col">
                                   <div class="form-check">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> BAIK <i class="input-helper"></i></label>
+                                      <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="BAIK" @if($item->status_peringkat == 'BAIK') checked @endif> BAIK <i class="input-helper"></i></label>
                                     </div>
                                   </div>
                                   <div class="col">
                                     <div class="form-check">
                                       <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> BAIK SEKALI <i class="input-helper"></i></label>
+                                        <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="BAIK_SEKALI" @if($item->status_peringkat == 'BAIK_SEKALI') checked @endif> BAIK SEKALI <i class="input-helper"></i></label>
                                       </div>
                                     </div>
                                     <div class="col">
                                       <div class="form-check">
                                         <label class="form-check-label">
-                                          <input type="radio" class="form-check-input" name="peringkat" id="peringkat" value=""> UNGGUL <i class="input-helper"></i></label>
+                                          <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="UNGGUL" @if($item->status_peringkat == 'UNGGUL') checked @endif> UNGGUL <i class="input-helper"></i></label>
                                         </div>
                                       </div>
                                     </div>
@@ -108,33 +118,33 @@
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Nomor SK</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Nomor SK"></td>
+                                  <td><input type="text" name="nomor_sk" class="form-control" id="exampleInputUsername1" placeholder="Ketik Nomor SK" value="{{$item->nomor_sk}}"></td>
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Tanggal SK</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Ketik Tanggal SK"></td>
+                                  <td><input type="text" name="tanggal_sk" class="form-control" id="exampleInputUsername1" placeholder="Ketik Ketik Tanggal SK" value="{{$item->tanggal_sk}}"></td>
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Tgl. Kadaluarsa</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Tanggal Kadaluarsa"></td>
+                                  <td><input type="text" name="tanggal_kadaluarsa" class="form-control" id="exampleInputUsername1" placeholder="Ketik Tanggal Kadaluarsa" value="{{$item->tanggal_kadaluarsa}}"></td>
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Jumlah Mahasiswa saat TS</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Jumlah Mahasiswa saat TS"></td>
+                                  <td><input type="text" name="jumlah_mhs_ts" class="form-control" id="exampleInputUsername1" placeholder="Ketik Jumlah Mahasiswa saat TS" value="{{$item->jumlah_mhs_ts}}"></td>
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Jumlah DTPS saat TS</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Jumlah DTPS saat TS"></td>
+                                  <td><input type="text" name="jumlah_dtps_ts" class="form-control" id="exampleInputUsername1" placeholder="Ketik Jumlah DTPS saat TS" value="{{$item->jumlah_dtps_ts}}"></td>
 
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Rerata IPK</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Rerata IPK"></td>
+                                  <td><input type="text" name="rerata_ipk" class="form-control" id="exampleInputUsername1" placeholder="Ketik Rerata IPK" value="{{$item->rerata_ipk}}"></td>
 
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Rerata masa studi</td>
-                                  <td><input type="text" class="form-control" id="exampleInputUsername1" placeholder="Ketik Rerata masa studi"></td>
+                                  <td><input type="text" name="rerata_masa_studi" class="form-control" id="exampleInputUsername1" placeholder="Ketik Rerata masa studi" value="{{$item->rerata_masa_studi}}"></td>
                                 </tr>
                                 <tr>
                                   <td >
