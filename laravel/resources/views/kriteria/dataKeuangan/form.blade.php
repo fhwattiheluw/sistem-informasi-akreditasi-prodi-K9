@@ -41,7 +41,6 @@
               <tr >
                 <th style="font-weight:bold">Item</th>
                 <th style="font-weight:bold">Data</th>
-                <th style="font-weight:bold">Tautan</th>
               </tr>
             </thead>
             <tbody>
@@ -56,17 +55,11 @@
                 <td>
                   <input type="text" class="form-control" id="" placeholder="Pendidikan/mahasiswa/tahun">
                 </td>
-                <td>
-                  <input type="url" class="form-control" id="" placeholder="Masukan link disini">
-                </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Penelitian/dosen/tahun</td>
                 <td>
                   <input type="text" class="form-control" id="" placeholder="Ketik Penelitian/dosen/tahun">
-                </td>
-                <td>
-                  <input type="url" class="form-control" id="" placeholder="Masukan link disini">
                 </td>
               </tr>
               <tr>
@@ -74,20 +67,19 @@
                 <td>
                   <input type="text" class="form-control" id="" placeholder="Ketik Publikasi/dosen/tahun">
                 </td>
-                <td>
-                  <input type="url" class="form-control" id="" placeholder="Masukan link disini">
-                </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Investasi/tahun</td>
                 <td>
                   <input type="text" class="form-control" id="" placeholder="Ketik Investasi/tahun">
                 </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold">Bukti/Tautan</td>
                 <td>
-                  <input type="url" class="form-control" id="" placeholder="Masukan link disini">
+                  <input type="text" class="form-control" id="" placeholder="Belum di isi">
                 </td>
               </tr>
-
               <tr>
                 <td >
                   <button type="submit" class="btn btn-primary mr-2"> Submit</button>

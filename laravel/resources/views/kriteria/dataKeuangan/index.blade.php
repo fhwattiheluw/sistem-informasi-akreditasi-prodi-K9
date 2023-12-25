@@ -41,6 +41,7 @@
               <tr>
                 <th style="font-weight: bold;" rowspan="2">Tahun akademik</th>
                 <th style="font-weight: bold;" colspan="5">Jenis dana</th>
+                <th style="font-weight: bold;" rowspan="2">Bukti/Tautan</th>
                 <th style="font-weight: bold;" rowspan="2">Aksi</th>
               </tr>
               <tr>
@@ -55,11 +56,12 @@
               @for ($i = 0; $i < 5; $i++)
               <tr >
                 <td style="font-weight: bold;">{{$i}}</td>
-                <td>3 <span class="badge badge-danger" style="font-size:small;">Tautan kosong</span></td>
-                <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
-                <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
-                <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
-                <td><a href="https://getbootstrap.com/docs/4.0/components/buttons/#sizes">3</a></td>
+                <td>3 </td>
+                <td>3</a></td>
+                <td>3</a></td>
+                <td>3</a></td>
+                <td>3</a></td>
+                <td><a href="#">Lihat</a></td>
                 <td>
                   <a href="/datakeuangan/edit">
                   <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
