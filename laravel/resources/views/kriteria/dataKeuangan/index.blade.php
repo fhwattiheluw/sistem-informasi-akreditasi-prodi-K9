@@ -34,6 +34,16 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Tabel Data Kuantitatif di Unit Pengelola Program Studi (UPPS) - Keuangan</h4>
+        
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         </p>
         <div class="table-responsive">
           <table class="table table-bordered table-hover">
@@ -53,24 +63,24 @@
               </tr>
             </thead>
             <tbody style="text-align: center;">
-              @for ($i = 0; $i < 5; $i++)
+              @foreach ($items as $item)
               <tr >
-                <td style="font-weight: bold;">{{$i}}</td>
-                <td>3 </td>
-                <td>3</a></td>
-                <td>3</a></td>
-                <td>3</a></td>
-                <td>3</a></td>
-                <td><a href="#">Lihat</a></td>
+                <td style="font-weight: bold;">{{$item->tahun}}</td>
+                <td>{{$item->pendidikan_per_mahasiswa}}</td>
+                <td>{{$item->penelitian_per_dosen}}</td>
+                <td>{{$item->pkm_per_dosen}}</a></td>
+                <td>{{$item->publikasi_per_dosen}}</td>
+                <td>{{number_format($item->investasi, 2)}}</td>
+                <td><a href="{{$item->tautan}}">Lihat</a></td>
                 <td>
-                  <a href="/datakeuangan/edit">
+                <a href="/datakeuangan/{{$item->id}}/edit">
                   <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                 </a>
-                  <a type="button" href="/" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                  <a type="button" href="{{ route('datakeuangan.delete', ['id' => $item->id]) }}" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                 </td>
               </tr>
-              @endfor
+              @endforeach
             </tbody>
           </table>
         </div>

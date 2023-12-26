@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\dataKeuangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class DataKeuanganController extends Controller
 {
@@ -14,7 +15,8 @@ class DataKeuanganController extends Controller
      */
     public function index()
     {
-        return view('kriteria.dataKeuangan.index');
+        $items = dataKeuangan::orderBy('tahun','asc')->get();
+        return view('kriteria.dataKeuangan.index', ['items' => $items]);
     }
 
     /**
@@ -36,7 +38,26 @@ class DataKeuanganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'tahun' => 'required|integer',
+            'pendidikan_per_mahasiswa' => 'required|integer',
+            'penelitian_per_dosen' => 'required|integer',
+            'pkm_per_dosen' => 'required|integer',
+            'publikasi_per_dosen' => 'required|integer',
+            'investasi' => 'required',
+        ]);
+
+        dataKeuangan::create([
+            'tahun' => $request->input('tahun'),
+            'pendidikan_per_mahasiswa' => $request->input('pendidikan_per_mahasiswa'),
+            'penelitian_per_dosen' => $request->input('penelitian_per_dosen'),
+            'pkm_per_dosen' => $request->input('pkm_per_dosen'),
+            'publikasi_per_dosen' => $request->input('publikasi_per_dosen'),
+            'investasi' => preg_replace("/[^0-9]/", "", $request->input('investasi')),
+            'tautan' => $request->input('tautan'),            
+        ]);
+        return redirect('/datakeuangan')->with('success', 'Data Keuangan created successfully');
     }
 
     /**
@@ -56,10 +77,10 @@ class DataKeuanganController extends Controller
      * @param  \App\Models\dataKeuangan  $dataKeuangan
      * @return \Illuminate\Http\Response
      */
-    public function edit(dataKeuangan $dataKeuangan)
+    public function edit(dataKeuangan $dataKeuangan, $id)
     {
-        //
-        return view('kriteria.dataKeuangan.form');
+        $item = dataKeuangan::find($id);
+        return view('kriteria.dataKeuangan.form', ['item' => $item]);
     }
 
     /**
@@ -69,9 +90,33 @@ class DataKeuanganController extends Controller
      * @param  \App\Models\dataKeuangan  $dataKeuangan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, dataKeuangan $dataKeuangan)
+    public function update(Request $request, dataKeuangan $dataKeuangan, $id)
     {
-        //
+        
+        $idx =Crypt::decryptString($id);
+        $data = dataKeuangan::find($idx);
+        
+        $request->validate([
+            'tahun' => 'required|integer',
+            'pendidikan_per_mahasiswa' => 'required|integer',
+            'penelitian_per_dosen' => 'required|integer',
+            'pkm_per_dosen' => 'required|integer',
+            'publikasi_per_dosen' => 'required|integer',
+            'investasi' => 'required',
+        ]);
+        $invest = number_format(preg_replace("/[^0-9]/", "", $request->input('investasi')),2, '.', '');
+
+        $data->update([
+            'tahun' => $request->input('tahun'),
+            'pendidikan_per_mahasiswa' => $request->input('pendidikan_per_mahasiswa'),
+            'penelitian_per_dosen' => $request->input('penelitian_per_dosen'),
+            'pkm_per_dosen' => $request->input('pkm_per_dosen'),
+            'publikasi_per_dosen' => $request->input('publikasi_per_dosen'),
+            'investasi' => $invest,
+            'tautan' => $request->input('tautan'),  
+        ]);
+
+        return redirect('/datakeuangan')->with('success', 'Data Keuangan updated successfully');
     }
 
     /**
@@ -80,8 +125,9 @@ class DataKeuanganController extends Controller
      * @param  \App\Models\dataKeuangan  $dataKeuangan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(dataKeuangan $dataKeuangan)
+    public function destroy(dataKeuangan $dataKeuangan, $id)
     {
-        //
+        dataKeuangan::destroy($id);
+        return redirect('/datakeuangan')->with('success', 'Data Keuangan deleted successfully');
     }
 }

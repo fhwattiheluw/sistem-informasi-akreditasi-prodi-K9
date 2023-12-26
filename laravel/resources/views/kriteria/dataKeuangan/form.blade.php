@@ -23,17 +23,32 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
-      <form class="card" action="#" method="GET" >
-        @csrf
+      
+        
         <div class="card-body">
           <h4 class="card-title">
-            @if (Request::segment(2) === 'create')
-            Tambah data
-            @elseif (Request::segment(2) === 'edit')
-            Edit data
+            @if(isset($item->id))              
+              <form class="card" action="{{ route('datakeuangan.update', ['id' => Crypt::encryptString($item->id)]) }}" method="post">
+                @method('PUT')              
+              Edit data
+            @else
+              <form class="card" action="{{ route('datakeuangan.store')}}" method="POST">
+              Tambah data
             @endif
             - Kuantitatif Di Unit Pengelola Program Studi (UPPS) - Keuangan</h4>
           <!-- <p class="card-description"> Add class <code>.table</code> -->
+          @csrf
+
+          @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li style="color: red;">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+          @endif
+
         </p>
         <div class="table-responsive">
           <table class="table">
@@ -47,37 +62,43 @@
               <tr>
                 <td style="font-weight:bold">Tahun akademik</td>
                 <td >
-                  <input type="text" class="form-control" id="" placeholder="Tahun akademik">
+                  <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Tahun akademik" @if(isset($item->id)) value="{{$item->tahun}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Pendidikan/mahasiswa/tahun</td>
                 <td>
-                  <input type="text" class="form-control" id="" placeholder="Pendidikan/mahasiswa/tahun">
+                  <input type="number" class="form-control" name="pendidikan_per_mahasiswa" id="" placeholder="Pendidikan/mahasiswa/tahun" @if(isset($item->id)) value="{{$item->pendidikan_per_mahasiswa}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Penelitian/dosen/tahun</td>
                 <td>
-                  <input type="text" class="form-control" id="" placeholder="Ketik Penelitian/dosen/tahun">
+                  <input type="number" class="form-control" name="penelitian_per_dosen" id="" placeholder="Ketik Penelitian/dosen/tahun" @if(isset($item->id)) value="{{$item->penelitian_per_dosen}}"  @endif>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold">PKM/dosen/tahun</td>
+                <td>
+                  <input type="number" class="form-control" name="pkm_per_dosen" id="" placeholder="Ketik PKM/dosen/tahun" @if(isset($item->id)) value="{{$item->pkm_per_dosen}}"  @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Publikasi/dosen/tahun</td>
                 <td>
-                  <input type="text" class="form-control" id="" placeholder="Ketik Publikasi/dosen/tahun">
+                  <input type="number" class="form-control" name="publikasi_per_dosen" id="" placeholder="Ketik Publikasi/dosen/tahun" @if(isset($item->id)) value="{{$item->publikasi_per_dosen}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Investasi/tahun</td>
                 <td>
-                  <input type="text" class="form-control" id="" placeholder="Ketik Investasi/tahun">
+                  <input type="text" class="form-control" id="rupiahAmount" name="investasi" placeholder="Masukkan jumlah investasi" oninput="formatRupiah(this)"  @if(isset($item->id)) value="{{number_format($item->investasi)}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Bukti/Tautan</td>
                 <td>
-                  <input type="text" class="form-control" id="" placeholder="Belum di isi">
+                  <input type="text" class="form-control" name="tautan" id="" placeholder="Belum di isi">
                 </td>
               </tr>
               <tr>
@@ -101,4 +122,17 @@
 <!-- last row starts here -->
 
 </div>
+
+<script>
+    function formatRupiah(input) {
+        // Hapus karakter selain angka
+        var value = input.value.replace(/\D/g, '');
+        
+        // Tambahkan titik sebagai pemisah ribuan
+        value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        
+        // Tampilkan hasil format di dalam input
+        input.value = value;
+    }
+</script>
 @endsection

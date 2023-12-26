@@ -50,9 +50,12 @@ Route::put('/dataprodi/{id}', [DataProgramStudiController::class, 'update'])->na
 // ====================================
 // data keuangan
 // ====================================
-Route::get('/datakeuangan', [DataKeuanganController::class, 'index']);
-Route::get('/datakeuangan/create', [DataKeuanganController::class, 'create']);
-Route::get('/datakeuangan/edit', [DataKeuanganController::class, 'edit']);
+Route::get('/datakeuangan', [DataKeuanganController::class, 'index'])->name('datakeuangan.index');
+Route::get('/datakeuangan/create', [DataKeuanganController::class, 'create'])->name('datakeuangan.create');
+Route::post('/datakeuangan/store', [DataKeuanganController::class, 'store'])->name('datakeuangan.store');
+Route::get('/datakeuangan/{id}/edit', [DataKeuanganController::class, 'edit'])->name('datakeuangan.edit');
+Route::put('/datakeuangan/{id}/update', [DataKeuanganController::class, 'update'])->name('datakeuangan.update');
+Route::get('/datakeuangan/{id}/delete', [DataKeuanganController::class, 'destroy'])->name('datakeuangan.delete');
 
 // ====================================
 // kriteria 2
