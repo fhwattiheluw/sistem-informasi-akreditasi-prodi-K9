@@ -40,7 +40,7 @@ class DataKeuanganController extends Controller
     {
         
         $request->validate([
-            'tahun' => 'required|integer',
+            'tahun' => 'required|min:2',
             'pendidikan_per_mahasiswa' => 'required|integer',
             'penelitian_per_dosen' => 'required|integer',
             'pkm_per_dosen' => 'required|integer',
@@ -97,7 +97,7 @@ class DataKeuanganController extends Controller
         $data = dataKeuangan::find($idx);
         
         $request->validate([
-            'tahun' => 'required|integer',
+            'tahun' => 'required|min:2',
             'pendidikan_per_mahasiswa' => 'required|integer',
             'penelitian_per_dosen' => 'required|integer',
             'pkm_per_dosen' => 'required|integer',

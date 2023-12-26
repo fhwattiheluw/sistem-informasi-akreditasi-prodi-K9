@@ -62,43 +62,43 @@
               <tr>
                 <td style="font-weight:bold">Tahun akademik</td>
                 <td >
-                  <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Tahun akademik" @if(isset($item->id)) value="{{$item->tahun}}" @endif>
+                  <input type="text" class="form-control" name="tahun" id="tahun" placeholder="Tahun akademik" @if(isset($item->id)) value="{{$item->tahun}}" @else value="{{old('tahun')}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Pendidikan/mahasiswa/tahun</td>
                 <td>
-                  <input type="number" class="form-control" name="pendidikan_per_mahasiswa" id="" placeholder="Pendidikan/mahasiswa/tahun" @if(isset($item->id)) value="{{$item->pendidikan_per_mahasiswa}}" @endif>
+                  <input type="number" class="form-control" name="pendidikan_per_mahasiswa" id="" placeholder="Pendidikan/mahasiswa/tahun" @if(isset($item->id)) value="{{$item->pendidikan_per_mahasiswa}}" @else value="{{old('pendidikan_per_mahasiswa')}}"  @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Penelitian/dosen/tahun</td>
                 <td>
-                  <input type="number" class="form-control" name="penelitian_per_dosen" id="" placeholder="Ketik Penelitian/dosen/tahun" @if(isset($item->id)) value="{{$item->penelitian_per_dosen}}"  @endif>
+                  <input type="number" class="form-control" name="penelitian_per_dosen" id="" placeholder="Ketik Penelitian/dosen/tahun" @if(isset($item->id)) value="{{$item->penelitian_per_dosen}}" @else value="{{old('penelitian_per_dosen')}}"  @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">PKM/dosen/tahun</td>
                 <td>
-                  <input type="number" class="form-control" name="pkm_per_dosen" id="" placeholder="Ketik PKM/dosen/tahun" @if(isset($item->id)) value="{{$item->pkm_per_dosen}}"  @endif>
+                  <input type="number" class="form-control" name="pkm_per_dosen" id="" placeholder="Ketik PKM/dosen/tahun" @if(isset($item->id)) value="{{$item->pkm_per_dosen}}" @else value="{{old('pkm_per_dosen')}}"  @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Publikasi/dosen/tahun</td>
                 <td>
-                  <input type="number" class="form-control" name="publikasi_per_dosen" id="" placeholder="Ketik Publikasi/dosen/tahun" @if(isset($item->id)) value="{{$item->publikasi_per_dosen}}" @endif>
+                  <input type="number" class="form-control" name="publikasi_per_dosen" id="" placeholder="Ketik Publikasi/dosen/tahun" @if(isset($item->id)) value="{{$item->publikasi_per_dosen}}" @else value="{{old('pkm_per_dosen')}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Investasi/tahun</td>
                 <td>
-                  <input type="text" class="form-control" id="rupiahAmount" name="investasi" placeholder="Masukkan jumlah investasi" oninput="formatRupiah(this)"  @if(isset($item->id)) value="{{number_format($item->investasi)}}" @endif>
+                  <input type="text" class="form-control" id="rupiahAmount" name="investasi" placeholder="Masukkan jumlah investasi" oninput="formatRupiah(this)"  @if(isset($item->id)) value="{{number_format($item->investasi)}}" @else value="{{old('investasi')}}" @endif>
                 </td>
               </tr>
               <tr>
                 <td style="font-weight:bold">Bukti/Tautan</td>
                 <td>
-                  <input type="text" class="form-control" name="tautan" id="" placeholder="Belum di isi">
+                  <input type="text" class="form-control" name="tautan" id="" placeholder="Belum di isi" @if(isset($item->id)) value="{{$item->tautan}}" @else value="{{old('tautan')}}" @endif>
                 </td>
               </tr>
               <tr>

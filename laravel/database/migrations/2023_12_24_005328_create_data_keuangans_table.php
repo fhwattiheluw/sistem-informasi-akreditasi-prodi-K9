@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('data_keuangans', function (Blueprint $table) {
             $table->id();
-            $table->integer('tahun');
+            $table->string('tahun');
             $table->integer('pendidikan_per_mahasiswa');
             $table->integer('penelitian_per_dosen');
             $table->integer('pkm_per_dosen');
