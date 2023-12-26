@@ -49,19 +49,19 @@
                     <div class="col">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="jenis" id="jenis" value="s1" @if($item->jenis == 's1') checked @endif > Sarjana <i class="input-helper"></i></label>
+                          <input type="radio" class="form-check-input" name="jenis" id="jenis" value="S1" @if($item->jenis == 'S1') checked @endif > Sarjana <i class="input-helper"></i></label>
                         </div>
                       </div>
                       <div class="col">
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="jenis" id="jenis" value="s2" @if($item->jenis == 's2') checked @endif> Magister <i class="input-helper"></i></label>
+                            <input type="radio" class="form-check-input" name="jenis" id="jenis" value="S2" @if($item->jenis == 'S2') checked @endif> Magister <i class="input-helper"></i></label>
                           </div>
                         </div>
                         <div class="col">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="jenis" id="jenis" value="s3" @if($item->jenis == 's3') checked @endif> Doktor <i class="input-helper"></i></label>
+                              <input type="radio" class="form-check-input" name="jenis" id="jenis" value="S3" @if($item->jenis == 'S3') checked @endif> Doktor <i class="input-helper"></i></label>
                             </div>
                           </div>
                         </div>
