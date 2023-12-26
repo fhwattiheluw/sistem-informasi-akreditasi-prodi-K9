@@ -120,6 +120,8 @@ Route::get('/kriteria7', [TabelC7Controller::class, 'index']);
 // kriteria 8
 // ====================================
 Route::get('/kriteria8', [TabelC8Controller::class, 'index']);
+Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_index']);
+Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/create', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_create']);
 
 // ====================================
 // kriteria 9

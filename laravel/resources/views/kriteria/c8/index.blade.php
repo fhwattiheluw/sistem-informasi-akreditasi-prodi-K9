@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.8 Pengabdian kepada Masyarakat</p>
+          <p class="m-0">K.8 Pengabdian kepada Masyarakat</p>
         </a>
       </div>
 
@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Aktivitas, Relevansi, dan Pelibatan Mahasiswa dalam PkM</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria8/pelibatan_mahasiswa_dalam_pkm" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

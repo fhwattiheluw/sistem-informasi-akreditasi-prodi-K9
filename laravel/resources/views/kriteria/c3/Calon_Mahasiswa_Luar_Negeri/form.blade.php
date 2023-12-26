@@ -35,12 +35,12 @@
             Mahasiswa Reguler
           </h4>
 
-            <p class="card-description">Data Kerja Sama </p>
+            <p class="card-description">Mahasiswa</p>
             <hr>
             <form action="#" method="post">
               @csrf
               <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered">
                   <thead class="text-center">
                     <tr>
                       <th rowspan="2">Tahun Akademik</th>
