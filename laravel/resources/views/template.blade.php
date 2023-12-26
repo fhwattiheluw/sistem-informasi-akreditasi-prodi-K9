@@ -20,6 +20,17 @@
   <link rel="stylesheet" href="/assets/css/demo_1/style.css" />
   <!-- End layout styles -->
   <link rel="shortcut icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEweNHo97nHl3B-gQnvmWrzEbDPVPRu4HtHVe9okR-DUVS7Sfj3kfI3w4esGZp9VGsYcoUu2COT1Khu-OvQQfKjJ6-SuykTXR4j8_mIae3zHkS-5XzGZUs-pKF4tM1c9S6q_t3dpFVnah24b5b_0n9p4E8IXcTQCyFLpygD_fMCDC6cId6rf_qOqFE/s320/GKL16_Logo%20IAIN%20Ambon%20-%20Koleksilogo.com.jpg" />
+  <style media="screen">
+    .table thead th {
+      font-weight: bold;
+       text-transform: capitalize;
+    }
+
+    button, h1,h2,h3,h4 {
+       text-transform: capitalize;
+    }
+
+  </style>
   @yield('css')
 </head>
 <body>

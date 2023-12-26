@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.4 Sumber Daya Manusia</p>
+          <p class="m-0">K.4 Sumber Daya Manusia</p>
         </a>
       </div>
 

@@ -28,7 +28,7 @@
         <div class="card-body">
           <h5 class="card-title">Data Kerja Sama - Bidang Pendidikan</h5>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
                   <th rowspan="2">No.</th>
