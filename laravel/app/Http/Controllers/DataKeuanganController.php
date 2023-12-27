@@ -38,7 +38,7 @@ class DataKeuanganController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'tahun' => 'required|min:2',
             'pendidikan_per_mahasiswa' => 'required|integer',
@@ -55,7 +55,7 @@ class DataKeuanganController extends Controller
             'pkm_per_dosen' => $request->input('pkm_per_dosen'),
             'publikasi_per_dosen' => $request->input('publikasi_per_dosen'),
             'investasi' => preg_replace("/[^0-9]/", "", $request->input('investasi')),
-            'tautan' => $request->input('tautan'),            
+            'tautan' => $request->input('tautan'),
         ]);
         return redirect('/datakeuangan')->with('success', 'Data Keuangan created successfully');
     }
@@ -92,10 +92,10 @@ class DataKeuanganController extends Controller
      */
     public function update(Request $request, dataKeuangan $dataKeuangan, $id)
     {
-        
+
         $idx =Crypt::decryptString($id);
         $data = dataKeuangan::find($idx);
-        
+
         $request->validate([
             'tahun' => 'required|min:2',
             'pendidikan_per_mahasiswa' => 'required|integer',
@@ -113,7 +113,7 @@ class DataKeuanganController extends Controller
             'pkm_per_dosen' => $request->input('pkm_per_dosen'),
             'publikasi_per_dosen' => $request->input('publikasi_per_dosen'),
             'investasi' => $invest,
-            'tautan' => $request->input('tautan'),  
+            'tautan' => $request->input('tautan'),
         ]);
 
         return redirect('/datakeuangan')->with('success', 'Data Keuangan updated successfully');

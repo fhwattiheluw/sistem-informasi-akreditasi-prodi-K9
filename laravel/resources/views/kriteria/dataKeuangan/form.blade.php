@@ -23,17 +23,19 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
-      
-        
+
+        <form class="card" action="{{isset($item->id) ?  route('datakeuangan.update', ['id' => Crypt::encryptString($item->id)])  : route('datakeuangan.store')}}" method="post">
+          @if(isset($item->id))
+          @method('PUT')
+          @endif
+
+
         <div class="card-body">
           <h4 class="card-title">
-            @if(isset($item->id))              
-              <form class="card" action="{{ route('datakeuangan.update', ['id' => Crypt::encryptString($item->id)]) }}" method="post">
-                @method('PUT')              
-              Edit data
-            @else
-              <form class="card" action="{{ route('datakeuangan.store')}}" method="POST">
-              Tambah data
+            @if (Request::segment(2) === 'create')
+            Tambah data
+            @elseif (Request::segment(2) === 'edit')
+            Edit data
             @endif
             - Kuantitatif Di Unit Pengelola Program Studi (UPPS) - Keuangan</h4>
           <!-- <p class="card-description"> Add class <code>.table</code> -->
@@ -127,10 +129,10 @@
     function formatRupiah(input) {
         // Hapus karakter selain angka
         var value = input.value.replace(/\D/g, '');
-        
+
         // Tambahkan titik sebagai pemisah ribuan
         value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        
+
         // Tampilkan hasil format di dalam input
         input.value = value;
     }
