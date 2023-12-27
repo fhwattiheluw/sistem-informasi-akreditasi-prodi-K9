@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.7 Penelitian</p>
+          <p class="m-0">K.7 Penelitian</p>
         </a>
       </div>
 
@@ -24,11 +24,11 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Aktivitas, Relevansi, dan Pelibatan Mahasiswa dalam Penelitian</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria7/pelibatan_mahasiswa_dalam_penelitian" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
-    
+
 
   </div>
   <!-- last row starts here -->

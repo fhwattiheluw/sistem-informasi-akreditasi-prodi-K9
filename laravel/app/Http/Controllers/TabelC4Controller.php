@@ -7,80 +7,66 @@ use Illuminate\Http\Request;
 
 class TabelC4Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
         return view('kriteria.c4.index');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\tabelC4  $tabelC4
-     * @return \Illuminate\Http\Response
-     */
     public function show(tabelC4 $tabelC4)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\tabelC4  $tabelC4
-     * @return \Illuminate\Http\Response
-     */
     public function edit(tabelC4 $tabelC4)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\tabelC4  $tabelC4
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, tabelC4 $tabelC4)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\tabelC4  $tabelC4
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(tabelC4 $tabelC4)
     {
         //
     }
+
+    // Tabel 4.1.2.2 DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
+    public function tabel_4_1_2_2_index()
+    {
+        //
+        return view('kriteria.c4.tabel_4_1_2_2.index');
+    }
+    public function tabel_4_1_2_2_create()
+    {
+        //
+    }
+    public function tabel_4_1_2_2_store(Request $request)
+    {
+        //
+    }
+    public function tabel_4_1_2_2_show(tabelC4 $tabelC4)
+    {
+        //
+    }
+    public function tabel_4_1_2_2_edit(tabelC4 $tabelC4)
+    {
+        //
+    }
+    public function tabel_4_1_2_2_update(Request $request, tabelC4 $tabelC4)
+    {
+        //
+    }
+    public function tabel_4_1_2_2_destroy(tabelC4 $tabelC4)
+    {
+        //
+    }
+
+
 }

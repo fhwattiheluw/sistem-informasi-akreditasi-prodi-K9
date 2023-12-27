@@ -118,6 +118,9 @@ Route::get('/kriteria6', [TabelC6Controller::class, 'index']);
 // kriteria 7
 // ====================================
 Route::get('/kriteria7', [TabelC7Controller::class, 'index']);
+Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_index']);
+Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/create', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_create']);
+Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/edit', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_edit']);
 
 // ====================================
 // kriteria 8
@@ -125,6 +128,7 @@ Route::get('/kriteria7', [TabelC7Controller::class, 'index']);
 Route::get('/kriteria8', [TabelC8Controller::class, 'index']);
 Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_index']);
 Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/create', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_create']);
+Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/edit', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_edit']);
 
 // ====================================
 // kriteria 9

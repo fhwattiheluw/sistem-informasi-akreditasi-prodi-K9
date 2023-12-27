@@ -39,6 +39,8 @@ class TabelC8Controller extends Controller
     public function pelibatan_mahasiswa_dalam_pkm_edit(tabelC8 $tabelC8)
     {
         //
+        return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.form');
+        
     }
 
 

@@ -18,69 +18,40 @@ class TabelC7Controller extends Controller
         return view('kriteria.c7.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function pelibatan_mahasiswa_dalam_penelitian_index()
+    {
+        //
+        return view('kriteria.c7.pelibatan_mahasiswa_dalam_penelitian.index');
+    }
+
+    public function pelibatan_mahasiswa_dalam_penelitian_create()
+    {
+        //
+        return view('kriteria.c7.pelibatan_mahasiswa_dalam_penelitian.form');
+    }
+
+    public function pelibatan_mahasiswa_dalam_penelitian_store(Request $request)
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function pelibatan_mahasiswa_dalam_penelitian_edit(tabelC8 $tabelC8)
+    {
+        //
+        return view('kriteria.c7.pelibatan_mahasiswa_dalam_penelitian.form');
+    }
+
+
+    public function pelibatan_mahasiswa_dalam_penelitian_update(Request $request, tabelC8 $tabelC8)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\tabelC7  $tabelC7
-     * @return \Illuminate\Http\Response
-     */
-    public function show(tabelC7 $tabelC7)
+
+    public function pelibatan_mahasiswa_dalam_penelitian_destroy(tabelC8 $tabelC8)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\tabelC7  $tabelC7
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(tabelC7 $tabelC7)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\tabelC7  $tabelC7
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, tabelC7 $tabelC7)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\tabelC7  $tabelC7
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(tabelC7 $tabelC7)
-    {
-        //
-    }
 }
