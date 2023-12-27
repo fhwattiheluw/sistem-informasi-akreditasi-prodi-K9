@@ -22,6 +22,8 @@ class TabelC4Controller extends Controller
     public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_create()
     {
         //
+        return view('kriteria.c4.dtps_bidang_Keahlian_sesuai_dengan_bidang_ps.form');
+
     }
     public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_store(Request $request)
     {
@@ -34,6 +36,7 @@ class TabelC4Controller extends Controller
     public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.dtps_bidang_Keahlian_sesuai_dengan_bidang_ps.form');
     }
     public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_update(Request $request, tabelC4 $tabelC4)
     {
@@ -53,6 +56,7 @@ class TabelC4Controller extends Controller
     public function dtps_yang_bidang_keahlian_luar_bidang_ps_create()
     {
         //
+        return view('kriteria.c4.dtps_yang_bidang_keahlian_luar_bidang_ps.form');
     }
     public function dtps_yang_bidang_keahlian_luar_bidang_ps_store(Request $request)
     {
@@ -65,6 +69,8 @@ class TabelC4Controller extends Controller
     public function dtps_yang_bidang_keahlian_luar_bidang_ps_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.dtps_yang_bidang_keahlian_luar_bidang_ps.form');
+
     }
     public function dtps_yang_bidang_keahlian_luar_bidang_ps_update(Request $request, tabelC4 $tabelC4)
     {
@@ -80,30 +86,6 @@ class TabelC4Controller extends Controller
     {
         //
         return view('kriteria.c4.rasio_dtps_terhadap_mahasiswa_reguler.index');
-    }
-    public function rasio_dtps_terhadap_mahasiswa_reguler_create()
-    {
-        //
-    }
-    public function rasio_dtps_terhadap_mahasiswa_reguler_store(Request $request)
-    {
-        //
-    }
-    public function rasio_dtps_terhadap_mahasiswa_reguler_show(tabelC4 $tabelC4)
-    {
-        //
-    }
-    public function rasio_dtps_terhadap_mahasiswa_reguler_edit(tabelC4 $tabelC4)
-    {
-        //
-    }
-    public function rasio_dtps_terhadap_mahasiswa_reguler_update(Request $request, tabelC4 $tabelC4)
-    {
-        //
-    }
-    public function rasio_dtps_terhadap_mahasiswa_reguler_destroy(tabelC4 $tabelC4)
-    {
-        //
     }
 
     // Tabel 4.1.2.5 Beban Kerja Dosen DTPS

@@ -103,6 +103,16 @@ Route::get('/kriteria3/program_layanan/edit', [TabelC3Controller::class, 'progra
 // kriteria 4
 // ====================================
 Route::get('/kriteria4', [TabelC4Controller::class, 'index']);
+// Kriteria 4 > DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
+Route::get('/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps', [TabelC4Controller::class, 'dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_index']);
+Route::get('/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps/create', [TabelC4Controller::class, 'dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_create']);
+Route::get('/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps/edit', [TabelC4Controller::class, 'dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_edit']);
+// Kriteria 4 > DTPS yang Bidang Keahliannya di Luar Bidang PS
+Route::get('/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps', [TabelC4Controller::class, 'dtps_yang_bidang_keahlian_luar_bidang_ps_index']);
+Route::get('/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps/create', [TabelC4Controller::class, 'dtps_yang_bidang_keahlian_luar_bidang_ps_create']);
+Route::get('/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps/edit', [TabelC4Controller::class, 'dtps_yang_bidang_keahlian_luar_bidang_ps_edit']);
+// Kriteria 4 > Tabel Rasio DTPS terhadap Mahasiswa Reguler
+Route::get('/kriteria4/rasio_dtps_terhadap_mahasiswa_reguler/index', [TabelC4Controller::class, 'rasio_dtps_terhadap_mahasiswa_reguler_index']);
 
 // ====================================
 // kriteria 5
