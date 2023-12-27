@@ -37,7 +37,7 @@ return new class extends Migration
       $table->timestamps();
     });
 
-    
+
   }
 
   /**
@@ -48,6 +48,7 @@ return new class extends Migration
   public function down()
   {
 
+    Schema::dropIfExists('tabel_c2_s');
     Schema::dropIfExists('tabel_k2_bidang_pendidikan');
     Schema::dropIfExists('tabel_k2_bidang_penelitian');
     Schema::dropIfExists('tabel_k2_bidang_pkm');
