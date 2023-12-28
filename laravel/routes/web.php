@@ -129,6 +129,18 @@ Route::get('/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi/edit
 Route::get('/kriteria4/prestasi_dtps', [TabelC4Controller::class, 'prestasi_dtps_index']);
 Route::get('/kriteria4/prestasi_dtps/create', [TabelC4Controller::class, 'prestasi_dtps_create']);
 Route::get('/kriteria4/prestasi_dtps/edit', [TabelC4Controller::class, 'prestasi_dtps_edit']);
+// Kriteria 4 > Tabel Pengembangan Kompetensi DTPS
+Route::get('/kriteria4/pengembangan_kompetensi_dtps', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_index']);
+Route::get('/kriteria4/pengembangan_kompetensi_dtps/create', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_create']);
+Route::get('/kriteria4/pengembangan_kompetensi_dtps/edit', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_edit']);
+// Kriteria 4 > Tabel Profil Tendik
+Route::get('/kriteria4/profil_tendik', [TabelC4Controller::class, 'profil_tendik_index']);
+Route::get('/kriteria4/profil_tendik/create', [TabelC4Controller::class, 'profil_tendik_create']);
+Route::get('/kriteria4/profil_tendik/edit', [TabelC4Controller::class, 'profil_tendik_edit']);
+// Kriteria 4 > Tabel Pengembangan Kompetensi dan Karier Tendik
+Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik', [TabelC4Controller::class, 'pengembangan_kompetensi_karier_tendik_index']);
+Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik/create', [TabelC4Controller::class, 'pengembangan_kompetensi_karier_tendik_create']);
+Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik/edit', [TabelC4Controller::class, 'pengembangan_kompetensi_karier_tendik_edit']);
 
 // ====================================
 // kriteria 5

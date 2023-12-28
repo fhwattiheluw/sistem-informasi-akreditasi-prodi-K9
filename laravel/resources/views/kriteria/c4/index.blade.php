@@ -80,7 +80,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Pengembangan Kompetensi DTPS</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/pengembangan_kompetensi_dtps" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Profil Tendik</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/profil_tendik" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -96,7 +96,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Pengembangan Kompetensi dan Karier Tendik</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/pengembangan_kompetensi_karier_tendik" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
