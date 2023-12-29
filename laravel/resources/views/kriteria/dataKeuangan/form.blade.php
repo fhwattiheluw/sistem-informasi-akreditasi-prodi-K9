@@ -29,7 +29,6 @@
           @method('PUT')
           @endif
 
-
         <div class="card-body">
           <h4 class="card-title">
             @if (Request::segment(2) === 'create')

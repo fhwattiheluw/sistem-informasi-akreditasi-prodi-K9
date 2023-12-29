@@ -46,40 +46,42 @@
                 </tr>
               </thead>
               <tbody class="text-justify">
-                @for($i = 0; $i < 5; $i++)
-              <tr>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>
-                  <a href="#">
+              @php $n = 1 @endphp
+                @foreach($items as $item)
+                <tr>
+                  <td>{{$n++;}}</td>
+                  <td>{{$item->nama_mitra}}</td>
+                  <td> @if($item->tingkat == "Internasional") <b>X</b> @endif </td>
+                  <td> @if($item->tingkat == "Nasional") <b>X</b> @endif </td>
+                  <td> @if($item->tingkat == "Lokal") <b>X</b> @endif </td>
+                  <td>{{$item->judul_ruang_lingkup}}</td>
+                  <td>{{$item->manfaat_output}}</td>
+                  <td>{{$item->durasi}}</td>
+                  <td>{{$item->tautan}}</td>
+                  <td>
                     <a href="#">
-                    <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
-                  </a>
+                      <a href="#">
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                    </a>
 
+                    </a>
+                  </td>
+                  <td>
+                    <a href="/kriteria2/bidang_penelitian/{{$item->id}}/edit/bidang penelitian">
+                    <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                   </a>
-                </td>
-                <td>
-                  <a href="/kriteria2/bidang_penelitian/edit/bidang penelitian">
-                  <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
-                </a>
-                  <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria2/bidang_penelitian/{{$item->id}}/delete/" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
-                </td>
-              </tr>
-              @endfor
+                  </td>
+                </tr>
+                @endforeach
               </tbody>
               <tfoot>
                 <tr>
                   <th colspan="2">Jumlah</th>
-                  <th>0</th>
-                  <th>0</th>
-                  <th>0</th>
+                  <th>{{$jum_inter}}</th>
+                  <th>{{$jum_nasional}}</th>
+                  <th>{{$jum_lokal}}</th>
                 </tr>
               </tfoot>
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\TabelC8Controller;
 use App\Http\Controllers\TabelC9Controller;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AutentikasiController;
+use App\Http\Controllers\K2BidangPendidikan;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,14 +62,23 @@ Route::get('/datakeuangan/{id}/delete', [DataKeuanganController::class, 'destroy
 // kriteria 2
 // ====================================
 Route::get('/kriteria2', [TabelC2Controller::class, 'index']);
+
 // kriteria 2 > bidang pendidikan
-Route::get('/kriteria2/bidang_pendidikan', [TabelC2Controller::class, 'bidang_pendidikan_index']);
-Route::get('/kriteria2/bidang_pendidikan/create/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_create']);
-Route::get('/kriteria2/bidang_pendidikan/edit/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_edit']);
+Route::get('/kriteria2/bidang_pendidikan', [TabelC2Controller::class, 'bidang_pendidikan_index'])->name('bidang_pendidikan.index');
+Route::get('/kriteria2/bidang_pendidikan/create/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_create'])->name('bidang_pendidikan.create');
+Route::post('/kriteria2/bidang_pendidikan/create/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_store'])->name('bidang_pendidikan.store');
+Route::get('/kriteria2/bidang_pendidikan/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_edit'])->name('bidang_pendidikan.edit');
+Route::put('/kriteria2/bidang_pendidikan/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_update'])->name('bidang_pendidikan.update');
+Route::get('/kriteria2/bidang_pendidikan/{id}/delete', [TabelC2Controller::class, 'bidang_pendidikan_destroy'])->name('bidang_pendidikan.delete');
+
 // kriteria 2 > bidang Penelitian
-Route::get('/kriteria2/bidang_penelitian', [TabelC2Controller::class, 'bidang_penelitian_index']);
-Route::get('/kriteria2/bidang_penelitian/create/{bidang}', [TabelC2Controller::class, 'bidang_penelitian_create']);
-Route::get('/kriteria2/bidang_penelitian/edit/{bidang}', [TabelC2Controller::class, 'bidang_penelitian_edit']);
+Route::get('/kriteria2/bidang_penelitian', [TabelC2Controller::class, 'bidang_penelitian_index'])->name('bidang_penelitan.index');
+Route::get('/kriteria2/bidang_penelitian/create/{bidang}', [TabelC2Controller::class, 'bidang_penelitian_create'])->name('bidang_penelitan.create');
+Route::post('/kriteria2/bidang_penelitian/create/{bidang}', [TabelC2Controller::class, 'bidang_penelitian_store'])->name('bidang_penelitan.store');
+Route::get('/kriteria2/bidang_penelitian/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_penelitian_edit'])->name('bidang_penelitan.edit');
+Route::put('/kriteria2/bidang_penelitian/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_penelitian_update'])->name('bidang_penelitan.update');
+Route::get('/kriteria2/bidang_penelitian/{id}/delete', [TabelC2Controller::class, 'bidang_penelitian_destroy'])->name('bidang_penelitan.delete');
+
 // kriteria 2 > bidang PkM
 Route::get('/kriteria2/bidang_pkm', [TabelC2Controller::class, 'bidang_pkm_index']);
 Route::get('/kriteria2/bidang_pkm/create/{bidang}', [TabelC2Controller::class, 'bidang_pkm_create']);

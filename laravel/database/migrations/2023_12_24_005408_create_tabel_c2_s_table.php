@@ -16,12 +16,24 @@ return new class extends Migration
     //create : Tabel 2.2.2 Data Kerja Sama - Bidang Pendidikan
     Schema::create('tabel_k2_bidang_pendidikan', function (Blueprint $table) {
       $table->id();
+      $table->string('nama_mitra');
+      $table->enum('tingkat', ['Internasional', 'Nasional', 'Lokal']);
+      $table->string('judul_ruang_lingkup');
+      $table->string('manfaat_output');
+      $table->integer('durasi');
+      $table->string('tautan')->nullable();
       $table->timestamps();
     });
 
     //create : Tabel 2.2.2 Data Kerja Sama - Bidang Penelitian
     Schema::create('tabel_k2_bidang_penelitian', function (Blueprint $table) {
       $table->id();
+      $table->string('nama_mitra');
+      $table->enum('tingkat', ['Internasional', 'Nasional', 'Lokal']);
+      $table->string('judul_ruang_lingkup');
+      $table->string('manfaat_output');
+      $table->integer('durasi');
+      $table->string('tautan')->nullable();
       $table->timestamps();
     });
 

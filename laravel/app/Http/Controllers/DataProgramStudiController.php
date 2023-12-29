@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\dataProgramStudi;
+use App\Models\TabelK2BidangPendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -113,8 +114,9 @@ class DataProgramStudiController extends Controller
      * @param  \App\Models\dataProgramStudi  $dataProgramStudi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(dataProgramStudi $dataProgramStudi)
+    public function destroy($id)
     {
-        //
+        dataProgramStudi::destroy($id);
+        return redirect('/dataprodi')->with('success', 'Data Prodi deleted successfully');
     }
 }
