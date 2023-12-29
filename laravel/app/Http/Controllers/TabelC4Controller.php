@@ -97,6 +97,7 @@ class TabelC4Controller extends Controller
     public function beban_kerja_dosen_dtps_create()
     {
         //
+        return view('kriteria.c4.beban_kerja_dosen_dtps.form');
     }
     public function beban_kerja_dosen_dtps_store(Request $request)
     {
@@ -109,6 +110,7 @@ class TabelC4Controller extends Controller
     public function beban_kerja_dosen_dtps_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.beban_kerja_dosen_dtps.form');
     }
     public function beban_kerja_dosen_dtps_update(Request $request, tabelC4 $tabelC4)
     {
@@ -128,6 +130,7 @@ class TabelC4Controller extends Controller
     public function kegiatan_mengajar_dosen_tetap_create()
     {
         //
+        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form');
     }
     public function kegiatan_mengajar_dosen_tetap_store(Request $request)
     {
@@ -140,6 +143,7 @@ class TabelC4Controller extends Controller
     public function kegiatan_mengajar_dosen_tetap_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form');
     }
     public function kegiatan_mengajar_dosen_tetap_update(Request $request, tabelC4 $tabelC4)
     {
@@ -159,6 +163,8 @@ class TabelC4Controller extends Controller
     public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_create()
     {
         //
+        return view('kriteria.c4.jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi.form');
+
     }
     public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_store(Request $request)
     {
@@ -171,6 +177,8 @@ class TabelC4Controller extends Controller
     public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi.form');
+
     }
     public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_update(Request $request, tabelC4 $tabelC4)
     {
@@ -190,6 +198,7 @@ class TabelC4Controller extends Controller
     public function prestasi_dtps_create()
     {
         //
+        return view('kriteria.c4.prestasi_dtps.form');
     }
     public function prestasi_dtps_store(Request $request)
     {
@@ -202,6 +211,7 @@ class TabelC4Controller extends Controller
     public function prestasi_dtps_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.prestasi_dtps.form');
     }
     public function prestasi_dtps_update(Request $request, tabelC4 $tabelC4)
     {
@@ -221,6 +231,7 @@ class TabelC4Controller extends Controller
     public function pengembangan_kompetensi_dtps_create()
     {
         //
+        return view('kriteria.c4.pengembangan_kompetensi_dtps.form');
     }
     public function pengembangan_kompetensi_dtps_store(Request $equest)
     {
@@ -233,6 +244,7 @@ class TabelC4Controller extends Controller
     public function pengembangan_kompetensi_dtps_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.pengembangan_kompetensi_dtps.form');
     }
     public function pengembangan_kompetensi_dtps_update(Request $request, tabelC4 $tabelC4)
     {
@@ -252,6 +264,8 @@ class TabelC4Controller extends Controller
     public function profil_tendik_create()
     {
         //
+        return view('kriteria.c4.profil_tendik.form');
+
     }
     public function profil_tendik_store(Request $equest)
     {
@@ -264,6 +278,7 @@ class TabelC4Controller extends Controller
     public function profil_tendik_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.profil_tendik.form');
     }
     public function profil_tendik_update(Request $request, tabelC4 $tabelC4)
     {
@@ -283,6 +298,8 @@ class TabelC4Controller extends Controller
     public function pengembangan_kompetensi_karier_tendik_create()
     {
         //
+        return view('kriteria.c4.pengembangan_kompetensi_karier_tendik.form');
+
     }
     public function pengembangan_kompetensi_karier_tendik_store(Request $equest)
     {
@@ -295,6 +312,8 @@ class TabelC4Controller extends Controller
     public function pengembangan_kompetensi_karier_tendik_edit(tabelC4 $tabelC4)
     {
         //
+        return view('kriteria.c4.pengembangan_kompetensi_karier_tendik.form');
+        
     }
     public function pengembangan_kompetensi_karier_tendik_update(Request $request, tabelC4 $tabelC4)
     {

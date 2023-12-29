@@ -48,23 +48,15 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Beban Kerja Dosen DTPS</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/beban_kerja_dosen_dtps" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title"> Kegiatan Mengajar Dosen Tetap - Semester Gasal</h5>
-          <a href="#" class="btn btn-primary">Go</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Kegiatan Mengajar Dosen Tetap - Semester Genap</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <h5 class="card-title"> Kegiatan Mengajar Dosen Tetap</h5>
+          <a href="/kriteria4/kegiatan_mengajar_dosen_tetap" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -72,7 +64,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"> Jumlah Bimbingan Tugas Akhir atau Skripsi, Tesis, dan Disertasi</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -80,7 +72,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Prestasi DTPS</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/prestasi_dtps" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -88,7 +80,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Pengembangan Kompetensi DTPS</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/pengembangan_kompetensi_dtps" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -96,7 +88,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Profil Tendik</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/profil_tendik" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -104,7 +96,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Pengembangan Kompetensi dan Karier Tendik</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/pengembangan_kompetensi_karier_tendik" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
