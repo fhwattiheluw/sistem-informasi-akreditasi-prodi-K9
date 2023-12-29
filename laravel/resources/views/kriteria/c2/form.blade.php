@@ -47,6 +47,10 @@
                 action="{{isset($item->id) ?  route('bidang_pendidikan.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pendidikan.store')}}" 
               @elseif($bidang == "bidang%20penelitian")
                 action="{{isset($item->id) ?  route('bidang_penelitian.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_penelitian.store')}}" 
+              @elseif($bidang == "bidang%20pkm")
+                action="{{isset($item->id) ?  route('bidang_pkm.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pkm.store')}}" 
+              @elseif($bidang == "Bidang%20Pengembangan%20Kelembagaan")
+                action="{{isset($item->id) ?  route('bidang_pengembangan_kelembagaan.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pengembangan_kelembagaan.store')}}" 
               
               @endif
             method="post">

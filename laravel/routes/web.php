@@ -80,13 +80,20 @@ Route::put('/kriteria2/bidang_penelitian/{id}/edit/{bidang}', [TabelC2Controller
 Route::get('/kriteria2/bidang_penelitian/{id}/delete', [TabelC2Controller::class, 'bidang_penelitian_destroy'])->name('bidang_penelitan.delete');
 
 // kriteria 2 > bidang PkM
-Route::get('/kriteria2/bidang_pkm', [TabelC2Controller::class, 'bidang_pkm_index']);
-Route::get('/kriteria2/bidang_pkm/create/{bidang}', [TabelC2Controller::class, 'bidang_pkm_create']);
-Route::get('/kriteria2/bidang_pkm/edit/{bidang}', [TabelC2Controller::class, 'bidang_pkm_edit']);
+Route::get('/kriteria2/bidang_pkm', [TabelC2Controller::class, 'bidang_pkm_index'])->name('bidang_pkm.index');
+Route::get('/kriteria2/bidang_pkm/create/{bidang}', [TabelC2Controller::class, 'bidang_pkm_create'])->name('bidang_pkm.create');
+Route::post('/kriteria2/bidang_pkm/create/{bidang}', [TabelC2Controller::class, 'bidang_pkm_store'])->name('bidang_pkm.store');
+Route::get('/kriteria2/bidang_pkm/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_pkm_edit'])->name('bidang_pkm.edit');
+Route::put('/kriteria2/bidang_pkm/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_pkm_update'])->name('bidang_pkm.update');
+Route::get('/kriteria2/bidang_pkm/{id}/delete', [TabelC2Controller::class, 'bidang_pkm_destroy'])->name('bidang_pkm.delete');
+
 // kriteria 2 > bidang Pengembangan Kelembagaan
-Route::get('/kriteria2/bidang_pengembangan_kelembagaan', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_index']);
-Route::get('/kriteria2/bidang_pengembangan_kelembagaan/create/{bidang}', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_create']);
-Route::get('/kriteria2/bidang_pengembangan_kelembagaan/edit/{bidang}', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_edit']);
+Route::get('/kriteria2/bidang_pengembangan_kelembagaan', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_index'])->name('bidang_pengembangan_kelembagaan.index');
+Route::get('/kriteria2/bidang_pengembangan_kelembagaan/create/{bidang}', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_create'])->name('bidang_pengembangan_kelembagaan.create');
+Route::post('/kriteria2/bidang_pengembangan_kelembagaan/create/{bidang}', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_store'])->name('bidang_pengembangan_kelembagaan.store');
+Route::get('/kriteria2/bidang_pengembangan_kelembagaan/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_edit'])->name('bidang_pengembangan_kelembagaan.edit');
+Route::put('/kriteria2/bidang_pengembangan_kelembagaan/{id}/edit/{bidang}', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_update'])->name('bidang_pengembangan_kelembagaan.update');
+Route::get('/kriteria2/bidang_pengembangan_kelembagaan/{id}/delete', [TabelC2Controller::class, 'bidang_pengembangan_kelembagaan_destroy'])->name('bidang_pengembangan_kelembagaan.delete');
 
 // ====================================
 // kriteria 3

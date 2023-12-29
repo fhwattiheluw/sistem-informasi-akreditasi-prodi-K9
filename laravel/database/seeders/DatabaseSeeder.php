@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\dataKeuangan;
+use App\Models\TabelK2BidangKelembagaan;
 use App\Models\TabelK2BidangPendidikan;
 use App\Models\TabelK2BidangPenelitian;
+use App\Models\TabelK2BidangPkm;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -73,6 +75,41 @@ class DatabaseSeeder extends Seeder
             'tingkat' => 'Internasional',
             'judul_ruang_lingkup' => 'Ruang Lingkup InterLokal',
             'manfaat_output' => 'Manfaat Internasional',
+            'durasi' => 4,
+            'tautan' => '',
+        ]);
+
+
+        TabelK2BidangPkm::create([
+            'nama_mitra' => 'Mitra PKM Mltinasional ',
+            'tingkat' => 'Internasional',
+            'judul_ruang_lingkup' => 'Ruang Lingkup InterLokal',
+            'manfaat_output' => 'Manfaat Internasional',
+            'durasi' => 4,
+            'tautan' => '',
+        ]);
+        TabelK2BidangPkm::create([
+            'nama_mitra' => 'Mitra PKM Regional ',
+            'tingkat' => 'Lokal',
+            'judul_ruang_lingkup' => 'Ruang Lingkup InterLokal',
+            'manfaat_output' => 'Manfaat Internasional',
+            'durasi' => 2,
+            'tautan' => '',
+        ]);
+
+        TabelK2BidangKelembagaan::create([
+            'nama_mitra' => 'Kerjasama Antar Institut',
+            'tingkat' => 'Lokal',
+            'judul_ruang_lingkup' => 'Ruang Lingkup Regional X',
+            'manfaat_output' => 'Manfaat Pengembangan Kelembagaan',
+            'durasi' => 2,
+            'tautan' => '',
+        ]);
+        TabelK2BidangKelembagaan::create([
+            'nama_mitra' => 'IAIN Se Indonesia Timur',
+            'tingkat' => 'Nasional',
+            'judul_ruang_lingkup' => 'Regional X',
+            'manfaat_output' => 'Manfaat Pengembangan Kelembagaan',
             'durasi' => 4,
             'tautan' => '',
         ]);
