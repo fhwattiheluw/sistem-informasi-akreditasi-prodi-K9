@@ -7,6 +7,7 @@ use App\Models\TabelK2BidangKelembagaan;
 use App\Models\TabelK2BidangPendidikan;
 use App\Models\TabelK2BidangPenelitian;
 use App\Models\TabelK2BidangPkm;
+use App\Models\TabelK3MahasiswaReguler;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -112,6 +113,31 @@ class DatabaseSeeder extends Seeder
             'manfaat_output' => 'Manfaat Pengembangan Kelembagaan',
             'durasi' => 4,
             'tautan' => '',
+        ]);
+
+        TabelK3MahasiswaReguler::create([
+            'tahun_akademik' => 2023,
+            'daya_tampung' => 200,
+            'pendaftar' => 250, 
+            'lulus_seleksi' => 200,
+            'jum_mahasiswa_baru' => 180,
+            'total' => 200
+        ]);
+        TabelK3MahasiswaReguler::create([
+            'tahun_akademik' => 2022,
+            'daya_tampung' => 200,
+            'pendaftar' => 350, 
+            'lulus_seleksi' => 210,
+            'jum_mahasiswa_baru' => 190,
+            'total' => 200
+        ]);
+        TabelK3MahasiswaReguler::create([
+            'tahun_akademik' => 2021,
+            'daya_tampung' => 220,
+            'pendaftar' => 350, 
+            'lulus_seleksi' => 210,
+            'jum_mahasiswa_baru' => 190,
+            'total' => 200
         ]);
 
     }

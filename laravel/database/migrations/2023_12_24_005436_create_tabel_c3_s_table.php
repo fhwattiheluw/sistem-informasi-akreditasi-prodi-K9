@@ -17,6 +17,17 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
         });
+
+        Schema::create('tabel_k3_mahasiswa_reguler', function (Blueprint $table) {
+            $table->id();
+            $table->year('tahun_akademik')->unique();
+            $table->integer('daya_tampung');
+            $table->integer('pendaftar');
+            $table->integer('lulus_seleksi');
+            $table->integer('jum_mahasiswa_baru');
+            $table->integer('total');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -27,5 +38,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('tabel_c3_s');
+        Schema::dropIfExists('tabel_k3_mahasiswa_reguler');
     }
 };

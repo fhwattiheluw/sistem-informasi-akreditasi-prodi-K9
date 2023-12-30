@@ -28,7 +28,7 @@
           <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
 
@@ -36,8 +36,23 @@
           </h4>
 
             <p class="card-description">Mahasiswa</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
             <hr>
-            <form action="#" method="post">
+            <form 
+            action="{{isset($item->id) ?  route('mahasiswa_reguler.update', ['id' => Crypt::encryptString($item->id)])  : route('mahasiswa_reguler.store')}}"
+            method="post">
+              @if(isset($item->id))
+                @method('PUT')
+              @endif
+
               @csrf
               <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -58,13 +73,13 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="tahun_akademik" value="{{isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik')}}" placeholder="ketik disini" autofocus>                      </td>
+                      <td><input type="text" class="form-control" name="daya_tampung" value="{{isset($item->daya_tampung) ? $item->daya_tampung : old('daya_tampung')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="text" class="form-control" name="pendaftar" value="{{isset($item->pendaftar) ? $item->pendaftar : old('pendaftar')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="lulus_seleksi" value="{{isset($item->lulus_seleksi) ? $item->lulus_seleksi : old('lulus_seleksi')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="jum_mahasiswa_baru" value="{{isset($item->jum_mahasiswa_baru) ? $item->jum_mahasiswa_baru : old('jum_mahasiswa_baru')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="total" value="{{isset($item->total) ? $item->total : old('total')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
                     </tr>
                   </tbody>
 
@@ -73,7 +88,7 @@
 
                     @if (Request::segment(3) === 'create')
                     <button type="submit" class="btn btn-primary mr-2"> Tambah data Mahasiswa Reguler </button>
-                    @elseif (Request::segment(3) === 'edit')
+                    @elseif (Request::segment(4) === 'edit')
                     <button type="submit" class="btn btn-primary mr-2"> Update data Mahasiswa Reguler  </button>
                     @endif
 

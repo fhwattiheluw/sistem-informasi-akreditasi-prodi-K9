@@ -100,9 +100,13 @@ Route::get('/kriteria2/bidang_pengembangan_kelembagaan/{id}/delete', [TabelC2Con
 // ====================================
 Route::get('/kriteria3', [TabelC3Controller::class, 'index']);
 // Kriteria 3 > Tabel Mahasiswa Reguler
-Route::get('/kriteria3/mahasiswa_reguler', [TabelC3Controller::class, 'mahasiswa_reguler_index']);
-Route::get('/kriteria3/mahasiswa_reguler/create', [TabelC3Controller::class, 'mahasiswa_reguler_create']);
-Route::get('/kriteria3/mahasiswa_reguler/edit', [TabelC3Controller::class, 'mahasiswa_reguler_edit']);
+Route::get('/kriteria3/mahasiswa_reguler', [TabelC3Controller::class, 'mahasiswa_reguler_index'])->name('mahasiswa_reguler.index');
+Route::get('/kriteria3/mahasiswa_reguler/create', [TabelC3Controller::class, 'mahasiswa_reguler_create'])->name('mahasiswa_reguler.create');
+Route::post('/kriteria3/mahasiswa_reguler/create', [TabelC3Controller::class, 'mahasiswa_reguler_store'])->name('mahasiswa_reguler.store');
+Route::get('/kriteria3/mahasiswa_reguler/{id}/edit', [TabelC3Controller::class, 'mahasiswa_reguler_edit'])->name('mahasiswa_reguler.edit');
+Route::put('/kriteria3/mahasiswa_reguler/{id}/edit', [TabelC3Controller::class, 'mahasiswa_reguler_update'])->name('mahasiswa_reguler.update');
+Route::get('/kriteria3/mahasiswa_reguler/{id}/delete', [TabelC3Controller::class, 'mahasiswa_reguler_destroy'])->name('mahasiswa_reguler.delete');
+
 // Kriteria 3 > Calon Mahasiswa dalam negeri
 Route::get('/kriteria3/mahasiswa_dalam_negeri', [TabelC3Controller::class, 'mahasiswa_dalam_negeri_index']);
 Route::get('/kriteria3/mahasiswa_dalam_negeri/create', [TabelC3Controller::class, 'mahasiswa_dalam_negeri_create']);

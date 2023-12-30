@@ -26,6 +26,14 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Mahasiswa Reguler</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -44,40 +52,37 @@
                 </tr>
               </thead>
               <tbody class="text-justify">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$item->ta}}</td>
+                  <td>{{$item->daya_tampung}}</td>
+                  <td>{{$item->pendaftar}}</td>
+                  <td>{{$item->lulus_seleksi}}</td>
+                  <td>{{$item->jum_mahasiswa_baru}}</td>
+                  <td>{{$item->total}}</td>
                   <td>
                     <a href="#">
-                      <a href="#">
-                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
-                      </a>
-
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria3/mahasiswa_reguler/edit">
+                    <a href="/kriteria3/mahasiswa_reguler/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria3/mahasiswa_reguler/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               <tfoot>
                 <tr>
                   <th>Jumlah</th>
-                  <th>0</th>
-                  <th>0</th>
-                  <th>0</th>
-                  <th>0</th>
-                  <th>0</th>
+                  <th>{{$total[0]}}</th>
+                  <th>{{$total[1]}}</th>
+                  <th>{{$total[2]}}</th>
+                  <th>{{$total[3]}}</th>
+                  <th>{{$total[4]}}</th>
                 </tr>
               </tfoot>
 
