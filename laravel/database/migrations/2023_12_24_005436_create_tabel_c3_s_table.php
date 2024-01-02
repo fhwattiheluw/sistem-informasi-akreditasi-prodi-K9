@@ -26,8 +26,21 @@ return new class extends Migration
             $table->integer('lulus_seleksi');
             $table->integer('jum_mahasiswa_baru');
             $table->integer('total');
+            $table->string('tautan')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('tabel_k3_mhs_dalam_negeri', function (Blueprint $table) {
+            $table->id();
+            $table->year('tahun_akademik')->unique();
+            $table->integer('jumlah_provinsi');
+            $table->integer('laki_laki');
+            $table->integer('perempuan');
+            $table->integer('total_mahasiswa');
+            $table->string('tautan')->nullable();
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -39,5 +52,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('tabel_c3_s');
         Schema::dropIfExists('tabel_k3_mahasiswa_reguler');
+        Schema::dropIfExists('tabel_k3_mhs_dalam_negeri');
     }
 };
