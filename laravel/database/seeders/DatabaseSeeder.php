@@ -8,6 +8,7 @@ use App\Models\TabelK2BidangPendidikan;
 use App\Models\TabelK2BidangPenelitian;
 use App\Models\TabelK2BidangPkm;
 use App\Models\TabelK3MahasiswaDalamNegeri;
+use App\Models\TabelK3MahasiswaLuarNegeri;
 use App\Models\TabelK3MahasiswaReguler;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -154,6 +155,27 @@ class DatabaseSeeder extends Seeder
             'laki_laki' => 100,
             'perempuan' => 200,
             'total_mahasiswa' => 300
+        ]);
+        TabelK3MahasiswaLuarNegeri::create([
+            'tahun_akademik' => 2022,
+            'jumlah_provinsi' => 3,
+            'laki_laki' => 100,
+            'perempuan' => 200,
+            'total_mahasiswa' => 300
+        ]);
+        TabelK3MahasiswaLuarNegeri::create([
+            'tahun_akademik' => 2023,
+            'jumlah_provinsi' => 2,
+            'laki_laki' => 100,
+            'perempuan' => 200,
+            'total_mahasiswa' => 300
+        ]);
+        TabelK3MahasiswaLuarNegeri::create([
+            'tahun_akademik' => 2021,
+            'jumlah_provinsi' => 3,
+            'laki_laki' => 200,
+            'perempuan' => 200,
+            'total_mahasiswa' => 400
         ]);
 
     }

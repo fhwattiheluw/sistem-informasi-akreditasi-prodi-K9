@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\tabelC3;
 use App\Models\TabelK3MahasiswaDalamNegeri;
+use App\Models\TabelK3MahasiswaLuarNegeri;
 use App\Models\TabelK3MahasiswaReguler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -259,8 +260,31 @@ class TabelC3Controller extends Controller
   // ===============================
   public function mahasiswa_luar_negeri_index()
   {
-    //
-    return view('kriteria.c3.mhs_luar_negeri.index');
+    $items = TabelK3MahasiswaLuarNegeri::latest('tahun_akademik')->take(4)->get();
+    
+    $tahun_sekarang = date('Y');
+    foreach($items as $item){
+      $selisih = $tahun_sekarang - $item->tahun_akademik;
+      $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
+
+      $data = new \stdClass;
+
+      $data->id = $item->id;
+      $data->ta = $ta;
+      $data->jumlah_provinsi = $item->jumlah_provinsi;
+      $data->laki_laki = $item->laki_laki;
+      $data->perempuan = $item->perempuan;
+      $data->total_mahasiswa = $item->total_mahasiswa;
+      $data->tautan = $item->tautan;  
+
+      $datas[] = $data;
+    }
+
+    $tot[0] = $items->sum('jumlah_provinsi');
+    $tot[1] = $items->sum('laki_laki');
+    $tot[2] = $items->sum('perempuan');
+    $tot[3] = $items->sum('total_mahasiswa');
+    return view('kriteria.c3.mhs_luar_negeri.index', ['items' => $datas, 'total' => $tot]);
   }
 
   public function mahasiswa_luar_negeri_create()
@@ -269,26 +293,65 @@ class TabelC3Controller extends Controller
     return view('kriteria.c3.mhs_luar_negeri.form');
   }
   public function mahasiswa_luar_negeri_store(Request $request)
-  {
-    //
+  {    
+    $request->validate([
+      'tahun_akademik' => 'unique:tabel_k3_mhs_luar_negeri,tahun_akademik',
+      'jumlah_provinsi' => 'required',
+      'laki_laki' => 'required',
+      'perempuan' => 'required',
+      'total_mahasiswa' => 'required'
+    ]);
+
+    TabelK3MahasiswaLuarNegeri::create([
+      'tahun_akademik' => $request->tahun_akademik,
+      'jumlah_provinsi' => $request->jumlah_provinsi,
+      'laki_laki' => $request->laki_laki,
+      'perempuan' =>  $request->perempuan,
+      'total_mahasiswa' => $request->total_mahasiswa,
+      'tautan' => $request->tautan
+    ]);
+
+    return redirect('/kriteria3/mahasiswa_luar_negeri')->with('success', 'Data K3 Mahasiswa Luar Negeri CREATED successfully');
   }
   public function mahasiswa_luar_negeri_show(tabelC3 $tabelC3)
   {
     //
   }
-  public function mahasiswa_luar_negeri_edit(tabelC3 $tabelC3)
+  public function mahasiswa_luar_negeri_edit($id)
   {
-    //
-    return view('kriteria.c3.mhs_luar_negeri.form');
+    $item = TabelK3MahasiswaLuarNegeri::findOrFail($id);
+    return view('kriteria.c3.mhs_luar_negeri.form', ['item' => $item]);
   }
 
-  public function mahasiswa_luar_negeri_update(Request $request, tabelC3 $tabelC3)
-  {
-    //
+  public function mahasiswa_luar_negeri_update(Request $request, $id)
+  {    
+    $idx =Crypt::decryptString($id);
+    $data = TabelK3MahasiswaLuarNegeri::find($idx);
+
+    $request->validate([
+      'tahun_akademik' => 'required',
+      'jumlah_provinsi' => 'required',
+      'laki_laki' => 'required',
+      'perempuan' => 'required',
+      'total_mahasiswa' => 'required'
+    ]);
+
+    $data->update([
+      'tahun_akademik' => $request->tahun_akademik,
+      'jumlah_provinsi' => $request->jumlah_provinsi,
+      'laki_laki' => $request->laki_laki,
+      'perempuan' =>  $request->perempuan,
+      'total_mahasiswa' => $request->total_mahasiswa,
+      'tautan' => $request->tautan
+    ]);
+
+    return redirect('/kriteria3/mahasiswa_luar_negeri')->with('success', 'Data K3 Mahasiswa Luar Negeri UPDATED successfully');
   }
-  public function mahasiswa_luar_negeri_destroy(tabelC3 $tabelC3)
+
+  public function mahasiswa_luar_negeri_destroy($id)
   {
-    //
+    TabelK3MahasiswaLuarNegeri::destroy($id);
+    return redirect('/kriteria3/mahasiswa_luar_negeri')->with('success', 'Data K3 Mahasiswa Luar Negeri DELETED successfully');
   }
 
   // ===============================

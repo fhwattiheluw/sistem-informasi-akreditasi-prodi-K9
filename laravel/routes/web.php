@@ -116,9 +116,13 @@ Route::put('/kriteria3/mahasiswa_dalam_negeri/{id}/edit', [TabelC3Controller::cl
 Route::get('/kriteria3/mahasiswa_dalam_negeri/{id}/delete', [TabelC3Controller::class, 'mahasiswa_dalam_negeri_destroy'])->name('mahasiswa_dalam_negeri.delete');
 
 // Kriteria 3 > Calon Mahasiswa luar negeri
-Route::get('/kriteria3/mahasiswa_luar_negeri', [TabelC3Controller::class, 'mahasiswa_luar_negeri_index']);
-Route::get('/kriteria3/mahasiswa_luar_negeri/create', [TabelC3Controller::class, 'mahasiswa_luar_negeri_create']);
-Route::get('/kriteria3/mahasiswa_luar_negeri/edit', [TabelC3Controller::class, 'mahasiswa_luar_negeri_edit']);
+Route::get('/kriteria3/mahasiswa_luar_negeri', [TabelC3Controller::class, 'mahasiswa_luar_negeri_index'])->name('mahasiswa_luar_negeri.index');
+Route::get('/kriteria3/mahasiswa_luar_negeri/create', [TabelC3Controller::class, 'mahasiswa_luar_negeri_create'])->name('mahasiswa_luar_negeri.create');
+Route::post('/kriteria3/mahasiswa_luar_negeri/create', [TabelC3Controller::class, 'mahasiswa_luar_negeri_store'])->name('mahasiswa_luar_negeri.store');
+Route::get('/kriteria3/mahasiswa_luar_negeri/{id}/edit', [TabelC3Controller::class, 'mahasiswa_luar_negeri_edit'])->name('mahasiswa_luar_negeri.edit');
+Route::put('/kriteria3/mahasiswa_luar_negeri/{id}/edit', [TabelC3Controller::class, 'mahasiswa_luar_negeri_update'])->name('mahasiswa_luar_negeri.update');
+Route::get('/kriteria3/mahasiswa_luar_negeri/{id}/delete', [TabelC3Controller::class, 'mahasiswa_luar_negeri_destroy'])->name('mahasiswa_luar_negeri.delete');
+
 // Kriteria 3 > Program Layanan Dan Pembinaan Minat, Bakat, Penalaran, Kesejahteraan, Dan Keprofesian Mahasiswa
 Route::get('/kriteria3/program_layanan', [TabelC3Controller::class, 'program_layanan_index']);
 Route::get('/kriteria3/program_layanan/create', [TabelC3Controller::class, 'program_layanan_create']);

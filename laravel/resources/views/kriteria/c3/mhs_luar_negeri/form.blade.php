@@ -32,20 +32,35 @@
             Edit data
             @endif
 
-            Mahasiswa Reguler
+            Mahasiswa Reguler Luar Negeri
           </h4>
 
             <p class="card-description">Mahasiswa</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
             <hr>
-            <form action="#" method="post">
+            <form 
+            action="{{isset($item->id) ?  route('mahasiswa_luar_negeri.update', ['id' => Crypt::encryptString($item->id)])  : route('mahasiswa_luar_negeri.store')}}"
+            method="post">
+              @if(isset($item->id))
+                @method('PUT')
+              @endif
               @csrf
+
               <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                   <thead class="text-center">
                     <tr>
                       <th rowspan="2">Tahun Akademik</th>
-                      <th rowspan="2">Jumlah Negara</th>
-                      <th colspan="2">Jumlah Calon Mahasiswa Reguler Full Time/Part Time</th>
+                      <th rowspan="2">Jumlah Provinsi</th>
+                      <th colspan="2">Jumlah Calon Mahasiswa Reguler</th>
                       <th rowspan="2">Jumlah Total Mahasiswa Reguler</th>
                       <th rowspan="2">Bukti/Tautan</th>
                     </tr>
@@ -57,12 +72,12 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="tahun_akademik" value="{{isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik')}}" placeholder="ketik disini" autofocus>                      </td>
+                      <td><input type="text" class="form-control" name="jumlah_provinsi" value="{{isset($item->jumlah_provinsi) ? $item->jumlah_provinsi : old('jumlah_provinsi')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="text" class="form-control" name="laki_laki" value="{{isset($item->laki_laki) ? $item->laki_laki : old('laki_laki')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="text" class="form-control" name="perempuan" value="{{isset($item->perempuan) ? $item->perempuan : old('perempuan')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="total_mahasiswa" value="{{isset($item->total_mahasiswa) ? $item->total_mahasiswa : old('total_mahasiswa')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tahun_akademik : old('tautan')}}" placeholder="ketik disini"></td>
                     </tr>
                   </tbody>
 
@@ -71,8 +86,8 @@
 
                     @if (Request::segment(3) === 'create')
                     <button type="submit" class="btn btn-primary mr-2"> Tambah data Calon Mahasiswa Luar negeri </button>
-                    @elseif (Request::segment(3) === 'edit')
-                    <button type="submit" class="btn btn-primary mr-2"> Update data Calon Mahasiswa luar negeri </button>
+                    @elseif (Request::segment(4) === 'edit')
+                    <button type="submit" class="btn btn-primary mr-2"> Update data Calon Mahasiswa Luar negeri </button>
                     @endif
 
                   </form>
