@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.5 Keuangan, Sarana, dan Prasarana</p>
+          <p class="m-0">K.5 Keuangan, Sarana, dan Prasarana</p>
         </a>
       </div>
 
@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Pemerolehan Dana</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria5/pemerolehan_dana" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Penggunaan Dana</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria5/penggunaan_dana" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Dana Penelitian</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria5/dana_penelitian" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Dana PkM</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria5/dana_pkm" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

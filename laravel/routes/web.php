@@ -175,6 +175,22 @@ Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik/edit', [TabelC4Cont
 // kriteria 5
 // ====================================
 Route::get('/kriteria5', [TabelC5Controller::class, 'index']);
+// Kriteria 5 > Tabel Pemerolehan Dana
+Route::get('/kriteria5/pemerolehan_dana', [TabelC5Controller::class, 'pemerolehan_dana_index']);
+Route::get('/kriteria5/pemerolehan_dana/create', [TabelC5Controller::class, 'pemerolehan_dana_create']);
+Route::get('/kriteria5/pemerolehan_dana/edit', [TabelC5Controller::class, 'pemerolehan_dana_edit']);
+// Kriteria 5 > Tabel Penggunaan Dana
+Route::get('/kriteria5/penggunaan_dana', [TabelC5Controller::class, 'penggunaan_dana_index']);
+Route::get('/kriteria5/penggunaan_dana/create', [TabelC5Controller::class, 'penggunaan_dana_create']);
+Route::get('/kriteria5/penggunaan_dana/edit', [TabelC5Controller::class, 'penggunaan_dana_edit']);
+// Kriteria 5 > Tabel Dana Penelitian
+Route::get('/kriteria5/dana_penelitian', [TabelC5Controller::class, 'dana_penelitian_index']);
+Route::get('/kriteria5/dana_penelitian/create', [TabelC5Controller::class, 'dana_penelitian_create']);
+Route::get('/kriteria5/dana_penelitian/edit', [TabelC5Controller::class, 'dana_penelitian_edit']);
+// Kriteria 5 > Tabel Dana PKM
+Route::get('/kriteria5/dana_pkm', [TabelC5Controller::class, 'dana_pkm_index']);
+Route::get('/kriteria5/dana_pkm/create', [TabelC5Controller::class, 'dana_pkm_create']);
+Route::get('/kriteria5/dana_pkm/edit', [TabelC5Controller::class, 'dana_pkm_edit']);
 
 // ====================================
 // kriteria 6
