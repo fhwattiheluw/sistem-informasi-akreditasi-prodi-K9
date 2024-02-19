@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS</h5>
-          <a href="/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/dtps_keahlian_bidang_ps" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">DTPS yang Bidang Keahliannya di Luar Bidang PS </h5>
-          <a href="/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps" class="btn btn-primary">Go</a>
+          <a href="/kriteria4/dtps_luar_ps" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

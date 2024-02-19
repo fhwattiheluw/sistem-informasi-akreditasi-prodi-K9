@@ -124,22 +124,35 @@ Route::put('/kriteria3/mahasiswa_luar_negeri/{id}/edit', [TabelC3Controller::cla
 Route::get('/kriteria3/mahasiswa_luar_negeri/{id}/delete', [TabelC3Controller::class, 'mahasiswa_luar_negeri_destroy'])->name('mahasiswa_luar_negeri.delete');
 
 // Kriteria 3 > Program Layanan Dan Pembinaan Minat, Bakat, Penalaran, Kesejahteraan, Dan Keprofesian Mahasiswa
-Route::get('/kriteria3/program_layanan', [TabelC3Controller::class, 'program_layanan_index']);
-Route::get('/kriteria3/program_layanan/create', [TabelC3Controller::class, 'program_layanan_create']);
-Route::get('/kriteria3/program_layanan/edit', [TabelC3Controller::class, 'program_layanan_edit']);
+Route::get('/kriteria3/program_layanan', [TabelC3Controller::class, 'program_layanan_index'])->name('program_layanan.index');
+Route::get('/kriteria3/program_layanan/create', [TabelC3Controller::class, 'program_layanan_create'])->name('program_layanan.create');
+Route::post('/kriteria3/program_layanan/create', [TabelC3Controller::class, 'program_layanan_store'])->name('program_layanan.store');
+Route::get('/kriteria3/program_layanan/{id}/edit', [TabelC3Controller::class, 'program_layanan_edit'])->name('program_layanan.edit');
+Route::put('/kriteria3/program_layanan/{id}/edit', [TabelC3Controller::class, 'program_layanan_update'])->name('program_layanan.update');
+Route::get('/kriteria3/program_layanan/{id}/delete', [TabelC3Controller::class, 'program_layanan_destroy'])->name('program_layanan.delete');
 
 // ====================================
 // kriteria 4
 // ====================================
 Route::get('/kriteria4', [TabelC4Controller::class, 'index']);
+
 // Kriteria 4 > DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
-Route::get('/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps', [TabelC4Controller::class, 'dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_index']);
-Route::get('/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps/create', [TabelC4Controller::class, 'dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_create']);
-Route::get('/kriteria4/dtps_bidang_Keahlian_sesuai_dengan_bidang_ps/edit', [TabelC4Controller::class, 'dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_edit']);
+Route::get('/kriteria4/dtps_keahlian_bidang_ps', [TabelC4Controller::class, 'dtps_keahlian_bidang_ps_index'])->name('dtps_ps.index');
+Route::get('/kriteria4/dtps_keahlian_bidang_ps/create', [TabelC4Controller::class, 'dtps_keahlian_bidang_ps_create'])->name('dtps_ps.create');
+Route::post('/kriteria4/dtps_keahlian_bidang_ps/create', [TabelC4Controller::class, 'dtps_keahlian_bidang_ps_store'])->name('dtps_ps.store');
+Route::get('/kriteria4/dtps_keahlian_bidang_ps/{id}/edit', [TabelC4Controller::class, 'dtps_keahlian_bidang_ps_edit'])->name('dtps_ps.edit');
+Route::put('/kriteria4/dtps_keahlian_bidang_ps/{id}/edit', [TabelC4Controller::class, 'dtps_keahlian_bidang_ps_update'])->name('dtps_ps.update');
+Route::get('/kriteria4/dtps_keahlian_bidang_ps/{id}/delete', [TabelC4Controller::class, 'dtps_keahlian_bidang_ps_destroy'])->name('dtps_ps.delete');
+
+
 // Kriteria 4 > DTPS yang Bidang Keahliannya di Luar Bidang PS
-Route::get('/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps', [TabelC4Controller::class, 'dtps_yang_bidang_keahlian_luar_bidang_ps_index']);
-Route::get('/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps/create', [TabelC4Controller::class, 'dtps_yang_bidang_keahlian_luar_bidang_ps_create']);
-Route::get('/kriteria4/dtps_yang_bidang_keahlian_luar_bidang_ps/edit', [TabelC4Controller::class, 'dtps_yang_bidang_keahlian_luar_bidang_ps_edit']);
+Route::get('/kriteria4/dtps_luar_ps', [TabelC4Controller::class, 'dtps_luar_ps_index'])->name('dtps_luar_ps.index');
+Route::get('/kriteria4/dtps_luar_ps/create', [TabelC4Controller::class, 'dtps_luar_ps_create'])->name('dtps_luar_ps.create');
+Route::post('/kriteria4/dtps_luar_ps/create', [TabelC4Controller::class, 'dtps_luar_ps_create'])->name('dtps_luar_ps.store');
+Route::get('/kriteria4/dtps_luar_ps/{id}/edit', [TabelC4Controller::class, 'dtps_luar_ps_edit'])->name('dtps_luar_ps.edit');
+Route::put('/kriteria4/dtps_luar_ps/{id}/edit', [TabelC4Controller::class, 'dtps_luar_ps_edit'])->name('dtps_luar_ps.update');
+Route::get('/kriteria4/dtps_luar_ps/{id}/delete', [TabelC4Controller::class, 'dtps_luar_ps_edit'])->name('dtps_luar_ps.delete');
+
 // Kriteria 4 > Tabel Rasio DTPS terhadap Mahasiswa Reguler
 Route::get('/kriteria4/rasio_dtps_terhadap_mahasiswa_reguler/index', [TabelC4Controller::class, 'rasio_dtps_terhadap_mahasiswa_reguler_index']);
 // Kriteria 4 > Tabel Beban Kerja Dosen DTPS

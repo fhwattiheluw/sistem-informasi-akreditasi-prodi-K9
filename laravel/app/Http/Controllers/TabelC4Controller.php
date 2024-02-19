@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\tabelC4;
+use App\Models\TabelK4DtpsKeahlianPS;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class TabelC4Controller extends Controller
 {
@@ -14,69 +16,118 @@ class TabelC4Controller extends Controller
     }
 
     // Tabel 4.1.2.2 DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_index()
+    public function dtps_keahlian_bidang_ps_index()
     {
-        //
-        return view('kriteria.c4.dtps_bidang_Keahlian_sesuai_dengan_bidang_ps.index');
+        $items = TabelK4DtpsKeahlianPS::all();
+        return view('kriteria.c4.dtps_keahlian_bidang_ps.index', ['items' => $items]);
     }
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_create()
+    public function dtps_keahlian_bidang_ps_create()
     {
         //
-        return view('kriteria.c4.dtps_bidang_Keahlian_sesuai_dengan_bidang_ps.form');
+        return view('kriteria.c4.dtps_keahlian_bidang_ps.form');
 
     }
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_store(Request $request)
+    public function dtps_keahlian_bidang_ps_store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'nidn_nidk' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat_pendidik' => 'required',
+            'jabatan_fungsional' => 'required',
+            'gelar_akademik' => 'required',
+            'pendidikan' => 'required',
+            'bidang_keahlian' => 'required', 
+        ]);
+
+        TabelK4DtpsKeahlianPS::create([
+            'nama' => $request->nama,
+            'nidn_nidk' => $request->nidn_nidk,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'sertifikat_pendidik' => $request->sertifikat_pendidik,
+            'jabatan_fungsional' => $request->jabatan_fungsional,
+            'gelar_akademik' => $request->gelar_akademik,
+            'pendidikan' => $request->pendidikan,
+            'bidang_keahlian' => $request->bidang_keahlian, 
+        ]);
+
+        return redirect()->route('dtps_ps.index')->with('success', 'Data K4 DTPS Sesuai Keahlian PS CREATED successfully');
+    }
+
+    public function dtps_keahlian_bidang_ps_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_show(tabelC4 $tabelC4)
+    public function dtps_keahlian_bidang_ps_edit($id)
     {
-        //
+        $item = TabelK4DtpsKeahlianPS::findOrFail($id);
+        return view('kriteria.c4.dtps_keahlian_bidang_ps.form', ['item' => $item]);
     }
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_edit(tabelC4 $tabelC4)
+
+    public function dtps_keahlian_bidang_ps_update(Request $request, $id)
     {
-        //
-        return view('kriteria.c4.dtps_bidang_Keahlian_sesuai_dengan_bidang_ps.form');
+        $idx =Crypt::decryptString($id);
+        $data = TabelK4DtpsKeahlianPS::findOrFail($idx);
+        $request->validate([
+            'nama' => 'required',
+            'nidn_nidk' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat_pendidik' => 'required',
+            'jabatan_fungsional' => 'required',
+            'gelar_akademik' => 'required',
+            'pendidikan' => 'required',
+            'bidang_keahlian' => 'required', 
+        ]);
+
+        $data->update([
+            'nama' => $request->nama,
+            'nidn_nidk' => $request->nidn_nidk,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'sertifikat_pendidik' => $request->sertifikat_pendidik,
+            'jabatan_fungsional' => $request->jabatan_fungsional,
+            'gelar_akademik' => $request->gelar_akademik,
+            'pendidikan' => $request->pendidikan,
+            'bidang_keahlian' => $request->bidang_keahlian, 
+        ]);
+
+        return redirect()->route('dtps_ps.index')->with('success', 'Data K4 DTPS Sesuai Keahlian PS Updated successfully');
     }
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_update(Request $request, tabelC4 $tabelC4)
+    public function dtps_keahlian_bidang_ps_destroy($id)
     {
-        //
-    }
-    public function dtps_bidang_Keahlian_sesuai_dengan_bidang_ps_destroy(tabelC4 $tabelC4)
-    {
-        //
+        TabelK4DtpsKeahlianPS::destroy($id);
+        return redirect()->route('dtps_ps.index')->with('success', 'Data K4 DTPS Sesuai Keahlian PS Deleted successfully');
     }
 
     //Tabel 4.1.2.3 DTPS yang Bidang Keahliannya di Luar Bidang PS
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_index()
+    public function dtps_luar_ps_index()
     {
         //
-        return view('kriteria.c4.dtps_yang_bidang_keahlian_luar_bidang_ps.index');
+        return view('kriteria.c4.dtps_luar_ps.index');
     }
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_create()
+    public function dtps_luar_ps_create()
     {
         //
-        return view('kriteria.c4.dtps_yang_bidang_keahlian_luar_bidang_ps.form');
+        return view('kriteria.c4.dtps_luar_ps.form');
     }
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_store(Request $request)
-    {
-        //
-    }
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_show(tabelC4 $tabelC4)
+    public function dtps_luar_ps_store(Request $request)
     {
         //
     }
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_edit(tabelC4 $tabelC4)
+    public function dtps_luar_ps_show(tabelC4 $tabelC4)
     {
         //
-        return view('kriteria.c4.dtps_yang_bidang_keahlian_luar_bidang_ps.form');
+    }
+    public function dtps_luar_ps_edit(tabelC4 $tabelC4)
+    {
+        //
+        return view('kriteria.c4.dtps_luar_ps.form');
 
     }
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_update(Request $request, tabelC4 $tabelC4)
+    public function dtps_luar_ps_update(Request $request, tabelC4 $tabelC4)
     {
         //
     }
-    public function dtps_yang_bidang_keahlian_luar_bidang_ps_destroy(tabelC4 $tabelC4)
+    public function dtps_luar_ps_destroy(tabelC4 $tabelC4)
     {
         //
     }
