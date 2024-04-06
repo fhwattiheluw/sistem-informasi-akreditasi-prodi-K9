@@ -30,6 +30,10 @@
        text-transform: capitalize;
     }
 
+    select.form-control {
+      color: black;
+    }
+
   </style>
   @yield('css')
 </head>
@@ -229,5 +233,6 @@
   <!-- Custom js for this page -->
   <script src="/assets/js/dashboard.js"></script>
   <!-- End custom js for this page -->
+    @yield('js')
 </body>
 </html>

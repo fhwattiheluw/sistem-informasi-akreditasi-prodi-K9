@@ -28,7 +28,6 @@
             <thead>
               <tr>
                 <th>Nama</th>
-                <th>NIDN</th>
                 <th>Username</th>
                 <th>Level</th>
                 <th>Aksi</th>
@@ -37,10 +36,10 @@
             <tbody>
               @for ($i = 0; $i < 10; $i++)
               <tr>
-                <td>nama {$i}</td>
-                <td>NIDN {$i}</td>
-                <td>username {$i}</td>
-                <td>level {$i}</td>
+                <td>{{ Illuminate\Support\Str::random(10) }}</td>
+                <td>{{ Illuminate\Support\Str::random(10) }}</td>
+                <td>{{ Illuminate\Support\Str::random(10) }}</td>
+                <td>{{ Illuminate\Support\Str::random(10) }}</td>
                 <td>
 <button type="button" class="btn btn-outline-primary btn-sm"> <i class="mdi mdi-tooltip-edit"></i> </button>
 <button type="button" class="btn btn-outline-danger btn-sm"> <i class="mdi mdi-delete"></i> </button>

@@ -170,5 +170,83 @@ class TabelC5Controller extends Controller
     //
   }
 
+  // Kriteria 5 > Tabel Data Prasarana Pendidikan
+
+  public function prasarana_pendidikan_index()
+  {
+    //
+    return view('kriteria.c5.prasarana_pendidikan.index');
+  }
+  public function prasarana_pendidikan_create()
+  {
+    //
+    return view('kriteria.c5.prasarana_pendidikan.form');
+  }
+
+  public function prasarana_pendidikan_store(Request $request)
+  {
+    //
+  }
+
+  public function prasarana_pendidikan_show(tabelC5 $tabelC5)
+  {
+    //
+  }
+
+  public function prasarana_pendidikan_edit(tabelC5 $tabelC5)
+  {
+    //
+    return view('kriteria.c5.prasarana_pendidikan.form');
+  }
+
+  public function prasarana_pendidikan_update(Request $request, tabelC5 $tabelC5)
+  {
+    //
+  }
+
+  public function prasarana_pendidikan_destroy(tabelC5 $tabelC5)
+  {
+    //
+  }
+
+  // Kriteria 5 > Tabel Data Sarana Pendidikan
+
+  public function sarana_pendidikan_index()
+  {
+    //
+    return view('kriteria.c5.sarana_pendidikan.index');
+  }
+  public function sarana_pendidikan_create()
+  {
+    //
+    return view('kriteria.c5.sarana_pendidikan.form');
+  }
+
+  public function sarana_pendidikan_store(Request $request)
+  {
+    //
+  }
+
+  public function sarana_pendidikan_show(tabelC5 $tabelC5)
+  {
+    //
+  }
+
+  public function sarana_pendidikan_edit(tabelC5 $tabelC5)
+  {
+    //
+    return view('kriteria.c5.sarana_pendidikan.form');
+  }
+
+  public function sarana_pendidikan_update(Request $request, tabelC5 $tabelC5)
+  {
+    //
+  }
+
+  public function sarana_pendidikan_destroy(tabelC5 $tabelC5)
+  {
+    //
+  }
+
 
 }

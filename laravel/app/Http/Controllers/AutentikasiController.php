@@ -18,6 +18,12 @@ class AutentikasiController extends Controller
         return view('login');
     }
 
+    public function forgot_form()
+    {
+      // code...
+      return view('forgot_password');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

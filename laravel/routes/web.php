@@ -27,7 +27,10 @@ use App\Http\Controllers\K2BidangPendidikan;
 |
 */
 
+// login awal
 Route::get('/',[AutentikasiController::class, 'index']);
+// lupa password
+Route::get('/forgot',[AutentikasiController::class, 'forgot_form']);
 // ====================================
 // dashboard
 // ====================================
@@ -204,6 +207,14 @@ Route::get('/kriteria5/dana_penelitian/edit', [TabelC5Controller::class, 'dana_p
 Route::get('/kriteria5/dana_pkm', [TabelC5Controller::class, 'dana_pkm_index']);
 Route::get('/kriteria5/dana_pkm/create', [TabelC5Controller::class, 'dana_pkm_create']);
 Route::get('/kriteria5/dana_pkm/edit', [TabelC5Controller::class, 'dana_pkm_edit']);
+// Kriteria 5 > Tabel Data Prasarana Pendidikan
+Route::get('/kriteria5/prasarana_pendidikan', [TabelC5Controller::class, 'prasarana_pendidikan_index']);
+Route::get('/kriteria5/prasarana_pendidikan/create', [TabelC5Controller::class, 'prasarana_pendidikan_create']);
+Route::get('/kriteria5/prasarana_pendidikan/edit', [TabelC5Controller::class, 'prasarana_pendidikan_edit']);
+// Kriteria 5 > Tabel Data Sarana Pendidikan
+Route::get('/kriteria5/sarana_pendidikan', [TabelC5Controller::class, 'sarana_pendidikan_index']);
+Route::get('/kriteria5/sarana_pendidikan/create', [TabelC5Controller::class, 'sarana_pendidikan_create']);
+Route::get('/kriteria5/sarana_pendidikan/edit', [TabelC5Controller::class, 'sarana_pendidikan_edit']);
 
 // ====================================
 // kriteria 6

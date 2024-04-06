@@ -56,7 +56,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Data Prasarana Pendidikan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="/kriteria5/prasarana_pendidikan" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Data Sarana Pendidikan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="kriteria5/sarana_pendidikan" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
