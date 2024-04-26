@@ -25,14 +25,22 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel DTPS yang Bidang Keahliannya di Luar Bidang PS</h5>
+          <h5 class="card-title">Tabel DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
                   <th rowspan="2">Nama Lengkap Dosen Tetap</th>
                   <th rowspan="2">NIDN/NIDK</th>
-                  <th colspan="2">Tanggal Lahir</th>
+                  <th rowspan="2">Tanggal Lahir</th>
                   <th rowspan="2">Sertifikat Pendidik</th>
                   <th rowspan="2">Jabatan Fungsional</th>
                   <th rowspan="2">Gelar Akademik</th>
@@ -43,17 +51,16 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$item->nama}}</td>
+                  <td>{{$item->nidn_nidk}}</td>
+                  <td>{{$item->tanggal_lahir}}</td>
+                  <td>{{$item->sertifikat_pendidik}}</td>
+                  <td>{{$item->jabatan_fungsional}}</td>
+                  <td>{{$item->pendidikan}}</td>
+                  <td>{{$item->bidang_keahlian}}</td>
+                  <td>{{$item->tautan}}</td>
                   <td>
                     <a href="#">
                       <a href="#">
@@ -63,14 +70,14 @@
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria4/dtps_luar_ps/edit">
+                    <a href="/kriteria4/dtps_luar_ps/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria4/dtps_luar_ps/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

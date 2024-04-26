@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\tabelC4;
+use App\Models\TabelDosen;
+use App\Models\TabelK4BebanKerjaDTPS;
 use App\Models\TabelK4DtpsKeahlianPS;
+use App\Models\TabelK4DtpsLuarPS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -18,7 +21,7 @@ class TabelC4Controller extends Controller
     // Tabel 4.1.2.2 DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
     public function dtps_keahlian_bidang_ps_index()
     {
-        $items = TabelK4DtpsKeahlianPS::all();
+        $items = TabelK4DtpsKeahlianPS::where('sesuai_ps','=','ya')->get();
         return view('kriteria.c4.dtps_keahlian_bidang_ps.index', ['items' => $items]);
     }
     public function dtps_keahlian_bidang_ps_create()
@@ -49,6 +52,7 @@ class TabelC4Controller extends Controller
             'gelar_akademik' => $request->gelar_akademik,
             'pendidikan' => $request->pendidikan,
             'bidang_keahlian' => $request->bidang_keahlian, 
+            'sesuai_ps' => 'ya', 
         ]);
 
         return redirect()->route('dtps_ps.index')->with('success', 'Data K4 DTPS Sesuai Keahlian PS CREATED successfully');
@@ -101,35 +105,81 @@ class TabelC4Controller extends Controller
     //Tabel 4.1.2.3 DTPS yang Bidang Keahliannya di Luar Bidang PS
     public function dtps_luar_ps_index()
     {
-        //
-        return view('kriteria.c4.dtps_luar_ps.index');
+        $items = TabelK4DtpsLuarPS::where('sesuai_ps','=','tidak')->get();
+        return view('kriteria.c4.dtps_luar_ps.index', ['items' => $items]);
     }
     public function dtps_luar_ps_create()
     {
-        //
         return view('kriteria.c4.dtps_luar_ps.form');
     }
     public function dtps_luar_ps_store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nidn_nidk' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat_pendidik' => 'required',
+            'jabatan_fungsional' => 'required',
+            'gelar_akademik' => 'required',
+            'pendidikan' => 'required',
+            'bidang_keahlian' => 'required', 
+        ]);
+
+        TabelK4DtpsLuarPS::create([
+            'nama' => $request->nama,
+            'nidn_nidk' => $request->nidn_nidk,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'sertifikat_pendidik' => $request->sertifikat_pendidik,
+            'jabatan_fungsional' => $request->jabatan_fungsional,
+            'gelar_akademik' => $request->gelar_akademik,
+            'pendidikan' => $request->pendidikan,
+            'bidang_keahlian' => $request->bidang_keahlian, 
+            'sesuai_ps' => 'tidak', 
+        ]);
+
+        return redirect()->route('dtps_luar_ps.index')->with('success', 'Data K4 DTPS diluar Keahlian PS CREATED successfully');
     }
     public function dtps_luar_ps_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function dtps_luar_ps_edit(tabelC4 $tabelC4)
+    public function dtps_luar_ps_edit($id)
     {
-        //
-        return view('kriteria.c4.dtps_luar_ps.form');
+        $item = TabelK4DtpsLuarPS::findOrFail($id);
+        return view('kriteria.c4.dtps_luar_ps.form', ['item' => $item]);
+    }
+    public function dtps_luar_ps_update(Request $request, $id)
+    {
+        $idx =Crypt::decryptString($id);
+        $data = TabelK4DtpsLuarPS::findOrFail($idx);
+        $request->validate([
+            'nama' => 'required',
+            'nidn_nidk' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'sertifikat_pendidik' => 'required',
+            'jabatan_fungsional' => 'required',
+            'gelar_akademik' => 'required',
+            'pendidikan' => 'required',
+            'bidang_keahlian' => 'required', 
+        ]);
 
+        $data->update([
+            'nama' => $request->nama,
+            'nidn_nidk' => $request->nidn_nidk,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'sertifikat_pendidik' => $request->sertifikat_pendidik,
+            'jabatan_fungsional' => $request->jabatan_fungsional,
+            'gelar_akademik' => $request->gelar_akademik,
+            'pendidikan' => $request->pendidikan,
+            'bidang_keahlian' => $request->bidang_keahlian, 
+        ]);
+
+        return redirect()->route('dtps_luar_ps.index')->with('success', 'Data K4 DTPS Diluar Keahlian PS Updated successfully');
     }
-    public function dtps_luar_ps_update(Request $request, tabelC4 $tabelC4)
+    public function dtps_luar_ps_destroy($id)
     {
-        //
-    }
-    public function dtps_luar_ps_destroy(tabelC4 $tabelC4)
-    {
-        //
+        TabelK4DtpsLuarPS::destroy($id);
+        return redirect()->route('dtps_luar_ps.index')->with('success', 'Data K4 DTPS diluar Keahlian PS Deleted successfully');
     }
 
     // Tabel 4.1.2.4 Rasio DTPS terhadap Mahasiswa Reguler
@@ -142,34 +192,84 @@ class TabelC4Controller extends Controller
     // Tabel 4.1.2.5 Beban Kerja Dosen DTPS
     public function beban_kerja_dosen_dtps_index()
     {
-        //
-        return view('kriteria.c4.beban_kerja_dosen_dtps.index');
+        $items = TabelK4BebanKerjaDTPS::latest()->get();
+        // dd($items);
+        return view('kriteria.c4.beban_kerja_dosen_dtps.index', ['items' => $items]);
     }
     public function beban_kerja_dosen_dtps_create()
     {
-        //
-        return view('kriteria.c4.beban_kerja_dosen_dtps.form');
+        $dosens = TabelDosen::all();
+        return view('kriteria.c4.beban_kerja_dosen_dtps.form', compact('dosens'));
     }
     public function beban_kerja_dosen_dtps_store(Request $request)
     {
-        //
+        $request->validate([
+            'nidn_nidk' => 'unique:tabel_k4_beban_kerja_dtps,nidn_nidk',
+            'sks_ps_sendiri' => 'required',
+            'sks_ps_luar' => 'required',
+            'sks_pt_luar' => 'required',
+            'sks_penelitian' => 'required',
+            'sks_p2m' => 'required',
+            'sks_manajemen_sendiri' => 'required',
+            'sks_manajemen_luar' => 'required',
+        ]);
+
+        TabelK4BebanKerjaDTPS::create([
+            'nidn_nidk' => $request->nidn_nidk,
+            'sks_ps_sendiri' => $request->sks_ps_sendiri ,
+            'sks_ps_luar' => $request->sks_ps_luar,
+            'sks_pt_luar' => $request->sks_pt_luar,
+            'sks_penelitian' => $request->sks_penelitian,
+            'sks_p2m' => $request->sks_p2m,
+            'sks_manajemen_sendiri' => $request->sks_manajemen_sendiri,
+            'sks_manajemen_luar' => $request->sks_manajemen_luar,
+        ]);
+        return redirect()->route('beban_kerja_dosen_dtps.index')->with('success', 'Data K4 Beban kerja PS added successfully');
     }
     public function beban_kerja_dosen_dtps_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function beban_kerja_dosen_dtps_edit(tabelC4 $tabelC4)
+    public function beban_kerja_dosen_dtps_edit($id)
     {
-        //
-        return view('kriteria.c4.beban_kerja_dosen_dtps.form');
+        $dosens = TabelDosen::all();
+        $item = TabelK4BebanKerjaDTPS::findOrFail($id);
+        return view('kriteria.c4.beban_kerja_dosen_dtps.form', ['item' => $item, 'dosens' => $dosens]);
     }
-    public function beban_kerja_dosen_dtps_update(Request $request, tabelC4 $tabelC4)
+    public function beban_kerja_dosen_dtps_update(Request $request, $id)
     {
-        //
+        $idx =Crypt::decryptString($id);
+        $data = TabelK4BebanKerjaDTPS::findOrFail($idx);
+        
+        $request->validate([
+            'nidn_nidk' => 'required',
+            'sks_ps_sendiri' => 'required',
+            'sks_ps_luar' => 'required',
+            'sks_pt_luar' => 'required',
+            'sks_penelitian' => 'required',
+            'sks_p2m' => 'required',
+            'sks_manajemen_sendiri' => 'required',
+            'sks_manajemen_luar' => 'required',
+        ]);
+
+        $data->update([
+            'sks_ps_sendiri' => $request->sks_ps_sendiri,
+            'sks_ps_luar' => $request->sks_ps_luar,
+            'sks_pt_luar' => $request->sks_pt_luar,
+            'sks_penelitian' => $request->sks_penelitian,
+            'sks_p2m' => $request->sks_p2m,
+            'sks_manajemen_sendiri' => $request->sks_manajemen_sendiri,
+            'sks_manajemen_luar' => $request->sks_manajemen_luar,
+        ]);
+
+        return redirect()->route('beban_kerja_dosen_dtps.index')->with('success', 'Data K4 Beban kerja PS UPDATED successfully');
+        
     }
-    public function beban_kerja_dosen_dtps_destroy(tabelC4 $tabelC4)
+    public function beban_kerja_dosen_dtps_destroy($id)
     {
-        //
+        TabelK4BebanKerjaDTPS::destroy($id);
+        
+        return redirect()->route('beban_kerja_dosen_dtps.index')->with('success', 'Data K4 Beban kerja PS DELETED successfully');
     }
 
     // Tabel 4.1.2.6 Kegiatan Mengajar Dosen Tetap - Semester Gasal & Semester Genap

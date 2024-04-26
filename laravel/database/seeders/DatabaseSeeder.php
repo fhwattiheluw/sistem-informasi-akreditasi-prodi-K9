@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\dataKeuangan;
+use App\Models\TabelDosen;
 use App\Models\TabelK2BidangKelembagaan;
 use App\Models\TabelK2BidangPendidikan;
 use App\Models\TabelK2BidangPenelitian;
@@ -11,7 +12,9 @@ use App\Models\TabelK3LayananPembinaanMahasiswa;
 use App\Models\TabelK3MahasiswaDalamNegeri;
 use App\Models\TabelK3MahasiswaLuarNegeri;
 use App\Models\TabelK3MahasiswaReguler;
+use App\Models\TabelK4BebanKerjaDTPS;
 use App\Models\TabelK4DtpsKeahlianPS;
+use App\Models\TabelK4DtpsLuarPS;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -159,7 +162,7 @@ class DatabaseSeeder extends Seeder
             'total_mahasiswa' => 300
         ]);
         TabelK3MahasiswaLuarNegeri::create([
-            'tahun_akademik' => 2022,
+            'tahun_akademik' => 2021,
             'jumlah_provinsi' => 3,
             'laki_laki' => 100,
             'perempuan' => 200,
@@ -191,33 +194,89 @@ class DatabaseSeeder extends Seeder
 
         TabelK4DtpsKeahlianPS::create([
             'nama' => 'Jono',
-            'nidn_nidk' => '120101010',
+            'nidn_nidk' => '3',
             'tanggal_lahir' => '1997-01-01',
             'sertifikat_pendidik' => 'ada',
             'jabatan_fungsional' => 'Lektor',
             'gelar_akademik' => 'Doktor',
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknik Informatika, S3 Manajemen pendidikan',
             'bidang_keahlian' => 'Manajemen Pendidikan', 
+            'sesuai_ps' => 'tidak', 
         ]);
-        TabelK4DtpsKeahlianPS::create([
+        TabelDosen::create([
             'nama' => 'Lono',
-            'nidn_nidk' => '120101011',
+            'nidn_nidk' => '1',
             'tanggal_lahir' => '1994-01-01',
             'sertifikat_pendidik' => 'ada',
             'jabatan_fungsional' => 'Lektor',
             'gelar_akademik' => 'S3',
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknik Informatika, S3 Manajemen pendidikan',
             'bidang_keahlian' => 'Manajemen Pendidikan', 
+            'sesuai_ps' => 'ya', 
         ]);
-        TabelK4DtpsKeahlianPS::create([
+        TabelDosen::create([
             'nama' => 'Joni',
-            'nidn_nidk' => '120101021',
+            'nidn_nidk' => '2',
             'tanggal_lahir' => '1993-01-01',
             'sertifikat_pendidik' => 'belum ada',
             'jabatan_fungsional' => 'Lektor Kepala',
             'gelar_akademik' => 'S3',
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
+            'sesuai_ps' => 'ya', 
+        ]);
+        TabelDosen::create([
+            'nama' => 'Joni',
+            'nidn_nidk' => '4',
+            'tanggal_lahir' => '1993-01-01',
+            'sertifikat_pendidik' => 'belum ada',
+            'jabatan_fungsional' => 'Lektor Kepala',
+            'gelar_akademik' => 'S3',
+            'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
+            'bidang_keahlian' => 'Teknologi Informasi', 
+            'sesuai_ps' => 'tidak', 
+        ]);
+        TabelDosen::create([
+            'nama' => 'Joni',
+            'nidn_nidk' => '5',
+            'tanggal_lahir' => '1993-01-01',
+            'sertifikat_pendidik' => 'belum ada',
+            'jabatan_fungsional' => 'Lektor Kepala',
+            'gelar_akademik' => 'S3',
+            'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
+            'bidang_keahlian' => 'Teknologi Informasi', 
+            'sesuai_ps' => 'tidak', 
+        ]);
+
+        TabelK4BebanKerjaDTPS::create([
+            'nidn_nidk' => '1',
+            'sks_ps_sendiri' => '3',
+            'sks_ps_luar' => '3',
+            'sks_pt_luar' => '3',
+            'sks_penelitian' => '3',
+            'sks_p2m' => '3',
+            'sks_manajemen_sendiri' => '3',
+            'sks_manajemen_luar' => '3',
+        ]);
+        TabelK4BebanKerjaDTPS::create([
+            'nidn_nidk' => '2',
+            'sks_ps_sendiri' => '3',
+            'sks_ps_luar' => '3',
+            'sks_pt_luar' => '3',
+            'sks_penelitian' => '3',
+            'sks_p2m' => '3',
+            'sks_manajemen_sendiri' => '3',
+            'sks_manajemen_luar' => '3',
+        ]);
+        TabelK4BebanKerjaDTPS::create([
+            'nidn_nidk' => '3',
+            'sks_ps_sendiri' => '3',
+            'sks_ps_luar' => '3',
+            'sks_pt_luar' => '3',
+            'sks_penelitian' => '3',
+            'sks_p2m' => '3',
+            'sks_manajemen_sendiri' => '3',
+            'sks_manajemen_luar' => '3',
         ]);
 
     }

@@ -20,7 +20,7 @@ return new class extends Migration
 
         Schema::create('tabel_k3_mahasiswa_reguler', function (Blueprint $table) {
             $table->id();
-            $table->year('tahun_akademik')->unique();
+            $table->year('tahun_akademik');
             $table->integer('daya_tampung');
             $table->integer('pendaftar');
             $table->integer('lulus_seleksi');

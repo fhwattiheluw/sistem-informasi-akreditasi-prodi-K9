@@ -87,7 +87,7 @@
 
                 </table>
               </div>
-                    @if (Request::segment(4) === 'create')
+                    @if (Request::segment(3) === 'create')
                       <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
                     @elseif (Request::segment(4) === 'edit')
                       <button type="submit" class="btn btn-primary mr-2"> Update data</button>

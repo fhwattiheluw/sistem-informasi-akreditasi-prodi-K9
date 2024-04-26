@@ -26,12 +26,19 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Beban Kerja Dosen DTPS</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
-                  <th rowspan="2">No.</th>
-                  <th rowspan="2">Nama Lengkap Dosen Tetap</th>
+                  <th rowspan="2">NIDN - Nama Lengkap</th>
                   <th colspan="3">sks Pembelajaran pada</th>
                   <th rowspan="2">sks Penelitian</th>
                   <th rowspan="2">sks P2M</th>
@@ -49,18 +56,17 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$item->nidn_nidk}} - {{$item->dosen->nama}} </td>
+                  <td>{{$item->sks_ps_sendiri}}</td>
+                  <td>{{$item->sks_ps_luar}}</td>
+                  <td>{{$item->sks_pt_luar}}</td>
+                  <td>{{$item->sks_penelitian}}</td>
+                  <td>{{$item->sks_p2m}}</td>
+                  <td>{{$item->sks_manajemen_sendiri}}</td>
+                  <td>{{$item->sks_manajemen_luar}}</td>
+                  <td>{{$item->sks_manajemen_luar + $item->sks_manajemen_sendiri + $item->sks_p2m + $item->sks_penelitian + $item->sks_pt_luar + $item->sks_ps_luar + $item->sks_ps_sendiri }}</td>
                   <td>
                     <a href="#">
                       <a href="#">
@@ -70,14 +76,14 @@
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria4/beban_kerja_dosen_dtps/edit">
+                    <a href="/kriteria4/beban_kerja_dosen_dtps/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria4/beban_kerja_dosen_dtps/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

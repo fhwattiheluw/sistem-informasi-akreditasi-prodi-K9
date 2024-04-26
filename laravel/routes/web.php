@@ -151,17 +151,22 @@ Route::get('/kriteria4/dtps_keahlian_bidang_ps/{id}/delete', [TabelC4Controller:
 // Kriteria 4 > DTPS yang Bidang Keahliannya di Luar Bidang PS
 Route::get('/kriteria4/dtps_luar_ps', [TabelC4Controller::class, 'dtps_luar_ps_index'])->name('dtps_luar_ps.index');
 Route::get('/kriteria4/dtps_luar_ps/create', [TabelC4Controller::class, 'dtps_luar_ps_create'])->name('dtps_luar_ps.create');
-Route::post('/kriteria4/dtps_luar_ps/create', [TabelC4Controller::class, 'dtps_luar_ps_create'])->name('dtps_luar_ps.store');
+Route::post('/kriteria4/dtps_luar_ps/create', [TabelC4Controller::class, 'dtps_luar_ps_store'])->name('dtps_luar_ps.store');
 Route::get('/kriteria4/dtps_luar_ps/{id}/edit', [TabelC4Controller::class, 'dtps_luar_ps_edit'])->name('dtps_luar_ps.edit');
-Route::put('/kriteria4/dtps_luar_ps/{id}/edit', [TabelC4Controller::class, 'dtps_luar_ps_edit'])->name('dtps_luar_ps.update');
-Route::get('/kriteria4/dtps_luar_ps/{id}/delete', [TabelC4Controller::class, 'dtps_luar_ps_edit'])->name('dtps_luar_ps.delete');
+Route::put('/kriteria4/dtps_luar_ps/{id}/edit', [TabelC4Controller::class, 'dtps_luar_ps_update'])->name('dtps_luar_ps.update');
+Route::get('/kriteria4/dtps_luar_ps/{id}/delete', [TabelC4Controller::class, 'dtps_luar_ps_destroy'])->name('dtps_luar_ps.delete');
 
 // Kriteria 4 > Tabel Rasio DTPS terhadap Mahasiswa Reguler
 Route::get('/kriteria4/rasio_dtps_terhadap_mahasiswa_reguler/index', [TabelC4Controller::class, 'rasio_dtps_terhadap_mahasiswa_reguler_index']);
+
 // Kriteria 4 > Tabel Beban Kerja Dosen DTPS
-Route::get('/kriteria4/beban_kerja_dosen_dtps', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_index']);
-Route::get('/kriteria4/beban_kerja_dosen_dtps/create', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_create']);
-Route::get('/kriteria4/beban_kerja_dosen_dtps/edit', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_edit']);
+Route::get('/kriteria4/beban_kerja_dosen_dtps', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_index'])->name('beban_kerja_dosen_dtps.index');
+Route::get('/kriteria4/beban_kerja_dosen_dtps/create', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_create'])->name('beban_kerja_dosen_dtps.create');
+Route::post('/kriteria4/beban_kerja_dosen_dtps/create', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_store'])->name('beban_kerja_dosen_dtps.store');
+Route::get('/kriteria4/beban_kerja_dosen_dtps/{id}/edit', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_edit'])->name('beban_kerja_dosen_dtps.edit');
+Route::put('/kriteria4/beban_kerja_dosen_dtps/{id}/edit', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_update'])->name('beban_kerja_dosen_dtps.update');
+Route::get('/kriteria4/beban_kerja_dosen_dtps/{id}/delete', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_destroy'])->name('beban_kerja_dosen_dtps.delete');
+
 // Kriteria 4 > Tabel Kegiatan Mengajar Dosen Tetap
 Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_index']);
 Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap/create', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_create']);

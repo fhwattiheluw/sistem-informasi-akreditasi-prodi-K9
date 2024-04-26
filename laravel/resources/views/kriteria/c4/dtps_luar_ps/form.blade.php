@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-<a href="{{route('dtps_ps.index')}}">
+<a href="{{route('dtps_luar_ps.index')}}">
   <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
 </a>
     </div>
@@ -32,7 +32,7 @@
             Edit data
             @endif
 
-            DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
+            DTPS yang Bidang Keahliannya diluar Bidang PS
           </h4>
 
             <p class="card-description">K.4 Sumber Daya Manusia</p>
@@ -47,7 +47,7 @@
             @endif
             <hr>
             <form 
-            action="{{isset($item->id) ?  route('dtps_ps.update', ['id' => Crypt::encryptString($item->id)])  : route('dtps_ps.store')}}"
+            action="{{isset($item->id) ?  route('dtps_luar_ps.update', ['id' => Crypt::encryptString($item->id)])  : route('dtps_luar_ps.store')}}"
             method="post">
               @if(isset($item->id))
                 @method('PUT')
@@ -87,7 +87,7 @@
 
                 </table>
               </div>
-                    @if (Request::segment(4) === 'create')
+                    @if (Request::segment(3) === 'create')
                       <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
                     @elseif (Request::segment(4) === 'edit')
                       <button type="submit" class="btn btn-primary mr-2"> Update data</button>
