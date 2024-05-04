@@ -15,6 +15,7 @@ use App\Http\Controllers\TabelC9Controller;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\K2BidangPendidikan;
+use App\Http\Controllers\RepositoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,16 @@ Route::get('/dashboard/edit', [DashboardController::class, 'edit']);
 // ====================================
 Route::get('/akun/show', [AkunController::class, 'show']);
 Route::get('/akun/index', [AkunController::class, 'index']);
+
+// ====================================
+// Repository
+// ====================================
+Route::get('/repository', [RepositoryController::class, 'index'])->name('repository.index');
+Route::get('/repository/form', [RepositoryController::class, 'formDokumen'])->name('repository.form');
+Route::post('/repository/store', [RepositoryController::class, 'store'])->name('repository.store');
+Route::get('/repository/{id}/edit', [RepositoryController::class, 'edit'])->name('repository.edit');
+Route::put('/repository/{id}', [RepositoryController::class, 'update'])->name('repository.update');
+Route::delete('/repository/{id}', [RepositoryController::class, 'destroy'])->name('repository.delete');
 
 // ====================================
 //  informasi prodi
