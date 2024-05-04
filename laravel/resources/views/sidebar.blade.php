@@ -94,14 +94,20 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/repository/form">
-                <i class="mdi mdi-upload menu-icon"></i>
-                <span class="menu-title">Unggah Dokumen</span>
+                <i class="mdi mdi-file-plus menu-icon"></i>
+                <span class="menu-title">Tambah repository</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/repository">
-                <i class="mdi mdi-folder-account menu-icon"></i>
-                <span class="menu-title">Manajemen Dokumen</span>
+            <a class="nav-link" href="/repository/semua">
+                <i class="mdi mdi-database-edit menu-icon"></i>
+                <span class="menu-title">Manajemen repository</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/dokumen">
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+                <span class="menu-title">Semua dokumen</span>
             </a>
         </li>
         <li class="pt-2 pb-1">

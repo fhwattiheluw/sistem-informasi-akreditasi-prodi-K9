@@ -1,21 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DataProgramStudiController;
-use App\Http\Controllers\DataKeuanganController;
-use App\Http\Controllers\TabelC2Controller;
-use App\Http\Controllers\TabelC3Controller;
-use App\Http\Controllers\TabelC4Controller;
-use App\Http\Controllers\TabelC5Controller;
-use App\Http\Controllers\TabelC6Controller;
-use App\Http\Controllers\TabelC7Controller;
-use App\Http\Controllers\TabelC8Controller;
-use App\Http\Controllers\TabelC9Controller;
-use App\Http\Controllers\AkunController;
-use App\Http\Controllers\AutentikasiController;
-use App\Http\Controllers\K2BidangPendidikan;
-use App\Http\Controllers\RepositoryController;
+use App\Http\Controllers\{
+    DashboardController,
+    DataProgramStudiController,
+    DataKeuanganController,
+    TabelC2Controller,
+    TabelC3Controller,
+    TabelC4Controller,
+    TabelC5Controller,
+    TabelC6Controller,
+    TabelC7Controller,
+    TabelC8Controller,
+    TabelC9Controller,
+    AkunController,
+    AutentikasiController,
+    RepositoryController,
+    DokumenController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -47,12 +49,24 @@ Route::get('/akun/index', [AkunController::class, 'index']);
 // ====================================
 // Repository
 // ====================================
-Route::get('/repository', [RepositoryController::class, 'index'])->name('repository.index');
-Route::get('/repository/form', [RepositoryController::class, 'formDokumen'])->name('repository.form');
+Route::get('/repository/semua', [RepositoryController::class, 'index'])->name('repository.semua');
+Route::get('/repository/form', [RepositoryController::class, 'formRepository'])->name('repository.form');
 Route::post('/repository/store', [RepositoryController::class, 'store'])->name('repository.store');
 Route::get('/repository/{id}/edit', [RepositoryController::class, 'edit'])->name('repository.edit');
 Route::put('/repository/{id}', [RepositoryController::class, 'update'])->name('repository.update');
 Route::delete('/repository/{id}', [RepositoryController::class, 'destroy'])->name('repository.delete');
+Route::get('/repository/show/{id}', [RepositoryController::class, 'show'])->name('repository.show');
+
+
+// ====================================
+// Dokumen
+// ====================================
+Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
+Route::get('/dokumen/create', [DokumenController::class, 'create'])->name('dokumen.create');
+Route::post('/dokumen/store', [DokumenController::class, 'store'])->name('dokumen.store');
+Route::get('/dokumen/{id}/edit', [DokumenController::class, 'edit'])->name('dokumen.edit');
+Route::put('/dokumen/{id}', [DokumenController::class, 'update'])->name('dokumen.update');
+Route::delete('/dokumen/{id}', [DokumenController::class, 'destroy'])->name('dokumen.delete');
 
 // ====================================
 //  informasi prodi

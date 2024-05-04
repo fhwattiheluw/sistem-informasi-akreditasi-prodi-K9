@@ -4,31 +4,48 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class repositoryController extends Controller
+class RepositoryController extends Controller
 {
     public function index()
     {
-        // kode untuk menampilkan data
-        return view('repository.manajemen_dokumen');
+        // Kode untuk menampilkan data
+        return view('repository.manajemen_repository');
     }
 
     public function store(Request $request)
     {
-        // kode untuk menyimpan data baru
+        // Kode untuk menyimpan data baru
     }
 
     public function update(Request $request, $id)
     {
-        // kode untuk memperbarui data berdasarkan id
+        // Kode untuk memperbarui data berdasarkan id
     }
 
     public function destroy($id)
     {
-        // kode untuk menghapus data berdasarkan id
+        // Kode untuk menghapus data berdasarkan id
     }
 
-    public function formDokumen()
+    public function formRepository()
     {
-        return view('repository.form_dokumen');
+        return view('repository.form_repository');
+    }
+
+    /**
+     * Menampilkan isi dari repository tertentu berdasarkan id.
+     */
+    public function show($id)
+    {
+        // Ambil data repository berdasarkan id
+        // $repository = Repository::find($id);
+
+        // // Periksa jika repository tidak ditemukan
+        // if (!$repository) {
+        //     return redirect()->route('repository.semua')->with('error', 'Repository tidak ditemukan.');
+        // }
+
+        // Tampilkan view dengan data repository
+        return view('repository.detail_repository');
     }
 }
