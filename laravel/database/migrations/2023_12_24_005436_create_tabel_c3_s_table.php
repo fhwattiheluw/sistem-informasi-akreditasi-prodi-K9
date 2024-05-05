@@ -7,17 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Jalankan migrasi.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('tabel_c3_s', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-
         Schema::create('tabel_k3_mahasiswa_reguler', function (Blueprint $table) {
             $table->id();
             $table->year('tahun_akademik');
@@ -40,6 +35,7 @@ return new class extends Migration
             $table->string('tautan')->nullable();
             $table->timestamps();
         });
+
         Schema::create('tabel_k3_mhs_luar_negeri', function (Blueprint $table) {
             $table->id();
             $table->year('tahun_akademik')->unique();
@@ -50,6 +46,7 @@ return new class extends Migration
             $table->string('tautan')->nullable();
             $table->timestamps();
         });
+
         Schema::create('tabel_k3_layanan_pembinaan_mahasiswa', function (Blueprint $table) {
             $table->id();
             $table->year('tahun_akademik')->unique();
@@ -61,19 +58,19 @@ return new class extends Migration
             $table->string('tautan')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
-     * Reverse the migrations.
+     * Balikkan migrasi.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('tabel_c3_s');
+        
         Schema::dropIfExists('tabel_k3_mahasiswa_reguler');
         Schema::dropIfExists('tabel_k3_mhs_dalam_negeri');
         Schema::dropIfExists('tabel_k3_mhs_luar_negeri');
+        Schema::dropIfExists('tabel_k3_layanan_pembinaan_mahasiswa');
     }
 };
