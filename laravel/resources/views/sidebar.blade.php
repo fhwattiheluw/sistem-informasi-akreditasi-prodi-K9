@@ -43,7 +43,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria2">
-                <i class="mdi mdi-handshake menu-icon"></i>
+                <i class="mdi mdi-gavel menu-icon"></i>
                 <span class="menu-title">K.2 Tata Pamong, Tata Kelola, dan Kerjasama</span>
             </a>
         </li>
@@ -67,7 +67,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria6">
-                <i class="mdi mdi-school-outline menu-icon"></i>
+                <i class="mdi mdi-book-open-page-variant menu-icon"></i>
                 <span class="menu-title">K.6 Pendidikan</span>
             </a>
         </li>
@@ -79,7 +79,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria8">
-                <i class="mdi mdi-earth-plus menu-icon"></i>
+                <i class="mdi mdi-human-handsup menu-icon"></i>
                 <span class="menu-title">K.8 Pengabdian kepada Masyarakat</span>
             </a>
         </li>
@@ -94,7 +94,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/repository/form">
-                <i class="mdi mdi-file-plus-outline menu-icon"></i>
+                <i class="mdi mdi-folder-plus menu-icon"></i>
                 <span class="menu-title">Tambah repository</span>
             </a>
         </li>
@@ -111,7 +111,7 @@
             </a>
         </li>
         <li class="pt-2 pb-1">
-            <span the "nav-item-head">Menu akun</span>
+            <span class="nav-item-head">Menu akun</span>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/akun/index">

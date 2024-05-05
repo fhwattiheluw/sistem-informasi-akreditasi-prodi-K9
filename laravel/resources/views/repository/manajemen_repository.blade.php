@@ -24,25 +24,23 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <form action="{{ url('/repository/filter') }}" method="GET">
+          <form action="{{ route('repository.semua') }}" method="GET">
             <div class="form-group">
               <label for="tahun">Filter Tahun:</label>
               <select class="form-control" id="tahun" name="tahun">
-                <option value="">Pilih Tahun</option>
+                <option value="">{{ request('tahun') ? request('tahun') : 'Pilih Tahun' }}</option>
                 @for ($year = date('Y'); $year >= date('Y') - 10; $year--)
-                  <option value="{{ $year }}">{{ $year }}</option>
+                  <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
                 @endfor
               </select>
             </div>
             <div class="form-group">
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
-                <option value="">Pilih Kriteria</option>
-                <option value="1">Kriteria 1</option>
-                <option value="2">Kriteria 2</option>
-                <option value="3">Kriteria 3</option>
-                <option value="4">Kriteria 4</option>
-                <option value="5">Kriteria 5</option>
+                <option value="">{{ request('kriteria') ? 'Kriteria ' . request('kriteria') : 'Pilih Kriteria' }}</option>
+                @for ($i = 2; $i <= 9; $i++)
+                  <option value="{{ $i }}" {{ request('kriteria') == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
+                @endfor
               </select>
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
@@ -65,6 +63,14 @@
               </button>
             </div>
           @endif
+          @if(session('error'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              {{ session('error') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -76,19 +82,23 @@
                 </tr>
               </thead>
               <tbody>
-                @for ($i = 1; $i <= 20; $i++)
+                @forelse ($repositories as $repository)
                 <tr>
-                  <td>Repository {{ $i }}</td>
-                  <td>Kriteria {{ $i % 5 + 1 }}</td>
-                  <td>2023</td>
+                  <td>{{ $repository->nama_repository }}</td>
+                  <td>Kriteria {{ $repository->kriteria }}</td>
+                  <td>{{ $repository->tahun }}</td>
                   <td>
-                    <a href="/repository/show/{{ $i }}" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-folder-open"></i></a>
+                    <a href="/repository/show/{{ $repository->id }}" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-folder-open"></i></a>
                     <button class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></button>
                     <button class="btn btn-danger btn-xs" title="Hapus"><i class="fa fa-trash"></i></button>
-                    <button class="btn btn-info btn-xs" title="Bagikan"><i class="fa fa-share-alt"></i></button>
+                    <a href="https://example.com/repository/{{ $repository->id }}" class="btn btn-info btn-xs" title="Bagikan" target="_blank"><i class="fa fa-share-alt"></i></a>
                   </td>
                 </tr>
-                @endfor
+                @empty
+                <tr>
+                  <td colspan="4" class="text-center">Tidak ada data repository.</td>
+                </tr>
+                @endforelse
                 <!-- Lebih banyak baris dapat ditambahkan di sini -->
               </tbody>
             </table>

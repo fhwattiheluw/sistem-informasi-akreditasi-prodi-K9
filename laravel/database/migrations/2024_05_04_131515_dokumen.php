@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id(); // Membuat kolom 'id' sebagai primary key
             $table->string('nama_dokumen'); // Membuat kolom 'nama_dokumen' untuk menyimpan nama dokumen
             $table->text('keterangan'); // Membuat kolom 'keterangan' untuk menyimpan deskripsi dokumen
+            $table->string('path'); // Menambahkan kolom 'path' untuk menyimpan lokasi penyimpanan file
             $table->unsignedBigInteger('repository_id'); // Membuat kolom 'repository_id' sebagai foreign key
             // Menetapkan 'repository_id' sebagai foreign key yang merujuk ke kolom 'id' pada tabel 'repository'
             $table->foreign('repository_id')->references('id')->on('repository')->onDelete('cascade');
