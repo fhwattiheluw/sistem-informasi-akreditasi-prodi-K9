@@ -57,7 +57,7 @@
           <div class="form-group">
             <label for="kriteria">Kriteria</label>
             <select class="form-control" id="kriteria" name="kriteria">
-              @for ($i = 1; $i <= 9; $i++)
+              @for ($i = 2; $i <= 9; $i++)
                 <option value="{{ $i }}" {{ isset($repository) && $repository->kriteria == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
               @endfor
             </select>

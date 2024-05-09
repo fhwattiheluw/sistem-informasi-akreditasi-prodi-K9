@@ -91,13 +91,7 @@
                     <a href="/repository/show/{{ $repository->id }}" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-folder-open"></i></a>
                     <a href="{{ route('repository.edit', $repository->id) }}" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
                     <a href="{{ route('repository.delete', $repository->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
-                    <a href="{{ route('repository.show', $repository->id) }}" class="btn btn-info btn-xs" title="Bagikan" target="_blank" onclick="navigator.clipboard.writeText('{{ route('repository.show', $repository->id) }}')"><i class="fa fa-share-alt"></i></a>
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                      Notifikasi: Tautan telah disalin ke papan klip.
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                    <button onclick="navigator.clipboard.writeText('{{ route('repository.show', $repository->id) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-share-alt"></i></button>
                   </td>
                 </tr>
                 @empty
@@ -133,3 +127,4 @@ $(document).ready(function() {
 });
 </script>
 @endsection
+

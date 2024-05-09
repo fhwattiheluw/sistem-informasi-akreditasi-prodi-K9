@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dokumen;
+use Illuminate\Support\Facades\Storage; // Menambahkan use statement untuk menggunakan kelas Storage
 
 class dokumenController extends Controller
 {
@@ -51,6 +52,24 @@ class dokumenController extends Controller
             return back()->with('error', 'Gagal mengupload dokumen.');
         }
     }
+
+    /**
+     * Menghapus dokumen berdasarkan ID.
+     */
+    public function destroy($id)
+    {
+        $dokumen = Dokumen::find($id);
+
+        if (!$dokumen) {
+            return back()->with('error', 'Dokumen tidak ditemukan.');
+        }
+
+        Storage::delete('public/documents/' . basename($dokumen->path));
+        $dokumen->delete();
+
+        return back()->with('success', 'Dokumen berhasil dihapus.');
+    }
+
 
     /**
      * Menampilkan dokumen tertentu.

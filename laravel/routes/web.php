@@ -66,7 +66,7 @@ Route::get('/dokumen/create', [DokumenController::class, 'create'])->name('dokum
 Route::post('/dokumen/store', [DokumenController::class, 'store'])->name('dokumen.store');
 Route::get('/dokumen/{id}/edit', [DokumenController::class, 'edit'])->name('dokumen.edit');
 Route::put('/dokumen/{id}', [DokumenController::class, 'update'])->name('dokumen.update');
-Route::delete('/dokumen/{id}', [DokumenController::class, 'destroy'])->name('dokumen.delete');
+Route::get('/dokumen/{id}', [DokumenController::class, 'destroy'])->name('dokumen.delete');
 
 // ====================================
 //  informasi prodi

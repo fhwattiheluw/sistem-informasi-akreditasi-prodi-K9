@@ -131,7 +131,7 @@
                     <td>{{ $doc->keterangan }}</td>
                     <td>
                       <a href="{{ url($doc->path) }}" class="btn btn-primary btn-xs" title="Melihat Dokumen" target="_blank"><i class="fa fa-eye"></i></a>
-                      <button class="btn btn-danger btn-xs" title="Hapus"><i class="fa fa-trash"></i></button>
+                      <a href="{{ route('dokumen.delete', $doc->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach
