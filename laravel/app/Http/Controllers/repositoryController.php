@@ -50,10 +50,45 @@ class RepositoryController extends Controller
         return redirect()->route('repository.form')->with('success', 'Repository berhasil disimpan.');
     }
 
+    // Fungsi untuk mengedit data repository
+    public function edit($id)
+    {
+        $repository = Repository::find($id);
+
+        // Cek jika repository tidak ditemukan
+        if (!$repository) {
+            return redirect()->route('repository.semua')->with('error', 'Repository tidak ditemukan.');
+        }
+
+        return view('repository.form_repository', compact('repository'));
+    }
+
     // Fungsi untuk memperbarui data repository
     public function update(Request $request, $id)
     {
-        // Kode untuk memperbarui data berdasarkan id
+        // Mengambil data repository berdasarkan id
+        $repository = Repository::find($id);
+
+        // Cek jika repository tidak ditemukan
+        if (!$repository) {
+            return redirect()->route('repository.edit', $id)->with('error', 'Repository tidak ditemukan.');
+        }
+
+        // Validasi data input
+        $validatedData = $request->validate([
+            'namaRepository' => 'required|string|max:255',
+            'tahun' => 'required|integer',
+            'kriteria' => 'required|integer'
+        ]);
+
+        // Memperbarui data repository
+        $repository->nama_repository = $validatedData['namaRepository'];
+        $repository->tahun = $validatedData['tahun'];
+        $repository->kriteria = $validatedData['kriteria'];
+        $repository->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('repository.edit', $id)->with('success', 'Repository berhasil diperbarui.');
     }
 
     // Fungsi untuk menghapus data repository

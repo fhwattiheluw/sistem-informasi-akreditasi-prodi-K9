@@ -19,13 +19,16 @@
   <!-- Form untuk mengunggah dokumen baru -->
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
-      <form class="card" action="{{ route('repository.store') }}" method="POST" enctype="multipart/form-data">
+      <form class="card" action="{{ isset($repository) ? route('repository.update', $repository->id) : route('repository.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @if(isset($repository))
+          @method('PUT')
+        @endif
         <div class="card-body">
-          <h4 class="card-title">Unggah Repository Baru</h4>
+          <h4 class="card-title">{{ isset($repository) ? 'Edit Repository' : 'Unggah Repository Baru' }}</h4>
           <div class="form-group">
             <label for="namaRepository">Nama Repository</label>
-            <input type="text" class="form-control" id="namaRepository" name="namaRepository" placeholder="Masukkan nama repository" autofocus>
+            <input type="text" class="form-control" id="namaRepository" name="namaRepository" placeholder="Masukkan nama repository" autofocus value="{{ isset($repository) ? $repository->nama_repository : '' }}">
             @error('namaRepository')
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error!</strong> {{ $message }}
@@ -37,7 +40,11 @@
           </div>
           <div class="form-group">
             <label for="tahun">Tahun</label>
-            <input type="number" class="form-control" id="tahun" name="tahun" placeholder="Masukkan tahun">
+            <select class="form-control" id="tahun" name="tahun">
+              @for ($i = date("Y"); $i >= date("Y") - 10; $i--)
+                <option value="{{ $i }}" {{ isset($repository) && $repository->tahun == $i ? 'selected' : '' }}>{{ $i }}</option>
+              @endfor
+            </select>
             @error('tahun')
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error!</strong> {{ $message }}
@@ -51,7 +58,7 @@
             <label for="kriteria">Kriteria</label>
             <select class="form-control" id="kriteria" name="kriteria">
               @for ($i = 1; $i <= 9; $i++)
-                <option value="{{ $i }}">Kriteria {{ $i }}</option>
+                <option value="{{ $i }}" {{ isset($repository) && $repository->kriteria == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
               @endfor
             </select>
             @error('kriteria')
@@ -63,7 +70,7 @@
               </div>
             @enderror
           </div>
-          <button type="submit" class="btn btn-primary">Unggah</button>
+          <button type="submit" class="btn btn-primary">{{ isset($repository) ? 'Simpan Perubahan' : 'Unggah' }}</button>
         </div>
       </form>
     </div>
