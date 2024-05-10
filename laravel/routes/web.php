@@ -43,8 +43,14 @@ Route::get('/dashboard/edit', [DashboardController::class, 'edit']);
 // ====================================
 // akun
 // ====================================
-Route::get('/akun/show', [AkunController::class, 'show']);
-Route::get('/akun/index', [AkunController::class, 'index']);
+Route::get('/akun/show', [AkunController::class, 'show'])->name('akun.show');
+Route::get('/akun/index', [AkunController::class, 'index'])->name('akun.index');
+Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
+Route::post('/akun/store', [AkunController::class, 'store'])->name('akun.store');
+Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
+Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
+Route::delete('/akun/{id}', [AkunController::class, 'destroy'])->name('akun.delete');
+
 
 // ====================================
 // Repository

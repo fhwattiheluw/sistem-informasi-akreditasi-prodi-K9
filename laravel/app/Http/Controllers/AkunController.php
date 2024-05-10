@@ -2,87 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\akun;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\AkunCreated;
+use App\Mail\sendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class AkunController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
         return view('akun.manag_akun');
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('akun.form_akun');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+            'email' => 'required|email|unique:users,email',
+        ]);
+
+        $akun = User::create($validatedData);
+        
+        $email = new sendEmail($akun); // Create an instance of the AkunCreated Mailable class
+        Mail::to($validatedData['email'])->send($email); // Send the email
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil dibuat');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function show(akun $akun)
+    public function show(Akun $akun)
     {
-        //
-        return view('akun.detail');
+        return view('akun.detail', compact('akun'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(akun $akun)
+    public function edit(Akun $akun)
     {
-        //
+        return view('akun.edit', compact('akun'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, akun $akun)
+    public function update(Request $request, User $akun)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_akun' => 'required|string|max:255',
+            'nomor_akun' => 'required|numeric|unique:akuns,'.$akun->id,
+            'email' => 'required|email',
+        ]);
+
+        $akun->update($validatedData);
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(akun $akun)
+    public function destroy(Akun $akun)
     {
-        //
+        $akun->delete();
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil dihapus');
     }
 }
+

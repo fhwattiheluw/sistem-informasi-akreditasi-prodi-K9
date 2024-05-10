@@ -5,7 +5,7 @@
   <!-- Header section with buttons and navigation links -->
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <button class="btn btn-primary mb-2 mb-md-0 mr-2">Tambah Data</button>
+      <a href="{{ route('akun.create') }}" class="btn btn-primary mb-2 mb-md-0 mr-2">Tambah akun</a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
