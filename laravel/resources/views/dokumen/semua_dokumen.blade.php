@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-   <a href="/repository/semua" class="btn btn-primary">Manajemen Repository</a>
+      <a href="/repository/semua" class="btn btn-primary">Manajemen Repository</a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -22,13 +22,13 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <form action="{{ url('/repository/filter') }}" method="GET">
+          <form action="{{ route('dokumen.index') }}" method="GET">
             <div class="form-group">
               <label for="tahun">Filter Tahun:</label>
               <select class="form-control" id="tahun" name="tahun">
                 <option value="">Pilih Tahun</option>
                 @for ($year = date('Y'); $year >= date('Y') - 10; $year--)
-                  <option value="{{ $year }}">{{ $year }}</option>
+                  <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
                 @endfor
               </select>
             </div>
@@ -36,11 +36,9 @@
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
                 <option value="">Pilih Kriteria</option>
-                <option value="1">Kriteria 1</option>
-                <option value="2">Kriteria 2</option>
-                <option value="3">Kriteria 3</option>
-                <option value="4">Kriteria 4</option>
-                <option value="5">Kriteria 5</option>
+                @for ($i = 2; $i <= 9; $i++)
+                  <option value="{{ $i }}" {{ request('kriteria') == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
+                @endfor
               </select>
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
@@ -63,6 +61,14 @@
               </button>
             </div>
           @endif
+          @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -71,26 +77,26 @@
                   <th>Nama Repository</th>
                   <th>Kriteria</th>
                   <th>Tahun</th>
-                  <th>Keterangan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                @for ($i = 1; $i <= 20; $i++)
+                @foreach($repository as $repo)
+                @foreach($repo->documents as $doc)
                 <tr>
-                  <td>File {{ $i }}</td>
-                  <td>Repository {{ $i }}</td>
-                  <td>Kriteria {{ $i % 5 + 1 }}</td>
-                  <td>2023</td>
-                  <td>Keterangan untuk Repository {{ $i }}</td>
+                  <td>{{ $doc->nama_dokumen }}</td>
+                  <td>{{ $repo->nama_repository }}</td>
+                  <td>Kriteria {{ $repo->kriteria }}</td>
+                  <td>{{ $repo->tahun }}</td>
                   <td>
-                    <button class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-eye"></i></button>
-                    <button class="btn btn-info btn-xs" title="Lihat Folder"><i class="fa fa-folder-open"></i></button>
-                    <button class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></button>
-                    <button class="btn btn-danger btn-xs" title="Hapus"><i class="fa fa-trash"></i></button>
+                    <a href="{{ $doc->path }}" class="btn btn-primary btn-xs" title="Lihat" target="_blank"><i class="fa fa-eye"></i></a>
+                    <button class="btn btn-info btn-xs" title="Lihat repository" onclick="window.location.href='/repository/show/{{ $repo->id }}'"><i class="fa fa-folder-open"></i></button>
+                    <button class="btn btn-warning btn-xs" title="Edit" onclick="window.location.href='{{route('dokumen.edit', $doc->id)}}'"><i class="fa fa-edit"></i></button>
+                    <a href="{{route('dokumen.delete', $doc->id)}}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen {{$doc->nama_dokumen}}?')"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
+                @endforeach
                 <!-- Lebih banyak baris dapat ditambahkan di sini -->
               </tbody>
             </table>

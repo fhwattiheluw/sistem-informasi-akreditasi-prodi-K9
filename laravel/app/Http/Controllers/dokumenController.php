@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dokumen;
+use App\Models\Repository; // Menambahkan model Repository
 use Illuminate\Support\Facades\Storage; // Menambahkan use statement untuk menggunakan kelas Storage
 
 class dokumenController extends Controller
@@ -11,9 +12,21 @@ class dokumenController extends Controller
     /**
      * Menampilkan daftar dokumen.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dokumen.semua_dokumen');
+        $tahun = $request->input('tahun', date('Y'));
+        $kriteria = $request->input('kriteria', 0);
+
+        $repository = Repository::where('tahun', $tahun)
+                        ->where('kriteria', $kriteria)
+                        ->with('documents')
+                        ->get();
+
+        if ($repository->isEmpty()) {
+            return view('dokumen.semua_dokumen', compact('repository'))->with('error', 'Data dokumen tidak tersedia.');
+        }
+
+        return view('dokumen.semua_dokumen', compact('repository'));
     }
 
     /**
@@ -21,8 +34,9 @@ class dokumenController extends Controller
      */
     public function create()
     {
-        // Kode untuk menampilkan form pembuatan dokumen
+        return view('dokumen.form_dokumen');
     }
+    
 
     /**
      * Menyimpan dokumen baru.
@@ -78,4 +92,52 @@ class dokumenController extends Controller
     {
         // Kode untuk menampilkan dokumen tertentu
     }
+
+    /**
+     * Menampilkan form untuk mengedit dokumen.
+     */
+    public function edit($id)
+    {
+        $dokumen = Dokumen::find($id);
+
+        if (!$dokumen) {
+            return back()->with('error', 'Dokumen tidak ditemukan.');
+        }
+
+        return view('dokumen.form_dokumen', compact('dokumen'));
+    }
+
+    /**
+     * Mengupdate dokumen berdasarkan ID.
+     */
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'dokumen' => 'file|mimes:pdf|max:2048', // Validasi untuk file dokumen
+            'namaDokumen' => 'required|string|max:255',
+            'keterangan' => 'required|string|max:1000',
+        ]);
+
+        $dokumen = Dokumen::find($id);
+
+        if (!$dokumen) {
+            return back()->with('error', 'Dokumen tidak ditemukan.');
+        }
+
+        if ($request->hasFile('dokumen')) {
+            $file = $request->file('dokumen');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/documents', $filename); // Simpan file dokumen
+
+            Storage::delete('public/documents/' . basename($dokumen->path)); // Hapus file dokumen sebelumnya
+            $dokumen->path = 'storage/documents/' . $filename; // Update path dokumen di database
+        }
+
+        $dokumen->nama_dokumen = $validatedData['namaDokumen'];
+        $dokumen->keterangan = $validatedData['keterangan'];
+        $dokumen->save();
+
+        return back()->with('success', 'Dokumen berhasil diperbarui.');
+    }
 }
+
