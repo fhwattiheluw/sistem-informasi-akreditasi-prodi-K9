@@ -131,7 +131,9 @@
                     <td>{{ $doc->keterangan }}</td>
                     <td>
                       <a href="{{ url($doc->path) }}" class="btn btn-primary btn-xs" title="Melihat Dokumen" target="_blank"><i class="fa fa-eye"></i></a>
+                      <button class="btn btn-warning btn-xs" title="Edit" onclick="window.location.href='{{route('dokumen.edit', $doc->id)}}'"><i class="fa fa-edit"></i></button>
                       <a href="{{ route('dokumen.delete', $doc->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                      <button onclick="navigator.clipboard.writeText('{{ url($doc->path) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-share-alt"></i></button>
                     </td>
                   </tr>
                   @endforeach
