@@ -28,52 +28,147 @@
           <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
- Profil Tendik
+             Profil Tendik
           </h4>
 
             <p class="card-description">K.4 Sumber Daya Manusia</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
             <hr>
-            <form action="#" method="post">
+            <form action="{{isset($item->id) ?  route('profil_tendik.update', ['id' => Crypt::encryptString($item->id)])  : route('profil_tendik.store')}}" method="post">
+              @if(isset($item->id))
+                @method('PUT')
+              @endif
               @csrf
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                  <thead class="text-center">
-                    <tr>
-                      <th rowspan="2">Nama Lengkap Tenaga Kependidikan</th>
-                      <th rowspan="2">Status Kepegawaian <br> (PNS, Tetap Non-PNS, Kontrak, dll)</th>
-                      <th rowspan="2">Bidang Keahlian <br> (administrator, pustakawan, laboran, dll)</th>
-                      <th rowspan="2">Pendidikan <br> (SLTA, Diploma, S1, S2, S3)</th>
-                      <th rowspan="2">Unit Kerja <br> (PS, UPPS, PT)</th>
-                      <th rowspan="2">Bukti/Tautan</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-justify">
-
-                    <tr>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-
-                    </tr>
-                  </tbody>
-
-                </table>
+              <div class="table-responsive">                
+              
               </div>
 
-                    @if (Request::segment(3) === 'create')
-                    <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
-                    @elseif (Request::segment(3) === 'edit')
-                    <button type="submit" class="btn btn-primary mr-2"> Update data</button>
-                    @endif
+                  <table class="table table-striped table-bordered">
+                  <tbody class="text-justify">
+                    <tr>
+                      <td >ID Tendik</td>
+                      <td>
+                        <input type="text" class="form-control" name="id_tendik"id="id_tendik"  value="{{isset($item->id_tendik) ? $item->id_tendik : old('id_tendik')}}" placeholder="ketik disini" @if(isset($item->id_tendik)) readonly @endif>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >Nama Lengkap</td>
+                      <td>
+                        <input type="text" class="form-control" name="nama" value="{{isset($item->nama) ? $item->nama : old('nama')}}" placeholder="ketik disini">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >Status</td>
+                      <td><input type="text" class="form-control" name="status" value="{{isset($item->status) ? $item->status : old('status')}}" placeholder="ketik disini"></td>
+                    </tr>
+                    <tr>
+                      <td >Bidang Keahlian</td>
+                      <td><input type="text" class="form-control" name="bidang_keahlian" value="{{isset($item->bidang_keahlian) ? $item->bidang_keahlian : old('bidang_keahlian')}}" placeholder="ketik disini"></td>
+                    </tr>
+                    <tr>
+                      <td >Pendidikan</td>
+                      <td>
+                        <div class="form-group row" style="margin: 0px; padding:0px;">
+                            <div class="col">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="pendidikan" id="slta" value="SLTA" @if(isset($item->pendidikan) && $item->pendidikan == 'SLTA') checked @endif> SLTA <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="pendidikan" id="diploma" value="Diploma" @if(isset($item->pendidikan) && $item->pendidikan == 'Diploma') checked @endif> Diploma <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="pendidikan" id="s1" value="S1" @if(isset($item->pendidikan) && $item->pendidikan == 'S1') checked @endif> S1 <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="pendidikan" id="s2" value="S2" @if(isset($item->pendidikan) && $item->pendidikan == 'S2') checked @endif> S2 <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="pendidikan" id="s3" value="S3" @if(isset($item->pendidikan) && $item->pendidikan == 'S3') checked @endif> S3 <i class="input-helper"></i>
+                                </label>
+                              </div>
+                            </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >Unit Kerja</td>
+                      <td>
+                        <div class="form-group row" style="margin: 0px; padding:0px;">
+                          <div class="col">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="unit_kerja" id="PS" value="PS" @if(isset($item->unit_kerja) && $item->unit_kerja == 'PS') checked @endif> PS <i class="input-helper"></i>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="unit_kerja" id="UPPS" value="UPPS" @if(isset($item->unit_kerja) && $item->unit_kerja == 'UPPS') checked @endif> UPPS <i class="input-helper"></i>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="unit_kerja" id="PT" value="PT" @if(isset($item->unit_kerja) && $item->unit_kerja == 'PT') checked @endif> PT <i class="input-helper"></i>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
 
-                  </form>
-                </div>
+                    <tr>
+                      <td >Bukti/Tautan</td>
+
+                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        @if (Request::segment(3) === 'create')
+                          <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
+                        @elseif (Request::segment(4) === 'edit')
+                          <button type="submit" class="btn btn-primary mr-2"> Update data</button>
+                        @endif
+                      </td>
+                    </tr>
+
+                  </tbody>
+                  
+                </table>
+
+            </form>
+          </div>
               </div>
             </div>
           </div>

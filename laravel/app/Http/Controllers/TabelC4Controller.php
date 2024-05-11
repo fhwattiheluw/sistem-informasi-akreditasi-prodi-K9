@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\tabelC4;
 use App\Models\TabelDosen;
 use App\Models\TabelK4BebanKerjaDTPS;
+use App\Models\TabelK4BimbinganTA;
 use App\Models\TabelK4DtpsKeahlianPS;
 use App\Models\TabelK4DtpsLuarPS;
+use App\Models\TabelK4KegiatanMengajar;
+use App\Models\TabelK4KompetensiTendik;
+use App\Models\TabelK4PengembanganKompetensiDTPS;
+use App\Models\TabelK4PrestasiDTPS;
+use App\Models\TabelK4Tendik;
+use App\Models\TabelMatakuliah;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class TabelC4Controller extends Controller
 {
@@ -275,142 +284,314 @@ class TabelC4Controller extends Controller
     // Tabel 4.1.2.6 Kegiatan Mengajar Dosen Tetap - Semester Gasal & Semester Genap
     public function kegiatan_mengajar_dosen_tetap_index()
     {
-        //
-        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.index');
+        $matakuliah = TabelMatakuliah::all();
+        $items = TabelK4KegiatanMengajar::all();
+        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.index', ['items' => $items, 'matakuliah' => $matakuliah]);
     }
     public function kegiatan_mengajar_dosen_tetap_create()
     {
-        //
-        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form');
+        $dosens = TabelDosen::all();
+        $matakuliah = TabelMatakuliah::all();
+        
+        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form', ['dosens'=>$dosens, 'matakuliah'=>$matakuliah]);
     }
     public function kegiatan_mengajar_dosen_tetap_store(Request $request)
     {
-        //
+        $request->validate([
+            'nidn_nidk' => 'required|unique:tabel_k4_kegiatan_mengajar,nidn_nidk',
+            'jumlah_kelas' => 'required',
+            'kode_mk' => 'required',
+            'jum_pertemuan_rencana' => 'required',
+            'jum_pertemuan_terlaksana' => 'required',
+            'semester' => 'required',
+        ]);
+
+        TabelK4KegiatanMengajar::create([
+            'nidn_nidk' => $request->nidn_nidk,
+            'jumlah_kelas' => $request->jumlah_kelas,
+            'kode_mk' => $request->kode_mk,
+            'jum_pertemuan_rencana' => $request->jum_pertemuan_rencana,
+            'jum_pertemuan_terlaksana' => $request->jum_pertemuan_terlaksana,
+            'semester' => $request->semester,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('kegiatan_mengajar_dosen_tetap.index')->with('success', 'Data K4 Kegiatan Mengajar Dosen Tetap added successfully');
     }
     public function kegiatan_mengajar_dosen_tetap_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function kegiatan_mengajar_dosen_tetap_edit(tabelC4 $tabelC4)
+    public function kegiatan_mengajar_dosen_tetap_edit($id)
     {
-        //
-        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form');
+        $dosens = TabelDosen::all();
+        $item = TabelK4KegiatanMengajar::findOrFail($id);
+        return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form', ['dosens' => $dosens, 'item' => $item]);
     }
-    public function kegiatan_mengajar_dosen_tetap_update(Request $request, tabelC4 $tabelC4)
+    public function kegiatan_mengajar_dosen_tetap_update(Request $request, $id)
     {
-        //
+        $idx = Crypt::decryptString($id);
+        $data = TabelK4KegiatanMengajar::findOrFail($idx);
+
+        $request->validate([
+            'nidn_nidk' => 'required',
+            'jumlah_kelas' => 'required',
+            'sks' => 'required',
+            'kode_mk' => 'required',
+            'nama_mk' => "required",
+            'jum_pertemuan_rencana' => 'required',
+            'jum_pertemuan_terlaksana' => 'required',
+            'semester' => 'required',
+        ]);
+
+        $data->update([
+            'nidn_nidk' => $request->nidn_nidk,
+            'jumlah_kelas' => $request->jumlah_kelas,
+            'sks' => $request->sks,
+            'kode_mk' => $request->kode_mk,
+            'nama_mk' => $request->nama_mk,
+            'jum_pertemuan_rencana' => $request->jum_pertemuan_rencana,
+            'jum_pertemuan_terlaksana' => $request->jum_pertemuan_terlaksana,
+            'semester' => $request->semester,
+            'tautan' => $request->tautan,
+        ]);
+        
+        return redirect()->route('kegiatan_mengajar_dosen_tetap.index')->with('success', 'Data K4 Kegiatan Mengajar Dosen Tetap updated successfully');
     }
-    public function kegiatan_mengajar_dosen_tetap_destroy(tabelC4 $tabelC4)
+    public function kegiatan_mengajar_dosen_tetap_destroy($id)
     {
-        //
+        TabelK4KegiatanMengajar::destroy($id);
+        return redirect()->route('kegiatan_mengajar_dosen_tetap.index')->with('success', 'Data K4 Kegiatan Mengajar Dosen Tetap deleted successfully');
     }
 
     // Tabel 4.1.2.7 Jumlah Bimbingan Tugas Akhir atau Skripsi, Tesis, dan Disertasi
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_index()
+    public function jumlah_bimbingan_ta_index()
     {
-        //
-        return view('kriteria.c4.jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi.index');
+        $items = TabelK4BimbinganTA::all();
+        return view('kriteria.c4.jumlah_bimbingan_ta.index', ['items' => $items]);
     }
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_create()
+    public function jumlah_bimbingan_ta_create()
     {
-        //
-        return view('kriteria.c4.jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi.form');
+        $dosens = TabelDosen::all();
+           
+        return view('kriteria.c4.jumlah_bimbingan_ta.form', ['dosens' => $dosens]);
 
     }
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_store(Request $request)
+    public function jumlah_bimbingan_ta_store(Request $request)
+    {
+        $request->validate([
+            'nidn_nidk' => 'required|unique:tabel_k4_bimbingan_ta,nidn_nidk',
+            'ts_2' => 'required',
+            'ts_1' => 'required',
+            'ts' => 'required',
+            'tautan' => 'required',
+        ]);
+        TabelK4BimbinganTA::create([
+            'nidn_nidk' => $request->nidn_nidk,
+            'ts_2' => $request->ts_2,
+            'ts_1' => $request->ts_1,
+            'ts' => $request->ts,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('jumlah_bimbingan_ta.index')->with('success', 'Data K4 Jumlah Bimbingan Dosen ADDED successfully');
+    }
+    public function jumlah_bimbingan_ta_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_show(tabelC4 $tabelC4)
+    public function jumlah_bimbingan_ta_edit($id)
     {
-        //
-    }
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_edit(tabelC4 $tabelC4)
-    {
-        //
-        return view('kriteria.c4.jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi.form');
+        $dosens = TabelDosen::all();
+        $item = TabelK4BimbinganTA::findOrFail($id);
+        return view('kriteria.c4.jumlah_bimbingan_ta.form', ['dosens' => $dosens, 'item' => $item]);
 
     }
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_update(Request $request, tabelC4 $tabelC4)
+    public function jumlah_bimbingan_ta_update(Request $request, $id)
     {
-        //
+        $idx = Crypt::decryptString($id);
+        $data = TabelK4BimbinganTA::findOrFail($idx);
+
+        $request->validate([
+            'nidn_nidk' => 'required',
+            'ts_2' => 'required',
+            'ts_1' => 'required',
+            'ts' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        $data->update([
+            'ts_2' => $request->ts_2,
+            'ts_1' => $request->ts_1,
+            'ts' => $request->ts,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('jumlah_bimbingan_ta.index')->with('success', 'Data K4 Jumlah Bimbingan Dosen UPDATED successfully');
     }
-    public function jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_destroy(tabelC4 $tabelC4)
+    public function jumlah_bimbingan_ta_destroy($id)
     {
-        //
+        TabelK4BimbinganTA::destroy($id);
+        return redirect()->route('jumlah_bimbingan_ta.index')->with('success', 'Data K4 Jumlah Bimbingan Dosen DELETED successfully');
     }
 
     // Tabel 4.1.2.8 Prestasi DTPS
     public function prestasi_dtps_index()
     {
-        //
-        return view('kriteria.c4.prestasi_dtps.index');
+        $items = TabelK4PrestasiDTPS::all();
+        return view('kriteria.c4.prestasi_dtps.index', ['items' => $items]);
     }
     public function prestasi_dtps_create()
     {
-        //
-        return view('kriteria.c4.prestasi_dtps.form');
+        $dosens = TabelDosen::all();
+        return view('kriteria.c4.prestasi_dtps.form', ['dosens' => $dosens ]);
     }
     public function prestasi_dtps_store(Request $request)
     {
-        //
+        $request->validate([
+            'nidn_nidk' => 'required|unique:tabel_k4_prestasi_dtps,nidn_nidk',
+            'prestasi' => 'required',
+            'tahun' => 'required',
+            'tingkat' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        TabelK4PrestasiDTPS::create([
+            'nidn_nidk' => $request->nidn_nidk,
+            'prestasi' => $request->prestasi,
+            'tahun' => $request->tahun,
+            'tingkat' => $request->tingkat,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('prestasi_dtps.index')->with('success', 'Data K4 Prestasi Dosen DTPS ADDED successfully');
     }
     public function prestasi_dtps_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function prestasi_dtps_edit(tabelC4 $tabelC4)
+    public function prestasi_dtps_edit($id)
     {
-        //
-        return view('kriteria.c4.prestasi_dtps.form');
+        $dosens = TabelDosen::all();
+        $item = TabelK4PrestasiDTPS::findOrFail($id);
+        return view('kriteria.c4.prestasi_dtps.form', ['dosens' => $dosens, 'item'=>$item]);
     }
-    public function prestasi_dtps_update(Request $request, tabelC4 $tabelC4)
+    public function prestasi_dtps_update(Request $request, $id)
     {
-        //
+        $idx = Crypt::decryptString($id);
+        $data = TabelK4PrestasiDTPS::findOrFail($idx);
+
+        $request->validate([
+            'nidn_nidk' => 'required',
+            'prestasi' => 'required',
+            'tahun' => 'required',
+            'tingkat' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        $data->update([
+            'prestasi' => $request->prestasi,
+            'tahun' => $request->tahun,
+            'tingkat' => $request->tingkat,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('prestasi_dtps.index')->with('success', 'Data K4 Prestasi Dosen DTPS UPDATED successfully');
     }
-    public function prestasi_dtps_destroy(tabelC4 $tabelC4)
+    public function prestasi_dtps_destroy($id)
     {
-        //
+        TabelK4PrestasiDTPS::destroy($id);
+        
+        return redirect()->route('prestasi_dtps.index')->with('success', 'Data K4 Prestasi Dosen DTPS DELETED successfully');
     }
 
     // Tabel 4.1.2.9 Pengembangan Kompetensi DTPS
     public function pengembangan_kompetensi_dtps_index()
     {
-        //
-        return view('kriteria.c4.pengembangan_kompetensi_dtps.index');
+        $tahun_sekarang = date('Y');
+        $tahun_ts1 = date('Y') - 1;
+        $tahun_ts2 = date('Y') - 2;
+
+        $items_ts = TabelK4PengembanganKompetensiDTPS::whereYear('waktu',$tahun_sekarang)->get();
+        $items_ts1 = TabelK4PengembanganKompetensiDTPS::whereYear('waktu',$tahun_ts1)->get();
+        $items_ts2 = TabelK4PengembanganKompetensiDTPS::whereYear('waktu',$tahun_ts2)->get();
+        return view('kriteria.c4.pengembangan_kompetensi_dtps.index', ['items_ts' => $items_ts, 'items_ts1'=>$items_ts1,'items_ts2'=>$items_ts2]);
     }
     public function pengembangan_kompetensi_dtps_create()
     {
-        //
-        return view('kriteria.c4.pengembangan_kompetensi_dtps.form');
+        $dosens = TabelDosen::all();
+        return view('kriteria.c4.pengembangan_kompetensi_dtps.form', ['dosens' => $dosens]);
     }
-    public function pengembangan_kompetensi_dtps_store(Request $equest)
+    public function pengembangan_kompetensi_dtps_store(Request $request)
     {
-        //
+        $request->validate([
+            'nidn_nidk' => 'required',
+            'bidang_keahlian' => 'required',
+            'nama_kegiatan' => 'required',
+            'tempat' => 'required',
+            'waktu' => 'required',
+            'manfaat' => 'required',
+            'tautan' =>'required',
+        ]);
+
+        TabelK4PengembanganKompetensiDTPS::create([
+            'nidn_nidk' => $request->nidn_nidk,
+            'bidang_keahlian' =>  $request->bidang_keahlian,
+            'nama_kegiatan' =>  $request->nama_kegiatan,
+            'tempat' =>  $request->tempat,
+            'waktu' =>  $request->waktu,
+            'manfaat' =>  $request->manfaat,
+            'tautan' => $request->tautan,
+        ]);
+        return redirect()->route('pengembangan_kompetensi_dtps.index')->with('success', 'Data K4 Pengembangan Kompetensi Dosen DTPS ADDED successfully');
     }
     public function pengembangan_kompetensi_dtps_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function pengembangan_kompetensi_dtps_edit(tabelC4 $tabelC4)
+    public function pengembangan_kompetensi_dtps_edit($id)
     {
-        //
-        return view('kriteria.c4.pengembangan_kompetensi_dtps.form');
+        $item = TabelK4PengembanganKompetensiDTPS::findOrFail($id);
+        return view('kriteria.c4.pengembangan_kompetensi_dtps.form', ['item' => $item]);
     }
-    public function pengembangan_kompetensi_dtps_update(Request $request, tabelC4 $tabelC4)
+    public function pengembangan_kompetensi_dtps_update(Request $request, $id)
     {
-        //
+        $idx = Crypt::decryptString($id);
+        $data = TabelK4PengembanganKompetensiDTPS::findOrFail($idx);
+        
+        $request->validate([
+            'nidn_nidk' => 'required',
+            'bidang_keahlian' => 'required',
+            'nama_kegiatan' => 'required',
+            'tempat' => 'required',
+            'waktu' => 'required',
+            'manfaat' => 'required',
+            'tautan' =>'required',
+        ]);
+
+        $data->update([
+            'bidang_keahlian' =>  $request->bidang_keahlian,
+            'nama_kegiatan' =>  $request->nama_kegiatan,
+            'tempat' =>  $request->tempat,
+            'waktu' =>  $request->waktu,
+            'manfaat' =>  $request->manfaat,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('pengembangan_kompetensi_dtps.index')->with('success', 'Data K4 Pengembangan Kompetensi Dosen DTPS UPDATED successfully');
     }
-    public function pengembangan_kompetensi_dtps_destroy(tabelC4 $tabelC4)
+
+    public function pengembangan_kompetensi_dtps_destroy($id)
     {
-        //
+        TabelK4PengembanganKompetensiDTPS::destroy($id);
+        return redirect()->route('pengembangan_kompetensi_dtps.index')->with('success', 'Data K4 Pengembangan Kompetensi Dosen DTPS DELETED successfully');
     }
 
     // Tabel 4.2.2.2 Profil Tendik
     public function profil_tendik_index()
     {
-        //
-        return view('kriteria.c4.profil_tendik.index');
+        $items = TabelK4Tendik::all();
+        return view('kriteria.c4.profil_tendik.index', ['items'=>$items]);
     }
     public function profil_tendik_create()
     {
@@ -418,61 +599,148 @@ class TabelC4Controller extends Controller
         return view('kriteria.c4.profil_tendik.form');
 
     }
-    public function profil_tendik_store(Request $equest)
+    public function profil_tendik_store(Request $request)
     {
-        //
+        $request->validate([
+            'id_tendik' => 'required|unique:tabel_k4_prestasi_dtps,id_tendik',
+            'nama' => 'required',
+            'status' => 'required',
+            'bidang_keahlian' => 'required',
+            'pendidikan' => 'required',
+            'unit_kerja' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        TabelK4Tendik::create([
+            'id_tendik' => $request->id_tendik,
+            'nama' => $request->nama,
+            'status' => $request->status,
+            'bidang_keahlian' => $request->bidang_keahlian,
+            'pendidikan' => $request->pendidikan,
+            'unit_kerja' => $request->unit_kerja,
+            'tautan' => $request->tautan,
+        ]);
+        return redirect()->route('profil_tendik.index')->with('success', 'Data K4 Data Tendik ADDED successfully');
     }
     public function profil_tendik_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function profil_tendik_edit(tabelC4 $tabelC4)
+    public function profil_tendik_edit($id)
     {
-        //
-        return view('kriteria.c4.profil_tendik.form');
+        $item = TabelK4Tendik::findOrFail($id);
+        return view('kriteria.c4.profil_tendik.form', ['item'=>$item]);
     }
-    public function profil_tendik_update(Request $request, tabelC4 $tabelC4)
+    public function profil_tendik_update(Request $request, $id)
     {
-        //
+        $idx = Crypt::decryptString($id);
+        $data = TabelK4Tendik::findOrFail($idx);
+        $request->validate([
+            'id_tendik' => 'required',
+            'nama' => 'required',
+            'status' => 'required',
+            'bidang_keahlian' => 'required',
+            'pendidikan' => 'required',
+            'unit_kerja' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        $data->update([
+            'nama' => $request->nama,
+            'status' => $request->status,
+            'bidang_keahlian' => $request->bidang_keahlian,
+            'pendidikan' => $request->pendidikan,
+            'unit_kerja' => $request->unit_kerja,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('profil_tendik.index')->with('success', 'Data K4 Data Tendik UPDATED successfully');
+        
     }
-    public function profil_tendik_destroy(tabelC4 $tabelC4)
+    public function profil_tendik_destroy($id)
     {
-        //
+        TabelK4Tendik::destroy($id);
+        return redirect()->route('profil_tendik.index')->with('success', 'Data K4 Data Tendik DELETED successfully');
     }
 
     // Tabel 4.2.2.3 Pengembangan Kompetensi dan Karier Tendik
-    public function pengembangan_kompetensi_karier_tendik_index()
+    public function kompetensi_tendik_index()
     {
-        //
-        return view('kriteria.c4.pengembangan_kompetensi_karier_tendik.index');
+        $items = DB::table('tabel_k4_kompetensi_tendik')
+            ->join('tabel_tendik', 'tabel_k4_kompetensi_tendik.id_tendik', '=', 'tabel_tendik.id_tendik')
+            ->select('tabel_k4_kompetensi_tendik.*', 'tabel_tendik.nama')
+            ->get();
+            
+        return view('kriteria.c4.kompetensi_tendik.index', ['items' => $items]);
     }
-    public function pengembangan_kompetensi_karier_tendik_create()
+    public function kompetensi_tendik_create()
     {
-        //
-        return view('kriteria.c4.pengembangan_kompetensi_karier_tendik.form');
+        $tendiks = TabelK4Tendik::all();
+        return view('kriteria.c4.kompetensi_tendik.form', ['tendiks'=>$tendiks]);
 
     }
-    public function pengembangan_kompetensi_karier_tendik_store(Request $equest)
+    public function kompetensi_tendik_store(Request $request)
+    {
+        $request->validate([
+            'id_tendik' => 'required',
+            'nama_kegiatan' => 'required',
+            'waktu_mulai' => 'required',
+            'waktu_selesai' => 'required',
+            'tempat' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        TabelK4KompetensiTendik::create([
+            'id_tendik' => $request->id_tendik,
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'waktu_mulai' => $request->waktu_mulai,
+            'waktu_selesai' => $request->waktu_selesai,
+            'tempat' => $request->tempat,
+            'tautan' => $request->tautan,
+        ]);
+        return redirect()->route('kompetensi_tendik.index')->with('success', 'Data K4 Pengembangan Kompetensi dan Karir Tendik ADDED successfully');
+    }
+    public function kompetensi_tendik_show(tabelC4 $tabelC4)
     {
         //
     }
-    public function pengembangan_kompetensi_karier_tendik_show(tabelC4 $tabelC4)
+    public function kompetensi_tendik_edit($id)
     {
-        //
-    }
-    public function pengembangan_kompetensi_karier_tendik_edit(tabelC4 $tabelC4)
-    {
-        //
-        return view('kriteria.c4.pengembangan_kompetensi_karier_tendik.form');
+        $item = DB::table('tabel_k4_kompetensi_tendik')
+            ->join('tabel_tendik', 'tabel_k4_kompetensi_tendik.id_tendik', '=', 'tabel_tendik.id_tendik')
+            ->select('tabel_k4_kompetensi_tendik.*', 'tabel_tendik.nama')
+            ->where('tabel_k4_kompetensi_tendik.id', $id)
+            ->get();
+        $tendiks = TabelK4Tendik::all();
+        return view('kriteria.c4.kompetensi_tendik.form', ['item' => $item, 'tendiks' => $tendiks]);
         
     }
-    public function pengembangan_kompetensi_karier_tendik_update(Request $request, tabelC4 $tabelC4)
+    public function kompetensi_tendik_update(Request $request, $id)
     {
-        //
+        $idx = Crypt::decryptString($id);
+        $data = TabelK4KompetensiTendik::findOrFail($idx);
+        $request->validate([
+            'id_tendik' => 'required',
+            'nama_kegiatan' => 'required',
+            'waktu_mulai' => 'required',
+            'waktu_selesai' => 'required',
+            'tempat' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        $data->update([
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'waktu_mulai' => $request->waktu_mulai,
+            'waktu_selesai' => $request->waktu_selesai,
+            'tempat' => $request->tempat,
+            'tautan' => $request->tautan,
+        ]);
+        return redirect()->route('kompetensi_tendik.index')->with('success', 'Data K4 Pengembangan Kompetensi dan Karir Tendik UPDATED successfully');
     }
-    public function pengembangan_kompetensi_karier_tendik_destroy(tabelC4 $tabelC4)
+    public function kompetensi_tendik_destroy($id)
     {
-        //
+        TabelK4KompetensiTendik::destroy($id);
+        return redirect()->route('kompetensi_tendik.index')->with('success', 'Data K4 Pengembangan Kompetensi dan Karir Tendik DELETED successfully');
     }
 
 

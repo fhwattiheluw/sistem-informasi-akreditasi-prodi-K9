@@ -13,8 +13,15 @@ use App\Models\TabelK3MahasiswaDalamNegeri;
 use App\Models\TabelK3MahasiswaLuarNegeri;
 use App\Models\TabelK3MahasiswaReguler;
 use App\Models\TabelK4BebanKerjaDTPS;
+use App\Models\TabelK4BimbinganTA;
 use App\Models\TabelK4DtpsKeahlianPS;
 use App\Models\TabelK4DtpsLuarPS;
+use App\Models\TabelK4KegiatanMengajar;
+use App\Models\TabelK4KompetensiTendik;
+use App\Models\TabelK4PengembanganKompetensiDTPS;
+use App\Models\TabelK4PrestasiDTPS;
+use App\Models\TabelK4Tendik;
+use App\Models\TabelMatakuliah;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -278,6 +285,158 @@ class DatabaseSeeder extends Seeder
             'sks_manajemen_sendiri' => '3',
             'sks_manajemen_luar' => '3',
         ]);
+        TabelK4KegiatanMengajar::create([
+            'nidn_nidk' => '3',
+            'jumlah_kelas' => '3',
+            'kode_mk' => '1',
+            'jum_pertemuan_rencana' => 16,
+            'jum_pertemuan_terlaksana' => 16,
+            'semester' => 'Gasal',
+        ]);
+        TabelK4KegiatanMengajar::create([
+            'nidn_nidk' => '2',
+            'jumlah_kelas' => '2',
+            'kode_mk' => '2',
+            'jum_pertemuan_rencana' => 16,
+            'jum_pertemuan_terlaksana' => 16,
+            'semester' => 'Gasal',
+        ]);
+        TabelK4KegiatanMengajar::create([
+            'nidn_nidk' => '2',
+            'jumlah_kelas' => '2',
+            'kode_mk' => '3',
+            'jum_pertemuan_rencana' => 16,
+            'jum_pertemuan_terlaksana' => 16,
+            'semester' => 'Genap',
+        ]);
 
+        TabelK4BimbinganTA::create([
+            'nidn_nidk' => '2',
+            'ts_2' => '2',
+            'ts_1' => '2',
+            'ts' => '3',
+            'tautan' => '#',
+        ]);
+        TabelK4BimbinganTA::create([
+            'nidn_nidk' => '1',
+            'ts_2' => '2',
+            'ts_1' => '3',
+            'ts' => '1',
+            'tautan' => '#',
+        ]);
+        TabelK4BimbinganTA::create([
+            'nidn_nidk' => '3',
+            'ts_2' => '2',
+            'ts_1' => '2',
+            'ts' => '2',
+            'tautan' => '#',
+        ]);
+        TabelK4PrestasiDTPS::create([
+            'nidn_nidk' => '3',
+            'prestasi' => "Keynote Speaker Seminar Internasional Jenis Ikan Dasar",
+            'tahun' => '2023',
+            'tautan' => "http://www.iainambon.ac.id/",
+        ]);
+        TabelK4PrestasiDTPS::create([
+            'nidn_nidk' => '3',
+            'prestasi' => "Keynote Speaker Seminar Nasional Jenis Ikan Dasar",
+            'tahun' => '2023',
+            'tingkat' => 'Nasional',
+            'tautan' => "http://www.iainambon.ac.id/",
+        ]);
+        TabelK4PengembanganKompetensiDTPS::create([ 
+            'nidn_nidk' => '3',
+            'bidang_keahlian' => 'Pendidikan',
+            'nama_kegiatan' => 'PPG',
+            'tempat' => 'IAIN Ambon',
+            'waktu' => '2024-02-01',
+            'manfaat' => 'Pengembangan diri',
+            'tautan' => '#',
+        ]);
+        TabelK4PengembanganKompetensiDTPS::create([ 
+            'nidn_nidk' => '2',
+            'bidang_keahlian' => 'Pendidikan',
+            'nama_kegiatan' => 'PPG',
+            'tempat' => 'IAIN Ambon',
+            'waktu' => '2023-02-01',
+            'manfaat' => 'Pengembangan diri',
+            'tautan' => '#',
+        ]);
+        TabelK4PengembanganKompetensiDTPS::create([ 
+            'nidn_nidk' => '2',
+            'bidang_keahlian' => 'Pendidikan',
+            'nama_kegiatan' => 'PPG',
+            'tempat' => 'IAIN Ambon',
+            'waktu' => '2024-02-01',
+            'manfaat' => 'Pengembangan diri',
+            'tautan' => '#',
+        ]);
+        TabelK4Tendik::create([
+            'id_tendik'=>'11',
+            'nama'=>'Andi Bedu',
+            'status'=>'PNS',
+            'bidang_keahlian'=>'Administrasi',
+            'pendidikan'=>'Diploma',
+            'unit_kerja'=>'PS',
+            'tautan'=>'#',
+        ]);
+        TabelK4Tendik::create([
+            'id_tendik'=>'22',
+            'nama'=>'Mas Toni',
+            'status'=>'Non PNS',
+            'bidang_keahlian'=>'Laboran',
+            'pendidikan'=>'S1',
+            'unit_kerja'=>'UPPS',
+            'tautan'=>'#',
+        ]);
+        TabelK4Tendik::create([
+            'id_tendik'=>'33',
+            'nama'=>'UDA Sederhana',
+            'status'=>'Pegawai tetap Kontrak',
+            'bidang_keahlian'=>'Laboran',
+            'pendidikan'=>'S1',
+            'unit_kerja'=>'PT',
+            'tautan'=>'#',
+        ]);
+        TabelK4KompetensiTendik::create([
+            'id_tendik' => '11',
+            'nama_kegiatan' => 'Pelatihan kompetensi penguasaan IT',
+            'waktu_mulai' => '2024-01-01',
+            'waktu_selesai' => '2024-01-10',
+            'tempat' => 'ITB Stikom Ambon',
+            'tautan' => '#',
+        ]);
+        TabelK4KompetensiTendik::create([
+            'id_tendik' => '22',
+            'nama_kegiatan' => 'Pelatihan kompetensi penguasaan IT',
+            'waktu_mulai' => '2023-03-06',
+            'waktu_selesai' => '2023-03-10',
+            'tempat' => 'ITB Stikom Ambon',
+            'tautan' => '#',
+        ]);
+        TabelK4KompetensiTendik::create([
+            'id_tendik' => '33',
+            'nama_kegiatan' => 'Pelatihan kompetensi penguasaan IT',
+            'waktu_mulai' => '2023-08-07',
+            'waktu_selesai' => '2023-08-10',
+            'tempat' => 'ITB Stikom Ambon',
+            'tautan' => '#',
+        ]);
+
+        TabelMatakuliah::create([
+            'kode_mk' => '1',
+            'nama' => 'Pengantar Tauhid',
+            'sks' => 3,
+        ]);
+        TabelMatakuliah::create([
+            'kode_mk' => '2',
+            'nama' => 'Pengantar Tauhid 2',
+            'sks' => 3,
+        ]);
+        TabelMatakuliah::create([
+            'kode_mk' => '3',
+            'nama' => 'Fiqih Kontemporer',
+            'sks' => 3,
+        ]);
     }
 }

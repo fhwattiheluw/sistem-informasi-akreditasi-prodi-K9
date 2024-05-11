@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-<a href="/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi">
+<a href="/kriteria4/jumlah_bimbingan_ta">
   <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
 </a>
     </div>
@@ -32,12 +32,24 @@
             Edit data
             @endif
 
-            DTPS yang Bidang Keahliannya Sesuai dengan Bidang PS
+            Jumlah Bimbingan Tugas Akhir atau Skripsi, Tesis, dan Disertasi
           </h4>
 
             <p class="card-description">K.4 Sumber Daya Manusia</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
             <hr>
-            <form action="#" method="post">
+            <form action="{{isset($item->id) ?  route('jumlah_bimbingan_ta.update', ['id' => Crypt::encryptString($item->id)])  : route('jumlah_bimbingan_ta.store')}}" method="post">
+              @if(isset($item->id))
+                @method('PUT')
+              @endif
               @csrf
               <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -56,11 +68,24 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
+                      <td>
+                        <select name="nidn_nidk" id="nidn_nidk" class="form-control">
+                          @if(isset($item->nidn_nidk))
+                            <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
+                          @else
+                            <option value="" selected>Pilih dosen</option>
+                            @foreach($dosens as $dosen)
+                            <option value="{{$dosen->nidn_nidk}}">
+                                {{$dosen->nama}}
+                            </option>
+                            @endforeach
+                          @endif
+                        </select>
+                      </td>
+                      <td><input type="text" class="form-control" name="ts_2" value="{{isset($item->ts_2) ? $item->ts_2 : old('ts_2')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="ts_1" value="{{isset($item->ts_1) ? $item->ts_1 : old('ts_1')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="ts" value="{{isset($item->ts) ? $item->ts : old('ts')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
                     </tr>
                   </tbody>
 
@@ -69,7 +94,7 @@
 
                     @if (Request::segment(3) === 'create')
                     <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
-                    @elseif (Request::segment(3) === 'edit')
+                    @elseif (Request::segment(4) === 'edit')
                     <button type="submit" class="btn btn-primary mr-2"> Update data</button>
                     @endif
 

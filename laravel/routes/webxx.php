@@ -15,7 +15,6 @@ use App\Http\Controllers\TabelC9Controller;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\K2BidangPendidikan;
-use App\Http\Controllers\RepositoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +27,7 @@ use App\Http\Controllers\RepositoryController;
 |
 */
 
-// login awal
 Route::get('/',[AutentikasiController::class, 'index']);
-// lupa password
-Route::get('/forgot',[AutentikasiController::class, 'forgot_form']);
 // ====================================
 // dashboard
 // ====================================
@@ -43,16 +39,6 @@ Route::get('/dashboard/edit', [DashboardController::class, 'edit']);
 // ====================================
 Route::get('/akun/show', [AkunController::class, 'show']);
 Route::get('/akun/index', [AkunController::class, 'index']);
-
-// ====================================
-// Repository
-// ====================================
-Route::get('/repository', [RepositoryController::class, 'index'])->name('repository.index');
-Route::get('/repository/form', [RepositoryController::class, 'formDokumen'])->name('repository.form');
-Route::post('/repository/store', [RepositoryController::class, 'store'])->name('repository.store');
-Route::get('/repository/{id}/edit', [RepositoryController::class, 'edit'])->name('repository.edit');
-Route::put('/repository/{id}', [RepositoryController::class, 'update'])->name('repository.update');
-Route::delete('/repository/{id}', [RepositoryController::class, 'destroy'])->name('repository.delete');
 
 // ====================================
 //  informasi prodi
@@ -169,62 +155,34 @@ Route::get('/kriteria4/dtps_luar_ps/{id}/delete', [TabelC4Controller::class, 'dt
 
 // Kriteria 4 > Tabel Rasio DTPS terhadap Mahasiswa Reguler
 Route::get('/kriteria4/rasio_dtps_terhadap_mahasiswa_reguler/index', [TabelC4Controller::class, 'rasio_dtps_terhadap_mahasiswa_reguler_index']);
-
 // Kriteria 4 > Tabel Beban Kerja Dosen DTPS
-Route::get('/kriteria4/beban_kerja_dosen_dtps', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_index'])->name('beban_kerja_dosen_dtps.index');
-Route::get('/kriteria4/beban_kerja_dosen_dtps/create', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_create'])->name('beban_kerja_dosen_dtps.create');
-Route::post('/kriteria4/beban_kerja_dosen_dtps/create', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_store'])->name('beban_kerja_dosen_dtps.store');
-Route::get('/kriteria4/beban_kerja_dosen_dtps/{id}/edit', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_edit'])->name('beban_kerja_dosen_dtps.edit');
-Route::put('/kriteria4/beban_kerja_dosen_dtps/{id}/edit', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_update'])->name('beban_kerja_dosen_dtps.update');
-Route::get('/kriteria4/beban_kerja_dosen_dtps/{id}/delete', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_destroy'])->name('beban_kerja_dosen_dtps.delete');
-
+Route::get('/kriteria4/beban_kerja_dosen_dtps', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_index']);
+Route::get('/kriteria4/beban_kerja_dosen_dtps/create', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_create']);
+Route::get('/kriteria4/beban_kerja_dosen_dtps/edit', [TabelC4Controller::class, 'beban_kerja_dosen_dtps_edit']);
 // Kriteria 4 > Tabel Kegiatan Mengajar Dosen Tetap
-Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_index'])->name('kegiatan_mengajar_dosen_tetap.index');
-Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap/create', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_create'])->name('kegiatan_mengajar_dosen_tetap.create');
-Route::post('/kriteria4/kegiatan_mengajar_dosen_tetap/create', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_store'])->name('kegiatan_mengajar_dosen_tetap.store');
-Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap/{id}/edit', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_edit'])->name('kegiatan_mengajar_dosen_tetap.edit');
-Route::put('/kriteria4/kegiatan_mengajar_dosen_tetap/{id}/edit', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_update'])->name('kegiatan_mengajar_dosen_tetap.update');
-Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap/{id}/delete', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_destroy'])->name('kegiatan_mengajar_dosen_tetap.delete');
-
+Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_index']);
+Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap/create', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_create']);
+Route::get('/kriteria4/kegiatan_mengajar_dosen_tetap/edit', [TabelC4Controller::class, 'kegiatan_mengajar_dosen_tetap_edit']);
 // Kriteria 4 > Tabel Jumlah Bimbingan Tugas Akhir atau Skripsi, Tesis, dan Disertasi
-Route::get('/kriteria4/jumlah_bimbingan_ta', [TabelC4Controller::class, 'jumlah_bimbingan_ta_index'])->name('jumlah_bimbingan_ta.index');
-Route::get('/kriteria4/jumlah_bimbingan_ta/create', [TabelC4Controller::class, 'jumlah_bimbingan_ta_create'])->name('jumlah_bimbingan_ta.create');
-Route::post('/kriteria4/jumlah_bimbingan_ta/create', [TabelC4Controller::class, 'jumlah_bimbingan_ta_store'])->name('jumlah_bimbingan_ta.store');
-Route::get('/kriteria4/jumlah_bimbingan_ta/{id}/edit', [TabelC4Controller::class, 'jumlah_bimbingan_ta_edit'])->name('jumlah_bimbingan_ta.edit');
-Route::put('/kriteria4/jumlah_bimbingan_ta/{id}/edit', [TabelC4Controller::class, 'jumlah_bimbingan_ta_update'])->name('jumlah_bimbingan_ta.update');
-Route::get('/kriteria4/jumlah_bimbingan_ta/{id}/delete', [TabelC4Controller::class, 'jumlah_bimbingan_ta_destroy'])->name('jumlah_bimbingan_ta.delete');
-
+Route::get('/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi', [TabelC4Controller::class, 'jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_index']);
+Route::get('/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi/create', [TabelC4Controller::class, 'jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_create']);
+Route::get('/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi/edit', [TabelC4Controller::class, 'jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi_edit']);
 // Kriteria 4 > Tabel Prestasi DTPS
-Route::get('/kriteria4/prestasi_dtps', [TabelC4Controller::class, 'prestasi_dtps_index'])->name('prestasi_dtps.index');
-Route::get('/kriteria4/prestasi_dtps/create', [TabelC4Controller::class, 'prestasi_dtps_create'])->name('prestasi_dtps.create');
-Route::post('/kriteria4/prestasi_dtps/create', [TabelC4Controller::class, 'prestasi_dtps_store'])->name('prestasi_dtps.store');
-Route::get('/kriteria4/prestasi_dtps/{id}/edit', [TabelC4Controller::class, 'prestasi_dtps_edit'])->name('prestasi_dtps.edit');
-Route::put('/kriteria4/prestasi_dtps/{id}/edit', [TabelC4Controller::class, 'prestasi_dtps_update'])->name('prestasi_dtps.update');
-Route::get('/kriteria4/prestasi_dtps/{id}/delete', [TabelC4Controller::class, 'prestasi_dtps_destroy'])->name('prestasi_dtps.delete');
-
+Route::get('/kriteria4/prestasi_dtps', [TabelC4Controller::class, 'prestasi_dtps_index']);
+Route::get('/kriteria4/prestasi_dtps/create', [TabelC4Controller::class, 'prestasi_dtps_create']);
+Route::get('/kriteria4/prestasi_dtps/edit', [TabelC4Controller::class, 'prestasi_dtps_edit']);
 // Kriteria 4 > Tabel Pengembangan Kompetensi DTPS
-Route::get('/kriteria4/pengembangan_kompetensi_dtps', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_index'])->name('pengembangan_kompetensi_dtps.index');
-Route::get('/kriteria4/pengembangan_kompetensi_dtps/create', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_create'])->name('pengembangan_kompetensi_dtps.create');;
-Route::post('/kriteria4/pengembangan_kompetensi_dtps/store', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_store'])->name('pengembangan_kompetensi_dtps.store');;
-Route::get('/kriteria4/pengembangan_kompetensi_dtps/{id}/edit', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_edit'])->name('pengembangan_kompetensi_dtps.edit');;
-Route::PUT('/kriteria4/pengembangan_kompetensi_dtps/{id}/update', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_update'])->name('pengembangan_kompetensi_dtps.update');;
-Route::get('/kriteria4/pengembangan_kompetensi_dtps/{id}/delete', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_destroy'])->name('pengembangan_kompetensi_dtps.destroy');;
-
+Route::get('/kriteria4/pengembangan_kompetensi_dtps', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_index']);
+Route::get('/kriteria4/pengembangan_kompetensi_dtps/create', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_create']);
+Route::get('/kriteria4/pengembangan_kompetensi_dtps/edit', [TabelC4Controller::class, 'pengembangan_kompetensi_dtps_edit']);
 // Kriteria 4 > Tabel Profil Tendik
-Route::get('/kriteria4/profil_tendik', [TabelC4Controller::class, 'profil_tendik_index'])->name('profil_tendik.index');
-Route::get('/kriteria4/profil_tendik/create', [TabelC4Controller::class, 'profil_tendik_create'])->name('profil_tendik.create');
-Route::post('/kriteria4/profil_tendik/store', [TabelC4Controller::class, 'profil_tendik_store'])->name('profil_tendik.store');
-Route::get('/kriteria4/profil_tendik/{id}/edit', [TabelC4Controller::class, 'profil_tendik_edit'])->name('profil_tendik.edit');
-Route::put('/kriteria4/profil_tendik/{id}/update', [TabelC4Controller::class, 'profil_tendik_update'])->name('profil_tendik.update');
-Route::get('/kriteria4/profil_tendik/{id}/delete', [TabelC4Controller::class, 'profil_tendik_destroy'])->name('profil_tendik.destroy');
-
+Route::get('/kriteria4/profil_tendik', [TabelC4Controller::class, 'profil_tendik_index']);
+Route::get('/kriteria4/profil_tendik/create', [TabelC4Controller::class, 'profil_tendik_create']);
+Route::get('/kriteria4/profil_tendik/edit', [TabelC4Controller::class, 'profil_tendik_edit']);
 // Kriteria 4 > Tabel Pengembangan Kompetensi dan Karier Tendik
-Route::get('/kriteria4/kompetensi_tendik', [TabelC4Controller::class, 'kompetensi_tendik_index'])->name('kompetensi_tendik.index');
-Route::get('/kriteria4/kompetensi_tendik/create', [TabelC4Controller::class, 'kompetensi_tendik_create'])->name('kompetensi_tendik.create');
-Route::post('/kriteria4/kompetensi_tendik/store', [TabelC4Controller::class, 'kompetensi_tendik_store'])->name('kompetensi_tendik.store');
-Route::get('/kriteria4/kompetensi_tendik/{id}/edit', [TabelC4Controller::class, 'kompetensi_tendik_edit'])->name('kompetensi_tendik.edit');
-Route::put('/kriteria4/kompetensi_tendik/{id}/update', [TabelC4Controller::class, 'kompetensi_tendik_update'])->name('kompetensi_tendik.update');
-Route::get('/kriteria4/kompetensi_tendik/{id}/delete', [TabelC4Controller::class, 'kompetensi_tendik_destroy'])->name('kompetensi_tendik.destroy');
+Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik', [TabelC4Controller::class, 'pengembangan_kompetensi_karier_tendik_index']);
+Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik/create', [TabelC4Controller::class, 'pengembangan_kompetensi_karier_tendik_create']);
+Route::get('/kriteria4/pengembangan_kompetensi_karier_tendik/edit', [TabelC4Controller::class, 'pengembangan_kompetensi_karier_tendik_edit']);
 
 // ====================================
 // kriteria 5
@@ -246,14 +204,6 @@ Route::get('/kriteria5/dana_penelitian/edit', [TabelC5Controller::class, 'dana_p
 Route::get('/kriteria5/dana_pkm', [TabelC5Controller::class, 'dana_pkm_index']);
 Route::get('/kriteria5/dana_pkm/create', [TabelC5Controller::class, 'dana_pkm_create']);
 Route::get('/kriteria5/dana_pkm/edit', [TabelC5Controller::class, 'dana_pkm_edit']);
-// Kriteria 5 > Tabel Data Prasarana Pendidikan
-Route::get('/kriteria5/prasarana_pendidikan', [TabelC5Controller::class, 'prasarana_pendidikan_index']);
-Route::get('/kriteria5/prasarana_pendidikan/create', [TabelC5Controller::class, 'prasarana_pendidikan_create']);
-Route::get('/kriteria5/prasarana_pendidikan/edit', [TabelC5Controller::class, 'prasarana_pendidikan_edit']);
-// Kriteria 5 > Tabel Data Sarana Pendidikan
-Route::get('/kriteria5/sarana_pendidikan', [TabelC5Controller::class, 'sarana_pendidikan_index']);
-Route::get('/kriteria5/sarana_pendidikan/create', [TabelC5Controller::class, 'sarana_pendidikan_create']);
-Route::get('/kriteria5/sarana_pendidikan/edit', [TabelC5Controller::class, 'sarana_pendidikan_edit']);
 
 // ====================================
 // kriteria 6

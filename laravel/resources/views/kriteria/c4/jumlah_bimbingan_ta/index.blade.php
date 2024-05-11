@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi/create">
+      <a href="/kriteria4/jumlah_bimbingan_ta/create">
         <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
@@ -26,6 +26,14 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Jumlah Bimbingan Tugas Akhir atau Skripsi, Tesis, dan Disertasi</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -45,32 +53,32 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->dosen->nama}}</td>
+                  <td>{{$item->ts_2}}</td>
+                  <td>{{$item->ts_1}}</td>
+                  <td>{{$item->ts}}</td>
+                  <td>{{$item->ts_2 + $item->ts_1 + $item->ts}}</td>
+                  <td>{{($item->ts_2 + $item->ts_1 + $item->ts)/3}}</td>
                   <td>
                     <a href="#">
-                      <a href="#">
+                      <a href="{{$item->tautan}}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
 
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria4/jumlah_bimbingan_tugas_akhir_skripsi_tesis_disertasi/edit">
+                    <a href="/kriteria4/jumlah_bimbingan_ta/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria4/jumlah_bimbingan_ta/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

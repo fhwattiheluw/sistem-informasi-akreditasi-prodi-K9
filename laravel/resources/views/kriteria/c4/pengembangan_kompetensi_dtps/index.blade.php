@@ -25,34 +25,42 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Pengembangan Kompetensi DTPS</h5>
+          <h5 class="card-title">Tabel Pengembangan Kompetensi DTPS pada TS</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
-                  <th rowspan="2">Tahun</th>
+                  <th rowspan="2">No.</th>
                   <th rowspan="2">Nama Dosen</th>
                   <th rowspan="2">Bidang Keahlian</th>
                   <th rowspan="2">Nama Kegiatan</th>
-                  <th rowspan="2">Tempat Kegiatan</th>
-                  <th rowspan="2">Waktu Kegiatan</th>
-                  <th rowspan="2">Manfaat Kegiatan</th>
+                  <th rowspan="2">Tempat</th>
+                  <th rowspan="2">Waktu</th>
+                  <th rowspan="2">Manfaat</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items_ts as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td></td>
-                  <td></td>
-                  <td>x</td>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->dosen->nama}}</td>
+                  <td>{{$item->bidang_keahlian}}</td>
+                  <td>{{$item->nama_kegiatan}}</td>
+                  <td>{{$item->tempat}}</td>
+                  <td>{{$item->waktu}}</td>
+                  <td>{{$item->manfaat}}</td>
                   <td>
-                    <a href="#">
+                    <a href="{{$item->tautan}}">
                       <a href="#">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
@@ -60,14 +68,14 @@
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria4/pengembangan_kompetensi_dtps/edit">
+                    <a href="/kriteria4/pengembangan_kompetensi_dtps/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria4/pengembangan_kompetensi_dtps/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>
@@ -77,6 +85,119 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Pengembangan Kompetensi DTPS pada TS-1</h5>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead class="text-center">
+                <tr>
+                  <th rowspan="2">No.</th>
+                  <th rowspan="2">Nama Dosen</th>
+                  <th rowspan="2">Bidang Keahlian</th>
+                  <th rowspan="2">Nama Kegiatan</th>
+                  <th rowspan="2">Tempat</th>
+                  <th rowspan="2">Waktu</th>
+                  <th rowspan="2">Manfaat</th>
+                  <th rowspan="2">Bukti/Tautan</th>
+                  <th rowspan="2">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                @foreach($items_ts1 as $item)
+                <tr>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->dosen->nama}}</td>
+                  <td>{{$item->bidang_keahlian}}</td>
+                  <td>{{$item->nama_kegiatan}}</td>
+                  <td>{{$item->tempat}}</td>
+                  <td>{{$item->waktu}}</td>
+                  <td>{{$item->manfaat}}</td>
+                  <td>
+                    <a href="{{$item->tautan}}">
+                      <a href="#">
+                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                      </a>
+
+                    </a>
+                  </td>
+                  <td>
+                    <a href="/kriteria4/pengembangan_kompetensi_dtps/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria4/pengembangan_kompetensi_dtps/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Tabel Pengembangan Kompetensi DTPS pada TS-2</h5>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead class="text-center">
+                <tr>
+                  <th rowspan="2">No.</th>
+                  <th rowspan="2">Nama Dosen</th>
+                  <th rowspan="2">Bidang Keahlian</th>
+                  <th rowspan="2">Nama Kegiatan</th>
+                  <th rowspan="2">Tempat</th>
+                  <th rowspan="2">Waktu</th>
+                  <th rowspan="2">Manfaat</th>
+                  <th rowspan="2">Bukti/Tautan</th>
+                  <th rowspan="2">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                @foreach($items_ts2 as $item)
+                <tr>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->dosen->nama}}</td>
+                  <td>{{$item->bidang_keahlian}}</td>
+                  <td>{{$item->nama_kegiatan}}</td>
+                  <td>{{$item->tempat}}</td>
+                  <td>{{$item->waktu}}</td>
+                  <td>{{$item->manfaat}}</td>
+                  <td>
+                    <a href="{{$item->tautan}}">
+                      <a href="#">
+                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                      </a>
+
+                    </a>
+                  </td>
+                  <td>
+                    <a href="/kriteria4/pengembangan_kompetensi_dtps/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria4/pengembangan_kompetensi_dtps/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <!-- last row starts here -->
 
 </div>

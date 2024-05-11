@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/kriteria4/profil_tendik/create">
+      <a href="/kriteria4/kompetensi_tendik/create">
         <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
@@ -25,7 +25,7 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Profil Tendik</h5>
+          <h5 class="card-title">Pengembangan Kompetensi dan Karier Tendik</h5>
           @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -39,26 +39,38 @@
               <thead class="text-center">
                 <tr>
                   <th rowspan="2">No.</th>
-                  <th rowspan="2">Nama Lengkap</th>
-                  <th rowspan="2">Status Kepegawaian <br> <small>(PNS, Tetap Non-PNS, Kontrak, dll)</small></th>
-                  <th rowspan="2">Bidang Keahlian <br> <small>(administrator, pustakawan, laboran, dll)</small></th>
-                  <th rowspan="2">Pendidikan <br> <small>(SLTA, Diploma, S1, S2, S3)</small></th>
-                  <th rowspan="2">Unit Kerja <br> <small>(PS, UPPS, PT)</small></th>
+                  <th rowspan="2">Nama</th>
+                  <th rowspan="2">Nama Kegiatan <br> <small>Pengembangan Kompetensi</th>
+                  <th rowspan="2">Tahun Pelaksanaan</th>
+                  <th rowspan="2">Lama Kegiatan <br> <small>(tahun, bulan, hari)</small></th>
+                  <th rowspan="2">Waktu Mulai</th>
+                  <th rowspan="2">Waktu Berakhir</th>
+                  <th rowspan="2">Tempat</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 @foreach($items as $item)
+
+                @php
+                    // Konversi $item->tgl_sekarang menjadi objek Carbon
+                    $waktu_mulai = \Carbon\Carbon::parse($item->waktu_mulai);
+                    $waktu_selesai = \Carbon\Carbon::parse($item->waktu_selesai);
+                    $selisih = $waktu_mulai->diff($waktu_selesai);
+                @endphp
+
                 <tr>
                   <td>{{$loop->iteration}}</td>
                   <td>{{$item->nama}}</td>
-                  <td>{{$item->status}}</td>
-                  <td>{{$item->bidang_keahlian}}</td>
-                  <td>{{$item->pendidikan}}</td>
-                  <td>{{$item->unit_kerja}}</td>
+                  <td>{{$item->nama_kegiatan}}</td>
+                  <td>{{$waktu_mulai->year}}</td>
+                  <td>{{$selisih->y}} Tahun, {{$selisih->m}} bulan, {{$selisih->d}} hari</td>
+                  <td>{{$item->waktu_mulai}}</td>
+                  <td>{{$item->waktu_selesai}}</td>
+                  <td>{{$item->tempat}}</td>
                   <td>
-                    <a href="{{$item->tautan}}">
+                    <a href="#">
                       <a href="{{$item->tautan}}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
@@ -66,10 +78,10 @@
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria4/profil_tendik/{{$item->id}}/edit">
+                    <a href="/kriteria4/kompetensi_tendik/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="/kriteria4/profil_tendik/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria4/kompetensi_tendik/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>

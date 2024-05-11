@@ -28,15 +28,28 @@
           <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
- Prestasi DTPS
+            
+            Prestasi DTPS
           </h4>
 
             <p class="card-description">K.4 Sumber Daya Manusia</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
             <hr>
-            <form action="#" method="post">
+            <form action="{{isset($item->id) ?  route('prestasi_dtps.update', ['id' => Crypt::encryptString($item->id)])  : route('prestasi_dtps.store')}}" method="post">
+              @if(isset($item->id))
+                @method('PUT')
+              @endif  
               @csrf
               <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -57,22 +70,35 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><textarea class="form-control" name="name" rows="8" cols="80" autofocus placeholder="ketik disini"></textarea> </td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
+                      <td>
+                        <select name="nidn_nidk" id="nidn_nidk" class="form-control">
+                          @if(isset($item->nidn_nidk))
+                            <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
+                          @else
+                            <option value="" selected>Pilih dosen</option>
+                            @foreach($dosens as $dosen)
+                            <option value="{{$dosen->nidn_nidk}}">
+                                {{$dosen->nama}}
+                            </option>
+                            @endforeach
+                          @endif
+                        </select>
+                      </td>
+                      <td><textarea class="form-control" name="prestasi" rows="8" cols="80" placeholder="ketik disini">{{isset($item->prestasi) ? $item->prestasi : old('prestasi')}}</textarea> </td>
+                      <td><input type="text" class="form-control" name="tahun" value="{{isset($item->tahun) ? $item->tahun : old('tahun')}}" placeholder="ketik disini"></td>
                       <td><div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value=""></label>
+                                <input type="radio" class="form-check-input" name="tingkat" id="tingkat1" value="Internasional" @if(isset($item->tingkat) && $item->tingkat == "Internasional") checked @endif ></label>
                             </div></td>
                             <td><div class="form-check">
                                     <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value=""></label>
+                                      <input type="radio" class="form-check-input" name="tingkat" id="tingkat1" value="Nasional" @if(isset($item->tingkat) && $item->tingkat == "Nasional") checked @endif></label>
                                   </div></td>
                                   <td><div class="form-check">
                                           <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value=""></label>
+                                            <input type="radio" class="form-check-input" name="tingkat" id="tingkat1" value="Lokal" @if(isset($item->tingkat) && $item->tingkat == "Lokal") checked @endif></label>
                                         </div></td>
-                      <td><input type="text" class="form-control" name="" value="" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
                     </tr>
                   </tbody>
 
@@ -81,7 +107,7 @@
 
                     @if (Request::segment(3) === 'create')
                     <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
-                    @elseif (Request::segment(3) === 'edit')
+                    @elseif (Request::segment(4) === 'edit')
                     <button type="submit" class="btn btn-primary mr-2"> Update data</button>
                     @endif
 

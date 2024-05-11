@@ -53,6 +53,75 @@ return new class extends Migration
 
             // $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
         });
+        Schema::create('tabel_k4_kegiatan_mengajar', function (Blueprint $table) {
+            $table->id();
+            $table->string('nidn_nidk');
+            $table->integer('jumlah_kelas');
+            $table->string('kode_mk');
+            $table->integer('jum_pertemuan_rencana');
+            $table->integer('jum_pertemuan_terlaksana');
+            $table->enum('semester', ['Gasal', 'Genap'])->nullable();
+            $table->string('tautan')->nullable();
+            $table->timestamps();
+
+            // $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
+        });
+
+        Schema::create('tabel_k4_bimbingan_ta', function(Blueprint $table){
+            $table->id();
+            $table->string('nidn_nidk');
+            $table->integer('ts_2');
+            $table->integer('ts_1');
+            $table->integer('ts');
+            $table->string('tautan');
+            $table->timestamps();
+        });
+        Schema::create('tabel_k4_prestasi_dtps', function(Blueprint $table){
+            $table->id();
+            $table->string('nidn_nidk');
+            $table->string('prestasi');
+            $table->string('tahun');
+            $table->enum('tingkat',['Internasional', 'Nasional', 'Lokal'])->default('Lokal');
+            $table->string('tautan');
+            $table->timestamps();
+        });
+
+        Schema::create('tabel_k4_pengembangan_kompetensi_dtps', function(Blueprint $table){
+            $table->id();
+            $table->string('nidn_nidk');
+            $table->string('bidang_keahlian');
+            $table->string('nama_kegiatan');
+            $table->string('tempat');
+            $table->date('waktu');
+            $table->string('manfaat');
+            $table->string('tautan');
+            $table->timestamps();
+        });
+
+        Schema::create('tabel_tendik', function(Blueprint $table){
+            $table->id();
+            $table->string('id_tendik')->unique();
+            $table->string('nama');
+            $table->string('status');
+            $table->string('bidang_keahlian');
+            $table->enum('pendidikan', ['SLTA','Diploma','S1','S2','S3']);
+            $table->enum('unit_kerja', ['PS','UPPS','PT']);
+            $table->string('tautan');
+            $table->timestamps();
+        });
+
+        Schema::create('tabel_k4_kompetensi_tendik', function(Blueprint $table){
+            $table->id();
+            $table->string('id_tendik');
+            $table->string('nama_kegiatan');
+            // $table->string('tahun');
+            // $table->string('lama_kegiatan');
+            $table->date('waktu_mulai');
+            $table->date('waktu_selesai');
+            $table->string('tempat');
+            $table->string('tautan');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -66,5 +135,11 @@ return new class extends Migration
         Schema::dropIfExists('tabel_k4_dtps_keahlian_ps');
         Schema::dropIfExists('tabel_k4_dtps_luar_ps');
         Schema::dropIfExists('tabel_k4_beban_kerja_dtps');
+        Schema::dropIfExists('tabel_k4_kegiatan_mengajar');
+        Schema::dropIfExists('tabel_k4_bimbingan_ta');
+        Schema::dropIfExists('tabel_k4_prestasi_dtps');
+        Schema::dropIfExists('tabel_k4_pengembangan_kompetensi_dtps');
+        Schema::dropIfExists('tabel_tendik');
+        Schema::dropIfExists('tabel_k4_kompetensi_tendik');
     }
 };
