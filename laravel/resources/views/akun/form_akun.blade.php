@@ -62,7 +62,7 @@
               <option value="admin" {{ old('level', isset($user) ? $user->level : '') == 'admin' ? 'selected' : '' }}>Admin
                 <small class="text-muted">(dapat menambahkan user dan memperbaharui data sistem)</small>
               </option>
-              <option value="view" {{ old('level', isset($user) ? $user->level : '') == 'view' ? 'selected' : '' }}>View
+              <option value="viewer" {{ old('level', isset($user) ? $user->level : '') == 'view' ? 'selected' : '' }}>View
                 <small class="text-muted">(hanya bisa melihat data)</small>
               </option>
             </select>

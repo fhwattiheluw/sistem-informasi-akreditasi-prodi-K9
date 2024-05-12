@@ -59,8 +59,8 @@
 
                     <p class="mb-2">
                         <strong>Keterangan:</strong><br>
-                        <span class="badge badge-primary">View</span> = User biasa yang dapat masuk ke website<br>
-                        <span class="badge badge-info">Author</span> = User yang dapat memasukan data<br>
+                        <span class="badge badge-primary">Viewer</span> = User yang bertugas menilai kinerja program studi dan unit pengelolaan<br>
+                        <span class="badge badge-info">Author</span> = User yang dapat mengelola data kinerja program studi<br>
                         <span class="badge badge-success">Admin</span> = User yang memiliki akses super admin
                     </p>
 
@@ -79,7 +79,7 @@
                                 <tr>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    @if($user->level == 'view')
+                                    @if($user->level == 'viewer')
                                         <td><span class="badge badge-primary">{{$user->level}}</span></td>
                                     @elseif($user->level == 'author')
                                         <td><span class="badge badge-info">{{$user->level}}</span></td>

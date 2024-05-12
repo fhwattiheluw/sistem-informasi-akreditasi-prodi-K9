@@ -49,12 +49,15 @@ class AkunController extends Controller
         return view('akun.form_akun', compact('user'));
     }
 
-    public function update(Request $request, User $akun)
+    public function update(Request $request, $id)
     {
+        // Find the account by ID
+        $akun = User::findOrFail($id);
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8',
-            'level' => 'required|in:admin,author,reviewer',
+            'level' => 'required|in:admin,author,viewer',
         ]);
         
         $akun->update($validatedData);

@@ -125,11 +125,5 @@
                 <span class="menu-title">Info Akun</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/program-studi">
-                <i class="mdi mdi-school menu-icon"></i>
-                <span class="menu-title">Program Studi</span>
-            </a>
-        </li>
     </ul>
 </nav>

@@ -26,10 +26,10 @@
                     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
                       <div class="d-flex align-items-center">
                         <a href="#">
-                          <p class="m-0 pr-3">Dashboard</p>
+                          <p class="m-0 pr-3">dashboard</p>
                         </a>
                         <a class="pl-3 mr-4" href="#">
-                          <p class="m-0">ADE-00234</p>
+                          <p class="m-0">{{ \Carbon\Carbon::now()->format('d-m-Y') }}</p>
                         </a>
                       </div>
                       <a href="{{route('repository.form')}}" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
@@ -84,11 +84,11 @@
                         <div class="card card-img">
                           <div class="card-body d-flex align-items-center">
                             <div class="text-white">
-                              <h1 class="font-20 font-weight-semibold mb-0"> Get premium </h1>
-                              <h1 class="font-20 font-weight-semibold">account!</h1>
-                              <p>to optimize your selling prodcut</p>
-                              <p class="font-10 font-weight-semibold"> Enjoy the advantage of premium. </p>
-                              <button class="btn bg-white font-12">Get Premium</button>
+                              <h1 class="font-20 font-weight-semibold mb-0"> Selamat Datang </h1>
+                              <h1 class="font-20 font-weight-semibold">Akresmart</h1>
+                              <p>Sistem akreditasi prodi ini dibuat untuk mempermudah proses akreditasi program studi </p>
+                              <p class="font-10 font-weight-semibold"> Terima kasih </p>
+                              <a class="btn bg-white font-12" href="{{ route('dataprodi.index') }}">data program studi</a>
                             </div>
                           </div>
                         </div>

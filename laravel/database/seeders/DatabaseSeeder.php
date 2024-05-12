@@ -15,6 +15,7 @@ use App\Models\TabelK3MahasiswaReguler;
 use App\Models\TabelK4BebanKerjaDTPS;
 use App\Models\TabelK4DtpsKeahlianPS;
 use App\Models\TabelK4DtpsLuarPS;
+use App\Models\dataProgramStudi;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
