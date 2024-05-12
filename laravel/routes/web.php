@@ -31,25 +31,35 @@ use App\Http\Controllers\{
 */
 
 // login awal
-Route::get('/',[AutentikasiController::class, 'index']);
+// Route::get('/',[AutentikasiController::class, 'index']);
+// redirect route ke route login
+Route::redirect('/', '/login');
 // lupa password
 Route::get('/forgot',[AutentikasiController::class, 'forgot_form']);
+
+// buatkan code route untuk login dan logout. sertakan nama route 
+Route::get('/login', [AutentikasiController::class, 'index'])->name('login');
+Route::post('/login', [AutentikasiController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AutentikasiController::class, 'logout'])->name('logout');
+
+
 // ====================================
 // dashboard
 // ====================================
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/dashboard/edit', [DashboardController::class, 'edit']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
 
 // ====================================
 // akun
 // ====================================
-Route::get('/akun/show', [AkunController::class, 'show'])->name('akun.show');
+Route::get('/akun/profil/{email}', [AkunController::class, 'show'])->name('akun.profil');
 Route::get('/akun/index', [AkunController::class, 'index'])->name('akun.index');
 Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
 Route::post('/akun/store', [AkunController::class, 'store'])->name('akun.store');
 Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
 Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
-Route::delete('/akun/{id}', [AkunController::class, 'destroy'])->name('akun.delete');
+Route::get('/akun/{email}', [AkunController::class, 'destroy'])->name('akun.destroy');
+Route::get('/akun/{akun}', [AkunController::class, 'show'])->name('akun.show');
 
 
 // ====================================
