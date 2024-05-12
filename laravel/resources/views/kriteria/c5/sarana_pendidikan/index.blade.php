@@ -26,15 +26,24 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Data Sarana Pendidikan</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
+                  <th rowspan="2">No.</th>
                   <th rowspan="2">Jenis Sarana</th>
                   <th rowspan="2">Jumlah Unit</th>
                   <th rowspan="2">Kualitas</th>
                   <th colspan="2">Kondisi</th>
-                  <th rowspan="2">Unit Pengelola (PS, UPPS, PT)</th>
+                  <th rowspan="2">Unit Pengelola <br><small>(PS, UPPS, PT)</small></th>
                   <th rowspan="2">Aksi</th>
                 </tr>
                 <tr>
@@ -43,23 +52,24 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr> 
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->jenis_sarana}}</td>
+                  <td>{{$item->jumlah_unit}}</td>
+                  <td>{{$item->kualitas}}</td>
+                  <td>@if($item->kondisi == 'terawat') V @endif</td>
+                  <td>@if($item->kondisi == 'tidak terawat') V @endif</td>
+                  <td>{{$item->unit_pengelola}}</td>
                   <td>
-                    <a href="/kriteria5/sarana_pendidikan/edit">
+                    <a href="/kriteria5/sarana_pendidikan/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria5/sarana_pendidikan/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

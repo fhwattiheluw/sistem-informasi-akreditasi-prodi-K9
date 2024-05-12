@@ -251,9 +251,12 @@ Route::get('/kriteria5/prasarana_pendidikan', [TabelC5Controller::class, 'prasar
 Route::get('/kriteria5/prasarana_pendidikan/create', [TabelC5Controller::class, 'prasarana_pendidikan_create']);
 Route::get('/kriteria5/prasarana_pendidikan/edit', [TabelC5Controller::class, 'prasarana_pendidikan_edit']);
 // Kriteria 5 > Tabel Data Sarana Pendidikan
-Route::get('/kriteria5/sarana_pendidikan', [TabelC5Controller::class, 'sarana_pendidikan_index']);
-Route::get('/kriteria5/sarana_pendidikan/create', [TabelC5Controller::class, 'sarana_pendidikan_create']);
-Route::get('/kriteria5/sarana_pendidikan/edit', [TabelC5Controller::class, 'sarana_pendidikan_edit']);
+Route::get('/kriteria5/sarana_pendidikan', [TabelC5Controller::class, 'sarana_pendidikan_index'])->name('sarana_pendidikan.index');
+Route::get('/kriteria5/sarana_pendidikan/create', [TabelC5Controller::class, 'sarana_pendidikan_create'])->name('sarana_pendidikan.create');
+Route::post('/kriteria5/sarana_pendidikan/store', [TabelC5Controller::class, 'sarana_pendidikan_store'])->name('sarana_pendidikan.store');
+Route::get('/kriteria5/sarana_pendidikan/{id}/edit', [TabelC5Controller::class, 'sarana_pendidikan_edit'])->name('sarana_pendidikan.edit');
+Route::put('/kriteria5/sarana_pendidikan/{id}/update', [TabelC5Controller::class, 'sarana_pendidikan_update'])->name('sarana_pendidikan.update');
+Route::get('/kriteria5/sarana_pendidikan/{id}/delete', [TabelC5Controller::class, 'sarana_pendidikan_destroy'])->name('sarana_pendidikan.destroy');
 
 // ====================================
 // kriteria 6

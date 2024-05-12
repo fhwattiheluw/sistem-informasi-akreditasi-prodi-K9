@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\tabelC5;
+use App\Models\TabelK5SaranaPendidikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class TabelC5Controller extends Controller
 {
@@ -213,8 +215,8 @@ class TabelC5Controller extends Controller
 
   public function sarana_pendidikan_index()
   {
-    //
-    return view('kriteria.c5.sarana_pendidikan.index');
+    $items = TabelK5SaranaPendidikan::all();
+    return view('kriteria.c5.sarana_pendidikan.index', ['items'=>$items]);
   }
   public function sarana_pendidikan_create()
   {
@@ -224,7 +226,24 @@ class TabelC5Controller extends Controller
 
   public function sarana_pendidikan_store(Request $request)
   {
-    //
+    $request->validate([
+      'jenis_sarana' => 'required',
+      'jumlah_unit'  => 'required|numeric',
+      'kualitas'  => 'required',
+      'kondisi' => 'required',
+      'unit_pengelola' => 'required',
+      'tautan' => 'required',
+    ]);
+
+    TabelK5SaranaPendidikan::create([
+      'jenis_sarana'  => $request->jenis_sarana,
+      'jumlah_unit'  => $request->jumlah_unit,
+      'kualitas'  => $request->kualitas,
+      'kondisi' => $request->kondisi,
+      'unit_pengelola' => $request->unit_pengelola,
+      'tautan' => $request->tautan,
+    ]);
+    return redirect()->route('sarana_pendidikan.index')->with('success', 'Data K5 Sarana Pendidikan ADDED successfully');
   }
 
   public function sarana_pendidikan_show(tabelC5 $tabelC5)
@@ -232,20 +251,39 @@ class TabelC5Controller extends Controller
     //
   }
 
-  public function sarana_pendidikan_edit(tabelC5 $tabelC5)
+  public function sarana_pendidikan_edit($id)
   {
-    //
-    return view('kriteria.c5.sarana_pendidikan.form');
+    $item = TabelK5SaranaPendidikan::findOrFail($id);
+    return view('kriteria.c5.sarana_pendidikan.form', ['item'=>$item]);
   }
 
-  public function sarana_pendidikan_update(Request $request, tabelC5 $tabelC5)
+  public function sarana_pendidikan_update(Request $request, $id)
   {
-    //
+    $idx = Crypt::decryptString($id);
+    $data = TabelK5SaranaPendidikan::findOrFail($idx);
+    $request->validate([
+      'jenis_sarana' => 'required',
+      'jumlah_unit'  => 'required|numeric',
+      'kualitas'  => 'required',
+      'kondisi' => 'required',
+      'unit_pengelola' => 'required',
+      'tautan' => 'required',
+    ]);
+    $data->update([
+      'jenis_sarana'  => $request->jenis_sarana,
+      'jumlah_unit'  => $request->jumlah_unit,
+      'kualitas'  => $request->kualitas,
+      'kondisi' => $request->kondisi,
+      'unit_pengelola' => $request->unit_pengelola,
+      'tautan' => $request->tautan,
+    ]);
+    return redirect()->route('sarana_pendidikan.index')->with('success', 'Data K5 Sarana Pendidikan UPDATED successfully');
   }
 
-  public function sarana_pendidikan_destroy(tabelC5 $tabelC5)
+  public function sarana_pendidikan_destroy($id)
   {
-    //
+    TabelK5SaranaPendidikan::destroy($id);
+    return redirect()->route('sarana_pendidikan.index')->with('success', 'Data K5 Sarana Pendidikan DELETED successfully');
   }
 
 

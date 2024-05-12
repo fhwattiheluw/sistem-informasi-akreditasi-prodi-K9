@@ -21,6 +21,7 @@ use App\Models\TabelK4KompetensiTendik;
 use App\Models\TabelK4PengembanganKompetensiDTPS;
 use App\Models\TabelK4PrestasiDTPS;
 use App\Models\TabelK4Tendik;
+use App\Models\TabelK5SaranaPendidikan;
 use App\Models\TabelMatakuliah;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -437,6 +438,21 @@ class DatabaseSeeder extends Seeder
             'kode_mk' => '3',
             'nama' => 'Fiqih Kontemporer',
             'sks' => 3,
+        ]);
+        TabelK5SaranaPendidikan::create([
+            'jenis_sarana' => 'Meja Kantor',
+            'kualitas' => 'Baik',
+            'kondisi' => 'terawat',
+            'unit_pengelola' => 'PS',
+            'tautan' => '#',
+        ]);
+        TabelK5SaranaPendidikan::create([
+            'jenis_sarana' => 'Meja Kantor',
+            'jumlah_unit' => 2,
+            'kualitas' => 'Kurang Baik',
+            'kondisi' => 'terawat',
+            'unit_pengelola' => 'UPPS',
+            'tautan' => '#',
         ]);
     }
 }
