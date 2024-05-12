@@ -1,21 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DataProgramStudiController;
-use App\Http\Controllers\DataKeuanganController;
-use App\Http\Controllers\TabelC2Controller;
-use App\Http\Controllers\TabelC3Controller;
-use App\Http\Controllers\TabelC4Controller;
-use App\Http\Controllers\TabelC5Controller;
-use App\Http\Controllers\TabelC6Controller;
-use App\Http\Controllers\TabelC7Controller;
-use App\Http\Controllers\TabelC8Controller;
-use App\Http\Controllers\TabelC9Controller;
-use App\Http\Controllers\AkunController;
-use App\Http\Controllers\AutentikasiController;
-use App\Http\Controllers\K2BidangPendidikan;
-use App\Http\Controllers\RepositoryController;
+use App\Http\Controllers\{
+    DashboardController,
+    DataProgramStudiController,
+    DataKeuanganController,
+    TabelC2Controller,
+    TabelC3Controller,
+    TabelC4Controller,
+    TabelC5Controller,
+    TabelC6Controller,
+    TabelC7Controller,
+    TabelC8Controller,
+    TabelC9Controller,
+    AkunController,
+    AutentikasiController,
+    RepositoryController,
+    DokumenController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,30 +31,58 @@ use App\Http\Controllers\RepositoryController;
 */
 
 // login awal
-Route::get('/',[AutentikasiController::class, 'index']);
+// Route::get('/',[AutentikasiController::class, 'index']);
+// redirect route ke route login
+Route::redirect('/', '/login');
 // lupa password
 Route::get('/forgot',[AutentikasiController::class, 'forgot_form']);
+
+// buatkan code route untuk login dan logout. sertakan nama route 
+Route::get('/login', [AutentikasiController::class, 'index'])->name('login');
+Route::post('/login', [AutentikasiController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AutentikasiController::class, 'logout'])->name('logout');
+
+
 // ====================================
 // dashboard
 // ====================================
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/dashboard/edit', [DashboardController::class, 'edit']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
 
 // ====================================
 // akun
 // ====================================
-Route::get('/akun/show', [AkunController::class, 'show']);
-Route::get('/akun/index', [AkunController::class, 'index']);
+Route::get('/akun/profil/{email}', [AkunController::class, 'show'])->name('akun.profil');
+Route::get('/akun/index', [AkunController::class, 'index'])->name('akun.index');
+Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
+Route::post('/akun/store', [AkunController::class, 'store'])->name('akun.store');
+Route::get('/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
+Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
+Route::get('/akun/{email}', [AkunController::class, 'destroy'])->name('akun.destroy');
+Route::get('/akun/{akun}', [AkunController::class, 'show'])->name('akun.show');
+
 
 // ====================================
 // Repository
 // ====================================
-Route::get('/repository', [RepositoryController::class, 'index'])->name('repository.index');
-Route::get('/repository/form', [RepositoryController::class, 'formDokumen'])->name('repository.form');
+Route::get('/repository/semua', [RepositoryController::class, 'index'])->name('repository.semua');
+Route::get('/repository/form', [RepositoryController::class, 'formRepository'])->name('repository.form');
 Route::post('/repository/store', [RepositoryController::class, 'store'])->name('repository.store');
 Route::get('/repository/{id}/edit', [RepositoryController::class, 'edit'])->name('repository.edit');
 Route::put('/repository/{id}', [RepositoryController::class, 'update'])->name('repository.update');
 Route::delete('/repository/{id}', [RepositoryController::class, 'destroy'])->name('repository.delete');
+Route::get('/repository/show/{id}', [RepositoryController::class, 'show'])->name('repository.show');
+
+
+// ====================================
+// Dokumen
+// ====================================
+Route::get('/dokumen', [DokumenController::class, 'index'])->name('dokumen.index');
+Route::get('/dokumen/create', [DokumenController::class, 'create'])->name('dokumen.create');
+Route::post('/dokumen/store', [DokumenController::class, 'store'])->name('dokumen.store');
+Route::get('/dokumen/{id}/edit', [DokumenController::class, 'edit'])->name('dokumen.edit');
+Route::put('/dokumen/{id}', [DokumenController::class, 'update'])->name('dokumen.update');
+Route::get('/dokumen/{id}', [DokumenController::class, 'destroy'])->name('dokumen.delete');
 
 // ====================================
 //  informasi prodi

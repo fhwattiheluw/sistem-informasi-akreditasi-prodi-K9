@@ -37,14 +37,25 @@
                 </p> -->
               </div>
             </div>
-            <form action="/dashboard" class="signin-form">
+            <form action="/dashboard" class="signin-form" method="GET">
+              @csrf
               <div class="form-group mb-3">
-                <label class="label" for="name">Username</label>
-                <input type="text" class="form-control" placeholder="Username" required>
+                <label class="label" for="username">Username</label>
+                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Username" value="{{ old('username') }}" required>
+                @error('username')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group mb-3">
                 <label class="label" for="password">Password</label>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required>
+                @error('password')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group">
                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
@@ -52,7 +63,7 @@
               <div class="form-group d-md-flex">
                 <div class="w-50 text-left">
                   <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                    <input type="checkbox" >
+                    <input type="checkbox" name="remember">
                     <span class="checkmark"></span>
                   </label>
                 </div>

@@ -22,19 +22,19 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/dashboard">
-                <i class="mdi mdi-compass-outline menu-icon"></i>
+                <i class="mdi mdi-view-dashboard menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/dataprodi">
-                <i class="mdi mdi-book-open menu-icon"></i>
+                <i class="mdi mdi-archive menu-icon"></i>
                 <span class="menu-title">Data Program Studi</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/datakeuangan">
-                <i class="mdi mdi-book-open menu-icon"></i>
+                <i class="mdi mdi-currency-usd menu-icon"></i>
                 <span class="menu-title">Keuangan</span>
             </a>
         </li>
@@ -43,49 +43,49 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria2">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-gavel menu-icon"></i>
                 <span class="menu-title">K.2 Tata Pamong, Tata Kelola, dan Kerjasama</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria3">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-account-multiple-outline menu-icon"></i>
                 <span class="menu-title">K.3 Mahasiswa</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria4">
-                <i class="mdi mdi-table-edit menu-icon"></i>
-                <span the="menu-title">K.4 Sumber Daya Manusia</span>
+                <i class="mdi mdi-account-tie menu-icon"></i>
+                <span class="menu-title">K.4 Sumber Daya Manusia</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria5">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-office-building menu-icon"></i>
                 <span class="menu-title">K.5 Keuangan, Sarana, dan Prasarana</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria6">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-book-open-page-variant menu-icon"></i>
                 <span class="menu-title">K.6 Pendidikan</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria7">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-flask-outline menu-icon"></i>
                 <span class="menu-title">K.7 Penelitian</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria8">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-human-handsup menu-icon"></i>
                 <span class="menu-title">K.8 Pengabdian kepada Masyarakat</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/kriteria9">
-                <i class="mdi mdi-table-edit menu-icon"></i>
+                <i class="mdi mdi-trophy-outline menu-icon"></i>
                 <span class="menu-title">K.9 Luaran dan Capaian Tridharma</span>
             </a>
         </li>
@@ -94,14 +94,20 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/repository/form">
-                <i class="mdi mdi-upload menu-icon"></i>
-                <span class="menu-title">Unggah Dokumen</span>
+                <i class="mdi mdi-folder-plus menu-icon"></i>
+                <span class="menu-title">Tambah repository</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/repository">
-                <i class="mdi mdi-folder-account menu-icon"></i>
-                <span class="menu-title">Manajemen Dokumen</span>
+            <a class="nav-link" href="/repository/semua">
+                <i class="mdi mdi-database menu-icon"></i>
+                <span class="menu-title">Manajemen repository</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/dokumen">
+                <i class="mdi mdi-file-document-outline menu-icon"></i>
+                <span class="menu-title">Semua dokumen</span>
             </a>
         </li>
         <li class="pt-2 pb-1">
@@ -109,20 +115,14 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/akun/index">
-                <i class="mdi mdi-account-multiple menu-icon"></i>
+                <i class="mdi mdi-account-group-outline menu-icon"></i>
                 <span class="menu-title">Akun Pengguna</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/akun/show">
-                <i class="mdi mdi-account-card-details menu-icon"></i>
+                <i class="mdi mdi-account-card-details-outline menu-icon"></i>
                 <span class="menu-title">Info Akun</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/program-studi">
-                <i class="mdi mdi-school menu-icon"></i>
-                <span class="menu-title">Program Studi</span>
             </a>
         </li>
     </ul>

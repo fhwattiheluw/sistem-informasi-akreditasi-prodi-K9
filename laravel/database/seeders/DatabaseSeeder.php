@@ -16,6 +16,7 @@ use App\Models\TabelK4BebanKerjaDTPS;
 use App\Models\TabelK4BimbinganTA;
 use App\Models\TabelK4DtpsKeahlianPS;
 use App\Models\TabelK4DtpsLuarPS;
+<<<<<<< HEAD
 use App\Models\TabelK4KegiatanMengajar;
 use App\Models\TabelK4KompetensiTendik;
 use App\Models\TabelK4PengembanganKompetensiDTPS;
@@ -23,6 +24,9 @@ use App\Models\TabelK4PrestasiDTPS;
 use App\Models\TabelK4Tendik;
 use App\Models\TabelK5SaranaPendidikan;
 use App\Models\TabelMatakuliah;
+=======
+use App\Models\dataProgramStudi;
+>>>>>>> e30f39688f53625e4de6ce9ef28b50e6494adcf0
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

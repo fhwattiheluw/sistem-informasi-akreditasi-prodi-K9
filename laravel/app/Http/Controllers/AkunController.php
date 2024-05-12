@@ -2,87 +2,92 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\akun;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\AkunCreated;
+use App\Mail\sendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class AkunController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        //
-        return view('akun.manag_akun');
-
+    { 
+        $dataUser = User::all();
+        
+        if($dataUser->count() == 0) {
+            return view('akun.manag_akun', compact('dataUser'))->with('info', 'Tidak ada data user.');
+        }
+        
+        return view('akun.manag_akun', compact('dataUser'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('akun.form_akun');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+            'email' => 'required|email|unique:users,email',
+            'level' => 'required|in:admin,author,reviewer',
+        ]);
+        
+        $akun = User::create($validatedData);
+        
+        // $email = new sendEmail($akun);
+        // Mail::to($validatedData['email'])->send($email);
+        
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil dibuat');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function show(akun $akun)
+    public function edit($id)
     {
-        //
-        return view('akun.detail');
+        $user = User::findOrFail($id);
+        return view('akun.form_akun', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(akun $akun)
+    public function update(Request $request, $id)
     {
-        //
+        // Find the account by ID
+        $akun = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+            'level' => 'required|in:admin,author,viewer',
+        ]);
+        
+        $akun->update($validatedData);
+        
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, akun $akun)
+    public function destroy($email)
     {
-        //
+        $user = User::where('email', $email)->first();
+        
+        if ($user) {
+            $user->delete();
+            return redirect()->route('akun.index')->with('success', 'Data pengguna berhasil dihapus');
+        } else {
+            return redirect()->route('akun.index')->with('error', 'Pengguna tidak ditemukan');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\akun  $akun
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(akun $akun)
-    {
-        //
+public function show($email)
+{
+    $user = User::where('email', $email)->first();
+
+    if ($user) {
+        return view('akun.detail', compact('user'));
+    } else {
+        return redirect()->route('dashboard.index')->with('error', 'Data pengguna tidak ditemukan');
     }
+}
+
+
+
 }
