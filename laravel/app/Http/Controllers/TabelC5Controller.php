@@ -176,7 +176,6 @@ class TabelC5Controller extends Controller
 
   public function prasarana_pendidikan_index()
   {
-    //
     return view('kriteria.c5.prasarana_pendidikan.index');
   }
   public function prasarana_pendidikan_create()
