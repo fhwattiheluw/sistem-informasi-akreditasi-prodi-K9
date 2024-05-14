@@ -7,10 +7,31 @@
             <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a>
           </div>
           <ul class="navbar-nav">
-            <li class="nav-item ">
-              <a class="nav-link"href="#" data-toggle="dropdown" aria-expanded="false">
-                IAIN AMBON
+            <li class="nav-item dropdown">
+              <a class="nav-link" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                {nama program studi}
               </a>
+              <div class="dropdown-menu dropdown-menu-left navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                <h6 class="p-3 mb-0 font-weight-semibold">Pilih Prodi</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">{nama program studi}</h6>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">{nama program studi}</h6>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">{nama program studi}</h6>
+                  </div>
+                </a>
+              </div>
             </li>
           </ul>
           <ul class="navbar-nav navbar-nav-right">
