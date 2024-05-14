@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        // create table data_program_studis
         Schema::create('data_program_studis', function (Blueprint $table) {
             $table->id();
             $table->enum('jenis', ['S1','S2','S3']);
             $table->string('nama');
-            $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK_SEKALI','UNGGUL']);
+            $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL']);
             $table->string('nomor_sk');
             $table->date('tanggal_sk');
             $table->date('tanggal_kadaluarsa');
@@ -26,6 +27,21 @@ return new class extends Migration
             $table->double('rerata_ipk');
             $table->double('rerata_masa_studi');
             $table->timestamps();
+        });
+        
+        // create table users
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->unsignedBigInteger('prodi_id');
+            $table->enum('role',['fakultas','admin prodi','asesor']);
+            $table->rememberToken();
+            $table->timestamps();            
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
         });
     }
 
@@ -36,6 +52,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('users');
         Schema::dropIfExists('data_program_studis');
+        
+
     }
 };

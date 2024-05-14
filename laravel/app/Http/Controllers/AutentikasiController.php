@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\autentikasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AutentikasiController extends Controller
 {
@@ -17,6 +18,32 @@ class AutentikasiController extends Controller
         //
         return view('login');
     }
+
+    
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->route('dashboard.index');
+        }
+    
+        return back()->withInput()->withErrors(['gagal' => 'Email atau password salah']);
+    }
+    
+
 
     public function forgot_form()
     {

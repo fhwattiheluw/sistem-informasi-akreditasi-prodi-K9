@@ -37,12 +37,12 @@
                 </p> -->
               </div>
             </div>
-            <form action="/dashboard" class="signin-form" method="GET">
+            <form action="{{route('login.submit')}}" class="signin-form" method="POST">
               @csrf
               <div class="form-group mb-3">
-                <label class="label" for="username">Username</label>
-                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Username" value="{{ old('username') }}" required>
-                @error('username')
+                <label class="label" for="email">email</label>
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="email" value="{{ old('email') }}" >
+                @error('email')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -50,22 +50,29 @@
               </div>
               <div class="form-group mb-3">
                 <label class="label" for="password">Password</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required>
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" >
                 @error('password')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
               </div>
+              @error('gagal')
+                <div class="form-group">
+                  <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                  </div>
+                </div>
+              @enderror
               <div class="form-group">
                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
               </div>
               <div class="form-group d-md-flex">
                 <div class="w-50 text-left">
-                  <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                    <input type="checkbox" name="remember">
+                  <!-- <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                     <span class="checkmark"></span>
-                  </label>
+                  </label> -->
                 </div>
                 <div class="w-50 text-md-right">
                   <a href="/forgot">Forgot Password</a>

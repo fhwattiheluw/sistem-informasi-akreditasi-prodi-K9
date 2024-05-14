@@ -114,6 +114,12 @@
             <span class="nav-item-head">Menu akun</span>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('dataprodi.semua') }}">
+                <i class="mdi mdi-domain menu-icon"></i>
+                <span class="menu-title">Kelola prodi</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/akun/index">
                 <i class="mdi mdi-account-group-outline menu-icon"></i>
                 <span class="menu-title">Akun Pengguna</span>

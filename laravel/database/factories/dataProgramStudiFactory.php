@@ -22,7 +22,7 @@ class dataProgramStudiFactory extends Factory
             //
             'jenis' => 'S1',
             'nama' => $this->faker->name(),
-            'status_peringkat' => 'BAIK_SEKALI',
+            'status_peringkat' => 'BAIK SEKALI',
             'nomor_sk' => Str::random(5),
             'tanggal_sk' => '2019-01-01 12:12',
             'tanggal_kadaluarsa' => '2024-02-3 12:12',

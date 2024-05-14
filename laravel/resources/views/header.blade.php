@@ -36,7 +36,7 @@
           </ul>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-logout d-none d-md-block mr-3">
-              <a class="nav-link" href="#">logout</a>
+              <a class="nav-link" href="{{route('logout')}}">logout</a>
             </li>
           </ul>
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
