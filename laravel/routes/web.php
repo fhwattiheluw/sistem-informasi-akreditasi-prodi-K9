@@ -92,6 +92,9 @@ Route::get('/dataprodi', [DataProgramStudiController::class, 'index'])->name('da
 Route::get('/dataprodi/edit', [DataProgramStudiController::class, 'edit'])->name('dataprodi.edit');
 Route::put('/dataprodi/{id}', [DataProgramStudiController::class, 'update'])->name('dataprodi.update');
 
+Route::get('/dataprodi/form', [DataProgramStudiController::class, 'create'])->name('dataprodi.create');
+Route::get('/dataprodi/semua/', [DataProgramStudiController::class, 'semua'])->name('dataprodi.semua');
+
 // ====================================
 // data keuangan
 // ====================================

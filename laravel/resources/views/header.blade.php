@@ -8,7 +8,7 @@
           </div>
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
-              <a class="nav-link" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+              <a class="btn btn-sm btn-outline-success " id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 {nama program studi}
               </a>
               <div class="dropdown-menu dropdown-menu-left navbar-dropdown preview-list" aria-labelledby="messageDropdown">

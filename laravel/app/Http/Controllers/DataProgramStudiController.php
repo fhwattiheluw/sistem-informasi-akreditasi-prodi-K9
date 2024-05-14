@@ -20,6 +20,18 @@ class DataProgramStudiController extends Controller
         return view('kriteria.dataProdi.index', ['prodi' => $data_prodi]);
     }
 
+    
+    /**
+     * Menampilkan semua data program studi
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function semua()
+    {
+        $data_prodi = dataProgramStudi::all();
+        return view('kriteria.dataprodi.kelola', ['data_prodi' => $data_prodi]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,6 +40,7 @@ class DataProgramStudiController extends Controller
     public function create()
     {
         //
+        return view('kriteria.dataprodi.create');
     }
 
     /**
