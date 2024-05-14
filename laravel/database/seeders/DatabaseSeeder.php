@@ -439,20 +439,5 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Fiqih Kontemporer',
             'sks' => 3,
         ]);
-        TabelK5SaranaPendidikan::create([
-            'jenis_sarana' => 'Meja Kantor',
-            'kualitas' => 'Baik',
-            'kondisi' => 'terawat',
-            'unit_pengelola' => 'PS',
-            'tautan' => '#',
-        ]);
-        TabelK5SaranaPendidikan::create([
-            'jenis_sarana' => 'Meja Kantor',
-            'jumlah_unit' => 2,
-            'kualitas' => 'Kurang Baik',
-            'kondisi' => 'terawat',
-            'unit_pengelola' => 'UPPS',
-            'tautan' => '#',
-        ]);
     }
 }

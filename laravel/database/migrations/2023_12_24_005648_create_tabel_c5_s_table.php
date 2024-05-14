@@ -25,18 +25,20 @@ return new class extends Migration
             $table->enum('kondisi', ['terawat','tidak terawat']);
             $table->enum('unit_pengelola', ['PS','UPPS','PT']);
             $table->string('tautan');
+            $table->unsignedBigInteger('prodi_id');
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade')->default(1);
             $table->timestamps();
         });
         Schema::create('tabel_k5_prasarana_pendidikan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('prodi_id');
-            $table->string('jenis_sarana');
+            $table->string('jenis_prasarana');
             $table->integer('jumlah_unit')->default(0);
             $table->integer('luas')->default(0);
             $table->enum('kepemilikan', ['SD', 'SW']);
             $table->enum('kondisi', ['terawat', 'tidak terawat']);
             $table->string('tautan');
-            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade')->default(1);
             $table->timestamps();
         });
 
@@ -51,5 +53,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('tabel_c5_s');
         Schema::dropIfExists('tabel_k5_sarana_pendidikan');
+        Schema::dropIfExists('tabel_k5_prasarana_pendidikan');
     }
 };
