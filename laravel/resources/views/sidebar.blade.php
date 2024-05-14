@@ -3,16 +3,16 @@
         <li class="nav-item nav-profile border-bottom">
             <a href="#" class="nav-link flex-column">
                 <div class="nav-profile-image">
-                    <img src="/assets/images/faces/face1.jpg" alt="profile" />
+                    <img src="/assets/images/logo.jpg" alt="profile" />
                 </div>
                 <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
-                    <span class="font-weight-semibold mb-1 mt-2 text-center">Antonio Olson</span>
-                    <span class="text-secondary icon-sm text-center">Fakultas</span>
+                    <span class="font-weight-semibold mb-1 mt-2 text-center">{namauser} </span>
+                    <span class="text-secondary icon-sm text-center">{rule user}</span>
                 </div>
             </a>
         </li>
         <li class="nav-item pt-3">
-            <a class="nav-link d-block" href="index.html">
+            <a class="nav-link d-block" href="#">
                 <h3 class="sidebar-brand-logo">AkreSmart</h3>
                 <div class="small font-weight-light pt-1">LAMDIK Versi 1.0 20220313</div>
             </a>
