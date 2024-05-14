@@ -10,7 +10,7 @@
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
         <a href="#">
-          <p class="m-0 pr-3">Data Kuantitatif</p>
+          <p class="m-0 pr-3">Menu Akun</p>
         </a>
         <a class="pl-3 mr-4" href="#">
           <p class="m-0">Kelola program studi</p>
@@ -33,6 +33,14 @@
                 </button>
             </div>
           @endif
+          @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -43,14 +51,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>Teknik Informatika</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit data"><i class="fas fa-pencil-alt"></i></a>
-                    <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></button>
-                  </td>
-                </tr>
+                @foreach($data_prodi as $prodi)
+                  <tr>
+                    <td>{{$prodi->id}}</td>
+                    <td>{{$prodi->nama}}</td>
+                    <td>
+                      <a href="{{route('dataprodi.editById', Crypt::encryptString($prodi->id) )}}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit data"><i class="fas fa-pencil-alt"></i></a>
+                      <form action="{{ route('dataprodi.delete', Crypt::encryptString($prodi->id) )}}" method="post" class="d-inline" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

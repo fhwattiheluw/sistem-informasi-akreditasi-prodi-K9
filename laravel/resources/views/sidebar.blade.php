@@ -6,8 +6,8 @@
                     <img src="/assets/images/logo.jpg" alt="profile" />
                 </div>
                 <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
-                    <span class="font-weight-semibold mb-1 mt-2 text-center">{namauser} </span>
-                    <span class="text-secondary icon-sm text-center">{rule user}</span>
+                    <span class="font-weight-semibold mb-1 mt-2 text-center">{{ auth()->user()->name }} </span>
+                    <span class="text-secondary icon-sm text-center">{{ auth()->user()->role }}</span>
                 </div>
             </a>
         </li>
@@ -89,6 +89,7 @@
                 <span class="menu-title">K.9 Luaran dan Capaian Tridharma</span>
             </a>
         </li>
+        @if(auth()->user()->role != 'fakultas')
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Repository</span>
         </li>
@@ -110,6 +111,7 @@
                 <span class="menu-title">Semua dokumen</span>
             </a>
         </li>
+        @endif
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Menu akun</span>
         </li>

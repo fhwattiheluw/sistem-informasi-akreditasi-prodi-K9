@@ -17,13 +17,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        // merupakan user default untuk admin fakutlas
+        // admin fakultas tidak bisa di tambahkan
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name' => "Admin Fakultas",
+            'email' => "fakultas@admin.ac.id",
             'email_verified_at' => now(),
             'role' => 'fakultas',
             'prodi_id' => 1,
-            'password' => bcrypt("12345678"),
+            'password' => bcrypt("admin"),
             'remember_token' => Str::random(10),
         ];
     }

@@ -78,7 +78,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // ====================================
-//  informasi prodi
+//  program studi
 // ====================================
 Route::middleware('auth')->group(function () {
     Route::get('/dataprodi', [DataProgramStudiController::class, 'index'])->name('dataprodi.index');
@@ -86,7 +86,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/dataprodi/{id}', [DataProgramStudiController::class, 'update'])->name('dataprodi.update');
 
     Route::get('/dataprodi/form', [DataProgramStudiController::class, 'create'])->name('dataprodi.create');
-Route::get('/dataprodi/semua/', [DataProgramStudiController::class, 'semua'])->name('dataprodi.semua');
+    Route::get('/dataprodi/semua/', [DataProgramStudiController::class, 'semua'])->name('dataprodi.semua');
+    Route::post('/dataprodi/store', [DataProgramStudiController::class, 'store'])->name('dataprodi.store');
+    
+    Route::get('/dataprodi/{id}/edit', [DataProgramStudiController::class, 'editById'])->name('dataprodi.editById');
+    Route::delete('/dataprodi/{id}/delete', [DataProgramStudiController::class, 'destroy'])->name('dataprodi.delete');
+    Route::post('/dataprodi/{id}', [DataProgramStudiController::class, 'updateByFakutlas'])->name('dataprodi.updateByFakutlas');
 });
 
 // ====================================

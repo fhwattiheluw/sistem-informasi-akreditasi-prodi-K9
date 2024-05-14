@@ -10,5 +10,5 @@ class dataProgramStudi extends Model
     use HasFactory;
 
     protected $table = 'data_program_studis';
-    protected $guarded = ['id'];    
+    protected $fillable = ['id', 'nama', ];
 }

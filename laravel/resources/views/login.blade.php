@@ -41,7 +41,7 @@
               @csrf
               <div class="form-group mb-3">
                 <label class="label" for="email">email</label>
-                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="email" value="{{ old('email') }}" >
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="email" value="{{ old('email') ? old('email') : 'fakultas@admin.ac.id' }}" >
                 @error('email')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
               </div>
               <div class="form-group mb-3">
                 <label class="label" for="password">Password</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" >
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" value="admin">
                 @error('password')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

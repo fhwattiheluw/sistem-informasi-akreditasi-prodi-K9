@@ -16,16 +16,16 @@ return new class extends Migration
         // create table data_program_studis
         Schema::create('data_program_studis', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis', ['S1','S2','S3']);
+            $table->enum('jenis', ['S1','S2','S3'])->nullable();;
             $table->string('nama');
-            $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL']);
-            $table->string('nomor_sk');
-            $table->date('tanggal_sk');
-            $table->date('tanggal_kadaluarsa');
-            $table->integer('jumlah_mhs_ts');
-            $table->integer('jumlah_dtps_ts');
-            $table->double('rerata_ipk');
-            $table->double('rerata_masa_studi');
+            $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL'])->nullable();;
+            $table->string('nomor_sk')->nullable();
+            $table->date('tanggal_sk')->nullable();;
+            $table->date('tanggal_kadaluarsa')->nullable();;
+            $table->integer('jumlah_mhs_ts')->nullable();;
+            $table->integer('jumlah_dtps_ts')->nullable();;
+            $table->double('rerata_ipk')->nullable();;
+            $table->double('rerata_masa_studi')->nullable();;
             $table->timestamps();
         });
         

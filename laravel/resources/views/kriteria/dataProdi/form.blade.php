@@ -10,7 +10,7 @@
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
         <a href="#">
-          <p class="m-0 pr-3">Data kuantitatif LED</p>
+          <p class="m-0 pr-3">Menu</p>
         </a>
         <a class="pl-3 mr-4" href="#">
           <p class="m-0">Data program studi</p>

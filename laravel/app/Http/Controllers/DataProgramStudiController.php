@@ -28,8 +28,25 @@ class DataProgramStudiController extends Controller
      */
     public function semua()
     {
-        $data_prodi = dataProgramStudi::all();
+        $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
         return view('kriteria.dataprodi.kelola', ['data_prodi' => $data_prodi]);
+    }
+
+    
+    /**
+     * Menampilkan data program studi berdasarkan id
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editById($id)
+    {
+        $id = Crypt::decryptString($id);
+        $data_prodi = dataProgramStudi::find($id);
+        if ($data_prodi === null) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+        return view('kriteria.dataprodi.create', ['dataProdi' => $data_prodi]);
     }
 
     /**
@@ -51,7 +68,16 @@ class DataProgramStudiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id' => 'required',
+            'nama' => 'required',
+        ]);
+
+        dataProgramStudi::create([
+            'id' => $request->id,
+            'nama' => $request->nama,
+        ]);
+        return redirect(route('dataprodi.semua'))->with('success', 'program studi telah berhasil di buat.');
     }
 
     /**
@@ -64,6 +90,25 @@ class DataProgramStudiController extends Controller
     {
         //
     }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateByFakutlas(Request $request, $id)
+    {
+        $id = Crypt::decryptString($id);
+        $data = dataProgramStudi::find($id);
+        $data->update([
+            'nama' => $request->nama,
+        ]);
+        return redirect(route('dataprodi.semua'))->with('success', 'Data Program Studi berhasil diubah');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -129,7 +174,8 @@ class DataProgramStudiController extends Controller
      */
     public function destroy($id)
     {
+        $id = Crypt::decryptString($id);
         dataProgramStudi::destroy($id);
-        return redirect('/dataprodi')->with('success', 'Data Prodi deleted successfully');
+        return redirect(route('dataprodi.semua'))->with('success', 'Data program studi telah berhasil di hapus');
     }
 }

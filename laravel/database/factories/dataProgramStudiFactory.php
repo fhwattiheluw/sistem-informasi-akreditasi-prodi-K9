@@ -19,7 +19,8 @@ class dataProgramStudiFactory extends Factory
     public function definition()
     {
         return [
-            //
+            // data prodi default
+            'id' => 1,
             'jenis' => 'S1',
             'nama' => $this->faker->name(),
             'status_peringkat' => 'BAIK SEKALI',
