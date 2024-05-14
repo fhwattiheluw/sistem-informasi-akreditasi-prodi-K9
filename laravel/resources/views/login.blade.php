@@ -65,7 +65,7 @@
                 </div>
               @enderror
               <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">Sign In</button>
               </div>
               <div class="form-group d-md-flex">
                 <div class="w-50 text-left">
