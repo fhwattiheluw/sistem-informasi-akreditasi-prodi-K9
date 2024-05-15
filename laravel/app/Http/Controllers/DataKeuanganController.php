@@ -19,6 +19,7 @@ class DataKeuanganController extends Controller
         return view('kriteria.dataKeuangan.index', ['items' => $items]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

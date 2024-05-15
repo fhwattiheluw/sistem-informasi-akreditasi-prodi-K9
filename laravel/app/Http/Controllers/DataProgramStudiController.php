@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Crypt;
 
 class DataProgramStudiController extends Controller
 {
+    // fungsi yang digunakan untuk mengambil data semua program studi
+    public function getSemuaProdi(){
+        $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
+        return $data_prodi;
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -7,13 +7,21 @@ use Illuminate\Http\Request;
 use App\Mail\AkunCreated;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\DataProgramStudiController;
 
 class AkunController extends Controller
 {
+    protected $prodiController;
+
+     public function __construct(Type $var = null,DataProgramStudiController $prodiController) {
+        $this->prodiController = $prodiController;
+    }
+
+
     public function index()
     { 
-        $dataUser = User::all();
-        
+        $dataUser = User::where('id', '!=', 1)->get();
+
         if($dataUser->count() == 0) {
             return view('akun.manag_akun', compact('dataUser'))->with('info', 'Tidak ada data user.');
         }
@@ -23,7 +31,8 @@ class AkunController extends Controller
 
     public function create()
     {
-        return view('akun.form_akun');
+        $prodi = $this->prodiController->getSemuaProdi();
+        return view('akun.form_akun',compact('prodi'));
     }
 
     public function store(Request $request)
@@ -32,7 +41,8 @@ class AkunController extends Controller
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8',
             'email' => 'required|email|unique:users,email',
-            'level' => 'required|in:admin,author,reviewer',
+            'role' => 'required|in:admin prodi,asesor',
+            'prodi_id' => 'required',
         ]);
         
         $akun = User::create($validatedData);
@@ -45,8 +55,9 @@ class AkunController extends Controller
 
     public function edit($id)
     {
+        $prodi = $this->prodiController->getSemuaProdi();
         $user = User::findOrFail($id);
-        return view('akun.form_akun', compact('user'));
+        return view('akun.form_akun', compact(['user','prodi']));
     }
 
     public function update(Request $request, $id)
@@ -57,7 +68,8 @@ class AkunController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8',
-            'level' => 'required|in:admin,author,viewer',
+            'role' => 'required|in:admin prodi,asesor',
+            'prodi_id' => 'required',
         ]);
         
         $akun->update($validatedData);

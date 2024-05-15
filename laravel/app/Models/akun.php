@@ -11,6 +11,6 @@ class akun extends Model
 
     protected $table = 'akun';
 
-    protected $fillable = ['name', 'level', 'password'];
+    protected $fillable = ['name', 'level', 'password','role'];
 
 }

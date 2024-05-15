@@ -18,14 +18,14 @@ return new class extends Migration
             $table->id();
             $table->enum('jenis', ['S1','S2','S3'])->nullable();;
             $table->string('nama');
-            $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL'])->nullable();;
+            $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL'])->nullable();
             $table->string('nomor_sk')->nullable();
-            $table->date('tanggal_sk')->nullable();;
-            $table->date('tanggal_kadaluarsa')->nullable();;
-            $table->integer('jumlah_mhs_ts')->nullable();;
-            $table->integer('jumlah_dtps_ts')->nullable();;
-            $table->double('rerata_ipk')->nullable();;
-            $table->double('rerata_masa_studi')->nullable();;
+            $table->date('tanggal_sk')->nullable();
+            $table->date('tanggal_kadaluarsa')->nullable();
+            $table->integer('jumlah_mhs_ts')->nullable();
+            $table->integer('jumlah_dtps_ts')->nullable();
+            $table->double('rerata_ipk')->nullable();
+            $table->double('rerata_masa_studi')->nullable();
             $table->timestamps();
         });
         
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('prodi_id');
-            $table->enum('role',['fakultas','admin prodi','asesor']);
+            $table->enum('role',['fakultas','admin prodi','asesor'])->nullable();
             $table->rememberToken();
             $table->timestamps();            
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

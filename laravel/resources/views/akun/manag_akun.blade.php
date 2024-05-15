@@ -59,9 +59,8 @@
 
                     <p class="mb-2">
                         <strong>Keterangan:</strong><br>
-                        <span class="badge badge-primary">Viewer</span> = User yang bertugas menilai kinerja program studi dan unit pengelolaan<br>
-                        <span class="badge badge-info">Author</span> = User yang dapat mengelola data kinerja program studi<br>
-                        <span class="badge badge-success">Admin</span> = User yang memiliki akses super admin
+                        <span class="badge badge-primary">Admin Prodi</span> user yang memiliki akses untuk mengelola data kuantitatif LED program studi <br>
+                        <span class="badge badge-info">Asesor</span> User yang memiliki akses untuk melihat data dokumen kuantitatif LED program studi
                     </p>
 
                     <div class="table-responsive">
@@ -70,7 +69,8 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Level</th>
+                                    <th>Program studi</th>
+                                    <th>Role</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -79,12 +79,11 @@
                                 <tr>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    @if($user->level == 'viewer')
-                                        <td><span class="badge badge-primary">{{$user->level}}</span></td>
-                                    @elseif($user->level == 'author')
-                                        <td><span class="badge badge-info">{{$user->level}}</span></td>
-                                    @elseif($user->level == 'admin')
-                                        <td><span class="badge badge-success">{{$user->level}}</span></td>
+                                    <td>{{$user->prodi->nama}} </td>
+                                    @if($user->role == 'admin prodi')
+                                        <td><span class="badge badge-primary">{{$user->role}}</span></td>
+                                    @elseif($user->role == 'asesor')
+                                        <td><span class="badge badge-info">{{$user->role}}</span></td>
                                     @endif
 
                                     <td>
