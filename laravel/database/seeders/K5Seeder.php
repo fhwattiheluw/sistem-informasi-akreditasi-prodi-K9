@@ -20,6 +20,7 @@ class K5Seeder extends Seeder
         TabelK5SaranaPendidikan::create([
             'jenis_sarana' => 'Meja Kantor',
             'kualitas' => 'Baik',
+            'jumlah_unit' => 2,
             'kondisi' => 'terawat',
             'unit_pengelola' => 'PS',
             'tautan' => '#',
@@ -35,7 +36,7 @@ class K5Seeder extends Seeder
         TabelK5PrasaranPendidikan::create([
             'jenis_prasarana' => 'Gedung HALL',
             'jumlah_unit' => '2',
-            'luas' => 120, 
+            'luas' => 120,
         ]);
     }
 }

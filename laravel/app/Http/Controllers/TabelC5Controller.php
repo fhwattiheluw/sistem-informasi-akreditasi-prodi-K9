@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\tabelC5;
+use App\Models\TabelK5PrasaranPendidikan;
 use App\Models\TabelK5SaranaPendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC5Controller extends Controller
 {
+  public $id_prodi;
+  public function __construct()
+  {
+      $this->id_prodi = 1;
+  }
 
   public function index()
   {
@@ -174,9 +180,10 @@ class TabelC5Controller extends Controller
 
   // Kriteria 5 > Tabel Data Prasarana Pendidikan
 
-  public function prasarana_pendidikan_index()
+  public function prasarana_pendidikan_index(Request $request)
   {
-    return view('kriteria.c5.prasarana_pendidikan.index');
+    $items = TabelK5PrasaranPendidikan::where('id_prodi', $this->id_prodi)->get();
+    return view('kriteria.c5.prasarana_pendidikan.index', ['items'=>$items]);
   }
   public function prasarana_pendidikan_create()
   {
