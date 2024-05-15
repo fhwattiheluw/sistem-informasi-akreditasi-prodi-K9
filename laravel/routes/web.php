@@ -287,10 +287,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/kriteria5/dana_pkm', [TabelC5Controller::class, 'dana_pkm_index']);
     Route::get('/kriteria5/dana_pkm/create', [TabelC5Controller::class, 'dana_pkm_create']);
     Route::get('/kriteria5/dana_pkm/edit', [TabelC5Controller::class, 'dana_pkm_edit']);
+    
     // Kriteria 5 > Tabel Data Prasarana Pendidikan
-    Route::get('/kriteria5/prasarana_pendidikan', [TabelC5Controller::class, 'prasarana_pendidikan_index']);
-    Route::get('/kriteria5/prasarana_pendidikan/create', [TabelC5Controller::class, 'prasarana_pendidikan_create']);
-    Route::get('/kriteria5/prasarana_pendidikan/edit', [TabelC5Controller::class, 'prasarana_pendidikan_edit']);
+    Route::get('/kriteria5/prasarana_pendidikan', [TabelC5Controller::class, 'prasarana_pendidikan_index'])->name('prasarana_pendidikan.index');
+    Route::get('/kriteria5/prasarana_pendidikan/create', [TabelC5Controller::class, 'prasarana_pendidikan_create'])->name('prasarana_pendidikan.create');
+    Route::post('/kriteria5/prasarana_pendidikan/store', [TabelC5Controller::class, 'prasarana_pendidikan_store'])->name('prasarana_pendidikan.store');
+    Route::get('/kriteria5/prasarana_pendidikan/{id}/edit', [TabelC5Controller::class, 'prasarana_pendidikan_edit'])->name('prasarana_pendidikan.edit');
+    Route::put('/kriteria5/prasarana_pendidikan/{id}/update', [TabelC5Controller::class, 'prasarana_pendidikan_update'])->name('prasarana_pendidikan.update');
+    Route::get('/kriteria5/prasarana_pendidikan/{id}/delete', [TabelC5Controller::class, 'prasarana_pendidikan_destroy'])->name('prasarana_pendidikan.destroy');
+    
     // Kriteria 5 > Tabel Data Sarana Pendidikan
     Route::get('/kriteria5/sarana_pendidikan', [TabelC5Controller::class, 'sarana_pendidikan_index'])->name('sarana_pendidikan.index');
     Route::get('/kriteria5/sarana_pendidikan/create', [TabelC5Controller::class, 'sarana_pendidikan_create'])->name('sarana_pendidikan.create');

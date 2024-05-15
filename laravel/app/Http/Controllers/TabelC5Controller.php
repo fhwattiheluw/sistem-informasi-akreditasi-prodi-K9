@@ -187,13 +187,32 @@ class TabelC5Controller extends Controller
   }
   public function prasarana_pendidikan_create()
   {
-    //
     return view('kriteria.c5.prasarana_pendidikan.form');
   }
 
   public function prasarana_pendidikan_store(Request $request)
   {
-    //
+    $request->validate([
+      "jenis_prasarana" => "required",
+      "jumlah_unit" => "required",
+      "luas" => "required",
+      "kepemilikan" => "required",
+      "kondisi" => "required",
+      "penggunaan" => "required",      
+    ]);
+
+    TabelK5PrasaranPendidikan::create([
+      "jenis_prasarana" => $request->jenis_prasarana,
+      "jumlah_unit" => $request->jumlah_unit,
+      "luas" => $request->luas,
+      "kepemilikan" => $request->kepemilikan,
+      "kondisi" => $request->kondisi,
+      "penggunaan" => $request->penggunaan,
+      "tautan" => $request->tautan,
+      "id_prodi" => $this->id_prodi,
+    ]);
+
+    return redirect()->route('prasarana_pendidikan.index')->with('success', 'Data K5 Prasarana Pendidikan ADDED successfully');    
   }
 
   public function prasarana_pendidikan_show(tabelC5 $tabelC5)
@@ -201,20 +220,43 @@ class TabelC5Controller extends Controller
     //
   }
 
-  public function prasarana_pendidikan_edit(tabelC5 $tabelC5)
+  public function prasarana_pendidikan_edit($id)
   {
-    //
-    return view('kriteria.c5.prasarana_pendidikan.form');
+    $item = TabelK5PrasaranPendidikan::findOrFail($id);
+    return view('kriteria.c5.prasarana_pendidikan.form', ['item'=>$item]);
   }
 
-  public function prasarana_pendidikan_update(Request $request, tabelC5 $tabelC5)
+  public function prasarana_pendidikan_update(Request $request, $id)
   {
-    //
+    $idx = Crypt::decryptString($id);
+    $data = TabelK5PrasaranPendidikan::findOrFail($idx);
+
+    $request->validate([
+      "jenis_prasarana" => "required",
+      "jumlah_unit" => "required",
+      "luas" => "required",
+      "kepemilikan" => "required",
+      "kondisi" => "required",
+      "penggunaan" => "required",      
+    ]);
+
+    $data->update([
+      "jenis_prasarana" => $request->jenis_prasarana,
+      "jumlah_unit" => $request->jumlah_unit,
+      "luas" => $request->luas,
+      "kepemilikan" => $request->kepemilikan,
+      "kondisi" => $request->kondisi,
+      "penggunaan" => $request->penggunaan,
+      "tautan" => $request->tautan,
+    ]);
+
+    return redirect()->route('prasarana_pendidikan.index')->with('success', 'Data K5 Prasarana Pendidikan UPDATED successfully');    
   }
 
-  public function prasarana_pendidikan_destroy(tabelC5 $tabelC5)
+  public function prasarana_pendidikan_destroy($id)
   {
-    //
+    TabelK5PrasaranPendidikan::destroy($id);
+    return redirect()->route('prasarana_pendidikan.index')->with('success', 'Data K5 Prasarana Pendidikan DELETED successfully');
   }
 
   // Kriteria 5 > Tabel Data Sarana Pendidikan

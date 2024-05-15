@@ -26,6 +26,14 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Data Prasarana Pendidikan</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -57,10 +65,10 @@
                   <td>@if($item->kondisi == 'tidak terawat') V @endif</td>
                   <td>{{$item->penggunaan}}</td>
                   <td>
-                    <a href="/kriteria5/prasarana_pendidikan/edit">
+                    <a href="/kriteria5/prasarana_pendidikan/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria5/prasarana_pendidikan/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>

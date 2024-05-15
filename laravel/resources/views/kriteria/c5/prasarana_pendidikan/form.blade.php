@@ -15,6 +15,7 @@
         </a>
         <a class="pl-3 mr-4" href="#">
           <p class="m-0">K.5 Keuangan, Sarana, dan Prasarana</p>
+          
         </a>
       </div>
 
@@ -24,42 +25,61 @@
   <div class="row">
 
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="#" method="post">
+        <form class="card forms-sample" action="{{isset($item->id) ?  route('prasarana_pendidikan.update', ['id' => Crypt::encryptString($item->id)])  : route('prasarana_pendidikan.store')}}" method="post">
+          @if(isset($item->id))
+            @method('PUT')
+          @endif 
+        
         @csrf
         <div class="card-body">
           <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
 
-            Dana PkM
+            Prasarana
           </h4>
 
           <p class="card-description">K.5 Tabel Data Prasarana Pendidikan</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
           <hr>
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Jenis Prasarana</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="jenis_prasarana" value="{{isset($item->jenis_prasarana) ? $item->jenis_prasarana : old('jenis_prasarana')}}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Jumlah Unit</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="jumlah_unit" value="{{isset($item->jumlah_unit) ? $item->jumlah_unit : old('jumlah_unit')}}" class="form-control" placeholder="Ketik disini">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Luas </label>
+            <div class="col-sm-9">
+              <input type="number" name="luas" value="{{isset($item->luas) ? $item->luas : old('luas')}}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Kepemilikan*</label>
             <div class="col-sm-9">
-              <select class="form-control" name="">
+              <select class="form-control" name="kepemilikan">
                 <option value="">--Pilih--</option>
-                <option value="">SD (Milik sendiri)</option>
-                <option value="">SW (Sewa/Kontrak/Kerjasama)</option>
+                <option value="SD" @if($item->kepemilikan != NULL && $item->kepemilikan == "SD")) selected @endif>SD (Milik sendiri)</option>
+                <option value="SW" @if($item->kepemilikan != NULL && $item->kepemilikan == "SW")) selected @endif>SW (Sewa/Kontrak/Kerjasama)</option>
               </select>
             </div>
           </div>
@@ -67,10 +87,10 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Kondisi</label>
             <div class="col-sm-9">
-              <select class="form-control" name="">
+              <select class="form-control" name="kondisi">
                 <option value="">--Pilih--</option>
-                <option value="">Terawat</option>
-                <option value="">Tidak Terawat</option>
+                <option value="terawat" @if($item->kondisi != NULL && $item->kondisi == "terawat")) selected @endif>Terawat</option>
+                <option value="tidak terawat" @if($item->kondisi != NULL && $item->kondisi == "tidak terawat")) selected @endif>Tidak Terawat</option>
               </select>
             </div>
           </div>
@@ -78,16 +98,22 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Penggunaan (Jam/minggu)</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="penggunaan" value="{{isset($item->penggunaan) ? $item->penggunaan : old('penggunaan')}}" class="form-control" placeholder="Ketik disini">
             </div>
+          </div><div class="form-group row">
+          <label class="col-sm-3 col-form-label">Tautan</label>
+          <div class="col-sm-9">
+            <input type="text" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" class="form-control" placeholder="Ketik disini">
           </div>
         </div>
 
+        </div>
+        
         <div class="card-footer">
           <button class="btn btn-primary" type="submit" name="button">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Update data
             @endif
           </button>
