@@ -72,7 +72,12 @@ class AkunController extends Controller
             'prodi_id' => 'required',
         ]);
         
-        $akun->update($validatedData);
+        $akun->update([
+            'name' => $request->name,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'prodi_id' => $request->prodi_id,
+        ]);
         
         return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui');
     }
