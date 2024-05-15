@@ -20,25 +20,26 @@ return new class extends Migration
         Schema::create('tabel_k5_sarana_pendidikan', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_sarana');
-            $table->integer('jumlah_unit')->default(0);
+            $table->integer('jumlah_unit');
             $table->enum('kualitas', ['Baik', 'Kurang Baik', 'Tidak Baik']);
             $table->enum('kondisi', ['terawat','tidak terawat']);
             $table->enum('unit_pengelola', ['PS','UPPS','PT']);
-            $table->string('tautan');
-            $table->unsignedBigInteger('prodi_id');
-            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade')->default(1);
+            $table->string('tautan')->default('#');;
+            $table->unsignedBigInteger('id_prodi')->default(1);
+            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('tabel_k5_prasarana_pendidikan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('prodi_id');
             $table->string('jenis_prasarana');
             $table->integer('jumlah_unit')->default(0);
             $table->integer('luas')->default(0);
             $table->enum('kepemilikan', ['SD', 'SW']);
             $table->enum('kondisi', ['terawat', 'tidak terawat']);
-            $table->string('tautan');
-            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade')->default(1);
+            $table->integer('penggunaan')->default(0);
+            $table->string('tautan')->default('#');
+            $table->unsignedBigInteger('id_prodi')->default(1);
+            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 

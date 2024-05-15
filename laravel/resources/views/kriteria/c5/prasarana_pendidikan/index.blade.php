@@ -46,16 +46,16 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$item->jenis_prasarana}}</td>
+                  <td>{{$item->jumlah_unit}}</td>
+                  <td>{{$item->luas}}</td>
+                  <td>@if($item->kepemilikan == 'SD') V @endif</td>
+                  <td>@if($item->kepemilikan == 'SW') V @endif</td>
+                  <td>@if($item->kondisi == 'terawat') V @endif</td>
+                  <td>@if($item->kondisi == 'tidak terawat') V @endif</td>
+                  <td>{{$item->penggunaan}}</td>
                   <td>
                     <a href="/kriteria5/prasarana_pendidikan/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
@@ -64,7 +64,7 @@
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

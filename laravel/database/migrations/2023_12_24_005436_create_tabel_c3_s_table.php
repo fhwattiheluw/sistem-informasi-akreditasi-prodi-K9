@@ -22,6 +22,8 @@ return new class extends Migration
             $table->integer('jum_mahasiswa_baru');
             $table->integer('total');
             $table->string('tautan')->nullable();
+            $table->unsignedBigInteger('id_prodi')->default(1);
+            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -33,6 +35,8 @@ return new class extends Migration
             $table->integer('perempuan');
             $table->integer('total_mahasiswa');
             $table->string('tautan')->nullable();
+            $table->unsignedBigInteger('id_prodi')->default(1);
+            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -44,6 +48,8 @@ return new class extends Migration
             $table->integer('perempuan');
             $table->integer('total_mahasiswa');
             $table->string('tautan')->nullable();
+            $table->unsignedBigInteger('id_prodi')->default(1);
+            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -56,6 +62,8 @@ return new class extends Migration
             $table->integer('kesejahteraan');
             $table->integer('keprofesian');
             $table->string('tautan')->nullable();
+            $table->unsignedBigInteger('id_prodi')->default(1);
+            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
     }
