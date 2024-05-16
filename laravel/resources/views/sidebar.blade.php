@@ -122,13 +122,16 @@
                 <span class="menu-title">Kelola prodi</span>
             </a>
         </li>
+         @endif
+         @if(auth()->user()->role != 'asesor')
         <li class="nav-item">
             <a class="nav-link" href="/akun/index">
                 <i class="mdi mdi-account-group-outline menu-icon"></i>
-                <span class="menu-title">Akun Pengguna</span>
+                <span class="menu-title">Kelola Akun Pengguna</span>
             </a>
         </li>
         @endif
+       
         <li class="nav-item">
             <a class="nav-link" href="{{ route('akun.profil') }}">
                 <i class="mdi mdi-account-card-details-outline menu-icon"></i>

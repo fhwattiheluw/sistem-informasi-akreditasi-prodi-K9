@@ -66,12 +66,18 @@
           </div>
           <div class="form-group">
             <label for="prodi">Program studi</label>
+            @if(auth()->user()->role === 'fakultas')
             <select class="form-control" id="prodi" name="prodi_id">
               <option value="">Pilih program studi</option>
               @foreach($prodi as $item)
                 <option value="{{ $item->id }}" {{ old('prodi_id', isset($user) ? $item->id : '') ==  $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
               @endforeach
             </select>
+            @else
+            <select class="form-control" id="prodi" name="prodi_id">
+              <option value="{{auth()->user()->prodi->id}}" selected>{{auth()->user()->prodi->nama}}</option>
+            <select>
+            @endif
             @error('prodi')
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error!</strong> {{ $message }}

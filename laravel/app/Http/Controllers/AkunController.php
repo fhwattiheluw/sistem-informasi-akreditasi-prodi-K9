@@ -32,7 +32,15 @@ class AkunController extends Controller
      */
     public function index()
     { 
+        if(auth()->user()->role == 'fakultas') {
         $dataUser = User::where('id', '!=', 1)->get();
+        } else {
+            $dataUser = User::where('id', '!=', 1)
+            ->where('prodi_id', auth()->user()->prodi->id)
+            ->get();
+        }
+
+        echo auth()->user()->prodi->id;
 
         if($dataUser->count() == 0) {
             return view('akun.manag_akun', compact('dataUser'))->with('info', 'Tidak ada data user.');
