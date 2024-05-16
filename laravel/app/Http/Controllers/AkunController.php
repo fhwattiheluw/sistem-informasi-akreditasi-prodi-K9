@@ -20,7 +20,7 @@ class AkunController extends Controller
       * @param Type $var The Type variable to initialize.
       * @param DataProgramStudiController $prodiController The DataProgramStudiController instance.
       */
-     public function __construct(Type $var = null,DataProgramStudiController $prodiController) {
+     public function __construct(DataProgramStudiController $prodiController) {
         $this->prodiController = $prodiController;
     }
 

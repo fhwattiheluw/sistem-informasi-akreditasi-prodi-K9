@@ -4,7 +4,9 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role != 'asesor')
       <a href="{{route('repository.semua')}}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Kelola Repository</a>
+      @endif
 
       <!-- Modal untuk upload dokumen -->
       <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -57,7 +59,7 @@
           <p class="m-0 pr-3">Kelola Repository</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">{{ $repository->nama_repository }}</p>
+          <p class="m-0">{{ Str::limit($repository->nama_repository, 50) }}</p>
         </a>
       </div>
     </div>
@@ -67,7 +69,9 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Informasi Repository <!-- Tombol untuk menyalin URL -->
+           @if(auth()->user()->role != 'asesor')
           <button onclick="copyToClipboard()" class="btn btn-info"><i class="fa fa-link"></i></button>
+          @endif
           </h4>
           <div id="copyAlert" class="alert alert-success mt-2" style="display:none;">
             URL disalin.
@@ -93,7 +97,11 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Dokumen Repository <button class="btn btn-outline-primary btn-sm mb-2 mb-md-0 mr-2" data-toggle="modal" data-target="#uploadModal">Upload Dokumen</button></h5>
+          <h5 class="card-title">Dokumen Repository 
+           @if(auth()->user()->role != 'asesor')  
+          <button class="btn btn-outline-primary btn-sm mb-2 mb-md-0 mr-2" data-toggle="modal" data-target="#uploadModal">Upload Dokumen</button>
+          @endif
+        </h5>
           @if(session('success'))
             <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -119,10 +127,12 @@
                     <td>{{ $doc->nama_dokumen }}</td>
                     <td>{{ $doc->keterangan }}</td>
                     <td>
-                      <a href="{{ url($doc->path) }}" class="btn btn-primary btn-xs" title="Melihat Dokumen" target="_blank"><i class="fa fa-eye"></i></a>
+                      <a href="#" onclick="openPopupDokumen('{{ url($doc->path) }}')" class="btn btn-primary btn-xs" title="Melihat Dokumen"><i class="fa fa-eye"></i></a>
+                       @if(auth()->user()->role != 'asesor')
                       <button class="btn btn-warning btn-xs" title="Edit" onclick="window.location.href='{{route('dokumen.edit', $doc->id)}}'"><i class="fa fa-edit"></i></button>
                       <a href="{{ route('dokumen.delete', $doc->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
                       <button onclick="navigator.clipboard.writeText('{{ url($doc->path) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-link"></i></button>
+                      @endif
                     </td>
                   </tr>
                   @endforeach
@@ -157,6 +167,16 @@ function copyToClipboard() {
   document.execCommand('copy');
   document.body.removeChild(el);
   $('#copyAlert').show().delay(2000).fadeOut();
+}
+
+function openPopupDokumen(url) {
+    var width = 500; // Width of the popup window
+    var height = 600; // Height of the popup window
+    var leftPosition = (screen.width - width) / 2;
+    var topPosition = (screen.height - height) / 2;
+    var popupOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=' + width + ', height=' + height + ', top=' + topPosition + ', left=' + leftPosition;
+
+    window.open(url, 'Popup', popupOptions);
 }
 </script>
 @endsection
