@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TabelK5DanaPKM;
 use App\Models\TabelK5PrasaranPendidikan;
 use App\Models\TabelK5SaranaPendidikan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,7 +17,24 @@ class K5Seeder extends Seeder
      */
     public function run()
     {
-        
+        TabelK5DanaPKM::create([
+            'judul_pkm' => "Pengembangan SISTEM eAkreditasi",
+            'nidn_nidk' => '1',
+            'sumber_dana' => 'DIPA PKM 2024',
+            'jumlah_dana_ts2' => 200000,
+            'jumlah_dana_ts1' => 150000,
+            'jumlah_dana_ts' => 123,
+            'tautan' => '#',
+        ]);
+        TabelK5DanaPKM::create([
+            'judul_pkm' => "Penanaman prinsip ketauhidan pada generasi Z di Ambon",
+            'nidn_nidk' => '2',
+            'sumber_dana' => 'DIPA PKM 2024',
+            'jumlah_dana_ts2' => 2000000,
+            'jumlah_dana_ts1' => 1500000,
+            'jumlah_dana_ts' => 123,
+            'tautan' => '#',
+        ]);
         TabelK5SaranaPendidikan::create([
             'jenis_sarana' => 'Meja Kantor',
             'kualitas' => 'Baik',

@@ -13,10 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tabel_c5_s', function (Blueprint $table) {
+        
+        Schema::create('tabel_k5_dana_pkm', function(Blueprint $table) {
             $table->id();
+            $table->string('judul_pkm');
+            $table->string('nidn_nidk')->unique();
+            $table->string('sumber_dana');
+            $table->double('jumlah_dana_ts2');
+            $table->double('jumlah_dana_ts1');
+            $table->double('jumlah_dana_ts');
+            $table->string('tautan')->nullable();
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
+
         Schema::create('tabel_k5_sarana_pendidikan', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_sarana');
@@ -24,9 +36,9 @@ return new class extends Migration
             $table->enum('kualitas', ['Baik', 'Kurang Baik', 'Tidak Baik']);
             $table->enum('kondisi', ['terawat','tidak terawat']);
             $table->enum('unit_pengelola', ['PS','UPPS','PT']);
-            $table->string('tautan')->default('#');;
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->string('tautan')->default('#');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('tabel_k5_prasarana_pendidikan', function (Blueprint $table) {
@@ -38,8 +50,8 @@ return new class extends Migration
             $table->enum('kondisi', ['terawat', 'tidak terawat']);
             $table->integer('penggunaan')->default(0);
             $table->string('tautan')->default('#');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -53,6 +65,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('tabel_c5_s');
+        Schema::dropIfExists('tabel_k5_dana_pkm');
         Schema::dropIfExists('tabel_k5_sarana_pendidikan');
         Schema::dropIfExists('tabel_k5_prasarana_pendidikan');
     }
