@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 // akun
 // ====================================
 Route::middleware('auth')->group(function () {
-    Route::get('/akun/profil/{email}', [AkunController::class, 'show'])->name('akun.profil');
+    Route::get('/akun/profil', [AkunController::class, 'profil'])->name('akun.profil');
     Route::get('/akun/index', [AkunController::class, 'index'])->name('akun.index');
     Route::get('/akun/create', [AkunController::class, 'create'])->name('akun.create');
     Route::post('/akun/store', [AkunController::class, 'store'])->name('akun.store');
@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/akun/{id}', [AkunController::class, 'update'])->name('akun.update');
     Route::get('/akun/{email}', [AkunController::class, 'destroy'])->name('akun.destroy');
     Route::get('/akun/{akun}', [AkunController::class, 'show'])->name('akun.show');
+    Route::put('/akun/profil/update', [AkunController::class, 'profilUpdate'])->name('akun.profil.update');
 });
 
 // ====================================

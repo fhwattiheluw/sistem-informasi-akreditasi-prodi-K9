@@ -6,7 +6,7 @@
                     <img src="/assets/images/logo.jpg" alt="profile" />
                 </div>
                 <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
-                    <span class="font-weight-semibold mb-1 mt-2 text-center">{{ auth()->user()->name }} </span>
+                    <span class="font-weight-semibold mb-1 mt-2 text-center">{{ auth()->user()->name }}</span>
                     <span class="text-secondary icon-sm text-center">{{ auth()->user()->role }}</span>
                 </div>
             </a>
@@ -89,7 +89,7 @@
                 <span class="menu-title">K.9 Luaran dan Capaian Tridharma</span>
             </a>
         </li>
-        @if(auth()->user()->role != 'fakultas')
+        @if(auth()->user()->role == 'admin prodi')
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Repository</span>
         </li>
@@ -115,6 +115,7 @@
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Menu akun</span>
         </li>
+        @if(auth()->user()->role == 'fakultas')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dataprodi.semua') }}">
                 <i class="mdi mdi-domain menu-icon"></i>
@@ -127,11 +128,13 @@
                 <span class="menu-title">Akun Pengguna</span>
             </a>
         </li>
+        @endif
         <li class="nav-item">
-            <a class="nav-link" href="/akun/show">
+            <a class="nav-link" href="{{ route('akun.profil') }}">
                 <i class="mdi mdi-account-card-details-outline menu-icon"></i>
                 <span class="menu-title">Info Akun</span>
             </a>
         </li>
     </ul>
 </nav>
+

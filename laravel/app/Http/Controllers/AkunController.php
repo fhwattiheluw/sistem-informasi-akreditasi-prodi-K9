@@ -8,16 +8,28 @@ use App\Mail\AkunCreated;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\DataProgramStudiController;
+use Illuminate\Support\Facades\Auth; 
 
 class AkunController extends Controller
 {
     protected $prodiController;
 
+     /**
+      * Constructor for initializing the Type variable and DataProgramStudiController instance.
+      *
+      * @param Type $var The Type variable to initialize.
+      * @param DataProgramStudiController $prodiController The DataProgramStudiController instance.
+      */
      public function __construct(Type $var = null,DataProgramStudiController $prodiController) {
         $this->prodiController = $prodiController;
     }
 
 
+    /**
+     * Displays the index page with a list of users.
+     *
+     * @return Illuminate\View\View
+     */
     public function index()
     { 
         $dataUser = User::where('id', '!=', 1)->get();
@@ -29,12 +41,23 @@ class AkunController extends Controller
         return view('akun.manag_akun', compact('dataUser'));
     }
 
+/**
+     * Show the form for creating a new resource.
+     *
+     * @return Illuminate\View\View
+     */
     public function create()
     {
         $prodi = $this->prodiController->getSemuaProdi();
-        return view('akun.form_akun',compact('prodi'));
+        return view('akun.form_akun', compact('prodi'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -53,6 +76,12 @@ class AkunController extends Controller
         return redirect()->route('akun.index')->with('success', 'Akun berhasil dibuat');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return Illuminate\View\View
+     */
     public function edit($id)
     {
         $prodi = $this->prodiController->getSemuaProdi();
@@ -60,6 +89,13 @@ class AkunController extends Controller
         return view('akun.form_akun', compact(['user','prodi']));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         // Find the account by ID
@@ -67,17 +103,20 @@ class AkunController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'required|string|min:8',
             'role' => 'required|in:admin prodi,asesor',
             'prodi_id' => 'required',
         ]);
-        
+
         $akun->update([
             'name' => $request->name,
+            'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
             'prodi_id' => $request->prodi_id,
         ]);
+
         
         return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui');
     }
@@ -94,16 +133,52 @@ class AkunController extends Controller
         }
     }
 
-public function show($email)
-{
-    $user = User::where('email', $email)->first();
+    public function show($email)
+    {
+        $user = User::where('email', $email)->first();
 
-    if ($user) {
-        return view('akun.detail', compact('user'));
-    } else {
-        return redirect()->route('dashboard.index')->with('error', 'Data pengguna tidak ditemukan');
+        if ($user) {
+            return view('akun.detail', compact('user'));
+        } else {
+            return redirect()->route('dashboard.index')->with('error', 'Data pengguna tidak ditemukan');
+        }
     }
-}
+    
+    public function profil()
+    {
+         // Mengambil ID pengguna yang sedang login
+        $id = Auth::id();
+
+        // Mencari pengguna berdasarkan ID atau gagal jika tidak ditemukan
+        $user = User::findOrFail($id);
+        
+        return view('akun.edit_profil', compact('user'));
+    }
+
+    public function profilUpdate(Request $request)
+    {
+          // Mengambil ID pengguna yang sedang login
+        $id = Auth::id();
+        // Find the account by ID
+        $akun = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'required|string|min:8',
+        ]);
+
+        $akun->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        
+        return redirect()->route('akun.profil')->with('success', 'Akun berhasil diperbarui');
+    }
+
+
 
 
 

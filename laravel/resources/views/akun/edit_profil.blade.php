@@ -4,9 +4,6 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{ route('akun.index') }}" class="btn btn-primary mb-2 mb-md-0 mr-2">Kelola akun</a>
-      <!-- Tempat untuk notifikasi -->
-      
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
@@ -21,24 +18,23 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-12 grid-margin stretch-card">
-      @if(session('success'))
-        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header bg-success text-white">
-            <strong class="mr-auto">Berhasil!</strong>
-            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">{{ session('success') }}</div>
-        </div>
-      @endif
-      <form class="card" action="{{ isset($user) ? route('akun.update', $user->id) : route('akun.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if(isset($user))
-          @method('PUT')
-        @endif
-        <div class="card-body">
+<div class="col-lg-12 grid-margin stretch-card">
+            <form class="card" action="{{ route('akun.profil.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @if(isset($user))
+                    @method('PUT')
+                @endif
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible flex-grow-1 mr-3 mb-3" role="alert">
+                            <div class="d-flex w-100">
+                                <div class="mr-auto">{{ session('success') }}</div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
           <h4 class="card-title">{{ isset($user) ? 'Perbaharui Akun' : 'Tambah Akun Baru' }}</h4>
           <div class="form-group">
             <label for="name">Nama</label>
@@ -65,25 +61,8 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="prodi">Program studi</label>
-            <select class="form-control" id="prodi" name="prodi_id">
-              <option value="">Pilih program studi</option>
-              @foreach($prodi as $item)
-                <option value="{{ $item->id }}" {{ old('prodi_id', isset($user) ? $item->id : '') ==  $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
-              @endforeach
-            </select>
-            @error('prodi')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-            @enderror
-          </div>
-          <div class="form-group">
             <label for="role">Role</label>
-            <select class="form-control" id="role" name="role">
+            <select class="form-control" id="role" name="role" disabled>
               <option value="">Pilih role</option>
               <option value="admin prodi" {{ old('role', isset($user) ? $user->role : '') == 'admin prodi' ? 'selected' : '' }}>Admin Prodi</option>
               <option value="asesor" {{ old('role', isset($user) ? $user->role : '') == 'asesor' ? 'selected' : '' }}>Asesor</option>
