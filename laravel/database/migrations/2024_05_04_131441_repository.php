@@ -18,8 +18,10 @@ return new class extends Migration
             $table->id(); // Membuat kolom 'id' sebagai primary key
             $table->string('nama_repository'); // Membuat kolom 'nama_repository' untuk menyimpan nama repository
             $table->text('kriteria'); // Membuat kolom 'kriteria' untuk menyimpan kriteria repository
-            $table->year('tahun'); // Membuat kolom 'tahun' untuk menyimpan tahun pembuatan repository
+            $table->unsignedBigInteger('prodi_id'); // Membuat kolom 'prodi id' untuk menyimpan prodi id pembuatan repository
             $table->timestamps(); // Membuat kolom 'created_at' dan 'updated_at' untuk pencatatan waktu
+
+             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
         });
     }
 

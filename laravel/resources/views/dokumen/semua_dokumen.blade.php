@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/repository/semua" class="btn btn-primary">Manajemen Repository</a>
+      <a href="/repository/semua" class="btn btn-outline-primary">Manajemen Repository</a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -23,15 +23,6 @@
       <div class="card">
         <div class="card-body">
           <form action="{{ route('dokumen.index') }}" method="GET">
-            <div class="form-group">
-              <label for="tahun">Filter Tahun:</label>
-              <select class="form-control" id="tahun" name="tahun">
-                <option value="">Pilih Tahun</option>
-                @for ($year = date('Y'); $year >= date('Y') - 10; $year--)
-                  <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
-                @endfor
-              </select>
-            </div>
             <div class="form-group">
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
@@ -76,7 +67,6 @@
                   <th>Nama File</th>
                   <th>Nama Repository</th>
                   <th>Kriteria</th>
-                  <th>Tahun</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -85,14 +75,13 @@
                 @foreach($repo->documents as $doc)
                 <tr>
                   <td>{{ $doc->nama_dokumen }}</td>
-                  <td>{{ $repo->nama_repository }}</td>
+                  <td><a href="/repository/show/{{ $repo->id }}"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a></td>
                   <td>Kriteria {{ $repo->kriteria }}</td>
-                  <td>{{ $repo->tahun }}</td>
                   <td>
                     <a href="{{ $doc->path }}" class="btn btn-primary btn-xs" title="Lihat" target="_blank"><i class="fa fa-eye"></i></a>
-                    <button class="btn btn-info btn-xs" title="Lihat repository" onclick="window.location.href='/repository/show/{{ $repo->id }}'"><i class="fa fa-folder-open"></i></button>
                     <button class="btn btn-warning btn-xs" title="Edit" onclick="window.location.href='{{route('dokumen.edit', $doc->id)}}'"><i class="fa fa-edit"></i></button>
                     <a href="{{route('dokumen.delete', $doc->id)}}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen {{$doc->nama_dokumen}}?')"><i class="fa fa-trash"></i></a>
+                    <button onclick="navigator.clipboard.writeText('{{ url($doc->path) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-link"></i></button>
                   </td>
                 </tr>
                 @endforeach

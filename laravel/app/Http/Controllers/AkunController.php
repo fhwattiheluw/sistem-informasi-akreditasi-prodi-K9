@@ -77,7 +77,7 @@ class AkunController extends Controller
         ]);
         
         $akun = User::create([
-            'name' => $request->name,
+                 'name' => $request->name,
                 'password' => bcrypt($request->password),
                 'email' => $request->email,
                 'role' => $request->role,

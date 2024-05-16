@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-   <a href="/repository/semua" class="btn btn-primary">Manajemen Repository</a>
+   <a href="/repository/semua" class="btn btn-outline-primary">Manajemen Repository</a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">

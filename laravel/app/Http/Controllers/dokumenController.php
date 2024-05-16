@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Dokumen;
 use App\Models\Repository; // Menambahkan model Repository
 use Illuminate\Support\Facades\Storage; // Menambahkan use statement untuk menggunakan kelas Storage
+use Illuminate\Support\Facades\Auth; 
+
 
 class dokumenController extends Controller
 {
@@ -14,11 +16,10 @@ class dokumenController extends Controller
      */
     public function index(Request $request)
     {
-        $tahun = $request->input('tahun', date('Y'));
-        $kriteria = $request->input('kriteria', 0);
+        $kriteria = $request->input('kriteria', 2);
 
-        $repository = Repository::where('tahun', $tahun)
-                        ->where('kriteria', $kriteria)
+        $repository = Repository::where('kriteria', $kriteria)
+                        ->where('prodi_id', Auth::user()->prodi->id)
                         ->with('documents')
                         ->get();
 

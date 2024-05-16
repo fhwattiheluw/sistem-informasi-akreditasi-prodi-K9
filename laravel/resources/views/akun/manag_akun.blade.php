@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
     <div class="page-header flex-wrap">
         <div class="header-left">
-            <a href="{{ route('akun.create') }}" class="btn btn-primary mb-2 mb-md-0 mr-2">Tambah akun</a>
+            <a href="{{ route('akun.create') }}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Tambah akun</a>
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Akun Pengguna</h5>
-                    @if (session('success'))
+                    @if (session('successs'))
                     <div class="alert alert-success alert-dismissible flex-grow-1 mr-3 mb-3" role="alert">
                         <div class="d-flex w-100">
                             <div class="mr-auto">{{ session('success') }}</div>

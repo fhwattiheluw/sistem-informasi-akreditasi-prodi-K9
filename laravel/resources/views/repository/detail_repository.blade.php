@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <button class="btn btn-primary mb-2 mb-md-0 mr-2" data-toggle="modal" data-target="#uploadModal">Upload Dokumen</button>
+      <a href="{{route('repository.semua')}}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Kelola Repository</a>
 
       <!-- Modal untuk upload dokumen -->
       <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -54,10 +54,10 @@
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
         <a href="#">
-          <p class="m-0 pr-3">{{ $repository->nama_repository }}</p>
+          <p class="m-0 pr-3">Kelola Repository</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">{{ $repository->deskripsi }}</p>
+          <p class="m-0">{{ $repository->nama_repository }}</p>
         </a>
       </div>
     </div>
@@ -66,45 +66,34 @@
     <div class="col-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Informasi Repository</h4>
+          <h4 class="card-title">Informasi Repository <!-- Tombol untuk menyalin URL -->
+          <button onclick="copyToClipboard()" class="btn btn-info"><i class="fa fa-link"></i></button>
+          </h4>
+          <div id="copyAlert" class="alert alert-success mt-2" style="display:none;">
+            URL disalin.
+          </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col">
               <div class="form-group">
                 <label>Nama Repository</label>
                 <p class="form-control">{{ $repository->nama_repository }}</p>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col">
               <div class="form-group">
                 <label>Kriteria</label>
                 <p class="form-control">Kriteria {{ $repository->kriteria }}</p>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label>Tahun</label>
-                <p class="form-control">{{ $repository->tahun }}</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label>Deskripsi</label>
-                <p class="form-control">{{ $repository->deskripsi }}</p>
-              </div>
-            </div>
           </div>
-          <!-- Tombol untuk menyalin URL -->
-          <button onclick="copyToClipboard()" class="btn btn-info">Salin URL</button>
-          <div id="copyAlert" class="alert alert-success mt-2" style="display:none;">
-            URL disalin.
-          </div>
+          
         </div>
       </div>
     </div>
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Dokumen Repository</h5>
+          <h5 class="card-title">Dokumen Repository <button class="btn btn-outline-primary btn-sm mb-2 mb-md-0 mr-2" data-toggle="modal" data-target="#uploadModal">Upload Dokumen</button></h5>
           @if(session('success'))
             <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -133,7 +122,7 @@
                       <a href="{{ url($doc->path) }}" class="btn btn-primary btn-xs" title="Melihat Dokumen" target="_blank"><i class="fa fa-eye"></i></a>
                       <button class="btn btn-warning btn-xs" title="Edit" onclick="window.location.href='{{route('dokumen.edit', $doc->id)}}'"><i class="fa fa-edit"></i></button>
                       <a href="{{ route('dokumen.delete', $doc->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
-                      <button onclick="navigator.clipboard.writeText('{{ url($doc->path) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-share-alt"></i></button>
+                      <button onclick="navigator.clipboard.writeText('{{ url($doc->path) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-link"></i></button>
                     </td>
                   </tr>
                   @endforeach

@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Repository; // Import model Repository
 use App\Models\Dokumen; // Import model Dokumen
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Str;
 
 class RepositoryController extends Controller
 {
+
+    public function __construct()
+    {
+        // Constructor logic here
+    }
+
     // Menampilkan semua data repository berdasarkan tahun dan kriteria
     public function index(Request $request)
     {
-        $tahun = $request->input('tahun', null); // Menetapkan nilai default null jika tidak ada input
-        $kriteria = $request->input('kriteria', null); // Menetapkan nilai default null jika tidak ada input
+        $kriteria = $request->input('kriteria', 2); // Menetapkan nilai default null jika tidak ada input
 
         // Query untuk mengambil data repository
-        $repositories = Repository::where('tahun', $tahun)
-                                  ->where('kriteria', $kriteria)
+        $repositories = Repository::where('kriteria', $kriteria)
+                                    ->where('prodi_id', Auth::user()->prodi->id)
                                   ->get();
 
         // Cek jika data repository kosong
@@ -35,14 +42,13 @@ class RepositoryController extends Controller
         // Validasi data input
         $validatedData = $request->validate([
             'namaRepository' => 'required|string|max:255|unique:repository,nama_repository',
-            'tahun' => 'required|integer',
             'kriteria' => 'required|integer'
         ]);
 
         // Membuat instance baru dari model Repository
         $repository = new Repository();
         $repository->nama_repository = $validatedData['namaRepository'];
-        $repository->tahun = $validatedData['tahun'];
+        $repository->prodi_id = Auth::user()->prodi->id;
         $repository->kriteria = $validatedData['kriteria'];
         $repository->save();
 
@@ -77,13 +83,11 @@ class RepositoryController extends Controller
         // Validasi data input
         $validatedData = $request->validate([
             'namaRepository' => 'required|string|max:255',
-            'tahun' => 'required|integer',
             'kriteria' => 'required|integer'
         ]);
 
         // Memperbarui data repository
         $repository->nama_repository = $validatedData['namaRepository'];
-        $repository->tahun = $validatedData['tahun'];
         $repository->kriteria = $validatedData['kriteria'];
         $repository->save();
 
@@ -100,6 +104,7 @@ class RepositoryController extends Controller
     // Menampilkan form untuk menambah repository
     public function formRepository()
     {
+        
         return view('repository.form_repository');
     }
 

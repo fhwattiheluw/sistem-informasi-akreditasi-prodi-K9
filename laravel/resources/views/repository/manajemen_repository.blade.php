@@ -5,7 +5,7 @@
   <div class="page-header flex-wrap">
     <div class="header-left">
       <a href="/repository/form">
-        <button class="btn btn-primary mb-2 mb-md-0 mr-2">Buat repository</button>
+        <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Buat repository</button>
       </a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
@@ -24,16 +24,7 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <form action="{{ route('repository.semua') }}" method="GET">
-            <div class="form-group">
-              <label for="tahun">Filter Tahun:</label>
-              <select class="form-control" id="tahun" name="tahun">
-                <option value="">{{ request('tahun') ? request('tahun') : 'Pilih Tahun' }}</option>
-                @for ($year = date('Y'); $year >= date('Y') - 10; $year--)
-                  <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
-                @endfor
-              </select>
-            </div>
+          <form action="{{ route('repository.semua') }}" method="GET"> 
             <div class="form-group">
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
@@ -77,21 +68,27 @@
                 <tr>
                   <th>Nama Repository</th>
                   <th>Kriteria</th>
-                  <th>Tahun</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 @forelse ($repositories as $repository)
                 <tr>
-                  <td>{{ $repository->nama_repository }}</td>
+                  <td>
+                    @if(strlen($repository->nama_repository) > 20)
+                      <div class="text-wrap">{{ $repository->nama_repository }}</div>
+                    @else
+                      {{ $repository->nama_repository }}
+                    @endif
+                  </td>
                   <td>Kriteria {{ $repository->kriteria }}</td>
-                  <td>{{ $repository->tahun }}</td>
                   <td>
                     <a href="/repository/show/{{ $repository->id }}" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-folder-open"></i></a>
                     <a href="{{ route('repository.edit', $repository->id) }}" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
                     <a href="{{ route('repository.delete', $repository->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
-                    <button onclick="navigator.clipboard.writeText('{{ route('repository.show', $repository->id) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-share-alt"></i></button>
+                    <button onclick="navigator.clipboard.writeText('{{ route('repository.show', $repository->id) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank">
+                      <i class="fa fa-link"></i>
+                  </button>
                   </td>
                 </tr>
                 @empty

@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{ route('akun.index') }}" class="btn btn-primary mb-2 mb-md-0 mr-2">Kelola akun</a>
+      <a href="{{ route('akun.index') }}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Kelola akun</a>
       <!-- Tempat untuk notifikasi -->
       
     </div>
@@ -92,7 +92,9 @@
             <select class="form-control" id="role" name="role">
               <option value="">Pilih role</option>
               <option value="admin prodi" {{ old('role', isset($user) ? $user->role : '') == 'admin prodi' ? 'selected' : '' }}>Admin Prodi</option>
+              @if(auth()->user()->role != 'fakultas')
               <option value="asesor" {{ old('role', isset($user) ? $user->role : '') == 'asesor' ? 'selected' : '' }}>Asesor</option>
+              @endif
             </select>
             <small class="text-muted">Asesor : User yang memiliki akses untuk melihat data dokumen kuantitatif LED program studi</small>
             <br><small class="text-muted">admin prodi : user yang memiliki akses untuk mengelola data kuantitatif LED program studi</small>
