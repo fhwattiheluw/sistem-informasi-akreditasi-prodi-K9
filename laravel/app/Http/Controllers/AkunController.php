@@ -76,7 +76,13 @@ class AkunController extends Controller
             'prodi_id' => 'required',
         ]);
         
-        $akun = User::create($validatedData);
+        $akun = User::create([
+            'name' => $request->name,
+                'password' => bcrypt($request->password),
+                'email' => $request->email,
+                'role' => $request->role,
+                'prodi_id' => $request->prodi_id,
+                ]);
         
         // $email = new sendEmail($akun);
         // Mail::to($validatedData['email'])->send($email);
