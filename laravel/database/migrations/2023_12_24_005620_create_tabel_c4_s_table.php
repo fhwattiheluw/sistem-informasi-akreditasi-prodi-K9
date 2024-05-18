@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('pendidikan');
             $table->string('bidang_keahlian');
             $table->string('tautan')->default('#');
-            $table->unsignedBigInteger('id_prodi');
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade')->default(1);
+            $table->unsignedBigInteger('prodi_id');
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade')->default(1);
             $table->timestamps();
         });
         Schema::create('tabel_k4_dtps_luar_ps', function (Blueprint $table) {
@@ -39,8 +39,8 @@ return new class extends Migration
             $table->string('pendidikan');
             $table->string('bidang_keahlian');
             $table->string('tautan')->default('#');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('tabel_k4_beban_kerja_dtps', function (Blueprint $table) {
@@ -54,8 +54,8 @@ return new class extends Migration
             $table->integer('sks_manajemen_sendiri');
             $table->integer('sks_manajemen_luar');
             $table->string('tautan')->default('#');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
 
             // $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
@@ -69,8 +69,8 @@ return new class extends Migration
             $table->integer('jum_pertemuan_terlaksana');
             $table->enum('semester', ['Gasal', 'Genap'])->nullable();
             $table->string('tautan')->default('#');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
 
             // $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
@@ -83,8 +83,8 @@ return new class extends Migration
             $table->integer('ts_1');
             $table->integer('ts');
             $table->string('tautan');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('tabel_k4_prestasi_dtps', function(Blueprint $table){
@@ -94,8 +94,8 @@ return new class extends Migration
             $table->string('tahun');
             $table->enum('tingkat',['Internasional', 'Nasional', 'Lokal'])->default('Lokal');
             $table->string('tautan');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -108,8 +108,8 @@ return new class extends Migration
             $table->date('waktu');
             $table->string('manfaat');
             $table->string('tautan');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -122,8 +122,8 @@ return new class extends Migration
             $table->enum('pendidikan', ['SLTA','Diploma','S1','S2','S3']);
             $table->enum('unit_kerja', ['PS','UPPS','PT']);
             $table->string('tautan');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -137,8 +137,8 @@ return new class extends Migration
             $table->date('waktu_selesai');
             $table->string('tempat');
             $table->string('tautan');
-            $table->unsignedBigInteger('id_prodi')->default(1);
-            $table->foreign('id_prodi')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->unsignedBigInteger('prodi_id')->default(1);
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });
     }

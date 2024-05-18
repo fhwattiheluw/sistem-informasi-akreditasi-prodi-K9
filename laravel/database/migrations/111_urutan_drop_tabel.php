@@ -13,13 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tabel_matakuliah', function(Blueprint $table){
-            $table->id();
-            $table->string('kode_mk')->uniqid();
-            $table->string('nama');
-            $table->integer('sks');
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -29,6 +23,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('tabel_k5_dana_pkm');
         Schema::dropIfExists('tabel_matakuliah');
+        Schema::dropIfExists('tabel_dosen');
+        Schema::dropIfExists('data_program_studis');
     }
 };

@@ -51,27 +51,27 @@
                 </tr>
               </tfoot>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$item->jenis_penggunaan}}</td>
+                  <td>{{$item->jumlah_ts2}}</td>
+                  <td>{{$item->jumlah_ts1}}</td>
+                  <td>{{$item->jumlah_ts}}</td>
+                  <td>{{($item->jumlah_ts2+$item->jumlah_ts1+$item->jumlah_ts)/3}}</td>
                   <td>
-                      <a href="#">
+                      <a href="{{$item->tautan}}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
                   </td>
                   <td>
-                    <a href="/kriteria5/penggunaan_dana/edit">
+                    <a href="/kriteria5/penggunaan_dana/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria5/penggunaan_dana/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

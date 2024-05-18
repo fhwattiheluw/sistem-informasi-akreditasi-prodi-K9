@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\tabelC5;
+use App\Models\TabelK5DanaPenelitian;
+use App\Models\TabelK5DanaPKM;
+use App\Models\TabelK5PemerolehanDana;
+use App\Models\TabelK5PenggunaanDana;
 use App\Models\TabelK5PrasaranPendidikan;
 use App\Models\TabelK5SaranaPendidikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC5Controller extends Controller
 {
-  public $id_prodi;
-  public function __construct()
-  {
-      $this->id_prodi = 1;
-  }
 
   public function index()
   {
@@ -26,8 +26,10 @@ class TabelC5Controller extends Controller
 
   public function pemerolehan_dana_index()
   {
-    //
-    return view('kriteria.c5.pemerolehan_dana.index');
+    $prodiId = Auth::user()->prodi_id;
+    $data = TabelK5PemerolehanDana::where('prodi_id', $prodiId)->get();
+
+    return view('kriteria.c5.pemerolehan_dana.index', compact('data'));
   }
   public function pemerolehan_dana_create()
   {
@@ -37,7 +39,31 @@ class TabelC5Controller extends Controller
 
   public function pemerolehan_dana_store(Request $request)
   {
-    //
+    // Validate request data
+    $request->validate([
+      'sumber_dana' => 'required|string|max:255',
+      'jenis_dana' => 'required|string|max:255',
+      'jumlah_ts2' => 'required|numeric',
+      'jumlah_ts1' => 'required|numeric',
+      'jumlah_ts' => 'required|numeric',
+      'tautan' => 'required|string|max:255',
+    ]);
+
+      // Get 'prodi_id' from logged-in user session
+    $prodiId = Auth::user()->prodi_id;
+
+    // Create a new record
+    $dana = TabelK5PemerolehanDana::create([
+      'sumber_dana' => $request->sumber_dana,
+      'jenis_dana' => $request->jenis_dana,
+      'jumlah_ts2' => $request->jumlah_ts2,
+      'jumlah_ts1' => $request->jumlah_ts1,
+      'jumlah_ts' => $request->jumlah_ts,
+      'tautan' => $request->tautan,
+      'prodi_id' => $prodiId,
+    ]);
+    
+    return redirect()->route('prasarana_pendidikan.index')->with('success', 'Data K5 Pemerolehan Dana ADDED successfully');    
   }
 
   public function pemerolehan_dana_show(tabelC5 $tabelC5)
@@ -45,28 +71,59 @@ class TabelC5Controller extends Controller
     //
   }
 
-  public function pemerolehan_dana_edit(tabelC5 $tabelC5)
+  public function pemerolehan_dana_edit($id)
   {
-    //
-    return view('kriteria.c5.pemerolehan_dana.form');
+    $item = TabelK5PemerolehanDana::findOrFail($id);
+    return view('kriteria.c5.pemerolehan_dana.form', ['item' => $item]);
   }
 
-  public function pemerolehan_dana_update(Request $request, tabelC5 $tabelC5)
+  public function pemerolehan_dana_update(Request $request, $id)
   {
-    //
+    // Validate request data
+    $request->validate([
+      'sumber_dana' => 'required|string|max:255',
+      'jenis_dana' => 'required|string|max:255',
+      'jumlah_ts2' => 'required|numeric',
+      'jumlah_ts1' => 'required|numeric',
+      'jumlah_ts' => 'required|numeric',
+      'tautan' => 'required|string|max:255',
+    ]);
+
+    // Find the record by ID
+    $dana = TabelK5PemerolehanDana::findOrFail($id);
+
+    // Verify the 'prodi_id' matches the logged-in user
+    if ($dana->prodi_id != Auth::user()->prodi_id) {
+        return redirect()->route('dana.index')->with('error', 'Unauthorized action.');
+    }
+    // Update the record
+    $dana->update($request->all());
+
+    return redirect()->route('prasarana_pendidikan.index')->with('success', 'Data K5 Pemerolehan Dana UPDATED successfully');    
+
   }
 
-  public function pemerolehan_dana_destroy(tabelC5 $tabelC5)
+  public function pemerolehan_dana_destroy($id)
   {
-    //
+    // Find the record by ID
+    $dana = TabelK5PemerolehanDana::findOrFail($id);
+
+    // Verify the 'prodi_id' matches the logged-in user
+    if ($dana->prodi_id != Auth::user()->prodi_id) {
+        return redirect()->route('pemorelahan_dana.index')->with('error', 'Unauthorized action.');
+    }
+
+    // Delete the record
+    $dana->delete();
+    return redirect()->route('pemorelahan_dana.index')->with('success', 'Data K5 Pemerolehan Dana DELETED successfully');    
   }
 
   // // Kriteria 5 > Tabel Penggunaan Dana
 
   public function penggunaan_dana_index()
   {
-    //
-    return view('kriteria.c5.penggunaan_dana.index');
+    $items = TabelK5PenggunaanDana::where('prodi_id', auth()->user()->prodi_id)->get();
+    return view('kriteria.c5.penggunaan_dana.index', compact('items'));
   }
   public function penggunaan_dana_create()
   {
@@ -104,8 +161,9 @@ class TabelC5Controller extends Controller
 
   public function dana_penelitian_index()
   {
-    //
-    return view('kriteria.c5.dana_penelitian.index');
+    $items = TabelK5DanaPenelitian::where('prodi_id', auth()->user()->id)->get();
+    
+    return view('kriteria.c5.dana_penelitian.index', ['items'=>$items]);
   }
   public function dana_penelitian_create()
   {
@@ -143,8 +201,12 @@ class TabelC5Controller extends Controller
 
   public function dana_pkm_index()
   {
-    //
-    return view('kriteria.c5.dana_pkm.index');
+    // $items = TabelK5DanaPenelitian::where('prodi_id', auth()->user()->id)->get();
+    $items = TabelK5DanaPKM::where('prodi_id', auth()->user()->prodi_id)->get();
+    // foreach($items as $item){
+    //   echo $item->dosen->nama;
+    // }
+    return view('kriteria.c5.dana_pkm.index', ['items'=>$items]);
   }
   public function dana_pkm_create()
   {
@@ -182,7 +244,7 @@ class TabelC5Controller extends Controller
 
   public function prasarana_pendidikan_index(Request $request)
   {
-    $items = TabelK5PrasaranPendidikan::where('id_prodi', $this->id_prodi)->get();
+    $items = TabelK5PrasaranPendidikan::where('prodi_id',  auth()->user()->prodi_id)->get();
     return view('kriteria.c5.prasarana_pendidikan.index', ['items'=>$items]);
   }
   public function prasarana_pendidikan_create()
@@ -209,7 +271,7 @@ class TabelC5Controller extends Controller
       "kondisi" => $request->kondisi,
       "penggunaan" => $request->penggunaan,
       "tautan" => $request->tautan,
-      "id_prodi" => $this->id_prodi,
+      "prodi_id" => auth()->user()->prodi_id,
     ]);
 
     return redirect()->route('prasarana_pendidikan.index')->with('success', 'Data K5 Prasarana Pendidikan ADDED successfully');    

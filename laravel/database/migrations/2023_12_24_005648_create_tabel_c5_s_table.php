@@ -13,19 +13,32 @@ return new class extends Migration
      */
     public function up()
     {
+        // Schema::create('tabel_dosen', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('nidn_nidk')->unique();
+        //     $table->string('nama');
+        //     $table->date('tanggal_lahir');
+        //     $table->string('sertifikat_pendidik');
+        //     $table->string('jabatan_fungsional');
+        //     $table->string('gelar_akademik');
+        //     $table->string('pendidikan');
+        //     $table->string('bidang_keahlian');
+        //     $table->enum('sesuai_ps', ['ya', 'tidak'])->nullable();
+        //     $table->timestamps();
+        // });
         
         Schema::create('tabel_k5_dana_pkm', function(Blueprint $table) {
             $table->id();
             $table->string('judul_pkm');
-            $table->string('nidn_nidk')->unique();
+            $table->string('nidn_nidk');
             $table->string('sumber_dana');
             $table->double('jumlah_dana_ts2');
             $table->double('jumlah_dana_ts1');
             $table->double('jumlah_dana_ts');
             $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id')->default(1);
-            $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
+            $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
             $table->timestamps();
         });
 

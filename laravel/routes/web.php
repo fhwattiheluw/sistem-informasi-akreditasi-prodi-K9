@@ -272,10 +272,15 @@ Route::middleware('auth')->group(function () {
 // ====================================
 Route::middleware('auth')->group(function () {
     Route::get('/kriteria5', [TabelC5Controller::class, 'index']);
+    
     // Kriteria 5 > Tabel Pemerolehan Dana
-    Route::get('/kriteria5/pemerolehan_dana', [TabelC5Controller::class, 'pemerolehan_dana_index']);
-    Route::get('/kriteria5/pemerolehan_dana/create', [TabelC5Controller::class, 'pemerolehan_dana_create']);
-    Route::get('/kriteria5/pemerolehan_dana/edit', [TabelC5Controller::class, 'pemerolehan_dana_edit']);
+    Route::get('/kriteria5/pemerolehan_dana', [TabelC5Controller::class, 'pemerolehan_dana_index'])->name('pemerolehan_dana.index');
+    Route::get('/kriteria5/pemerolehan_dana/create', [TabelC5Controller::class, 'pemerolehan_dana_create'])->name('pemerolehan_dana.create');
+    Route::post('/kriteria5/pemerolehan_dana/store', [TabelC5Controller::class, 'pemerolehan_dana_store'])->name('pemerolehan_dana.store');
+    Route::get('/kriteria5/pemerolehan_dana/{id}/edit', [TabelC5Controller::class, 'pemerolehan_dana_edit'])->name('pemerolehan_dana.edit');
+    Route::put('/kriteria5/pemerolehan_dana/{id}/update', [TabelC5Controller::class, 'pemerolehan_dana_update'])->name('pemerolehan_dana.update');
+    Route::get('/kriteria5/pemerolehan_dana/{id}/delete', [TabelC5Controller::class, 'pemerolehan_dana_destroy'])->name('pemerolehan_dana.destroy');
+    
     // Kriteria 5 > Tabel Penggunaan Dana
     Route::get('/kriteria5/penggunaan_dana', [TabelC5Controller::class, 'penggunaan_dana_index']);
     Route::get('/kriteria5/penggunaan_dana/create', [TabelC5Controller::class, 'penggunaan_dana_create']);

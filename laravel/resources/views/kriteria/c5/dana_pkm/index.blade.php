@@ -53,15 +53,15 @@
                 </tr>
               </tfoot>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{$item->judul_pkm}}</td>
+                  <td>{{$item->dosen->nama}}</td>
+                  <td>{{$item->sumber_dana}}</td>
+                  <td>{{$item->jumlah_dana_ts2}}</td>
+                  <td>{{$item->jumlah_dana_ts1}}</td>
+                  <td>{{$item->jumlah_dana_ts}}</td>
+                  <td>{{($item->jumlah_dana_ts2 + $item->jumlah_dana_ts1 + $item->jumlah_dana_ts)/3}}</td>
                   <td>
                       <a href="#">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
@@ -75,7 +75,7 @@
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>
