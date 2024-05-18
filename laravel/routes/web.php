@@ -16,7 +16,11 @@ use App\Http\Controllers\{
     AkunController,
     AutentikasiController,
     RepositoryController,
-    DokumenController
+    DokumenController,
+    DosenController,
+    MatakuliahController,
+    TendikController,
+    
 };
 
 // redirect route ke route login
@@ -38,6 +42,45 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
 });
 
+// ====================================
+// dosen
+// ====================================
+Route::middleware('auth')->group(function () {
+    Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
+    Route::get('/dosen/create', [DosenController::class, 'create'])->name('dosen.create');
+    Route::post('/dosen/store', [DosenController::class, 'store'])->name('dosen.store');
+    Route::get('/dosen/{id}/edit', [DosenController::class, 'edit'])->name('dosen.edit');
+    Route::put('/dosen/{id}/update', [DosenController::class, 'update'])->name('dosen.update');
+    Route::delete('/dosen/{id}/delete', [DosenController::class, 'destroy'])->name('dosen.delete');
+});
+
+
+    // ====================================
+    // matakuliah
+    // ====================================
+    Route::middleware('auth')->group(function () {
+        Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
+        Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
+        Route::post('/matakuliah/store', [MatakuliahController::class, 'store'])->name('matakuliah.store');
+        Route::get('/matakuliah/{id}/edit', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
+        Route::put('/matakuliah/{id}/update', [MatakuliahController::class, 'update'])->name('matakuliah.update');
+        Route::delete('/matakuliah/{id}/delete', [MatakuliahController::class, 'destroy'])->name('matakuliah.delete');
+    });
+
+    
+    // ====================================
+    // tendik
+    // ====================================
+    Route::middleware('auth')->group(function () {
+        Route::get('/tendik', [TendikController::class, 'index'])->name('tendik.index');
+        Route::get('/tendik/create', [TendikController::class, 'create'])->name('tendik.create');
+        Route::post('/tendik/store', [TendikController::class, 'store'])->name('tendik.store');
+        Route::get('/tendik/{id}/edit', [TendikController::class, 'edit'])->name('tendik.edit');
+        Route::put('/tendik/{id}/update', [TendikController::class, 'update'])->name('tendik.update');
+        Route::delete('/tendik/{id}/delete', [TendikController::class, 'destroy'])->name('tendik.delete');
+    });
+    
+    
 // ====================================
 // akun
 // ====================================
