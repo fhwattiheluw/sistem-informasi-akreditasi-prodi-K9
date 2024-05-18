@@ -6,6 +6,7 @@ use App\Models\dataProgramStudi;
 use App\Models\TabelK2BidangPendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Session;
 
 class DataProgramStudiController extends Controller
 {
@@ -13,6 +14,24 @@ class DataProgramStudiController extends Controller
     public function getSemuaProdi(){
         $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
         return $data_prodi;
+    }
+
+    /**
+     * Set the session of the selected program studi
+     * 
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sessionProdi($id)
+    {
+        // Find the program studi based on the given id
+        $prodi = dataProgramStudi::find($id);
+
+        // Set the session variable 'prodi' with the selected program studi
+        Session::put('prodi', compact('prodi'));
+
+        // Redirect back to the page where this function was called
+        return redirect()->back();
     }
 
     /**

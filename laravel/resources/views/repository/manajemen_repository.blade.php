@@ -28,7 +28,6 @@
             <div class="form-group">
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
-                <option value="">{{ request('kriteria') ? 'Kriteria ' . request('kriteria') : 'Pilih Kriteria' }}</option>
                 @for ($i = 2; $i <= 9; $i++)
                   <option value="{{ $i }}" {{ request('kriteria') == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
                 @endfor

@@ -26,7 +26,6 @@
             <div class="form-group">
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
-                <option value="">Pilih Kriteria</option>
                 @for ($i = 2; $i <= 9; $i++)
                   <option value="{{ $i }}" {{ request('kriteria') == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
                 @endfor
@@ -74,11 +73,25 @@
                 @foreach($repository as $repo)
                 @foreach($repo->documents as $doc)
                 <tr>
-                  <td>{{ $doc->nama_dokumen }}</td>
-                  <td><a href="/repository/show/{{ $repo->id }}"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a></td>
+                  <td>
+                    @if(strlen($doc->nama_dokumen) > 20)
+                      <div class="text-wrap">{{ $doc->nama_dokumen }}</div>
+                    @else
+                      {{ $doc->nama_dokumen }}
+                    @endif
+                  </td>
+                  <td>
+                     @if(strlen($doc->nama_dokumen) > 20) 
+                     <div class="text-wrap">
+                      <a href="/repository/show/{{ $repo->id }}"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a>
+                    </div>
+                    @else
+                    <a href="/repository/show/{{ $repo->id }}"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a>
+                      @endif
+                  </td>
                   <td>Kriteria {{ $repo->kriteria }}</td>
                   <td>
-                    <a href="{{ $doc->path }}" class="btn btn-primary btn-xs" title="Lihat" target="_blank"><i class="fa fa-eye"></i></a>
+                    <a href="#" onclick="openPopupDokumen('{{ url($doc->path) }}')" class="btn btn-primary btn-xs" title="Melihat Dokumen"><i class="fa fa-eye"></i></a>
                     <button class="btn btn-warning btn-xs" title="Edit" onclick="window.location.href='{{route('dokumen.edit', $doc->id)}}'"><i class="fa fa-edit"></i></button>
                     <a href="{{route('dokumen.delete', $doc->id)}}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen {{$doc->nama_dokumen}}?')"><i class="fa fa-trash"></i></a>
                     <button onclick="navigator.clipboard.writeText('{{ url($doc->path) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-link"></i></button>
@@ -112,5 +125,15 @@
 $(document).ready(function() {
     $('.table').DataTable();
 });
+
+function openPopupDokumen(url) {
+    var width = 500; // Width of the popup window
+    var height = 600; // Height of the popup window
+    var leftPosition = (screen.width - width) / 2;
+    var topPosition = (screen.height - height) / 2;
+    var popupOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=' + width + ', height=' + height + ', top=' + topPosition + ', left=' + leftPosition;
+
+    window.open(url, 'Popup', popupOptions);
+}
 </script>
 @endsection

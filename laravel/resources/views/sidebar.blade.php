@@ -38,6 +38,29 @@
                 <span class="menu-title">Keuangan</span>
             </a>
         </li>
+
+        <li class="pt-2 pb-1">
+            <span class="nav-item-head">MASTER DATA</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('dosen.index') }}">
+                <i class="mdi mdi-account menu-icon"></i>
+                <span class="menu-title">Data Dosen</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('matakuliah.index') }}">
+                <i class="mdi mdi-book menu-icon"></i>
+                <span class="menu-title">Data Matakuliah</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('tendik.index') }}">
+                <i class="mdi mdi-briefcase menu-icon"></i>
+                <span class="menu-title">Data Tenik</span>
+            </a>
+        </li>
+
         <li class="pt-2 pb-1">
             <span class="nav-item-head">DATA KUANTITATIF LED</span>
         </li>
