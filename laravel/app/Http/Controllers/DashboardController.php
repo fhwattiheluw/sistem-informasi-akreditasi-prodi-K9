@@ -20,7 +20,6 @@ class DashboardController extends Controller
         $semuaProdi = $programstudi->getSemuaProdi();
         
         if(session::has('prodi') && !empty(session::get('prodi'))){
-            // dd(session::get('prodi'));
             return view('dashboard.index',compact('semuaProdi' ));
         }else {
             return view('dashboard.index', compact('semuaProdi'))->withErrors(['pesan'=> 'Silahkan pilih prodi terlebih dahulu']);
