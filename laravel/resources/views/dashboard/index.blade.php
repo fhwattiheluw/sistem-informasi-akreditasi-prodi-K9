@@ -14,6 +14,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if (auth()->user()->role === 'admin prodi')
       <a href="{{route('repository.semua')}}" class="btn btn-primary mb-2 mb-md-0 mr-2">
         <i class="mdi mdi-folder-multiple mr-2"></i>
         semua repository
@@ -22,6 +23,7 @@
         <i class="mdi mdi-file-multiple mr-2"></i>
         Lihat semua dokumen
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
