@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\autentikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AutentikasiController extends Controller
 {
@@ -23,6 +24,8 @@ class AutentikasiController extends Controller
     public function logout()
     {
         Auth::logout();
+        Session::forget('prodi');
+        
         return redirect()->route('login');
     }
 

@@ -93,6 +93,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dataprodi/{id}/edit', [DataProgramStudiController::class, 'editById'])->name('dataprodi.editById');
     Route::delete('/dataprodi/{id}/delete', [DataProgramStudiController::class, 'destroy'])->name('dataprodi.delete');
     Route::post('/dataprodi/{id}', [DataProgramStudiController::class, 'updateByFakutlas'])->name('dataprodi.updateByFakutlas');
+
+    Route::get('/dataprodi/{id}/session', [DataProgramStudiController::class, 'sessionProdi'])->name('dataprodi.session');
 });
 
 // ====================================

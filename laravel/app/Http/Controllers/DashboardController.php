@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\dashboard;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DataProgramStudiController;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -14,7 +16,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $programstudi = new DataProgramStudiController();
+        $semuaProdi = $programstudi->getSemuaProdi();
+        
+        if(session::has('prodi') && !empty(session::get('prodi'))){
+            // dd(session::get('prodi'));
+            return view('dashboard.index',compact('semuaProdi' ));
+        }else {
+            return view('dashboard.index', compact('semuaProdi'))->withErrors(['pesan'=> 'Silahkan pilih prodi terlebih dahulu']);
+        }
+
+        
     }
 
     /**
