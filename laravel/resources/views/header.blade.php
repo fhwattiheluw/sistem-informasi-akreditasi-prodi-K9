@@ -8,7 +8,7 @@
         </div>
         <ul class="navbar-nav">
             @if (auth()->user()->role === 'fakultas')
-            <a class="btn btn-sm btn-link" style="color: white" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            <a class="btn btn-sm btn-link" style="color: white" href="{{route('dashboard.index')}}">
                     {{session()->has('prodi') ? session('prodi')['prodi']->nama : 'Pilih Program Studi'}}
                 </a>
             @endif
