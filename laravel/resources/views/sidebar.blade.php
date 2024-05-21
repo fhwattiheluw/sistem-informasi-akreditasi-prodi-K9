@@ -55,12 +55,12 @@
                 <span class="menu-title">Data Matakuliah</span>
             </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('tendik.index') }}">
                 <i class="mdi mdi-briefcase menu-icon"></i>
                 <span class="menu-title">Data Tenik</span>
             </a>
-        </li>
+        </li> -->
         @endif
         
         <li class="pt-2 pb-1">
