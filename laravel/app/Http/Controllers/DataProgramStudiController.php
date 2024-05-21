@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth; 
+// use App\Http\Controllers\AkunController;
 
 class DataProgramStudiController extends Controller
 {
+
+
     // fungsi yang digunakan untuk mengambil data semua program studi
     public function getSemuaProdi(){
         $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
@@ -42,7 +45,13 @@ class DataProgramStudiController extends Controller
      */
     public function index()
     {
-        $data_prodi = dataProgramStudi::findorfail( Auth::user()->prodi->id);
+        if(Auth::user()->role == 'admin prodi'){
+            $data_prodi = dataProgramStudi::findorfail( Auth::user()->prodi->id);
+            
+        }else{           
+            $session_prodi = Session::get('prodi');
+            $data_prodi = dataProgramStudi::findorfail($session_prodi['prodi']->id);
+        }
         return view('kriteria.dataProdi.index', ['prodi' => $data_prodi]);
     }
 

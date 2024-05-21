@@ -5,7 +5,7 @@
   <div class="page-header flex-wrap">
     <div class="header-left">
       <a href="/dataprodi/edit">
-        @if($prodi)
+        @if(auth()->user()->role == 'admin prodi')
           <button  type="button" class="btn btn-primary mb-2 mb-md-0 mr-2 ">Ubah Data Program Studi</button>
         @endif
       </a>
@@ -45,43 +45,43 @@
                 <tbody>
                   <tr>
                     <td style="font-weight:bold">Jenis program</td>
-                    <td>{{$prodi->jenis}}</td>
+                    <td {{!empty($prodi->jenis) ? '' : 'style=color:red;'}}>{{empty($prodi->jenis) ? 'data belum di isi' : $prodi->jenis }}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Nama program studi</td>
-                    <td>{{$prodi->nama}}</td>
+                    <td {{!empty($prodi->nama) ? '' : 'style=color:red;'}}>{{empty($prodi->nama) ? 'data belum di isi' : $prodi->nama}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Status/Peringkat</td>
-                    <td>{{$prodi->status_peringkat}}</td>
+                    <td {{!empty($prodi->status_peringkat) ? '' : 'style=color:red;'}}>{{empty($prodi->status_peringkat) ? 'data belum di isi' : $prodi->status_peringkat}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Nomor SK</td>
-                    <td>{{$prodi->nomor_sk}}</td>
+                    <td {{!empty($prodi->nomor_sk) ? '' : 'style=color:red;'}}>{{empty($prodi->nomor_sk) ? 'data belum di isi' : $prodi->nomor_sk}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Tanggal SK</td>
-                    <td>{{$prodi->tanggal_sk}}</td>
+                    <td {{!empty($prodi->tanggal_sk) ? '' : 'style=color:red;'}}>{{empty($prodi->tanggal_sk) ? 'data belum di isi' : $prodi->tanggal_sk}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Tgl. Kadaluarsa</td>
-                    <td>{{$prodi->tanggal_kadaluarsa}}</td>
+                    <td {{!empty($prodi->tanggal_kadaluarsa) ? '' : 'style=color:red;'}}>{{empty($prodi->tanggal_kadaluarsa) ? 'data belum di isi' : $prodi->tanggal_kadaluarsa}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Jumlah Mahasiswa saat TS</td>
-                    <td>{{$prodi->jumlah_mhs_ts}}</td>
+                    <td {{!empty($prodi->jumlah_mhs_ts) ? '' : 'style=color:red;'}}>{{empty($prodi->jumlah_mhs_ts) ? 'data belum di isi' : $prodi->jumlah_mhs_ts}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Jumlah DTPS saat TS</td>
-                    <td>{{$prodi->jumlah_dtps_ts}}</td>
+                    <td {{!empty($prodi->jumlah_dtps_ts) ? '' : 'style=color:red;'}}>{{empty($prodi->jumlah_dtps_ts) ? 'data belum di isi' : $prodi->jumlah_dtps_ts}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Rerata IPK</td>
-                    <td>{{$prodi->rerata_ipk}}</td>
+                    <td {{!empty($prodi->rerata_ipk) ? '' : 'style=color:red;'}}>{{empty($prodi->rerata_ipk) ? 'data belum di isi' : $prodi->rerata_ipk}}</td>
                   </tr>
                   <tr>
                     <td style="font-weight:bold">Rerata masa studi</td>
-                    <td>{{$prodi->rerata_masa_studi}}</td>
+                    <td {{!empty($prodi->rerata_masa_studi) ? '' : 'style=color:red;'}}>{{empty($prodi->rerata_masa_studi) ? 'data belum di isi' : $prodi->rerata_masa_studi}}</td>
                   </tr>
                 </tbody>
               </table>
