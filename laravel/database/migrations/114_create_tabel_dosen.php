@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('gelar_akademik');
             $table->string('pendidikan');
             $table->string('bidang_keahlian');
+            $table->string('tautan')->nullable();
             $table->enum('sesuai_ps', ['ya', 'tidak'])->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

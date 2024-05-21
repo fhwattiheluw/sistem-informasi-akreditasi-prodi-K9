@@ -21,7 +21,7 @@ class AkunController extends Controller
       * @param DataProgramStudiController $prodiController The DataProgramStudiController instance.
       */
      public function __construct(DataProgramStudiController $prodiController) {
-        $this->prodiController = $prodiController;
+        $this->prodiController = new DataProgramStudiController();
     }
 
 
@@ -47,6 +47,14 @@ class AkunController extends Controller
         }
         
         return view('akun.manag_akun', compact('dataUser'));
+    }
+
+    public function cek_select_prodi_by_fakultas(){
+        if(auth()->user()->role == 'fakultas' && !session()->has('prodi') && empty(session()->get('prodi'))) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
 /**

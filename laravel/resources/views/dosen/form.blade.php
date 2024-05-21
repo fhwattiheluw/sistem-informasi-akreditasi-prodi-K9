@@ -51,114 +51,76 @@
       
           <div class="form-group">
             <label for="nidn_nidk">NIDN/NIDK</label>
-            <input type="text" class="form-control" id="nidn_nidk" name="nidn_nidk" placeholder="Masukkan NIDN/NIDK" value="{{ old('nidn_nidk', isset($dosen) ? $dosen->nidn_nidk : '') }}">
+            <input type="text" class="form-control @error('nidn_nidk') is-invalid @enderror" id="nidn_nidk" name="nidn_nidk" placeholder="Masukkan NIDN/NIDK" value="{{ old('nidn_nidk', isset($dosen) ? $dosen->nidn_nidk : '') }}">
             @error('nidn_nidk')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="nama">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ old('nama', isset($dosen) ? $dosen->nama : '') }}">
+            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan nama" value="{{ old('nama', isset($dosen) ? $dosen->nama : '') }}">
             @error('nama')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="tanggal_lahir">Tanggal Lahir</label>
-            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan tanggal lahir" value="{{ old('tanggal_lahir', isset($dosen) ? $dosen->tanggal_lahir : '') }}">
+            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir" placeholder="Masukkan tanggal lahir" value="{{ old('tanggal_lahir', isset($dosen) ? $dosen->tanggal_lahir : '') }}">
             @error('tanggal_lahir')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="sertifikat_pendidik">Sertifikat/Pendidik</label>
-            <input type="text" class="form-control" id="sertifikat_pendidik" name="sertifikat_pendidik" placeholder="Masukkan sertifikat/pendidik" value="{{ old('sertifikat_pendidik', isset($dosen) ? $dosen->sertifikat_pendidik : '') }}">
+            <input type="text" class="form-control @error('sertifikat_pendidik') is-invalid @enderror" id="sertifikat_pendidik" name="sertifikat_pendidik" placeholder="Masukkan sertifikat/pendidik" value="{{ old('sertifikat_pendidik', isset($dosen) ? $dosen->sertifikat_pendidik : '') }}">
             @error('sertifikat_pendidik')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="jabatan_fungsional">Jabatan Fungsional</label>
-            <input type="text" class="form-control" id="jabatan_fungsional" name="jabatan_fungsional" placeholder="Masukkan jabatan fungsional" value="{{ old('jabatan_fungsional', isset($dosen) ? $dosen->jabatan_fungsional : '') }}">
+            <input type="text" class="form-control @error('jabatan_fungsional') is-invalid @enderror" id="jabatan_fungsional" name="jabatan_fungsional" placeholder="Masukkan jabatan fungsional" value="{{ old('jabatan_fungsional', isset($dosen) ? $dosen->jabatan_fungsional : '') }}">
             @error('jabatan_fungsional')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="gelar_akademik">Gelar Akademik</label>
-            <input type="text" class="form-control" id="gelar_akademik" name="gelar_akademik" placeholder="Masukkan gelar akademik" value="{{ old('gelar_akademik', isset($dosen) ? $dosen->gelar_akademik : '') }}">
+            <input type="text" class="form-control @error('gelar_akademik') is-invalid @enderror" id="gelar_akademik" name="gelar_akademik" placeholder="Masukkan gelar akademik" value="{{ old('gelar_akademik', isset($dosen) ? $dosen->gelar_akademik : '') }}">
             @error('gelar_akademik')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="pendidikan">Pendidik</label>
-            <input type="text" class="form-control" id="pendidikan" name="pendidikan" placeholder="Masukkan pendidikan" value="{{ old('pendidikan', isset($dosen) ? $dosen->pendidikan : '') }}">
+            <input type="text" class="form-control @error('pendidikan') is-invalid @enderror" id="pendidikan" name="pendidikan" placeholder="Masukkan pendidikan" value="{{ old('pendidikan', isset($dosen) ? $dosen->pendidikan : '') }}">
             @error('pendidikan')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="bidang_keahlian">Bidang Keahlian</label>
-            <input type="text" class="form-control" id="bidang_keahlian" name="bidang_keahlian" placeholder="Masukkan bidang keahlian" value="{{ old('bidang_keahlian', isset($dosen) ? $dosen->bidang_keahlian : '') }}">
+            <input type="text" class="form-control @error('bidang_keahlian') is-invalid @enderror" id="bidang_keahlian" name="bidang_keahlian" placeholder="Masukkan bidang keahlian" value="{{ old('bidang_keahlian', isset($dosen) ? $dosen->bidang_keahlian : '') }}">
             @error('bidang_keahlian')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="sesuai_ps">Sesuai PS</label>
-            <select class="form-control" id="sesuai_ps" name="sesuai_ps">
+            <select class="form-control @error('sesuai_ps') is-invalid @enderror" id="sesuai_ps" name="sesuai_ps">
               <option value="" {{ old('sesuai_ps', isset($dosen) ? $dosen->sesuai_ps : '') == '' ? 'selected' : '' }}>Pilih</option>
               <option value="ya" {{ old('sesuai_ps', isset($dosen) ? $dosen->sesuai_ps : '') == 'ya' ? 'selected' : '' }}>Ya</option>
               <option value="tidak" {{ old('sesuai_ps', isset($dosen) ? $dosen->sesuai_ps : '') == 'tidak' ? 'selected' : '' }}>Tidak</option>
             </select>
             @error('sesuai_ps')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+              <small class="form-text text-danger">{{ $message }}</small>
+            @enderror
+          </div>
+          <div class="form-group">
+            <label for="tautan_link">Tautan Link</label>
+            <input type="text" class="form-control @error('tautan_link') is-invalid @enderror" id="tautan_link" name="tautan_link" placeholder="Masukkan tautan link" value="{{ old('tautan_link', isset($dosen) ? $dosen->tautan : '') }}">
+            @error('tautan_link')
+              <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>
           <div class="form-group mb-0">

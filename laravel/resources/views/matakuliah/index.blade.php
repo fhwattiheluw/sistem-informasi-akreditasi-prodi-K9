@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
     <div class="page-header flex-wrap">
         <div class="header-left">
-            <a href="{{ route('dosen.create') }}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Tambah dosen</a>
+            <a href="{{ route('matakuliah.create') }}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Tambah data matakuliah</a>
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
@@ -12,7 +12,7 @@
                     <p class="m-0 pr-3">Master data</p>
                 </a>
                 <a class="pl-3 mr-4" href="#">
-                    <p class="m-0">Dosen</p>
+                    <p class="m-0">Matakuliah</p>
                 </a>
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Master data dosen</h5>
+                    <h5 class="card-title">Master data Matakuliah</h5>
                     @if (session('success'))
                     <div class="alert alert-success alert-dismissible flex-grow-1 mr-3 mb-3" role="alert">
                         <div class="d-flex w-100">
@@ -65,54 +65,40 @@
                         <table class="table table-bordered table-striped table-hover" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>NIDN / NIDK</th>
+                                    <th>Kode MK</th>
                                     <th>Nama</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Sertifikat Pendidikan</th>
-                                    <th>Jabatan fungsional</th>
-                                    <th>Gelar Akademik</th>
-                                    <th>Pendidikan</th>
-                                    <th>Bidang Keahlian</th>
-                                    <th>Sesuai PS</th>
+                                    <th>SKS</th>
+                                    <th>Semester</th>
+                                    <th>Jenis Matakuliah</th>
+                                    <th>Kesesuaian CPL</th>
+                                    <th>Perangkat Pembelajaran</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($dosen as $user)
+                                @foreach($dataMatakuliah as $data)
                                 <tr>
-                                    <td>{{ $user->nidn_nidk }}</td>
-                                    <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->tanggal_lahir }}</td>
-                                    <td>{{ $user->sertifikat_pendidik }}</td>
-                                    <td>{{ $user->jabatan_fungsional }}</td>
-                                    <td>{{ $user->gelar_akademik }}</td>
-                                    <td>{{ $user->pendidikan }}</td>
-                                    <td>{{ $user->bidang_keahlian }}</td>
-                                    <td>{{ $user->sesuai_ps }}</td>
+                                    <td>{{ $data->kode_mk }}</td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->sks }}</td>
+                                    <td>{{ $data->semester }}</td>
+                                    <td>{{ $data->jenis_matakuliah }}</td>
+                                    <td>{{ $data->kesesuaian_cpl }}</td>
+                                    <td>{{ $data->perangkat_pembelajaran }}</td>
                                     <td>
-                                        @if(empty($user->tautan))
-                                            <p class="text-danger">tautan belum di input</p>
-                                        @else
-                                            <a href="{{ $user->tautan }}" target="_blank" class="btn btn-primary btn-sm">Lihat</a>
-                                        @endif
-                                    
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('dosen.edit',$user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ route('matakuliah.edit',$data->kode_mk) }}" class="btn btn-warning btn-sm">Edit</a>
 
-                                        <form action="{{ route('dosen.delete',$user->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('matakuliah.delete',$data->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
                                     </td>
-                                </tr>
-                                </tr>
-                                </tr>
                                 @endforeach
 
                             </tbody>
                         </table>
+                    
                     </div>
                 </div>
             </div>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('unit_penyelenggara', ['pt','upps','ps']);
             $table->enum('kesesuaian_cpl', ['ya', 'tidak']);
             $table->enum('perangkat_pembelajaran', ['ada','tidak']);
+            
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();

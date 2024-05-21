@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\dataKeuangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class DataKeuanganController extends Controller
 {
@@ -15,9 +17,26 @@ class DataKeuanganController extends Controller
      */
     public function index()
     {
-        $items = dataKeuangan::orderBy('tahun','asc')->get();
+        // Check if current user is from faculty, if so
+        // Check if session variable 'prodi' exists, if not redirect to dashboard
+        // Get all dataKeuangan records where prodi id matches session 'prodi' value
+        if(auth::user()->role == 'fakultas'){
+            if(empty(session::get('prodi'))){
+                // If session variable 'prodi' is empty, redirect to dashboard
+                return redirect()->route('dashboard.index')->with('error', 'Anda harus memilih prodi terlebih dahulu');
+            }
+            $session_prodi = session::get('prodi');
+            
+            // Get all dataKeuangan records where prodi id matches session 'prodi' value
+            $items = dataKeuangan::where('prodi_id', $session_prodi['prodi']->id)->get();
+        }else{
+            // If current user is not from faculty, get all dataKeuangan records where prodi id matches current user's prodi id
+            $items = dataKeuangan::where('prodi_id', auth::user()->prodi->id)->get();
+        }
+        // Return view 'kriteria.dataKeuangan.index' with $items data
         return view('kriteria.dataKeuangan.index', ['items' => $items]);
     }
+    
 
 
     /**
@@ -56,6 +75,7 @@ class DataKeuanganController extends Controller
             'pkm_per_dosen' => $request->input('pkm_per_dosen'),
             'publikasi_per_dosen' => $request->input('publikasi_per_dosen'),
             'investasi' => preg_replace("/[^0-9]/", "", $request->input('investasi')),
+            'prodi_id' => auth::user()->prodi->id,
             'tautan' => $request->input('tautan'),
         ]);
         return redirect('/datakeuangan')->with('success', 'Data Keuangan created successfully');

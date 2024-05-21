@@ -10,5 +10,6 @@ class dosen extends Model
     use HasFactory;
     protected $table = 'tabel_dosen';
     protected $guarded = ['id'];
+    protected $fillable = [];
 
 }

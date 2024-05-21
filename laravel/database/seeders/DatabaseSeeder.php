@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\dataProgramStudi;
 use App\Models\dataKeuangan;
 use App\Models\TabelDosen;
 use App\Models\TabelK2BidangKelembagaan;
@@ -38,20 +40,35 @@ class DatabaseSeeder extends Seeder
         
         // menjalankan faker class data program studi
         \App\Models\dataProgramStudi::factory(1)->create();
+        \App\Models\dataProgramStudi::factory()->prodiBahasaArab()->create();
+        \App\Models\dataProgramStudi::factory()->prodiIpa()->create();
+        
       // menjalankan faker class user
         \App\Models\User::factory(1)->create();
-
-        $this->call(K5Seeder::class);
-        
+        \App\Models\User::factory()->AdminProdiBahasaArab()->create();
+        \App\Models\User::factory()->AdminProdiIPA()->create();
+        \App\Models\User::factory()->asesor()->create();
 
         //data keuangan
         dataKeuangan::create([
-          'tahun' => 'TS',
+          'tahun' => 2024,
+          'pendidikan_per_mahasiswa' => 3000,
+          'penelitian_per_dosen' => 10000,
+          'pkm_per_dosen' => 8000,
+          'publikasi_per_dosen' => 1500,
+          'investasi' => 250000.50,
+          'prodi_id' => 123,
+          'tautan' => 'https://example.com',
+        ]);
+
+              dataKeuangan::create([
+          'tahun' => 2024,
           'pendidikan_per_mahasiswa' => 5000,
           'penelitian_per_dosen' => 10000,
           'pkm_per_dosen' => 8000,
           'publikasi_per_dosen' => 1500,
           'investasi' => 250000.50,
+          'prodi_id' => 123,
           'tautan' => 'https://example.com',
         ]);
 
@@ -214,6 +231,8 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknik Informatika, S3 Manajemen pendidikan',
             'bidang_keahlian' => 'Manajemen Pendidikan', 
             'sesuai_ps' => 'tidak', 
+            'prodi_id' => 123
+            
         ]);
         TabelDosen::create([
             'nama' => 'Lono',
@@ -225,6 +244,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknik Informatika, S3 Manajemen pendidikan',
             'bidang_keahlian' => 'Manajemen Pendidikan', 
             'sesuai_ps' => 'ya', 
+            'prodi_id' => 123
         ]);
         TabelDosen::create([
             'nama' => 'Joni',
@@ -236,6 +256,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
             'sesuai_ps' => 'ya', 
+            'prodi_id' => 123
         ]);
         TabelDosen::create([
             'nama' => 'Joni',
@@ -247,6 +268,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
             'sesuai_ps' => 'tidak', 
+            'prodi_id' => 321,
         ]);
         TabelDosen::create([
             'nama' => 'Joni',
@@ -258,6 +280,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
             'sesuai_ps' => 'tidak', 
+            'prodi_id' => 321,
         ]);
 
         TabelK4BebanKerjaDTPS::create([
@@ -431,17 +454,25 @@ class DatabaseSeeder extends Seeder
         TabelMatakuliah::create([
             'kode_mk' => '1',
             'nama' => 'Pengantar Tauhid',
+            'semester' => 1,
+            'prodi_id' => 123,
             'sks' => 3,
         ]);
         TabelMatakuliah::create([
             'kode_mk' => '2',
             'nama' => 'Pengantar Tauhid 2',
+            'semester' => 2,
+            'prodi_id' => 123,
             'sks' => 3,
         ]);
         TabelMatakuliah::create([
             'kode_mk' => '3',
             'nama' => 'Fiqih Kontemporer',
+            'semester' => 2,
             'sks' => 3,
+            'prodi_id' => 123,
         ]);
+
+        $this->call(K5Seeder::class);
     }
 }

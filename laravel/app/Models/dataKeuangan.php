@@ -13,4 +13,5 @@ class dataKeuangan extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = [];
 }

@@ -34,4 +34,50 @@ class dataProgramStudiFactory extends Factory
 
         ];
     }
+
+    public function prodiBahasaArab()
+    {
+         return $this->state(function (array $attributes) { 
+            return [
+            // data prodi default
+            'id' => 123,
+            'jenis' => 'S1',
+            'nama' => 'PENDIDIKAN BAHASA ARAB',
+            'status_peringkat' => 'BAIK SEKALI',
+            'nomor_sk' => Str::random(5),
+            'tanggal_sk' => '2019-01-01 12:12',
+            'tanggal_kadaluarsa' => '2024-02-3 12:12',
+            'jumlah_mhs_ts' => 1000,
+            'jumlah_dtps_ts' => 1000,
+            'rerata_ipk' => 3.8,
+            'rerata_masa_studi' => 7.5,
+
+        ];
+         });
+        
+    }
+
+    
+    public function prodiIpa()
+    {
+         return $this->state(function (array $attributes) { 
+            return [
+            // data prodi default
+            'id' => 321,
+            'jenis' => 'S1',
+            'nama' => 'INDUSTRI PERTANIAN',
+            'status_peringkat' => 'BAIK SEKALI',
+            'nomor_sk' => Str::random(5),
+            'tanggal_sk' => '2019-01-01 12:12',
+            'tanggal_kadaluarsa' => '2024-02-3 12:12',
+            'jumlah_mhs_ts' => 1000,
+            'jumlah_dtps_ts' => 1000,
+            'rerata_ipk' => 3.8,
+            'rerata_masa_studi' => 7.5,
+
+        ];
+         });
+        
+    }
+    
 }

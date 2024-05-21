@@ -7,9 +7,13 @@ use App\Models\TabelK2BidangPendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth; 
+// use App\Http\Controllers\AkunController;
 
 class DataProgramStudiController extends Controller
 {
+
+
     // fungsi yang digunakan untuk mengambil data semua program studi
     public function getSemuaProdi(){
         $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
@@ -41,7 +45,19 @@ class DataProgramStudiController extends Controller
      */
     public function index()
     {
-        $data_prodi = dataProgramStudi::first();
+
+        if(Auth::user()->role != 'fakultas'){
+            $data_prodi = dataProgramStudi::findorfail( Auth::user()->prodi->id);
+            
+        }else{        
+            if(empty(session::get('prodi'))){
+                // If session variable 'prodi' is empty, redirect to dashboard
+                return redirect()->route('dashboard.index')->with('error', 'Anda harus memilih prodi terlebih dahulu');
+            }
+
+            $session_prodi = Session::get('prodi');
+            $data_prodi = dataProgramStudi::findorfail($session_prodi['prodi']->id);
+        }
         return view('kriteria.dataProdi.index', ['prodi' => $data_prodi]);
     }
 
@@ -143,7 +159,7 @@ class DataProgramStudiController extends Controller
      */
     public function edit(dataProgramStudi $dataProgramStudi)
     {
-        $item = dataProgramStudi::first();
+        $item =  dataProgramStudi::findorfail( Auth::user()->prodi->id);
         return view('kriteria.dataprodi.form', ['item'=>$item]);
     }
 
@@ -151,16 +167,16 @@ class DataProgramStudiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\dataProgramStudi  $dataProgramStudi
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, dataProgramStudi $dataProgramStudi)
+    public function update(Request $request, $id)
     {
         $idx =Crypt::decryptString($id);
         
-        $data = dataProgramStudi::find($idx);
+        $data = dataProgramStudi::findOrFail($idx);
 
-        // Validasi input jika diperlukan
+        // Validate input if needed
         $request->validate([
             'jenis' => 'required|max:255',
             'nama' => 'required',
@@ -174,22 +190,23 @@ class DataProgramStudiController extends Controller
             'rerata_masa_studi' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/'
         ]);
 
-        // Perbarui data
+        // Update data
         $data->update([
-            'jenis' => $request->input('jenis'),
-            'nama' => $request->input('nama'),
-            'status_peringkat' => $request->input('status_peringkat'),
-            'nomor_sk' => $request->input('nomor_sk'),
-            'tanggal_sk' => $request->input('tanggal_sk'),
-            'tanggal_kadaluarsa' => $request->input('tanggal_kadaluarsa'),
-            'jumlah_mhs_ts' => $request->input('jumlah_mhs_ts'),
-            'jumlah_dtps_ts' => $request->input('jumlah_dtps_ts'),
-            'rerata_ipk' => $request->input('rerata_ipk'),
-            'rerata_masa_studi' => $request->input('rerata_masa_studi')
+            'jenis' => $request->jenis,
+            'nama' => $request->nama,
+            'status_peringkat' => $request->status_peringkat,
+            'nomor_sk' => $request->nomor_sk,
+            'tanggal_sk' => $request->tanggal_sk,
+            'tanggal_kadaluarsa' => $request->tanggal_kadaluarsa,
+            'jumlah_mhs_ts' => $request->jumlah_mhs_ts,
+            'jumlah_dtps_ts' => $request->jumlah_dtps_ts,
+            'rerata_ipk' => $request->rerata_ipk,
+            'rerata_masa_studi' => $request->rerata_masa_studi
         ]);
 
         return redirect('/dataprodi')->with('success', 'Data Prodi updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
