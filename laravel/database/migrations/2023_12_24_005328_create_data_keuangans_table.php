@@ -22,7 +22,10 @@ return new class extends Migration
             $table->integer('publikasi_per_dosen');
             $table->decimal('investasi',12,2);
             $table->string('tautan')->nullable();
+            $table->unsignedBigInteger('prodi_id');
             $table->timestamps();
+
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
         });
     }
 

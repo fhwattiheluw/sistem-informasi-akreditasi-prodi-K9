@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\dataProgramStudi;
 use App\Models\dataKeuangan;
 use App\Models\TabelDosen;
 use App\Models\TabelK2BidangKelembagaan;
@@ -39,23 +41,34 @@ class DatabaseSeeder extends Seeder
         // menjalankan faker class data program studi
         \App\Models\dataProgramStudi::factory(1)->create();
         \App\Models\dataProgramStudi::factory()->prodiBahasaArab()->create();
+        \App\Models\dataProgramStudi::factory()->prodiIpa()->create();
         
       // menjalankan faker class user
         \App\Models\User::factory(1)->create();
         \App\Models\User::factory()->AdminProdiBahasaArab()->create();
-        
-
-        $this->call(K5Seeder::class);
-        
+        \App\Models\User::factory()->AdminProdiIPA()->create();
+        \App\Models\User::factory()->asesor()->create();
 
         //data keuangan
         dataKeuangan::create([
-          'tahun' => 'TS',
+          'tahun' => 2024,
+          'pendidikan_per_mahasiswa' => 3000,
+          'penelitian_per_dosen' => 10000,
+          'pkm_per_dosen' => 8000,
+          'publikasi_per_dosen' => 1500,
+          'investasi' => 250000.50,
+          'prodi_id' => 123,
+          'tautan' => 'https://example.com',
+        ]);
+
+              dataKeuangan::create([
+          'tahun' => 2024,
           'pendidikan_per_mahasiswa' => 5000,
           'penelitian_per_dosen' => 10000,
           'pkm_per_dosen' => 8000,
           'publikasi_per_dosen' => 1500,
           'investasi' => 250000.50,
+          'prodi_id' => 123,
           'tautan' => 'https://example.com',
         ]);
 
@@ -447,5 +460,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Fiqih Kontemporer',
             'sks' => 3,
         ]);
+
+        $this->call(K5Seeder::class);
     }
 }

@@ -45,10 +45,16 @@ class DataProgramStudiController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role == 'admin prodi'){
+
+        if(Auth::user()->role != 'fakultas'){
             $data_prodi = dataProgramStudi::findorfail( Auth::user()->prodi->id);
             
-        }else{           
+        }else{        
+            if(empty(session::get('prodi'))){
+                // If session variable 'prodi' is empty, redirect to dashboard
+                return redirect()->route('dashboard.index')->with('error', 'Anda harus memilih prodi terlebih dahulu');
+            }
+
             $session_prodi = Session::get('prodi');
             $data_prodi = dataProgramStudi::findorfail($session_prodi['prodi']->id);
         }

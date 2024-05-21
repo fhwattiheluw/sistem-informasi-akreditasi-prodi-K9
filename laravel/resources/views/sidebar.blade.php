@@ -39,6 +39,7 @@
             </a>
         </li>
 
+        @if(auth()->user()->role == 'admin prodi')
         <li class="pt-2 pb-1">
             <span class="nav-item-head">MASTER DATA</span>
         </li>
@@ -60,7 +61,8 @@
                 <span class="menu-title">Data Tenik</span>
             </a>
         </li>
-
+        @endif
+        
         <li class="pt-2 pb-1">
             <span class="nav-item-head">DATA KUANTITATIF LED</span>
         </li>

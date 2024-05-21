@@ -24,7 +24,10 @@ return new class extends Migration
             $table->string('pendidikan');
             $table->string('bidang_keahlian');
             $table->enum('sesuai_ps', ['ya', 'tidak'])->nullable();
+            $table->unsignedBigInteger('prodi_id');
             $table->timestamps();
+            $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
+
         });
     }
 

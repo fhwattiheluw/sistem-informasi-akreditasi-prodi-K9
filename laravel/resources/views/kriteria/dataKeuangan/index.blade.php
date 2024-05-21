@@ -12,9 +12,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="/datakeuangan/create">
         <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -62,22 +64,23 @@
                 <th style="font-weight: bold;">Investasi/tahun</th>
               </tr>
             </thead>
-            <tbody style="text-align: center;">
+            <tbody style="text-align: center; ">
               @foreach ($items as $item)
-              <tr >
+              <tr style="padding: 10px">
                 <td style="font-weight: bold;">{{$item->tahun}}</td>
                 <td>{{$item->pendidikan_per_mahasiswa}}</td>
                 <td>{{$item->penelitian_per_dosen}}</td>
                 <td>{{$item->pkm_per_dosen}}</a></td>
                 <td>{{$item->publikasi_per_dosen}}</td>
                 <td>{{number_format($item->investasi, 2)}}</td>
-                <td><a href="{{$item->tautan}}">Lihat</a></td>
+                <td><a href="{{$item->tautan}}" target="_blank">Lihat</a></td>
                 <td>
+                  @if(auth()->user()->role == 'admin prodi')
                 <a href="/datakeuangan/{{$item->id}}/edit">
                   <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                 </a>
                   <a type="button" href="{{ route('datakeuangan.delete', ['id' => $item->id]) }}" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
-
+              @endif
                 </td>
               </tr>
               @endforeach
