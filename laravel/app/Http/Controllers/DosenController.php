@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Dosen;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class DosenController extends Controller
 {
@@ -17,7 +19,7 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosen = Dosen::all();
+        $dosen = Dosen::where('prodi_id',Auth::user()->prodi_id)->get();
         return view('dosen.index', compact('dosen'));
     }
 
@@ -64,11 +66,15 @@ class DosenController extends Controller
             'pendidikan' => 'required',
             'bidang_keahlian' => 'required',
             'sesuai_ps' => 'required',
+            'tautan_link' => 'nullable|url',
+            
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->with('danger', 'Data Gagal Disimpan')->withInput()->withErrors($validator);
         }
+
+        // $dosen = Dosen::store($validator->validated());
 
         $dosen = new Dosen();
         $dosen->nidn_nidk = $request->input('nidn_nidk');
@@ -80,6 +86,8 @@ class DosenController extends Controller
         $dosen->pendidikan = $request->input('pendidikan');
         $dosen->bidang_keahlian = $request->input('bidang_keahlian');
         $dosen->sesuai_ps = $request->input('sesuai_ps');
+        $dosen->tautan = $request->input('tautan_link');
+        $dosen->prodi_id = Auth::user()->prodi_id;
 
         $dosen->save();
 
@@ -119,6 +127,7 @@ class DosenController extends Controller
             'pendidikan' => 'required',
             'bidang_keahlian' => 'required',
             'sesuai_ps' => 'required',
+            'tautan_link' => 'nullable|url',
         ]);
 
         if ($validator->fails()) {
@@ -135,6 +144,7 @@ class DosenController extends Controller
         $dosen->gelar_akademik = $request->input('gelar_akademik');
         $dosen->pendidikan = $request->input('pendidikan');
         $dosen->bidang_keahlian = $request->input('bidang_keahlian');
+        $dosen->tautan = $request->input('tautan_link');
         $dosen->sesuai_ps = $request->input('sesuai_ps');
 
         $dosen->save();

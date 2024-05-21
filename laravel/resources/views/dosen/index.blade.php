@@ -83,12 +83,20 @@
                                     <td>{{ $user->nidn_nidk }}</td>
                                     <td>{{ $user->nama }}</td>
                                     <td>{{ $user->tanggal_lahir }}</td>
-                                    <td>{{ $user->sertifikat_pendidikan }}</td>
+                                    <td>{{ $user->sertifikat_pendidik }}</td>
                                     <td>{{ $user->jabatan_fungsional }}</td>
                                     <td>{{ $user->gelar_akademik }}</td>
                                     <td>{{ $user->pendidikan }}</td>
                                     <td>{{ $user->bidang_keahlian }}</td>
                                     <td>{{ $user->sesuai_ps }}</td>
+                                    <td>
+                                        @if(empty($user->tautan))
+                                            <p class="text-danger">tautan belum di input</p>
+                                        @else
+                                            <a href="{{ $user->tautan }}" target="_blank" class="btn btn-primary btn-sm">Lihat</a>
+                                        @endif
+                                    
+                                    </td>
                                     <td>
                                         <a href="{{ route('dosen.edit',$user->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
