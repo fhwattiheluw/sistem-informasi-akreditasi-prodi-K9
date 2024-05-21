@@ -17,7 +17,7 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosen = Dosen::all();
+        $dosen = Dosen::where('prodi_id', auth()->user()->prodi_id)->get();
         return view('dosen.index', compact('dosen'));
     }
 
@@ -80,6 +80,7 @@ class DosenController extends Controller
         $dosen->pendidikan = $request->input('pendidikan');
         $dosen->bidang_keahlian = $request->input('bidang_keahlian');
         $dosen->sesuai_ps = $request->input('sesuai_ps');
+        $dosen->prodi_id = auth()->user()->prodi_id;
 
         $dosen->save();
 

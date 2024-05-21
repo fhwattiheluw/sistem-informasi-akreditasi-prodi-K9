@@ -26,6 +26,14 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Pemerolehan Dana</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -46,34 +54,34 @@
               <tfoot>
                 <tr>
                   <th colspan="2">TOTAL</th>
-                  <th>x</th>
-                  <th>x</th>
-                  <th>x</th>
+                  <th>{{ number_format($total_ts2) }}</th>
+                  <th>{{ number_format($total_ts1) }}</th>
+                  <th>{{ number_format($total_ts) }}</th>
                 </tr>
               </tfoot>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach ($data as $item)                  
                 <tr>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
-                  <td>x</td>
+                  <td>{{ $item->sumber_dana }}</td>
+                  <td>{{ $item->jenis_dana }}</td>
+                  <td>{{ number_format($item->jumlah_ts2) }}</td>
+                  <td>{{ number_format($item->jumlah_ts1) }}</td>
+                  <td>{{ number_format($item->jumlah_ts) }}</td>
+                  <td>{{ number_format(($item->jumlah_ts2 + $item->jumlah_ts1 + $item->jumlah_ts ) / 3) }}</td>
                   <td>
-                      <a href="#">
+                      <a href="{{ $item->tautan }}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
                   </td>
                   <td>
-                    <a href="/kriteria5/pemerolehan_dana/edit">
+                    <a href="/kriteria5/pemerolehan_dana/{{ $item->id }}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria5/pemerolehan_dana/{{ $item->id }}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
 
             </table>

@@ -44,6 +44,7 @@
                   <th colspan="2">Kepemilikan*</th>
                   <th colspan="2">Kondisi</th>
                   <th rowspan="2">Penggunaan (Jam/minggu)</th>
+                  <th rowspan="2">Bukti/Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
                 <tr>
@@ -64,6 +65,11 @@
                   <td>@if($item->kondisi == 'terawat') V @endif</td>
                   <td>@if($item->kondisi == 'tidak terawat') V @endif</td>
                   <td>{{$item->penggunaan}}</td>
+                  <td>
+                      <a href="{{$item->tautan}}">
+                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                      </a>
+                  </td>
                   <td>
                     <a href="/kriteria5/prasarana_pendidikan/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>

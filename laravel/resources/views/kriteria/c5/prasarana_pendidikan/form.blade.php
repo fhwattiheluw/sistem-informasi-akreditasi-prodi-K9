@@ -78,8 +78,8 @@
             <div class="col-sm-9">
               <select class="form-control" name="kepemilikan">
                 <option value="">--Pilih--</option>
-                <option value="SD" @if($item->kepemilikan != NULL && $item->kepemilikan == "SD")) selected @endif>SD (Milik sendiri)</option>
-                <option value="SW" @if($item->kepemilikan != NULL && $item->kepemilikan == "SW")) selected @endif>SW (Sewa/Kontrak/Kerjasama)</option>
+                <option value="SD" @if(old('kepemilikan', isset($item->kepemilikan) ? $item->kepemilikan : '') == "SD")) selected @endif>SD (Milik sendiri)</option>
+                <option value="SW" @if(old('kepemilikan', isset($item->kepemilikan) ? $item->kepemilikan : '') == "SW")) selected @endif>SW (Sewa/Kontrak/Kerjasama)</option>
               </select>
             </div>
           </div>
@@ -89,8 +89,8 @@
             <div class="col-sm-9">
               <select class="form-control" name="kondisi">
                 <option value="">--Pilih--</option>
-                <option value="terawat" @if($item->kondisi != NULL && $item->kondisi == "terawat")) selected @endif>Terawat</option>
-                <option value="tidak terawat" @if($item->kondisi != NULL && $item->kondisi == "tidak terawat")) selected @endif>Tidak Terawat</option>
+                <option value="terawat" @if(old('kondisi', isset($item->kondisi) ? $item->kondisi : '') == "terawat")) selected @endif>Terawat</option>
+                <option value="tidak terawat" @if(old('kondisi', isset($item->kondisi) ? $item->kondisi : '') == "tidak terawat")) selected @endif>Tidak Terawat</option>
               </select>
             </div>
           </div>

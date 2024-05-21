@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         // menjalankan faker class data program studi
-        // \App\Models\dataProgramStudi::factory(1)->create();
+        \App\Models\dataProgramStudi::factory(1)->create();
       // menjalankan faker class user
         \App\Models\User::factory(1)->create();
     }

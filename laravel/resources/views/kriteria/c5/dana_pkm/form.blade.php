@@ -23,66 +23,93 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="#" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('dana_pkm.update', ['id' => Crypt::encryptString($item->id)])  : route('dana_pkm.store')}}" method="post">
+        @if(isset($item->id))
+          @method('PUT')
+        @endif
         @csrf
         <div class="card-body">
           <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
 
-            Dana PkM
+            Dana PKM
           </h4>
 
           <p class="card-description">K.5 Investsi sarana pendidikan</p>
+            @if ($errors->any())
+              <div>
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li style="color: red;">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+            @endif
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Judul PkM</label>
+            <label class="col-sm-3 col-form-label">Judul PKM</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="judul_pkm" value="{{ isset($item->judul_pkm) ? $item->judul_pkm : old('judul_pkm') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">ketua Tim</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" placeholder="Ketik disini">
+              <select class="form-control" name="nidn_nidk">
+                <option value="">Pilih</option>
+                @foreach($dosens as $dosen)
+                  <option value="{{ $dosen->nidn_nidk }}"
+                    @if(old('nidn_nidk', isset($item->nidk_nidk) ? $item->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
+                    {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Sumber dan Jenis Dana</label>
             <div class="col-sm-9">
-              <select class="form-control" name="">
+              <select class="form-control" name="sumber_dana">
                 <option value="">Pilih</option>
-                <option value="">PT/Mandiri</option>
-                <option value="">Lembaga DN (diluar PT)</option>
-                <option value="">Lembaga LN</option>
+                <option value="PT/Mandiri"
+                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "PT/Mandiri") selected @endif>
+                  PT/Mandiri</option>
+                <option value="Lembaga DN (diluar PT)"
+                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Lembaga DN (diluar PT)") selected @endif>
+                  Lembaga DN (diluar PT)</option>
+                <option value="Lembaga LN"
+                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Lembaga LN") selected @endif>
+                  Lembaga LN</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Tahun Akademik</label>
+            <label class="col-sm-3 col-form-label">TS-2 ({{date('Y') - 2}})</label>
             <div class="col-sm-9">
-              <select class="form-control" name="">
-                @for($i = 0; $i < 4; $i++)
-                <option value="">{{date('Y') - $i}}</option>
-                @endfor
-              </select>
+              <input type="text" name="jumlah_dana_ts2" value="{{ isset($item->jumlah_dana_ts2) ? $item->jumlah_dana_ts2 : old('jumlah_dana_ts2') }}" id="nilai2" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jumlah Dana (Dalam Jutaan)</label>
+            <label class="col-sm-3 col-form-label">TS-1 ({{date('Y') - 1}})</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="jumlah_dana_ts1" id="nilai1" value="{{ isset($item->jumlah_dana_ts1) ? $item->jumlah_dana_ts1 : old('jumlah_dana_ts1') }}" class="form-control" placeholder="Ketik disini">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">TS ({{date('Y')}})</label>
+            <div class="col-sm-9">
+              <input type="text" name="jumlah_dana_ts" id="nilai" value="{{ isset($item->jumlah_dana_ts) ? $item->jumlah_dana_ts : old('jumlah_dana_ts') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Bukti/Tautan</label>
             <div class="col-sm-9">
-              <input type="url" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
 
@@ -93,7 +120,7 @@
             <button class="btn btn-primary" type="submit" name="button">
               @if (Request::segment(3) === 'create')
               Tambah data
-              @elseif (Request::segment(3) === 'edit')
+              @elseif (Request::segment(4) === 'edit')
               Update data
               @endif
             </button>
@@ -104,4 +131,23 @@
     <!-- last row starts here -->
 
   </div>
+
+  <script>
+    document.getElementById('nilai2').addEventListener('input', function (e) {
+        let value = e.target.value;
+        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.target.value = value;
+    });
+    document.getElementById('nilai1').addEventListener('input', function (e) {
+        let value = e.target.value;
+        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.target.value = value;
+    });
+    document.getElementById('nilai').addEventListener('input', function (e) {
+        let value = e.target.value;
+        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.target.value = value;
+    });
+  </script>
+
   @endsection

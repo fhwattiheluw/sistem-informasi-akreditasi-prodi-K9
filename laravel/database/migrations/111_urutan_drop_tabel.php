@@ -25,7 +25,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('tabel_k5_dana_pkm');
         Schema::dropIfExists('tabel_matakuliah');
-        Schema::dropIfExists('tabel_dosen');
+        // Schema::dropIfExists('tabel_dosen');
         Schema::dropIfExists('data_program_studis');
     }
 };

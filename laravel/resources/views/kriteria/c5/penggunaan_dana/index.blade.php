@@ -26,6 +26,14 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Penggunaan Dana</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -45,19 +53,19 @@
               <tfoot>
                 <tr>
                   <th colspan="1">TOTAL</th>
-                  <th>x</th>
-                  <th>x</th>
-                  <th>x</th>
+                  <th>{{ number_format($total_ts2) }}</th>
+                  <th>{{ number_format($total_ts1) }}</th>
+                  <th>{{ number_format($total_ts) }}</th>
                 </tr>
               </tfoot>
               <tbody class="text-center">
                 @foreach($items as $item)
                 <tr>
-                  <td>{{$item->jenis_penggunaan}}</td>
-                  <td>{{$item->jumlah_ts2}}</td>
-                  <td>{{$item->jumlah_ts1}}</td>
-                  <td>{{$item->jumlah_ts}}</td>
-                  <td>{{($item->jumlah_ts2+$item->jumlah_ts1+$item->jumlah_ts)/3}}</td>
+                  <td>{{ $item->jenis_penggunaan }}</td>
+                  <td>{{ number_format($item->jumlah_ts2) }}</td>
+                  <td>{{ number_format($item->jumlah_ts1) }}</td>
+                  <td>{{ number_format($item->jumlah_ts) }}</td>
+                  <td>{{ number_format(($item->jumlah_ts2 + $item->jumlah_ts1 + $item->jumlah_ts ) / 3) }}</td>
                   <td>
                       <a href="{{$item->tautan}}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
