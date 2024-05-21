@@ -55,6 +55,7 @@
                           <a class="btn bg-white font-12" href="{{ route('dataprodi.index') }}">data program studi</a>
                           @endif
 
+                          @if(Auth::user()->role == 'fakultas')
                           @error('pesan')
                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -65,6 +66,7 @@
                   </div>
 
                       @enderror
+                          @endif
 
                           @if(Auth::user()->role == 'fakultas')
                           <div class="dropdown">

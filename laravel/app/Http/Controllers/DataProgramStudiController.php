@@ -7,6 +7,7 @@ use App\Models\TabelK2BidangPendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth; 
 
 class DataProgramStudiController extends Controller
 {
@@ -41,7 +42,7 @@ class DataProgramStudiController extends Controller
      */
     public function index()
     {
-        $data_prodi = dataProgramStudi::first();
+        $data_prodi = dataProgramStudi::findorfail( Auth::user()->prodi->id);
         return view('kriteria.dataProdi.index', ['prodi' => $data_prodi]);
     }
 
@@ -143,7 +144,7 @@ class DataProgramStudiController extends Controller
      */
     public function edit(dataProgramStudi $dataProgramStudi)
     {
-        $item = dataProgramStudi::first();
+        $item =  dataProgramStudi::findorfail( Auth::user()->prodi->id);
         return view('kriteria.dataprodi.form', ['item'=>$item]);
     }
 
