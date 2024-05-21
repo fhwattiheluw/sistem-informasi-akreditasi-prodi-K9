@@ -29,6 +29,14 @@
       <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
+            @if(session('success'))
+            @if (session('success'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                
+              </div>
+            @endif
+            @endif
             <h4 class="card-title">Data Program Studi</h4>
             <!-- <p class="card-description"> Add class <code>.table</code> -->
             </p>

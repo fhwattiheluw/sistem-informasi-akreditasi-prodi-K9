@@ -104,7 +104,7 @@
                                   <div class="col">
                                     <div class="form-check">
                                       <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="BAIK_SEKALI" @if($item->status_peringkat == 'BAIK_SEKALI') checked @endif> BAIK SEKALI <i class="input-helper"></i></label>
+                                        <input type="radio" class="form-check-input" name="status_peringkat" id="status_peringkat" value="BAIK SEKALI" @if($item->status_peringkat == 'BAIK SEKALI') checked @endif> BAIK SEKALI <i class="input-helper"></i></label>
                                       </div>
                                     </div>
                                     <div class="col">
