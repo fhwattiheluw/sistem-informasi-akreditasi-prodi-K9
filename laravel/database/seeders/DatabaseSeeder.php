@@ -231,6 +231,8 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknik Informatika, S3 Manajemen pendidikan',
             'bidang_keahlian' => 'Manajemen Pendidikan', 
             'sesuai_ps' => 'tidak', 
+            'prodi_id' => 123
+            
         ]);
         TabelDosen::create([
             'nama' => 'Lono',
@@ -242,6 +244,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknik Informatika, S3 Manajemen pendidikan',
             'bidang_keahlian' => 'Manajemen Pendidikan', 
             'sesuai_ps' => 'ya', 
+            'prodi_id' => 123
         ]);
         TabelDosen::create([
             'nama' => 'Joni',
@@ -253,6 +256,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
             'sesuai_ps' => 'ya', 
+            'prodi_id' => 123
         ]);
         TabelDosen::create([
             'nama' => 'Joni',
@@ -264,6 +268,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
             'sesuai_ps' => 'tidak', 
+            'prodi_id' => 321,
         ]);
         TabelDosen::create([
             'nama' => 'Joni',
@@ -275,6 +280,7 @@ class DatabaseSeeder extends Seeder
             'pendidikan' => 'S1 Sistem Informasi, S2 Teknologi Informasi, S3 Manajemen Sistem Informasi',
             'bidang_keahlian' => 'Teknologi Informasi', 
             'sesuai_ps' => 'tidak', 
+            'prodi_id' => 321,
         ]);
 
         TabelK4BebanKerjaDTPS::create([
@@ -448,17 +454,23 @@ class DatabaseSeeder extends Seeder
         TabelMatakuliah::create([
             'kode_mk' => '1',
             'nama' => 'Pengantar Tauhid',
+            'semester' => 1,
+            'prodi_id' => 123,
             'sks' => 3,
         ]);
         TabelMatakuliah::create([
             'kode_mk' => '2',
             'nama' => 'Pengantar Tauhid 2',
+            'semester' => 2,
+            'prodi_id' => 123,
             'sks' => 3,
         ]);
         TabelMatakuliah::create([
             'kode_mk' => '3',
             'nama' => 'Fiqih Kontemporer',
+            'semester' => 2,
             'sks' => 3,
+            'prodi_id' => 123,
         ]);
 
         $this->call(K5Seeder::class);
