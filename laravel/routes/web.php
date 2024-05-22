@@ -370,7 +370,66 @@ Route::middleware('auth')->group(function () {
 // kriteria 6
 // ====================================
 Route::middleware('auth')->group(function () {
+    // route index kriteria 6
     Route::get('/kriteria6', [TabelC6Controller::class, 'index']);
+
+    // Tabel Mata Kuliah, CPL, Dan Perangkat Pembelajaran
+    Route::get('/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran', [TabelC6Controller::class, 'mata_kuliah_cpl_dan_perangkat_pembelajaran_index'])->name('mata_kuliah_cpl_dan_perangkat_pembelajaran.index');
+    Route::get('/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/create', [TabelC6Controller::class, 'mata_kuliah_cpl_dan_perangkat_pembelajaran_create'])->name('mata_kuliah_cpl_dan_perangkat_pembelajaran.create');
+    Route::post('/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/store', [TabelC6Controller::class, 'mata_kuliah_cpl_dan_perangkat_pembelajaran_store'])->name('mata_kuliah_cpl_dan_perangkat_pembelajaran.store');
+    Route::get('/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{id}/edit', [TabelC6Controller::class, 'mata_kuliah_cpl_dan_perangkat_pembelajaran_edit'])->name('mata_kuliah_cpl_dan_perangkat_pembelajaran.edit');
+    Route::put('/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{id}/update', [TabelC6Controller::class, 'mata_kuliah_cpl_dan_perangkat_pembelajaran_update'])->name('mata_kuliah_cpl_dan_perangkat_pembelajaran.update');
+    Route::get('/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{id}/delete', [TabelC6Controller::class, 'mata_kuliah_cpl_dan_perangkat_pembelajaran_destroy'])->name('mata_kuliah_cpl_dan_perangkat_pembelajaran.destroy');
+
+    // Tabel Integrasi Hasil Penelitian Dan PkM Dalam Proses Pembelajaran
+    Route::get('/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran', [TabelC6Controller::class, 'integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_index'])->name('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index');
+    Route::get('/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/create', [TabelC6Controller::class, 'integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_create'])->name('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.create');
+    Route::post('/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/store', [TabelC6Controller::class, 'integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_store'])->name('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.store');
+    Route::get('/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{id}/edit', [TabelC6Controller::class, 'integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_edit'])->name('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.edit');
+    Route::put('/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{id}/update', [TabelC6Controller::class, 'integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_update'])->name('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.update');
+    Route::get('/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{id}/delete', [TabelC6Controller::class, 'integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_destroy'])->name('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.destroy');
+
+    // Tabel Jumlah Mahasiswa Bimbingan Dan Frekuensi Pertemuan
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_index'])->name('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index');
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan/create', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_create'])->name('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.create');
+    Route::post('/kriteria6/jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan/store', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_store'])->name('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.store');
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan/{id}/edit', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_edit'])->name('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.edit');
+    Route::put('/kriteria6/jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan/{id}/update', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_update'])->name('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.update');
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan/{id}/delete', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_destroy'])->name('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.destroy');
+
+    // Tabel Jumlah Mahasiswa Bimbingan Magang Kependidikan Dan Frekuensi Pertemuan
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_index'])->name('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/create', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_create'])->name('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.create');
+    Route::post('/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/store', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_store'])->name('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.store');
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/{id}/edit', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_edit'])->name('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.edit');
+    Route::put('/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/{id}/update', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_update'])->name('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.update');
+    Route::get('/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/{id}/delete', [TabelC6Controller::class, 'jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_destroy'])->name('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.destroy');
+
+    // Tabel Kegiatan Akademik Di Luar Perkuliahan
+    Route::get('/kriteria6/kegiatan_akademik_di_luar_perkuliahan', [TabelC6Controller::class, 'index'])->name('kegiatan_akademik_di_luar_perkuliahan.index');
+    Route::get('/kriteria6/kegiatan_akademik_di_luar_perkuliahan/create', [TabelC6Controller::class, 'create'])->name('kegiatan_akademik_di_luar_perkuliahan.create');
+    Route::post('/kriteria6/kegiatan_akademik_di_luar_perkuliahan/store', [TabelC6Controller::class, 'store'])->name('kegiatan_akademik_di_luar_perkuliahan.store');
+    Route::get('/kriteria6/kegiatan_akademik_di_luar_perkuliahan/{id}/edit', [TabelC6Controller::class, 'edit'])->name('kegiatan_akademik_di_luar_perkuliahan.edit');
+    Route::put('/kriteria6/kegiatan_akademik_di_luar_perkuliahan/{id}/update', [TabelC6Controller::class, 'update'])->name('kegiatan_akademik_di_luar_perkuliahan.update');
+    Route::get('/kriteria6/kegiatan_akademik_di_luar_perkuliahan/{id}/delete', [TabelC6Controller::class, 'destroy'])->name('kegiatan_akademik_di_luar_perkuliahan.destroy');
+
+    // Tabel Dosen Tamu Dan Tenaga Ahli
+    Route::get('/kriteria6/dosen_tamu_dan_tenaga_ahli', [TabelC6Controller::class, 'index'])->name('dosen_tamu_dan_tenaga_ahli.index');
+    Route::get('/kriteria6/dosen_tamu_dan_tenaga_ahli/create', [TabelC6Controller::class, 'create'])->name('dosen_tamu_dan_tenaga_ahli.create');
+    Route::post('/kriteria6/dosen_tamu_dan_tenaga_ahli/store', [TabelC6Controller::class, 'store'])->name('dosen_tamu_dan_tenaga_ahli.store');
+    Route::get('/kriteria6/dosen_tamu_dan_tenaga_ahli/{id}/edit', [TabelC6Controller::class, 'edit'])->name('dosen_tamu_dan_tenaga_ahli.edit');
+    Route::put('/kriteria6/dosen_tamu_dan_tenaga_ahli/{id}/update', [TabelC6Controller::class, 'update'])->name('dosen_tamu_dan_tenaga_ahli.update');
+    Route::get('/kriteria6/dosen_tamu_dan_tenaga_ahli/{id}/delete', [TabelC6Controller::class, 'destroy'])->name('dosen_tamu_dan_tenaga_ahli.destroy');
+
+    // Tabel Kepuasan Mahasiswa
+    Route::get('/kriteria6/kepuasan_mahasiswa', [TabelC6Controller::class, 'index'])->name('kepuasan_mahasiswa.index');
+    Route::get('/kriteria6/kepuasan_mahasiswa/create', [TabelC6Controller::class, 'create'])->name('kepuasan_mahasiswa.create');
+    Route::post('/kriteria6/kepuasan_mahasiswa/store', [TabelC6Controller::class, 'store'])->name('kepuasan_mahasiswa.store');
+    Route::get('/kriteria6/kepuasan_mahasiswa/{id}/edit', [TabelC6Controller::class, 'edit'])->name('kepuasan_mahasiswa.edit');
+    Route::put('/kriteria6/kepuasan_mahasiswa/{id}/update', [TabelC6Controller::class, 'update'])->name('kepuasan_mahasiswa.update');
+    Route::get('/kriteria6/kepuasan_mahasiswa/{id}/delete', [TabelC6Controller::class, 'destroy'])->name('kepuasan_mahasiswa.destroy');
+
+
 });
 // ====================================
 // kriteria 7
