@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{route('kegiatan_akademik_di_luar_perkuliahan.create')}}">
+      <a href="{{route('jumlah_mahasiswa_bimbingan_ta.create')}}">
         <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif LED</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 Kegiatan Akademik di Luar Perkuliahan</p>
+          <p class="m-0">K.6 Jumlah Mahasiswa Bimbingan Tugas Akhir atau Skripsi dan Frekuensi Pertemuan</p>
         </a>
       </div>
 
@@ -25,7 +25,7 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Kegiatan Akademik di Luar Perkuliahan</h5>
+          <h5 class="card-title">Tabel Jumlah Mahasiswa Bimbingan Tugas Akhir atau Skripsi dan Frekuensi Pertemuan</h5>
           @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -38,20 +38,41 @@
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
-                  <th>No</th>
-                  <th>Nama Kegiatan</th>
-                  <th>Nama Dosen Pembimbing</th>
-                  <th>Frekuensi Kegiatan</th>
-                  <th>Hasil Kegiatan</th>
-                  <th>Tautan</th>
-                  <th>Aksi</th>
+                  <th rowspan="3">No</th>
+                  <th rowspan="3">Nama Dosen Pembimbing Tugas Akhir</th>
+                  <th colspan="8">Banyaknya Mahasiswa Bimbingan</th>
+                  <th rowspan="3">Rata-Rata Jumlah  Bimbingan di semua Program</th>
+                  <th rowspan="3">Rata-Rata Banyaknya Pertemuan</th>
+                  <th rowspan="3">Tautan</th>
+                  <th rowspan="3">Aksi</th>
+                </tr>
+                <tr>
+                  <th colspan="4">Di PS Sendiri</th>
+                  <th colspan="4">Di PS Lain</th>
+                </tr>
+                <tr>
+                  <th>TS-2</th>
+                  <th>TS-1</th>
+                  <th>TS</th>
+                  <th>Rata-Rata</th>
+                  <th>TS-2</th>
+                  <th>TS-1</th>
+                  <th>TS</th>
+                  <th>Rata-Rata</th>
                 </tr>
               </thead>
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 60; $i++)
+                @for($i = 1; $i <= 2; $i++)
                 <tr>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
                   <td>{{ $i }}</td>
                   <td>{{ $i }}</td>
                   <td>{{ $i }}</td>

@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/kriteria5/pemerolehan_dana/create">
+      <a href="{{route('kepuasan_mahasiswa.create')}}">
         <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif LED</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.5 Keuangan, Sarana, dan Prasarana</p>
+          <p class="m-0">K.6 Kepuasan Mahasiswa</p>
         </a>
       </div>
 
@@ -25,7 +25,7 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Pemerolehan Dana</h5>
+          <h5 class="card-title">Tabel Kepuasan Mahasiswa</h5>
           @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -38,51 +38,40 @@
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
-                  <th rowspan="2">Sumber Dana</th>
-                  <th rowspan="2">Jenis data</th>
-                  <th colspan="3">Jumlah Dana (dalam jutaan)</th>
-                  <th rowspan="2">Rata-rata</th>
-                  <th rowspan="2">Bukti/Tautan</th>
+                  <th rowspan="2">No</th>
+                  <th rowspan="2">Aspek Pengukuran Kepuasan</th>
+                  <th colspan="3">Objek Kepuasan Mahasiswa</th>
+                  <th rowspan="2">Tindak Lanjut</th>
+                  <th rowspan="2">Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
                 <tr>
-                  <th>TS-2</th>
-                  <th>TS-1</th>
-                  <th>TS</th>
+                  <th>Kinerja Mengajar DTPS</th>
+                  <th>Layanan Administrasi Akademik oleh PS</th>
+                  <th>Prasarana dan Sarana Pembelajaran di PS</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th colspan="2">TOTAL</th>
-                  <th>{{ number_format($total_ts2) }}</th>
-                  <th>{{ number_format($total_ts1) }}</th>
-                  <th>{{ number_format($total_ts) }}</th>
-                </tr>
-              </tfoot>
-              <tbody class="text-center">
-                @foreach ($data as $item)                  
-                <tr>
-                  <td>{{ $item->sumber_dana }}</td>
-                  <td>{{ $item->jenis_dana }}</td>
-                  <td>{{ number_format($item->jumlah_ts2) }}</td>
-                  <td>{{ number_format($item->jumlah_ts1) }}</td>
-                  <td>{{ number_format($item->jumlah_ts) }}</td>
-                  <td>{{ number_format(($item->jumlah_ts2 + $item->jumlah_ts1 + $item->jumlah_ts ) / 3) }}</td>
-                  <td>
-                      <a href="{{ $item->tautan }}">
-                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
-                      </a>
-                  </td>
-                  <td>
-                    <a href="/kriteria5/pemerolehan_dana/{{ $item->id }}/edit">
-                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
-                    </a>
-                    <a type="button" href="/kriteria5/pemerolehan_dana/{{ $item->id }}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
+              <tbody style="overflow-y: auto;" class="text-center" >
+
+                @for($i = 1; $i <= 10; $i++)
+                <tr>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>lihat tautan</td>
+                  <td>
+                    <button type="button" class="btn btn-primary"> Edit </button>
+                    <button type="button" class="btn btn-danger"> Hapus </button>
                   </td>
                 </tr>
-                @endforeach
+                @endfor
               </tbody>
+              
+              
 
             </table>
           </div>
@@ -95,3 +84,4 @@
 
 </div>
 @endsection
+

@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Mata Kuliah, CPL, dan Perangkat Pembelajaran</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Integrasi Hasil Penelitian dan PkM dalam Proses Pembelajaran</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Jumlah Mahasiswa Bimbingan dan Frekuensi Pertemuan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -48,15 +48,24 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Jumlah Mahasiswa Bimbingan Magang Kependidikan dan Frekuensi Pertemuan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
+          <h5 class="card-title">Tabel Jumlah Mahasiswa Bimbingan Tugas Akhir atau Skripsi dan Frekuensi Pertemuan</h5>
+          <a href="{{route('jumlah_mahasiswa_bimbingan_ta.index')}}" class="btn btn-primary">Go</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
           <h5 class="card-title">Tabel Kegiatan Akademik di Luar Perkuliahan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('kegiatan_akademik_di_luar_perkuliahan.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -64,7 +73,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Dosen Tamu dan Tenaga Ahli</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('dosen_tamu_dan_tenaga_ahli.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -72,7 +81,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Kepuasan Mahasiswa</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('kepuasan_mahasiswa.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

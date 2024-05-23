@@ -40,7 +40,7 @@ class TabelC6Controller extends Controller
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_create()
     {
         //
-        return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.create');
+        return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.form');
     }
 
     /**
@@ -123,7 +123,7 @@ class TabelC6Controller extends Controller
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_create()
     {
         //
-        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.create');
+        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.form');
     }
 
     /**
@@ -195,8 +195,8 @@ class TabelC6Controller extends Controller
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_index()
     {
         //
-        $data = jumlahMhsBimbinganDanFrekuensiPertemuan::all();
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index', compact('data'));
+        // $data = jumlahMhsBimbinganDanFrekuensiPertemuan::all();
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index');
     }
 
     /**
@@ -207,7 +207,7 @@ class TabelC6Controller extends Controller
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_create()
     {
         //
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.create');
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.form');
     }
 
     /**
@@ -278,8 +278,8 @@ class TabelC6Controller extends Controller
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_index()
     {
         //
-        $data = jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan::all();
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index', compact('data'));
+        // $data = jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan::all();
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
     }
 
     /**
@@ -290,7 +290,7 @@ class TabelC6Controller extends Controller
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_create()
     {
         //
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.create');
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.form');
     }
 
     /**
@@ -352,7 +352,88 @@ class TabelC6Controller extends Controller
         $data->delete();
         return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
     }
-    
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jumlah_mahasiswa_bimbingan_ta_index()
+    {
+        //
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jumlah_mahasiswa_bimbingan_ta_create()
+    {
+        //
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.form');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function jumlah_mahasiswa_bimbingan_ta_store(Request $request)
+    {
+        //
+        $data = new jumlahMhsBimbinganTa;
+        $data->id_kriteria6 = $request->id_kriteria6;
+        $data->jumlah_mahasiswa_bimbingan_ta = $request->jumlah_mahasiswa_bimbingan_ta;
+        $data->save();
+        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index');
+    }
+
+    /**
+     * Show the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function jumlah_mahasiswa_bimbingan_ta_edit($id)
+    {
+        //
+        $data = jumlahMhsBimbinganTa::find($id);
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.edit', compact('data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function jumlah_mahasiswa_bimbingan_ta_update(Request $request, $id)
+    {
+        //
+        $data = jumlahMhsBimbinganTa::find($id);
+        $data->id_kriteria6 = $request->id_kriteria6;
+        $data->jumlah_mahasiswa_bimbingan_ta = $request->jumlah_mahasiswa_bimbingan_ta;
+        $data->save();
+        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function jumlah_mahasiswa_bimbingan_ta_destroy($id)
+    {
+        //
+        $data = jumlahMhsBimbinganTa::find($id);
+        $data->delete();
+        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -361,8 +442,8 @@ class TabelC6Controller extends Controller
     public function kegiatan_akademik_di_luar_perkuliahan_index()
     {
         //
-        $data = kegiatanAkademikDiLuarPerkuliahan::all();
-        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.index', compact('data'));
+        // $data = kegiatanAkademikDiLuarPerkuliahan::all();
+        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.index');
     }
 
     /**
@@ -373,7 +454,7 @@ class TabelC6Controller extends Controller
     public function kegiatan_akademik_di_luar_perkuliahan_create()
     {
         //
-        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.create');
+        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.form');
     }
 
     /**
@@ -444,8 +525,8 @@ class TabelC6Controller extends Controller
     public function dosen_tamu_dan_tenaga_ahli_index()
     {
         //
-        $data = dosenTamuDanTenagaAhli::all();
-        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.index', compact('data'));
+        // $data = dosenTamuDanTenagaAhli::all();
+        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.index');
     }
 
     /**
@@ -456,7 +537,7 @@ class TabelC6Controller extends Controller
     public function dosen_tamu_dan_tenaga_ahli_create()
     {
         //
-        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.create');
+        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.form');
     }
 
     /**
@@ -527,8 +608,8 @@ class TabelC6Controller extends Controller
     public function kepuasan_mahasiswa_index()
     {
         //
-        $data = kepuasanMahasiswa::all();
-        return view('kriteria.c6.kepuasan_mahasiswa.index', compact('data'));
+        // $data = kepuasanMahasiswa::all();
+        return view('kriteria.c6.kepuasan_mahasiswa.index');
     }
 
     /**
@@ -539,7 +620,7 @@ class TabelC6Controller extends Controller
     public function kepuasan_mahasiswa_create()
     {
         //
-        return view('kriteria.c6.kepuasan_mahasiswa.create');
+        return view('kriteria.c6.kepuasan_mahasiswa.form');
     }
 
     /**
