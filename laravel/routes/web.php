@@ -459,9 +459,92 @@ Route::middleware('auth')->group(function () {
     Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/create', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_create']);
     Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/edit', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_edit']);
 });
+
 // ====================================
 // kriteria 9
 // ====================================
 Route::middleware('auth')->group(function () {
     Route::get('/kriteria9', [TabelC9Controller::class, 'index']);
+
+    // ipk lulusan
+    Route::get('/kriteria9/ipk_lulusan', [TabelC9Controller::class, 'ipk_lulusan_index'])->name('ipk_lulusan.index');
+    Route::get('/kriteria9/ipk_lulusan/create', [TabelC9Controller::class, 'ipk_lulusan_create'])->name('ipk_lulusan.create');
+    Route::post('/kriteria9/ipk_lulusan/store', [TabelC9Controller::class, 'ipk_lulusan_store'])->name('ipk_lulusan.store');
+    Route::get('/kriteria9/ipk_lulusan/{id}/edit', [TabelC9Controller::class, 'ipk_lulusan_edit'])->name('ipk_lulusan.edit');
+    Route::put('/kriteria9/ipk_lulusan/{id}/update', [TabelC9Controller::class, 'ipk_lulusan_update'])->name('ipk_lulusan.update');
+    Route::get('/kriteria9/ipk_lulusan/{id}/delete', [TabelC9Controller::class, 'ipk_lulusan_destroy'])->name('ipk_lulusan.destroy');
+    
+    // prestasi_mahasiswa
+    Route::get('/kriteria9/prestasi_mahasiswa', [TabelC9Controller::class, 'prestasi_mahasiswa_index'])->name('prestasi_mahasiswa.index');
+    Route::get('/kriteria9/prestasi_mahasiswa/create', [TabelC9Controller::class, 'prestasi_mahasiswa_create'])->name('prestasi_mahasiswa.create');
+    Route::post('/kriteria9/prestasi_mahasiswa/store', [TabelC9Controller::class, 'prestasi_mahasiswa_store'])->name('prestasi_mahasiswa.store');
+    Route::get('/kriteria9/prestasi_mahasiswa/{id}/edit', [TabelC9Controller::class, 'prestasi_mahasiswa_edit'])->name('prestasi_mahasiswa.edit');
+    Route::put('/kriteria9/prestasi_mahasiswa/{id}/update', [TabelC9Controller::class, 'prestasi_mahasiswa_update'])->name('prestasi_mahasiswa.update');
+    Route::get('/kriteria9/prestasi_mahasiswa/{id}/delete', [TabelC9Controller::class, 'prestasi_mahasiswa_destroy'])->name('prestasi_mahasiswa.destroy');
+    
+    // masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi
+    Route::get('/kriteria9/masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi', [TabelC9Controller::class, 'masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi_index'])->name('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.index');
+    Route::get('/kriteria9/masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi/create', [TabelC9Controller::class, 'masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi_create'])->name('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.create');
+    Route::post('/kriteria9/masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi/store', [TabelC9Controller::class, 'masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi_store'])->name('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.store');
+    Route::get('/kriteria9/masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi/{id}/edit', [TabelC9Controller::class, 'masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi_edit'])->name('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.edit');
+    Route::put('/kriteria9/masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi/{id}/update', [TabelC9Controller::class, 'masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi_update'])->name('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.update');
+    Route::get('/kriteria9/masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi/{id}/delete', [TabelC9Controller::class, 'masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi_destroy'])->name('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.destroy');
+    
+    // tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama
+    Route::get('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_index'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index');
+    Route::get('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/create', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_create'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.create');
+    Route::post('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/store', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_store'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.store');
+    Route::get('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/{id}/edit', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_edit'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.edit');
+    Route::put('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/{id}/update', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_update'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.update');
+    Route::get('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/{id}/delete', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_destroy'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.destroy');
+
+    
+    // tingkat_relevansi_pekerjaan
+    Route::get('/kriteria9/tingkat_relevansi_pekerjaan', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_index'])->name('tingkat_relevansi_pekerjaan.index');
+    Route::get('/kriteria9/tingkat_relevansi_pekerjaan/create', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_create'])->name('tingkat_relevansi_pekerjaan.create');
+    Route::post('/kriteria9/tingkat_relevansi_pekerjaan/store', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_store'])->name('tingkat_relevansi_pekerjaan.store');
+    Route::get('/kriteria9/tingkat_relevansi_pekerjaan/{id}/edit', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_edit'])->name('tingkat_relevansi_pekerjaan.edit');
+    Route::put('/kriteria9/tingkat_relevansi_pekerjaan/{id}/update', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_update'])->name('tingkat_relevansi_pekerjaan.update');
+    Route::get('/kriteria9/tingkat_relevansi_pekerjaan/{id}/delete', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_destroy'])->name('tingkat_relevansi_pekerjaan.destroy');
+    
+    // tingkat_kepuasan_pengguna_lulusan
+    Route::get('/kriteria9/tingkat_kepuasan_pengguna_lulusan', [TabelC9Controller::class, 'tingkat_kepuasan_pengguna_lulusan_index'])->name('tingkat_kepuasan_pengguna_lulusan.index');
+    Route::get('/kriteria9/tingkat_kepuasan_pengguna_lulusan/create', [TabelC9Controller::class, 'tingkat_kepuasan_pengguna_lulusan_create'])->name('tingkat_kepuasan_pengguna_lulusan.create');
+    Route::post('/kriteria9/tingkat_kepuasan_pengguna_lulusan/store', [TabelC9Controller::class, 'tingkat_kepuasan_pengguna_lulusan_store'])->name('tingkat_kepuasan_pengguna_lulusan.store');
+    Route::get('/kriteria9/tingkat_kepuasan_pengguna_lulusan/{id}/edit', [TabelC9Controller::class, 'tingkat_kepuasan_pengguna_lulusan_edit'])->name('tingkat_kepuasan_pengguna_lulusan.edit');
+    Route::put('/kriteria9/tingkat_kepuasan_pengguna_lulusan/{id}/update', [TabelC9Controller::class, 'tingkat_kepuasan_pengguna_lulusan_update'])->name('tingkat_kepuasan_pengguna_lulusan.update');
+    Route::get('/kriteria9/tingkat_kepuasan_pengguna_lulusan/{id}/delete', [TabelC9Controller::class, 'tingkat_kepuasan_pengguna_lulusan_destroy'])->name('tingkat_kepuasan_pengguna_lulusan.destroy');
+    
+    // publikasi_dtps_dan_mahasiswa
+    Route::get('/kriteria9/publikasi_dtps_dan_mahasiswa', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_index'])->name('publikasi_dtps_dan_mahasiswa.index');
+    Route::get('/kriteria9/publikasi_dtps_dan_mahasiswa/create', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_create'])->name('publikasi_dtps_dan_mahasiswa.create');
+    Route::post('/kriteria9/publikasi_dtps_dan_mahasiswa/store', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_store'])->name('publikasi_dtps_dan_mahasiswa.store');
+    Route::get('/kriteria9/publikasi_dtps_dan_mahasiswa/{id}/edit', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_edit'])->name('publikasi_dtps_dan_mahasiswa.edit');
+    Route::put('/kriteria9/publikasi_dtps_dan_mahasiswa/{id}/update', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_update'])->name('publikasi_dtps_dan_mahasiswa.update');
+    Route::get('/kriteria9/publikasi_dtps_dan_mahasiswa/{id}/delete', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_destroy'])->name('publikasi_dtps_dan_mahasiswa.destroy');
+
+    
+    // karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi
+    Route::get('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_index'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index');
+    Route::get('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi/create', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_create'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.create');
+    Route::post('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi/store', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_store'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.store');
+    Route::get('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi/{id}/edit', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_edit'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit');
+    Route::put('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi/{id}/update', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_update'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.update');
+    Route::get('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi/{id}/delete', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_destroy'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.destroy');
+    
+    // produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_index'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index');
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat/create', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_create'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.create');
+    Route::post('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat/store', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_store'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.store');
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat/{id}/edit', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_edit'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.edit');
+    Route::put('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat/{id}/update', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_update'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.update');
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat/{id}/delete', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_destroy'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.destroy');
+    
+    // produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_index'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index');
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten/create', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_create'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.create');
+    Route::post('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten/store', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_store'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.store');
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten/{id}/edit', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_edit'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.edit');
+    Route::put('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten/{id}/update', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_update'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.update');
+    Route::get('/kriteria9/produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten/{id}/delete', [TabelC9Controller::class, 'produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_destroy'])->name('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.destroy');
 });
