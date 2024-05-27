@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel IPK Lulusan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('ipk_lulusan.index')}} " class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Prestasi Mahasiswa</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('prestasi_mahasiswa.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Masa Studi, Kelulusan Tepat Waktu, dan Keberhasilan Studi</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Tracer Study, Waktu Tunggu Mendapatkan Pekerjaan Pertama</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Tingkat Relevansi Pekerjaan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('tingkat_relevansi_pekerjaan.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Tingkat Kepuasan Pengguna Lulusan</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('tingkat_kepuasan_pengguna_lulusan.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Publikasi DTPS dan Mahasiswa</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('publikasi_dtps_dan_mahasiswa.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Karya Ilmiah DTPS dan Mahasiswa yang Disitasi</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Produk atau Jasa DTPS dan Mahasiswa yang Diadopsi oleh Masyarakat</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>
@@ -96,7 +96,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Produk atau Jasa DTPS dan Mahasiswa yang Ber-HKI atau Paten</h5>
-          <a href="#" class="btn btn-primary">Go</a>
+          <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

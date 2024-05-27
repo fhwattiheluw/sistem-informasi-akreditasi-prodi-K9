@@ -36,6 +36,14 @@
       color: black;
     }
 
+        .table thead th, .table tbody td, .table tfoot th {
+    font-size: small;
+}
+
+.table th, .table td {
+    padding: 5px;
+}
+
   </style>
   @yield('css')
 </head>

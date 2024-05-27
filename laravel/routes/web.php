@@ -497,7 +497,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/{id}/edit', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_edit'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.edit');
     Route::put('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/{id}/update', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_update'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.update');
     Route::get('/kriteria9/tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama/{id}/delete', [TabelC9Controller::class, 'tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_destroy'])->name('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.destroy');
-
     
     // tingkat_relevansi_pekerjaan
     Route::get('/kriteria9/tingkat_relevansi_pekerjaan', [TabelC9Controller::class, 'tingkat_relevansi_pekerjaan_index'])->name('tingkat_relevansi_pekerjaan.index');
@@ -522,7 +521,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/kriteria9/publikasi_dtps_dan_mahasiswa/{id}/edit', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_edit'])->name('publikasi_dtps_dan_mahasiswa.edit');
     Route::put('/kriteria9/publikasi_dtps_dan_mahasiswa/{id}/update', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_update'])->name('publikasi_dtps_dan_mahasiswa.update');
     Route::get('/kriteria9/publikasi_dtps_dan_mahasiswa/{id}/delete', [TabelC9Controller::class, 'publikasi_dtps_dan_mahasiswa_destroy'])->name('publikasi_dtps_dan_mahasiswa.destroy');
-
     
     // karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi
     Route::get('/kriteria9/karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi', [TabelC9Controller::class, 'karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_index'])->name('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index');
