@@ -14,7 +14,7 @@
     <div class="header-left">
       @if(auth()->user()->role == 'admin prodi')
       <a href="/datakeuangan/create">
-        <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
+        <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
       @endif
     </div>

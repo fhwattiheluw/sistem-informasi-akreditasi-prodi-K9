@@ -5,7 +5,7 @@
   <div class="page-header flex-wrap">
     <div class="header-left">
       <a href="{{route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.create')}}">
-        <button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
+        <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">

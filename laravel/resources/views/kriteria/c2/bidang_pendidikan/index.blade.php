@@ -5,7 +5,7 @@
   <div class="page-header flex-wrap">
     <div class="header-left">
       <a href="/kriteria2/bidang_pendidikan/create/bidang pendidikan">
-<button class="btn btn-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
+<button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
 
     </div>

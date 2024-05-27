@@ -6,7 +6,7 @@
     <div class="header-left">
       <a href="/dataprodi/edit">
         @if(auth()->user()->role == 'admin prodi')
-          <button  type="button" class="btn btn-primary mb-2 mb-md-0 mr-2 ">Ubah Data Program Studi</button>
+          <button  type="button" class="btn btn-outline-primary mb-2 mb-md-0 mr-2 ">Ubah Data Program Studi</button>
         @endif
       </a>
       <!-- <button class="btn btn-outline-primary bg-white mb-2 mb-md-0"> Import documents </button> -->
