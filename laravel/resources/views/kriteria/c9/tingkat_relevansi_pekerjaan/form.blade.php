@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{route('kepuasan_mahasiswa.index')}}">
+      <a href="{{route('tingkat_relevansi_pekerjaan.index')}}">
         <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
       </a>
     </div>
@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 Dosen Tamu Dan Tenaga Ahli</p>
+          <p class="m-0">K.9 tingkat_relevansi_pekerjaan</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('tingkat_relevansi_pekerjaan.update', ['id' => Crypt::encryptString($item->id)])  : route('tingkat_relevansi_pekerjaan.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,7 +36,7 @@
             Edit data
             @endif
 
-            Dosen Tamu Dan Tenaga Ahli</h4>
+            tingkat_relevansi_pekerjaan</h4>
 
           @if ($errors->any())
               <div>
@@ -50,29 +50,55 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Tahun Lulus</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="tahun_lulus" value="{{ isset($item->tahun_lulus) ? $item->tahun_lulus : old('tahun_lulus') }}" class="form-control @error('tahun_lulus') is-invalid @enderror" placeholder="Ketik disini">
+              @error('tahun_lulus')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing</label>
+            <label class="col-sm-3 col-form-label">Jumlah Lulusan</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing" value="{{ isset($item->nama_dosen_pembimbing) ? $item->nama_dosen_pembimbing : old('nama_dosen_pembimbing') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="jumlah_lulusan" value="{{ isset($item->jumlah_lulusan) ? $item->jumlah_lulusan : old('jumlah_lulusan') }}" class="form-control @error('jumlah_lulusan') is-invalid @enderror" placeholder="Ketik disini">
+              @error('jumlah_lulusan')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Jumlah Lulusan Yang Terlacak</label>
             <div class="col-sm-9">
-              <input type="text" name="frekuensi_kegiatan" value="{{ isset($item->frekuensi_kegiatan) ? $item->frekuensi_kegiatan : old('frekuensi_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="jumlah_lulusan_terlacak" value="{{ isset($item->jumlah_lulusan_terlacak) ? $item->jumlah_lulusan_terlacak : old('jumlah_lulusan_terlacak') }}" class="form-control @error('jumlah_lulusan_terlacak') is-invalid @enderror" placeholder="Ketik disini">
+              @error('jumlah_lulusan_terlacak')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Jumlah Lulusan Terlacak Dengan Tingkat Relevansi Bidang Kerja (Tinggi,	Sedang,	Rendah)</label>
             <div class="col-sm-9">
-              <input type="text" name="hasil_kegiatan" value="{{ isset($item->hasil_kegiatan) ? $item->hasil_kegiatan : old('hasil_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <select name="tingkat_relevansi_bidang_kerja" class="form-control @error('tingkat_relevansi_bidang_kerja') is-invalid @enderror">
+                <option value="" hidden>Select Tingkat Relevansi Bidang Kerja</option>
+                <option value="Tinggi" {{ (isset($item->tingkat_relevansi_bidang_kerja) && $item->tingkat_relevansi_bidang_kerja == 'Tinggi') ? 'selected' : '' }}>Tinggi</option>
+                <option value="Sedang" {{ (isset($item->tingkat_relevansi_bidang_kerja) && $item->tingkat_relevansi_bidang_kerja == 'Sedang') ? 'selected' : '' }}>Sedang</option>
+                <option value="Rendah" {{ (isset($item->tingkat_relevansi_bidang_kerja) && $item->tingkat_relevansi_bidang_kerja == 'Rendah') ? 'selected' : '' }}>Rendah</option>
+              </select>
+              @error('tingkat_relevansi_bidang_kerja')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">

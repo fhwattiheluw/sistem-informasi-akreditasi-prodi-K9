@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{route('kepuasan_mahasiswa.index')}}">
+      <a href="{{route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index')}}">
         <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
       </a>
     </div>
@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 Dosen Tamu Dan Tenaga Ahli</p>
+          <p class="m-0">K.9 Karya Ilmiah DTPS Dan Mahasiswa Yang Disitasi</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.update', ['id' => Crypt::encryptString($item->id)])  : route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,7 +36,7 @@
             Edit data
             @endif
 
-            Dosen Tamu Dan Tenaga Ahli</h4>
+            Karya Ilmiah DTPS Dan Mahasiswa Yang Disitasi</h4>
 
           @if ($errors->any())
               <div>
@@ -50,29 +50,72 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Nama Dosen Dan/Atau Mahasiswa</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="nama_dosen_dan_atau_mahasiswa" value="{{ isset($item->nama_dosen_dan_atau_mahasiswa) ? $item->nama_dosen_dan_atau_mahasiswa : old('nama_dosen_dan_atau_mahasiswa') }}" class="form-control" placeholder="Ketik disini">
+              @error('nama_dosen_dan_atau_mahasiswa')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing</label>
+            <label class="col-sm-3 col-form-label">Judul Karya Ilmiah</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing" value="{{ isset($item->nama_dosen_pembimbing) ? $item->nama_dosen_pembimbing : old('nama_dosen_pembimbing') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="judul_karya_ilmiah" value="{{ isset($item->judul_karya_ilmiah) ? $item->judul_karya_ilmiah : old('judul_karya_ilmiah') }}" class="form-control" placeholder="Ketik disini">
+              @error('judul_karya_ilmiah')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Tahun</label>
             <div class="col-sm-9">
-              <input type="text" name="frekuensi_kegiatan" value="{{ isset($item->frekuensi_kegiatan) ? $item->frekuensi_kegiatan : old('frekuensi_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="tahun" value="{{ isset($item->tahun) ? $item->tahun : old('tahun') }}" class="form-control" placeholder="Ketik disini">
+              @error('tahun')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Nama Jurnal/Prosiding/Buku</label>
             <div class="col-sm-9">
-              <input type="text" name="hasil_kegiatan" value="{{ isset($item->hasil_kegiatan) ? $item->hasil_kegiatan : old('hasil_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="nama_jurnal_prosiding_buku" value="{{ isset($item->nama_jurnal_prosiding_buku) ? $item->nama_jurnal_prosiding_buku : old('nama_jurnal_prosiding_buku') }}" class="form-control" placeholder="Ketik disini">
+              @error('nama_jurnal_prosiding_buku')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Nomor Halaman</label>
+            <div class="col-sm-9">
+              <input type="text" name="nomor_halaman" value="{{ isset($item->nomor_halaman) ? $item->nomor_halaman : old('nomor_halaman') }}" class="form-control" placeholder="Ketik disini">
+              @error('nomor_halaman')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Jumlah Sitasi</label>
+            <div class="col-sm-9">
+              <input type="text" name="jumlah_sitasi" value="{{ isset($item->jumlah_sitasi) ? $item->jumlah_sitasi : old('jumlah_sitasi') }}" class="form-control" placeholder="Ketik disini">
+              @error('jumlah_sitasi')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
+            </div>
+          </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">

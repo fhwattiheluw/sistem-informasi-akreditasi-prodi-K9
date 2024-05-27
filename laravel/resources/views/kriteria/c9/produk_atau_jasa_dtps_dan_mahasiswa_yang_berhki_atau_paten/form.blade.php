@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{route('kepuasan_mahasiswa.index')}}">
+      <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index')}}">
         <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
       </a>
     </div>
@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 Dosen Tamu Dan Tenaga Ahli</p>
+          <p class="m-0">K.9 Produk Atau Jasa DTPS Dan/Atau Mahasiswa Yang Ber-HKI Atau Paten</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.update', ['id' => Crypt::encryptString($item->id)])  : route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,43 +36,31 @@
             Edit data
             @endif
 
-            Dosen Tamu Dan Tenaga Ahli</h4>
-
-          @if ($errors->any())
-              <div>
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li style="color: red;">{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-            @endif
+            Produk Atau Jasa DTPS Dan/Atau Mahasiswa Yang Ber-HKI Atau Paten</h4> 
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Nama Dosen Dan/Atau Mahasiswa</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="nama_dosen_dan_atau_mahasiswa" value="{{ isset($item->nama_dosen_dan_atau_mahasiswa) ? $item->nama_dosen_dan_atau_mahasiswa : old('nama_dosen_dan_atau_mahasiswa') }}" class="form-control" placeholder="Ketik disini">
+              <div class="invalid-feedback" data-bv-message="Name must be filled"></div>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing</label>
+            <label class="col-sm-3 col-form-label">Identitas Produk/Jasa</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing" value="{{ isset($item->nama_dosen_pembimbing) ? $item->nama_dosen_pembimbing : old('nama_dosen_pembimbing') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="identitas_produk_jasa" value="{{ isset($item->identitas_produk_jasa) ? $item->identitas_produk_jasa : old('identitas_produk_jasa') }}" class="form-control" placeholder="Ketik disini">
+              <div class="invalid-feedback" data-bv-message="Identitas Produk/Jasa must be filled"></div>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Tahun (YYYY)</label>
             <div class="col-sm-9">
-              <input type="text" name="frekuensi_kegiatan" value="{{ isset($item->frekuensi_kegiatan) ? $item->frekuensi_kegiatan : old('frekuensi_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="tahun" value="{{ isset($item->tahun) ? $item->tahun : old('tahun') }}" class="form-control" placeholder="Ketik disini">
+              <div class="invalid-feedback" data-bv-message="Tahun must be a number"></div>
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
-            <div class="col-sm-9">
-              <input type="text" name="hasil_kegiatan" value="{{ isset($item->hasil_kegiatan) ? $item->hasil_kegiatan : old('hasil_kegiatan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">

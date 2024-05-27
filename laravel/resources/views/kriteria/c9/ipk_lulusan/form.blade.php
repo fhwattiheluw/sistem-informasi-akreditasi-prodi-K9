@@ -50,27 +50,34 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Tahun Lulus</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="tahun_lulus" value="{{ isset($item->tahun_lulus) ? $item->tahun_lulus : old('tahun_lulus') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing</label>
+            <label class="col-sm-3 col-form-label">Jumlah Lulusan</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing" value="{{ isset($item->nama_dosen_pembimbing) ? $item->nama_dosen_pembimbing : old('nama_dosen_pembimbing') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="jumlah_lulusan" value="{{ isset($item->jumlah_lulusan) ? $item->jumlah_lulusan : old('jumlah_lulusan') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Indeks Prestasi Kumulatif (IPK)</label>
             <div class="col-sm-9">
-              <input type="text" name="frekuensi_kegiatan" value="{{ isset($item->frekuensi_kegiatan) ? $item->frekuensi_kegiatan : old('frekuensi_kegiatan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
-            <div class="col-sm-9">
-              <input type="text" name="hasil_kegiatan" value="{{ isset($item->hasil_kegiatan) ? $item->hasil_kegiatan : old('hasil_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="col-form-label">Minimum</label>
+                  <input type="number" name="ipk_min" value="{{ isset($item->ipk_min) ? $item->ipk_min : old('ipk_min') }}" class="form-control" placeholder="Ketik disini">
+                </div>
+                <div class="col-sm-4">
+                  <label class="col-form-label">Rata-Rata</label>
+                  <input type="number" name="ipk_rata_rata" value="{{ isset($item->ipk_rata_rata) ? $item->ipk_rata_rata : old('ipk_rata_rata') }}" class="form-control" placeholder="Ketik disini">
+                </div>
+                <div class="col-sm-4">
+                  <label class="col-form-label">Maksimum</label>
+                  <input type="number" name="ipk_max" value="{{ isset($item->ipk_max) ? $item->ipk_max : old('ipk_max') }}" class="form-control" placeholder="Ketik disini">
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
