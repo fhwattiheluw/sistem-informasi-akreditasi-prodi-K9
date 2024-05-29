@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('jumlah_lulusan');
             $table->string('jumlah_terlacak');
             $table->enum('relevansi',['tinggi','sedang','rendah']);
-            $table->string('tautan');
+            $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();

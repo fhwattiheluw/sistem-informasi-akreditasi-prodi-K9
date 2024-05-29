@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('jenis_kemampuan');
             $table->enum('tingkat',['sangat_baik','baik','cukup','kurang']);
             $table->string('tindak_lanjut');
-            $table->string('tautan');
+            $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tabal_k9_kepuasan_penggunas');
+        Schema::dropIfExists('tabel_k9_kepuasan_penggunas');
     }
 };

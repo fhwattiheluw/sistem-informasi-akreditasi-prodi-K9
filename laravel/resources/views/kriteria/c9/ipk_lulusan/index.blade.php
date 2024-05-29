@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(Auth::user()->role == 'admin prodi')
       <a href="{{route('ipk_lulusan.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -50,7 +52,9 @@
                   <th rowspan="2">Jumlah lulusan</th>
                   <th colspan="3">Indeks Prestasi Kumulatif (IPK)</th>
                   <th rowspan="2">Tautan</th>
+                  @if(Auth::user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>Minimum</th>
@@ -69,12 +73,15 @@
                   <td>{{ number_format($d->rata_rata, 2) }}</td>
                   <td>{{ number_format($d->maksimum, 2) }}</td>
                   <td>@if(!empty($d->tautan))<a href="{{ $d->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
-                  
+                  @if(Auth::user()->role == 'admin prodi')
                   <td>
                     <a href="{{ route('ipk_lulusan.edit', ['id' => $d->id]) }}" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    <a href="{{ route('ipk_lulusan.destroy', ['id' => $d->id]) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                      <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    </a>
                   </td>
                 </tr>
+                @endif
                 @endforeach
               </tbody>
               

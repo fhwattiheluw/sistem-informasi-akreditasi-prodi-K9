@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('waktu_tunggu_wt36');
             $table->integer('waktu_tunggu_wt612');
             $table->integer('waktu_tunggu_wt12');
-            $table->string('tautan');
+            $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();

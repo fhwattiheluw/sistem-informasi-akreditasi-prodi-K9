@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('jumlah_lulus_ts');
             $table->integer('jumlah_lulus');
             $table->integer('rata_masa_studi');
-            $table->string('tautan');
+            $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();

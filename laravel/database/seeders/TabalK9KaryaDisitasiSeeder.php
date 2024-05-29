@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-use App\Models\TabalK9KaryaDisitasi;
+use App\Models\TabelK9KaryaDisitasi;
 
 class TabalK9KaryaDisitasiSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class TabalK9KaryaDisitasiSeeder extends Seeder
      */
     public function run()
     {
-        TabalK9KaryaDisitasi::insert([
+        TabelK9KaryaDisitasi::insert([
             ['penulis_dosen_id' => '12345678', 'penulis_mahasiswa' => '123456789', 'judul' => 'judul 1', 'tahun' => '2020', 'nama_penerbit' => 'penerbit 1', 'nomor_halaman' => 'halaman 1', 'jumlah_sitasi' => 1, 'tautan' => 'tautan 1', 'prodi_id' => '123'],
             ['penulis_dosen_id' => '12345678', 'penulis_mahasiswa' => '123456788', 'judul' => 'judul 2', 'tahun' => '2021', 'nama_penerbit' => 'penerbit 2', 'nomor_halaman' => 'halaman 2', 'jumlah_sitasi' => 2, 'tautan' => 'tautan 2', 'prodi_id' => '123'],
             ['penulis_dosen_id' => '23456789', 'penulis_mahasiswa' => '123456787', 'judul' => 'judul 3', 'tahun' => '2022', 'nama_penerbit' => 'penerbit 3', 'nomor_halaman' => 'halaman 3', 'jumlah_sitasi' => 3, 'tautan' => 'tautan 3', 'prodi_id' => '123'],

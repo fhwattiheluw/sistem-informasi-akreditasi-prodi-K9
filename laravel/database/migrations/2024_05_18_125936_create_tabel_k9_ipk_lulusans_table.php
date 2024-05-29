@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('minimum', 4, 2);
             $table->decimal('rata_rata', 4, 2);
             $table->decimal('maksimum', 4, 2);
-            $table->string('tautan');
+            $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();

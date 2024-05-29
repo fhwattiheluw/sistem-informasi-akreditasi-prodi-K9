@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('nama_penerbit');
             $table->string('nomor_halaman')->nullable();
             $table->integer('jumlah_sitasi');
-            $table->string('tautan');
+            $table->string('tautan')->nullable();
             $table->foreign('penulis_dosen_id')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

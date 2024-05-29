@@ -46,9 +46,9 @@ class TabelC9Controller extends Controller
     public function ipk_lulusan_index()
     {
         if(Auth::user()->role == 'fakultas'){
-        $data = TabelK9IpkLulusan::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+            $data = TabelK9IpkLulusan::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->orderBy('tahun', 'desc')->get();
         }else{
-            $data = TabelK9IpkLulusan::where('prodi_id', Auth::user()->prodi->id)->get();
+            $data = TabelK9IpkLulusan::where('prodi_id', Auth::user()->prodi->id)->orderBy('tahun', 'desc')->get();
 
         }
         
@@ -75,9 +75,29 @@ class TabelC9Controller extends Controller
     public function ipk_lulusan_store(Request $request)
     {
         //
-        $data = $request->all();
-        tabelC9::create($data);
-        return redirect()->route('ipk_lulusan.index');
+        
+        $request->validate([
+            'tahun' => 'required|unique:tabel_k9_ipk_lulusans',
+            'jumlah_lulusan' => 'required',
+            'minimum' => 'required',
+            'rata_rata' => 'required',
+            'maksimum' => 'required',
+            'tautan' => 'nullable',
+        ]);
+
+
+        TabelK9IpkLulusan::create([
+            'tahun' => $request->tahun,
+            'jumlah_lulusan' => $request->jumlah_lulusan,
+            'minimum' => $request->minimum,
+            'rata_rata' => $request->rata_rata,
+            'maksimum' => $request->maksimum,
+            'tautan' => $request->tautan,
+            'prodi_id' => Auth::user()->prodi->id,
+        ]);
+
+
+        return redirect()->route('ipk_lulusan.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -86,10 +106,11 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function ipk_lulusan_edit(tabelC9 $tabelC9)
+    public function ipk_lulusan_edit(tabelC9 $tabelC9,$id)
     {
         //
-        return view('kriteria.c9.ipk_lulusan.form', ['item' => $tabelC9]);
+        $data = TabelK9IpkLulusan::findorfail($id);
+        return view('kriteria.c9.ipk_lulusan.form', ['item' => $data]);
     }
 
     /**
@@ -99,12 +120,30 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function ipk_lulusan_update(Request $request, tabelC9 $tabelC9)
+    public function ipk_lulusan_update(Request $request, TabelK9IpkLulusan $model,$id)
     {
         //
-        $data = $request->all();
-        $tabelC9->update($data);
-        return redirect()->route('ipk_lulusan.index');
+
+        $id = Crypt::decryptString($id);
+        
+         $request->validate([
+            'jumlah_lulusan' => 'required',
+            'minimum' => 'required',
+            'rata_rata' => 'required',
+            'maksimum' => 'required',
+            'tautan' => 'nullable',
+        ]);
+
+
+        // TabelK9IpkLulusan::findorfail($id);
+        TabelK9IpkLulusan::where('id', $id)->update([
+            'jumlah_lulusan' => $request->jumlah_lulusan,
+            'minimum' => $request->minimum,
+            'rata_rata' => $request->rata_rata,
+            'maksimum' => $request->maksimum,
+            'tautan' => $request->tautan,
+        ]); 
+        return redirect()->back()->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -113,11 +152,12 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function ipk_lulusan_destroy(tabelC9 $tabelC9)
+    public function ipk_lulusan_destroy(tabelC9 $tabelC9,$id)
     {
         //
-        $tabelC9->delete();
-        return redirect()->route('ipk_lulusan.index');
+        TabelK9IpkLulusan::destroy($id);
+
+        return redirect()->back()->with('success', 'Data Berhasil Di Hapus');
     }
 
     

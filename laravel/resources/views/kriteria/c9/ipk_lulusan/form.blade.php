@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('ipk_lulusan.update', ['id' => Crypt::encryptString($item->id)])  : route('ipk_lulusan.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -37,6 +37,15 @@
             @endif
 
             IPK Lulusan</h4>
+
+             @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
 
           @if ($errors->any())
               <div>
@@ -52,8 +61,8 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tahun Lulus <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input type="number" name="tahun_lulus" value="{{ isset($item->tahun_lulus) ? $item->tahun_lulus : old('tahun_lulus') }}" class="form-control @error('tahun_lulus') is-invalid @enderror" placeholder="Ketik disini">
-              @error('tahun_lulus')
+              <input type="number" step="0.01" name="tahun" value="{{ isset($item->tahun) ? $item->tahun : old('tahun') }}" class="form-control @error('tahun') is-invalid @enderror" placeholder="Ketik disini" @if(isset($item->id)) disabled @endif>
+              @error('tahun')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
@@ -63,7 +72,7 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Jumlah Lulusan <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input type="number" name="jumlah_lulusan" value="{{ isset($item->jumlah_lulusan) ? $item->jumlah_lulusan : old('jumlah_lulusan') }}" class="form-control @error('jumlah_lulusan') is-invalid @enderror" placeholder="Ketik disini">
+              <input type="number" step="0.01" name="jumlah_lulusan" value="{{ isset($item->jumlah_lulusan) ? $item->jumlah_lulusan : old('jumlah_lulusan') }}" class="form-control @error('jumlah_lulusan') is-invalid @enderror" placeholder="Ketik disini">
               @error('jumlah_lulusan')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -77,8 +86,8 @@
               <div class="row">
                 <div class="col-sm-4">
                   <label class="col-form-label">Minimum <span class="text-danger">*</span></label>
-                  <input type="number" name="ipk_min" value="{{ isset($item->ipk_min) ? $item->ipk_min : old('ipk_min') }}" class="form-control @error('ipk_min') is-invalid @enderror" placeholder="Ketik disini">
-                  @error('ipk_min')
+                  <input type="number" step="0.01" name="minimum" value="{{ isset($item->minimum) ? $item->minimum : old('minimum') }}" class="form-control @error('minimum') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('minimum')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -86,8 +95,8 @@
                 </div>
                 <div class="col-sm-4">
                   <label class="col-form-label">Rata-Rata <span class="text-danger">*</span></label>
-                  <input type="number" name="ipk_rata_rata" value="{{ isset($item->ipk_rata_rata) ? $item->ipk_rata_rata : old('ipk_rata_rata') }}" class="form-control @error('ipk_rata_rata') is-invalid @enderror" placeholder="Ketik disini">
-                  @error('ipk_rata_rata')
+                  <input type="number" step="0.01" name="rata_rata" value="{{ isset($item->rata_rata) ? $item->rata_rata : old('rata_rata') }}" class="form-control @error('rata_rata') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('rata_rata')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -95,8 +104,8 @@
                 </div>
                 <div class="col-sm-4">
                   <label class="col-form-label">Maksimum <span class="text-danger">*</span></label>
-                  <input type="number" name="ipk_max" value="{{ isset($item->ipk_max) ? $item->ipk_max : old('ipk_max') }}" class="form-control @error('ipk_max') is-invalid @enderror" placeholder="Ketik disini">
-                  @error('ipk_max')
+                  <input type="number" step="0.01" name="maksimum" value="{{ isset($item->maksimum) ? $item->maksimum : old('maksimum') }}" class="form-control @error('maksimum') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('maksimum')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -106,9 +115,14 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Tautan</label>
+            <label class="col-sm-3 col-form-label">Tautan <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control @error('tautan') is-invalid @enderror" placeholder="Ketik disini">
+              @error('tautan')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
             </div>
           </div>
 
