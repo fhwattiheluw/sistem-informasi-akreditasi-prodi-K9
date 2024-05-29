@@ -473,6 +473,17 @@ class DatabaseSeeder extends Seeder
             'prodi_id' => 123,
         ]);
 
+        $this->call(tabelDosenSeeder::class);
+
+        // Tabel kriteria 9
+        $this->call(TabelK9IpkLulusanSeeder::class);
+        $this->call(TabelK9PrestasiMahasiswaSeeder::class);
+        $this->call(TabelK9TracerStudiSeeder::class);
+        $this->call(TabelK9RelevansiPekerjaanSeeder::class);
+        $this->call(TabalK9KaryaDisitasiSeeder::class);
+        $this->call(TabalK9ProdukSeeder::class);
+        $this->call(TabalK9ProdukHkiSeeder::class);
+
         $this->call(K5Seeder::class);
     }
 }

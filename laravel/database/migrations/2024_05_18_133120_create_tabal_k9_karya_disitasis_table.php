@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tabal_k9_karya_disitasis', function (Blueprint $table) {
+        Schema::create('tabel_k9_karya_disitasis', function (Blueprint $table) {
             $table->id();
             $table->string('penulis_dosen_id')->nullable();
             $table->string('penulis_mahasiswa')->nullable();

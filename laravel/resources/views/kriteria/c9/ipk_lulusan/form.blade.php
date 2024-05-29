@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 IPK Lulusan</p>
+          <p class="m-0">K.9 IPK Lulusan</p>
         </a>
       </div>
 
@@ -50,32 +50,57 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Tahun Lulus</label>
+            <label class="col-sm-3 col-form-label">Tahun Lulus <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input type="number" name="tahun_lulus" value="{{ isset($item->tahun_lulus) ? $item->tahun_lulus : old('tahun_lulus') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="tahun_lulus" value="{{ isset($item->tahun_lulus) ? $item->tahun_lulus : old('tahun_lulus') }}" class="form-control @error('tahun_lulus') is-invalid @enderror" placeholder="Ketik disini">
+              @error('tahun_lulus')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jumlah Lulusan</label>
+            <label class="col-sm-3 col-form-label">Jumlah Lulusan <span class="text-danger">*</span></label>
             <div class="col-sm-9">
-              <input type="number" name="jumlah_lulusan" value="{{ isset($item->jumlah_lulusan) ? $item->jumlah_lulusan : old('jumlah_lulusan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="jumlah_lulusan" value="{{ isset($item->jumlah_lulusan) ? $item->jumlah_lulusan : old('jumlah_lulusan') }}" class="form-control @error('jumlah_lulusan') is-invalid @enderror" placeholder="Ketik disini">
+              @error('jumlah_lulusan')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Indeks Prestasi Kumulatif (IPK)</label>
+            <label class="col-sm-3 col-form-label">Indeks Prestasi Kumulatif (IPK) <span class="text-danger">*</span></label>
             <div class="col-sm-9">
               <div class="row">
                 <div class="col-sm-4">
-                  <label class="col-form-label">Minimum</label>
-                  <input type="number" name="ipk_min" value="{{ isset($item->ipk_min) ? $item->ipk_min : old('ipk_min') }}" class="form-control" placeholder="Ketik disini">
+                  <label class="col-form-label">Minimum <span class="text-danger">*</span></label>
+                  <input type="number" name="ipk_min" value="{{ isset($item->ipk_min) ? $item->ipk_min : old('ipk_min') }}" class="form-control @error('ipk_min') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('ipk_min')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
                 <div class="col-sm-4">
-                  <label class="col-form-label">Rata-Rata</label>
-                  <input type="number" name="ipk_rata_rata" value="{{ isset($item->ipk_rata_rata) ? $item->ipk_rata_rata : old('ipk_rata_rata') }}" class="form-control" placeholder="Ketik disini">
+                  <label class="col-form-label">Rata-Rata <span class="text-danger">*</span></label>
+                  <input type="number" name="ipk_rata_rata" value="{{ isset($item->ipk_rata_rata) ? $item->ipk_rata_rata : old('ipk_rata_rata') }}" class="form-control @error('ipk_rata_rata') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('ipk_rata_rata')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
                 <div class="col-sm-4">
-                  <label class="col-form-label">Maksimum</label>
-                  <input type="number" name="ipk_max" value="{{ isset($item->ipk_max) ? $item->ipk_max : old('ipk_max') }}" class="form-control" placeholder="Ketik disini">
+                  <label class="col-form-label">Maksimum <span class="text-danger">*</span></label>
+                  <input type="number" name="ipk_max" value="{{ isset($item->ipk_max) ? $item->ipk_max : old('ipk_max') }}" class="form-control @error('ipk_max') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('ipk_max')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
               </div>
             </div>

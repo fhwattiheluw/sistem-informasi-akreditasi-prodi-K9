@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tabal_k9_kepuasan_penggunas', function (Blueprint $table) {
+        Schema::create('tabel_k9_kepuasan_penggunas', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_kemampuan');
             $table->enum('tingkat',['sangat_baik','baik','cukup','kurang']);

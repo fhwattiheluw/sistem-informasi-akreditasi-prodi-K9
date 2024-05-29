@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tabel_k9_tracer_studis', function (Blueprint $table) {
             $table->id();
-            $table->enum('tahun_lulus',['ts_6','ts_5','ts_4','ts_3']);
+            $table->integer('tahun_lulus');
             $table->integer('jumlah_lulusan');
             $table->integer('jumlah_terlacak');
             $table->integer('waktu_tunggu_wt3');

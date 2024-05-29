@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('tabel_k9_ipk_lulusans', function (Blueprint $table) {
             $table->id();
-            $table->enum('tahun',['ts_2','ts_1','ts']);
+            $table->integer('tahun');
             $table->integer('jumlah_lulusan');
-            $table->decimal('minimum', 2, 2);
-            $table->decimal('maksimum', 2, 2);
+            $table->decimal('minimum', 4, 2);
+            $table->decimal('rata_rata', 4, 2);
+            $table->decimal('maksimum', 4, 2);
             $table->string('tautan');
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

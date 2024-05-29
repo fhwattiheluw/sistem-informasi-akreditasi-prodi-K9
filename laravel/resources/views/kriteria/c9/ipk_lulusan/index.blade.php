@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif LED</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 IPK Lulusan</p>
+          <p class="m-0">K.9 IPK Lulusan</p>
         </a>
       </div>
 

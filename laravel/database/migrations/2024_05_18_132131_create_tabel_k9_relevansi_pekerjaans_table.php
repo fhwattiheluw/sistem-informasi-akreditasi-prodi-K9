@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tabel_k9_relevansi_pekerjaans', function (Blueprint $table) {
             $table->id();
-            $table->enum('tahun_lulus',['ts_6','ts_5','ts_4','ts_3']);
+            $table->integer('tahun_lulus');
             $table->string('jumlah_lulusan');
             $table->string('jumlah_terlacak');
             $table->enum('relevansi',['tinggi','sedang','rendah']);
