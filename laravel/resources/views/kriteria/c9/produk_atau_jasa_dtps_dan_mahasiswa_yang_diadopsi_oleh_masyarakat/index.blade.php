@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -49,19 +57,29 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach ($items as $item)
                 <tr>
-                  <td>{{ $i }}</td> 
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td> 
                   <td>
-                    <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.edit', ['id'=>$i] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    Dosen : {{ $item->dosen->nama }} <br>
+                    Mahasiswa : {{ $item->nama_mahasiswa }}
+                  </td>
+                  <td>{{ $item->nama_produk }}</td>
+                  <td>{{ $item->deskripsi }}</td>
+                  <td>@if(!empty($item->tautan))<a href="{{ $item->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
+
+                  <td>
+                    <a href="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.edit', [$item->id]) }}">
+                      <button type="button" class="btn btn-primary btn-sm"> Edit </button>
+                    </a>
+                    <form action="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.destroy', [$item->id]) }}" method="POST" style="display: inline">
+                      @method('DELETE')
+                      @csrf
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin untuk menghapus data ini?')">Hapus</button>
+                    </form>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

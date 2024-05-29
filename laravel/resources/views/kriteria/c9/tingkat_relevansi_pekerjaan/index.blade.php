@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -54,21 +62,26 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($items as $data)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $data->tahun_lulus }}</td>
+                  <td>{{ $data->jumlah_lulusan }}</td>
+                  <td>{{ $data->jumlah_terlacak }}</td>
+                  <td>{{ $data->relevansi }}</td>
+                  <td>{{ $data->relevansi }}</td>
+                  <td>{{ $data->relevansi }}</td>
+                  <td>@if(!empty($data->tautan))<a href="{{ $data->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
+
                   <td>
-                    <a href="{{route('tingkat_relevansi_pekerjaan.edit', ['id' => $i])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    <a href="{{route('tingkat_relevansi_pekerjaan.edit', ['id' => $data->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <form action="{{route('tingkat_relevansi_pekerjaan.destroy', ['id' => $data->id])}}" method="POST" class="d-inline">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</button>
+                    </form>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

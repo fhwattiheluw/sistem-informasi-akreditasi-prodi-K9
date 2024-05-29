@@ -9,6 +9,7 @@ use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\DataProgramStudiController;
 use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Session;
 
 class AkunController extends Controller
 {
@@ -20,7 +21,7 @@ class AkunController extends Controller
       * @param Type $var The Type variable to initialize.
       * @param DataProgramStudiController $prodiController The DataProgramStudiController instance.
       */
-     public function __construct(DataProgramStudiController $prodiController) {
+     public function __construct() {
         $this->prodiController = new DataProgramStudiController();
     }
 
@@ -49,12 +50,16 @@ class AkunController extends Controller
         return view('akun.manag_akun', compact('dataUser'));
     }
 
-    public function cek_select_prodi_by_fakultas(){
-        if(auth()->user()->role == 'fakultas' && !session()->has('prodi') && empty(session()->get('prodi'))) {
-            return true;
-        }else{
-            return false;
+    public function get_session_prodi_by_fakultas(){
+        $session_prodi = null;
+        if(!empty(session::has('prodi'))){
+            return $session_prodi = session::get('prodi')['prodi']->id;
         }
+
+        
+        session()->flash('info', 'Anda belum memilih prodi. Silahkan pilih prodi terlebih dahulu');
+
+        return $session_prodi;
     }
 
 /**

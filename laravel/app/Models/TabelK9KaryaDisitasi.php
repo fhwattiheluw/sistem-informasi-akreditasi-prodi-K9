@@ -4,12 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TabelDosen;
 
-class TabalK9KaryaDisitasi extends Model
+class TabelK9KaryaDisitasi extends Model
 {
     use HasFactory;
 
     protected $table = 'tabel_k9_karya_disitasis';
     protected $guarded = ['id'];
     protected $fillable = [];
+
+    
+    public function dosen()
+    {
+        return $this->belongsTo(TabelDosen::class, 'penulis_dosen_id', 'nidn_nidk');
+    }
+    
 }

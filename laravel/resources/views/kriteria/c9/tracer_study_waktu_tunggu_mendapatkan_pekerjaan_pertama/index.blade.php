@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -55,22 +63,23 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($data as $d)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $d->tahun_lulus }}</td>
+                  <td>{{ $d->jumlah_lulusan }}</td>
+                  <td>{{ $d->jumlah_terlacak }}</td>
+                  <td>{{ $d->waktu_tunggu_wt3 }}</td>
+                  <td>{{ $d->waktu_tunggu_wt36 }}</td>
+                  <td>{{ $d->waktu_tunggu_wt612 }}</td>
+                  <td>{{ $d->waktu_tunggu_wt12 }}</td>
+                   <td>@if(!empty($d->tautan))<a href="{{ $d->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
+
                   <td>
-                    <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.edit',['id'=>$i])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.edit',['id'=>$d->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
                     <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

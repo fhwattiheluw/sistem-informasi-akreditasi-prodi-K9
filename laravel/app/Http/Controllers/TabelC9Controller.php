@@ -4,9 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\tabelC9;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\TabelK9IpkLulusan;
+use App\Models\TabelK9MasaStudi;
+use App\Models\TabelK9PrestasiMahasiswa;
+use App\Models\TabelK9RelevansiPekerjaan;
+use App\Models\TabelK9TracerStudi;
+use App\Models\TabelK9Publikasi;
+use App\Models\TabelK9ProdukHki;
+use App\Models\TabelK9Produk;
+use App\Models\TabelK9KepuasanPengguna;
+use App\Models\TabelK9KaryaDisitasi;
+
 
 class TabelC9Controller extends Controller
 {
+
+    public function __construct()
+    {
+        $this->akunController = new AkunController();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +45,14 @@ class TabelC9Controller extends Controller
      */
     public function ipk_lulusan_index()
     {
-        //
-        // $items = tabelC9::all();
-        return view('kriteria.c9.ipk_lulusan.index');
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9IpkLulusan::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+            $data = TabelK9IpkLulusan::where('prodi_id', Auth::user()->prodi->id)->get();
+
+        }
+        
+        return view('kriteria.c9.ipk_lulusan.index',compact('data'));
     }
     
     /**
@@ -103,8 +128,13 @@ class TabelC9Controller extends Controller
      */
     public function prestasi_mahasiswa_index()
     {
-        $items = tabelC9::all();
-        return view('kriteria.c9.prestasi_mahasiswa.index', ['items' => $items]);
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9PrestasiMahasiswa::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+            $data = TabelK9PrestasiMahasiswa::where('prodi_id', Auth::user()->prodi->id)->get();
+
+        }
+        return view('kriteria.c9.prestasi_mahasiswa.index', ['data' => $data]);
     }
 
     /**
@@ -245,8 +275,13 @@ class TabelC9Controller extends Controller
      */
     public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_index()
     {
-        // $items = tabelC9::where('kriteria', 'Tracer Study Waktu Tunggu Mendapatkan Pekerjaan Pertama')->get();
-        return view('kriteria.c9.tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index');
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9TracerStudi::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+        $data = TabelK9TracerStudi::where('prodi_id', Auth::user()->prodi->id)->get();
+        }
+
+        return view('kriteria.c9.tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index', ['data' => $data]);
     }
 
     /**
@@ -316,8 +351,13 @@ class TabelC9Controller extends Controller
      */
     public function tingkat_relevansi_pekerjaan_index()
     {
-        // $items = tabelC9::where('kriteria', 'Tingkat Relevansi Pekerjaan')->get();
-        return view('kriteria.c9.tingkat_relevansi_pekerjaan.index');
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9RelevansiPekerjaan::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+        $data = TabelK9RelevansiPekerjaan::where('prodi_id', Auth::user()->prodi->id)->get();
+        }
+
+        return view('kriteria.c9.tingkat_relevansi_pekerjaan.index', ['items' => $data]);
     }
 
     /**
@@ -529,8 +569,13 @@ class TabelC9Controller extends Controller
      */
     public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_index()
     {
-        
-        return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index');
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9KaryaDisitasi::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+        $data = TabelK9KaryaDisitasi::where('prodi_id', Auth::user()->prodi->id)->get();
+        }
+
+        return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index', ['data' => $data]);
     }
 
     /**
@@ -600,8 +645,13 @@ class TabelC9Controller extends Controller
      */
     public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_index()
     {
-        
-        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index');
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9Produk::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+        $data = TabelK9Produk::where('prodi_id', Auth::user()->prodi->id)->get();
+        }
+
+        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index',['items' => $data]);
     }
 
     /**
@@ -671,8 +721,13 @@ class TabelC9Controller extends Controller
      */
     public function produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_index()
     {
-        
-        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index');
+        if(Auth::user()->role == 'fakultas'){
+        $data = TabelK9ProdukHki::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+        }else{
+        $data = TabelK9ProdukHki::where('prodi_id', Auth::user()->prodi->id)->get();
+        }
+
+        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index',['items' => $data]);
     }
 
     /**

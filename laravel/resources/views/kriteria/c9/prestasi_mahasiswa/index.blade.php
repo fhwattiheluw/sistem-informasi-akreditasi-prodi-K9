@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -55,22 +63,22 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($data as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->nama_mahasiswa }}</td>
+                  <td>{{ $item->prestasi }}</td>
+                  <td>{{ $item->waktu }}</td>
+                  <td>{{ ($item->tingkat == 'internasional') ? 'X' : ''  }}</td>
+                  <td>{{ ($item->tingkat == 'nasional') ? 'X' : ''  }}</td>
+                  <td>{{ ($item->tingkat == 'lokal') ? 'X' : ''  }}</td>
+                  <td>@if(!empty($item->tautan))<a href="{{ $item->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
                   <td>
-                    <a href="{{route('prestasi_mahasiswa.edit',['id'=>$i])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{route('prestasi_mahasiswa.edit',['id'=>$item->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
                     <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -53,21 +61,21 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($data as $d)
                 <tr>
-                  <td>{{ $i }}</td>
+                  <td>{{ $d->tahun }}</td>
+                  <td>{{ $d->jumlah_lulusan }}</td>
+                  <td>{{ number_format($d->minimum, 2) }}</td>
+                  <td>{{ number_format($d->rata_rata, 2) }}</td>
+                  <td>{{ number_format($d->maksimum, 2) }}</td>
+                  <td>@if(!empty($d->tautan))<a href="{{ $d->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
                   
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
                   <td>
-                    <a href="{{ route('ipk_lulusan.edit', ['id' => $i]) }}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{ route('ipk_lulusan.edit', ['id' => $d->id]) }}" type="button" class="btn btn-primary btn-sm"> Edit </a>
                     <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

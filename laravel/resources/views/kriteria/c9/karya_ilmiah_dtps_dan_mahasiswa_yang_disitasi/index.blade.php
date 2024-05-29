@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -49,19 +57,23 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($data as $d)
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
                   <td>
-                    <a href="{{route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit', ['id'=>$i] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    Dosen : {{ $d->dosen->nama }} <br>
+                    Mahasiswa : {{ $d->penulis_mahasiswa }}
+                  </td>
+                  <td>{{ $d->judul }}, {{ $d->tahun }}, {{ $d->nama_penerbit }}, {{ $d->nomor_halaman }}</td>
+                  <td>{{ $d->jumlah_sitasi }}</td>
+                  <td>@if(!empty($d->tautan))<a href="{{ $d->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
+
+                  <td>
+                    <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit', ['id' => $d->id]) }}" class="btn btn-primary btn-sm" type="button">Edit</a>
+                    <button type="button" class="btn btn-danger btn-sm">Hapus</button>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               
