@@ -120,7 +120,7 @@ class TabelC7Controller extends Controller
         if(isset($prodiId) &&  $prodiId != NULL){
             TabelK7PelibatanMahasiswaPenelitian::destroy($id);
         }
-        return redirect()->route('pelibatan_mahasiswa_dalam_penelitian.index')->with('success', 'Data K7 Pelibatan Mahasiswa dalam Penelelitian UPDATED successfully');    
+        return redirect()->route('pelibatan_mahasiswa_dalam_penelitian.index')->with('success', 'Data K7 Pelibatan Mahasiswa dalam Penelelitian DELETED successfully');    
     }
 
 }

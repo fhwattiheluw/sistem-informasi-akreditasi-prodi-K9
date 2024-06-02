@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tabel_k8_pelibatan_mhs_pkms', function (Blueprint $table) {
             $table->id();
-            $table->enum('tahun_akademik', ['ts_2','ts_1','ts']);
+            $table->year('tahun_akademik');
             $table->string('judul');
             $table->string('dosen_ketua_id');
             $table->string('kepakaran_ketua');
