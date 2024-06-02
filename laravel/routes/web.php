@@ -444,9 +444,12 @@ Route::middleware('auth')->group(function () {
 // ====================================
 Route::middleware('auth')->group(function () {
     Route::get('/kriteria7', [TabelC7Controller::class, 'index']);
-    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_index']);
-    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/create', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_create']);
-    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/edit', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_edit']);
+    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_index'])->name('pelibatan_mahasiswa_dalam_penelitian.index');
+    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/create', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_create'])->name('pelibatan_mahasiswa_dalam_penelitian.create');
+    Route::post('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/store', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_store'])->name('pelibatan_mahasiswa_dalam_penelitian.store');
+    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/{id}/edit', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_edit'])->name('pelibatan_mahasiswa_dalam_penelitian.edit');
+    Route::put('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/{id}/update', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_update'])->name('pelibatan_mahasiswa_dalam_penelitian.update');
+    Route::get('/kriteria7/pelibatan_mahasiswa_dalam_penelitian/{id}/delete', [TabelC7Controller::class, 'pelibatan_mahasiswa_dalam_penelitian_destroy'])->name('pelibatan_mahasiswa_dalam_penelitian.delete');
 });
 
 
@@ -455,9 +458,12 @@ Route::middleware('auth')->group(function () {
 // ====================================
 Route::middleware('auth')->group(function () {
     Route::get('/kriteria8', [TabelC8Controller::class, 'index']);
-    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_index']);
-    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/create', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_create']);
-    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/edit', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_edit']);
+    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_index'])->name('pelibatan_mahasiswa_dalam_pkm.index');
+    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/create', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_create'])->name('pelibatan_mahasiswa_dalam_pkm.create');
+    Route::post('/kriteria8/pelibatan_mahasiswa_dalam_pkm/store', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_store'])->name('pelibatan_mahasiswa_dalam_pkm.store');
+    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/{id}/edit', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_edit'])->name('pelibatan_mahasiswa_dalam_pkm.edit');
+    Route::put('/kriteria8/pelibatan_mahasiswa_dalam_pkm/{id}/update', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_update'])->name('pelibatan_mahasiswa_dalam_pkm.update');
+    Route::get('/kriteria8/pelibatan_mahasiswa_dalam_pkm/{id}/delete', [TabelC8Controller::class, 'pelibatan_mahasiswa_dalam_pkm_destroy'])->name('pelibatan_mahasiswa_dalam_pkm.delete');
 });
 
 // ====================================

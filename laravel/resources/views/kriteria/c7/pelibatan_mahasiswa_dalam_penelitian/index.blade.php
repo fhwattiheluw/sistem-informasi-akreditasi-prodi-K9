@@ -26,6 +26,14 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Aktivitas, Relevansi, dan Pelibatan Mahasiswa dalam Penelitian</h5>
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -41,31 +49,31 @@
                 </tr>
               </thead>
               <tbody class="text-center">
-                @for($i = 0; $i < 5; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>Lorem ipsum.</td>
-                  <td>Lorem ipsum.</td>
-                  <td>Lorem ipsum.</td>
-                  <td>Lorem ipsum.</td>
-                  <td>Lorem ipsum.</td>
-                  <td>Lorem ipsum.</td>
+                  <td>{{konversiTahunTS($item->tahun_akademik)}}</td>
+                  <td>{{$item->judul}}</td>
+                  <td>{{$item->dosen_ketua->nama}}</td>
+                  <td>{{$item->kepakaran_ketua}}</td>
+                  <td>{{$item->dosen_anggota->nama}}</td>
+                  <td>{{$item->mahasiswa}}</td>
                   <td>
                     <a href="#">
-                      <a href="#">
+                      <a href="{{$item->tautan}}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
 
                     </a>
                   </td>
                   <td>
-                    <a href="/kriteria7/pelibatan_mahasiswa_dalam_penelitian/edit">
+                    <a href="/kriteria7/pelibatan_mahasiswa_dalam_penelitian/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="#" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria7/pelibatan_mahasiswa_dalam_penelitian/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
             </table>
           </div>
