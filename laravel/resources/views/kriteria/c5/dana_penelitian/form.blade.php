@@ -64,7 +64,7 @@
                 <option value="">Pilih</option>
                 @foreach($dosens as $dosen)
                   <option value="{{ $dosen->nidn_nidk }}"
-                    @if(old('nidn_nidk', isset($item->nidk_nidk) ? $item->nidk_nidk : '') == $dosen->nidn_nidk) selected @endif>
+                    @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
                     {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
                 @endforeach
               </select>

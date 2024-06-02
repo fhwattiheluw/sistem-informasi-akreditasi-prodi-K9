@@ -10,6 +10,6 @@ class dataProgramStudi extends Model
     use HasFactory;
 
     protected $table = 'data_program_studis';
-    protected $fillable = [];
+    protected $guarded = ['id'];
 
 }
