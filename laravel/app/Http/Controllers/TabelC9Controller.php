@@ -169,9 +169,9 @@ class TabelC9Controller extends Controller
     public function prestasi_mahasiswa_index()
     {
         if(Auth::user()->role == 'fakultas'){
-        $data = TabelK9PrestasiMahasiswa::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+            $data = TabelK9PrestasiMahasiswa::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
         }else{
-            $data = TabelK9PrestasiMahasiswa::where('prodi_id', Auth::user()->prodi->id)->get();
+            $data = TabelK9PrestasiMahasiswa::where('prodi_id', Auth::user()->prodi->id)->orderBy('waktu', 'desc')->get();
 
         }
         return view('kriteria.c9.prestasi_mahasiswa.index', ['data' => $data]);
@@ -195,9 +195,24 @@ class TabelC9Controller extends Controller
      */
     public function prestasi_mahasiswa_store(Request $request)
     {
-        $data = $request->all();
-        tabelC9::create($data);
-        return redirect()->route('prestasi_mahasiswa.index');
+        $request->validate([
+            'nama_mahasiswa' => 'required',
+            'prestasi' => 'required',
+            'waktu' => 'required',
+            'tingkat' => 'required',
+            'tautan' => 'nullable',
+        ]);
+
+        TabelK9PrestasiMahasiswa::create([
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'prestasi' => $request->prestasi,
+            'waktu' => $request->waktu,
+            'tingkat' => $request->tingkat,
+            'tautan' => $request->tautan,
+            'prodi_id' => Auth::user()->prodi->id,
+        ]); 
+
+        return redirect()->route('prestasi_mahasiswa.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -206,9 +221,11 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function prestasi_mahasiswa_edit(tabelC9 $tabelC9)
+    public function prestasi_mahasiswa_edit(tabelC9 $tabelC9, $id)
     {
-        return view('kriteria.c9.prestasi_mahasiswa.form', ['item' => $tabelC9]);
+        $data = TabelK9PrestasiMahasiswa::findorfail($id);
+
+        return view('kriteria.c9.prestasi_mahasiswa.form', ['item' => $data]);
     }
 
     /**
@@ -218,11 +235,27 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function prestasi_mahasiswa_update(Request $request, tabelC9 $tabelC9)
+    public function prestasi_mahasiswa_update(Request $request, tabelC9 $tabelC9, $id)
     {
-        $data = $request->all();
-        $tabelC9->update($data);
-        return redirect()->route('prestasi_mahasiswa.index');
+         $request->validate([
+            'nama_mahasiswa' => 'required',
+            'prestasi' => 'required',
+            'waktu' => 'required',
+            'tingkat' => 'required',
+            'tautan' => 'nullable',
+        ]);
+
+
+        // TabelK9IpkLulusan::findorfail($id);
+        TabelK9PrestasiMahasiswa::where('id', $id)->update([
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'prestasi' => $request->prestasi,
+            'waktu' => $request->waktu,
+            'tingkat' => $request->tingkat,
+            'tautan' => $request->tautan,
+        ]); 
+
+        return redirect()->back()->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -231,10 +264,11 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function prestasi_mahasiswa_destroy(tabelC9 $tabelC9)
+    public function prestasi_mahasiswa_destroy(tabelC9 $tabelC9,$id)
     {
-        $tabelC9->delete();
-        return redirect()->route('prestasi_mahasiswa.index');
+        TabelK9PrestasiMahasiswa::destroy($id);
+
+        return redirect()->back()->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**
@@ -318,7 +352,7 @@ class TabelC9Controller extends Controller
         if(Auth::user()->role == 'fakultas'){
         $data = TabelK9TracerStudi::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
         }else{
-        $data = TabelK9TracerStudi::where('prodi_id', Auth::user()->prodi->id)->get();
+        $data = TabelK9TracerStudi::where('prodi_id', Auth::user()->prodi->id)->orderBy('tahun_lulus', 'desc')->get();
         }
 
         return view('kriteria.c9.tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index', ['data' => $data]);
@@ -342,9 +376,31 @@ class TabelC9Controller extends Controller
      */
     public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_store(Request $request)
     {
-        $data = $request->all();
-        tabelC9::create($data);
-        return redirect()->route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index');
+        $request->validate([
+            'tahun_lulus' => 'required|integer|unique:tabel_k9_tracer_studis',
+            'jumlah_lulusan' => 'required|integer',
+            'jumlah_terlacak' => 'required|integer',
+            'waktu_tunggu_wt3' => 'required|integer',
+            'waktu_tunggu_wt36' => 'required|integer',
+            'waktu_tunggu_wt612' => 'required|integer',
+            'waktu_tunggu_wt12' => 'required|integer',
+            'tautan' => 'nullable|url',
+        ]);
+
+
+        TabelK9TracerStudi::create([
+            'tahun_lulus' => $request->tahun_lulus,
+            'jumlah_lulusan' => $request->jumlah_lulusan,
+            'jumlah_terlacak' => $request->jumlah_terlacak,
+            'waktu_tunggu_wt3' => $request->waktu_tunggu_wt3,
+            'waktu_tunggu_wt36' => $request->waktu_tunggu_wt36,
+            'waktu_tunggu_wt612' => $request->waktu_tunggu_wt612,
+            'waktu_tunggu_wt12' => $request->waktu_tunggu_wt12,
+            'tautan' => $request->tautan,
+            'prodi_id' => Auth::user()->prodi->id,
+        ]);
+
+        return redirect()->route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -353,9 +409,10 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_edit(tabelC9 $tabelC9)
+    public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_edit(tabelC9 $tabelC9,$id)
     {
-        return view('kriteria.c9.tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.form', ['item' => $tabelC9]);
+        $item = TabelK9TracerStudi::findorfail($id);
+        return view('kriteria.c9.tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.form', ['item' => $item]);
     }
 
     /**
@@ -365,11 +422,30 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_update(Request $request, tabelC9 $tabelC9)
+    public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_update(Request $request, tabelC9 $tabelC9,$id)
     {
-        $data = $request->all();
-        $tabelC9->update($data);
-        return redirect()->route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index');
+        
+        $request->validate([
+            'jumlah_lulusan' => 'required|integer',
+            'jumlah_terlacak' => 'required|integer',
+            'waktu_tunggu_wt3' => 'required|integer',
+            'waktu_tunggu_wt36' => 'required|integer',
+            'waktu_tunggu_wt612' => 'required|integer',
+            'waktu_tunggu_wt12' => 'required|integer',
+            'tautan' => 'nullable|url',
+        ]);
+
+        TabelK9TracerStudi::findorfail($id)->update([
+            'jumlah_lulusan' => $request->jumlah_lulusan,
+            'jumlah_terlacak' => $request->jumlah_terlacak,
+            'waktu_tunggu_wt3' => $request->waktu_tunggu_wt3,
+            'waktu_tunggu_wt36' => $request->waktu_tunggu_wt36,
+            'waktu_tunggu_wt612' => $request->waktu_tunggu_wt612,
+            'waktu_tunggu_wt12' => $request->waktu_tunggu_wt12,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -378,10 +454,10 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_destroy(tabelC9 $tabelC9)
+    public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_destroy(tabelC9 $tabelC9,$id)
     {
-        $tabelC9->delete();
-        return redirect()->route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.index');
+        TabelK9TracerStudi::findorfail($id)->delete();
+        return redirect()->back()->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**
@@ -612,7 +688,7 @@ class TabelC9Controller extends Controller
         if(Auth::user()->role == 'fakultas'){
         $data = TabelK9KaryaDisitasi::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
         }else{
-        $data = TabelK9KaryaDisitasi::where('prodi_id', Auth::user()->prodi->id)->get();
+        $data = TabelK9KaryaDisitasi::where('prodi_id', Auth::user()->prodi->id)->orderBy('tahun', 'desc')->get();
         }
 
         return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index', ['data' => $data]);
@@ -625,7 +701,9 @@ class TabelC9Controller extends Controller
      */
     public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_create()
     {
-        return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.form');
+        $dosenController = new DosenController();
+        $dataDosen = $dosenController->getSemuaDosenProdi(Auth::user()->prodi->id);
+        return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.form', ['dosens' => $dataDosen]);
     }
 
     /**
@@ -635,10 +713,32 @@ class TabelC9Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_store(Request $request)
-    {
-        $data = $request->all();
-        tabelC9::create($data);
-        return redirect()->route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index');
+    {   
+        $request->validate([
+            'penulis_dosen_id' => 'required',
+            'penulis_mahasiswa' => 'required',
+            'judul' => 'required|unique:tabel_k9_karya_disitasis',
+            'tahun' => 'required|numeric',
+            'nama_penerbit' => 'required',
+            'nomor_halaman' => 'required',
+            'jumlah_sitasi' => 'required|numeric',
+            'tautan' => 'nullable|url',
+        ]);
+
+        TabelK9KaryaDisitasi::create([
+            'penulis_dosen_id' => $request->penulis_dosen_id,
+            'penulis_mahasiswa' => $request->penulis_mahasiswa,
+            'judul' => $request->judul,
+            'tahun' => $request->tahun,
+            'nama_penerbit' => $request->nama_penerbit,
+            'nomor_halaman' => $request->nomor_halaman,
+            'jumlah_sitasi' => $request->jumlah_sitasi,
+            'tautan' => $request->tautan,
+            'prodi_id' => Auth::user()->prodi->id,
+        ]);
+
+        
+        return redirect()->route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -647,9 +747,14 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_edit(tabelC9 $tabelC9)
+    public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_edit(tabelC9 $tabelC9,$id)
     {
-        return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.form', ['item' => $tabelC9]);
+        $dosenController = new DosenController();
+        $dataDosen = $dosenController->getSemuaDosenProdi(Auth::user()->prodi->id);
+
+        $data_edit = TabelK9KaryaDisitasi::findorfail($id);
+
+        return view('kriteria.c9.karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.form', ['dosens' => $dataDosen, 'item' => $data_edit]);
     }
 
     /**
@@ -659,11 +764,34 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_update(Request $request, tabelC9 $tabelC9)
+    public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_update(Request $request, tabelC9 $tabelC9,$id)
     {
-        $data = $request->all();
-        $tabelC9->update($data);
-        return redirect()->route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index');
+        $request->validate([
+            'penulis_dosen_id' => 'required',
+            'penulis_mahasiswa' => 'required',
+            'judul' => 'required',
+            'tahun' => 'required|numeric',
+            'nama_penerbit' => 'required',
+            'nomor_halaman' => 'required',
+            'jumlah_sitasi' => 'required|numeric',
+            'tautan' => 'nullable|url',
+        ]);
+
+        // dd("berhasil");
+
+        
+        $data = TabelK9KaryaDisitasi::findorfail($id);
+        $data->penulis_dosen_id = $request->penulis_dosen_id;
+        $data->penulis_mahasiswa = $request->penulis_mahasiswa;
+        $data->judul = $request->judul;
+        $data->tahun = $request->tahun;
+        $data->nama_penerbit = $request->nama_penerbit;
+        $data->nomor_halaman = $request->nomor_halaman;
+        $data->jumlah_sitasi = $request->jumlah_sitasi;
+        $data->tautan = $request->tautan;
+        $data->save();
+
+        return redirect()->back()->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -672,10 +800,11 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_destroy(tabelC9 $tabelC9)
+    public function karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi_destroy(tabelC9 $tabelC9, $id)
     {
-        $tabelC9->delete();
-        return redirect()->route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.index');
+        TabelK9KaryaDisitasi::findorfail($id)->delete();
+
+        return redirect()->back()->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**
@@ -688,7 +817,7 @@ class TabelC9Controller extends Controller
         if(Auth::user()->role == 'fakultas'){
         $data = TabelK9Produk::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
         }else{
-        $data = TabelK9Produk::where('prodi_id', Auth::user()->prodi->id)->get();
+        $data = TabelK9Produk::where('prodi_id', Auth::user()->prodi->id)->orderBy('dosen_id', 'asc')->get();
         }
 
         return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index',['items' => $data]);
@@ -701,7 +830,10 @@ class TabelC9Controller extends Controller
      */
     public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_create()
     {
-        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.form');
+        $dosenController = new DosenController();
+        $dataDosen = $dosenController->getSemuaDosenProdi(Auth::user()->prodi->id);
+
+        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.form',['dosens' => $dataDosen]);
     }
 
     /**
@@ -712,9 +844,25 @@ class TabelC9Controller extends Controller
      */
     public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_store(Request $request)
     {
-        $data = $request->all();
-        tabelC9::create($data);
-        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index');
+        $request->validate([
+            'dosen_id' => 'required|exists:tabel_dosen,nidn_nidk',
+            'nama_mahasiswa' => 'required|string|max:255',
+            'nama_produk' => 'required|string|max:255',
+            'deskripsi' => 'required|string|max:255',
+            'tautan' => 'nullable|url',
+        ]);
+
+        
+        TabelK9Produk::create([
+            'prodi_id' => Auth::user()->prodi->id,
+            'dosen_id' => $request->dosen_id,
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'nama_produk' => $request->nama_produk,
+            'deskripsi' => $request->deskripsi,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -723,9 +871,14 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_edit(tabelC9 $tabelC9)
+    public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_edit(tabelC9 $tabelC9, $id)
     {
-        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.form', ['item' => $tabelC9]);
+        $dosenController = new DosenController();
+        $dataDosen = $dosenController->getSemuaDosenProdi(Auth::user()->prodi->id);
+
+        $dataEdit =  TabelK9Produk::findorfail($id);
+
+        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.form', ['dosens' => $dataDosen, 'item' => $dataEdit]);
     }
 
     /**
@@ -735,11 +888,26 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_update(Request $request, tabelC9 $tabelC9)
+    public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_update(Request $request, tabelC9 $tabelC9, $id)
     {
-        $data = $request->all();
-        $tabelC9->update($data);
-        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index');
+        $request->validate([
+            'dosen_id' => 'required|exists:tabel_dosen,nidn_nidk',
+            'nama_mahasiswa' => 'required|string|max:255',
+            'nama_produk' => 'required|string|max:255',
+            'deskripsi' => 'required|string|max:255',
+            'tautan' => 'nullable|url',
+        ]);
+
+        
+        TabelK9Produk::where('id', $id)->update([
+            'dosen_id' => $request->dosen_id,
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'nama_produk' => $request->nama_produk,
+            'deskripsi' => $request->deskripsi,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**
@@ -748,10 +916,11 @@ class TabelC9Controller extends Controller
      * @param  \App\Models\tabelC9  $tabelC9
      * @return \Illuminate\Http\Response
      */
-    public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_destroy(tabelC9 $tabelC9)
+    public function produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat_destroy(tabelC9 $tabelC9, $id)
     {
-        $tabelC9->delete();
-        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index');
+        TabelK9Produk::where('id', $id)->delete();
+
+        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.index')->with('success', 'Data Berhasil Di Hapus');
     }
 
     /**
@@ -764,7 +933,7 @@ class TabelC9Controller extends Controller
         if(Auth::user()->role == 'fakultas'){
         $data = TabelK9ProdukHki::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
         }else{
-        $data = TabelK9ProdukHki::where('prodi_id', Auth::user()->prodi->id)->get();
+        $data = TabelK9ProdukHki::where('prodi_id', Auth::user()->prodi->id)->orderBy('tahun', 'desc')->get();
         }
 
         return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index',['items' => $data]);
@@ -777,7 +946,10 @@ class TabelC9Controller extends Controller
      */
     public function produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_create()
     {
-        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.form');
+        $dosenController = new DosenController();
+        $dataDosen = $dosenController->getSemuaDosenProdi(Auth::user()->prodi->id);
+
+        return view('kriteria.c9.produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.form',['dosens' => $dataDosen]);
     }
 
     /**
@@ -788,9 +960,26 @@ class TabelC9Controller extends Controller
      */
     public function produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten_store(Request $request)
     {
-        $data = $request->all();
-        tabelC9::create($data);
-        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index');
+        $request->validate([
+            'dosen_id' => 'required',
+            'nama_mahasiswa' => 'required',
+            'identitas_produk' => 'required',
+            'tahun' => 'required|numeric',
+            'tautan' => 'nullable|url',
+        ]);
+
+        TabelK9ProdukHki::create([
+            'dosen_id' => $request->dosen_id,
+            'nama_mahasiswa' => $request->nama_mahasiswa,
+            'identitas_produk' => $request->identitas_produk,
+            'tahun' => $request->tahun,
+            'tautan' => $request->tautan,
+            'prodi_id' => Auth::user()->prodi->id,
+        ]);
+
+
+        
+        return redirect()->route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index')->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**

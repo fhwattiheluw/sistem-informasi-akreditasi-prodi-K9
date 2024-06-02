@@ -70,7 +70,7 @@
 
                   <td>
                     <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit', ['id' => $d->id]) }}" class="btn btn-primary btn-sm" type="button">Edit</a>
-                    <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                    <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.destroy', ['id' => $d->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</a>
                   </td>
                 </tr>
                 @endforeach

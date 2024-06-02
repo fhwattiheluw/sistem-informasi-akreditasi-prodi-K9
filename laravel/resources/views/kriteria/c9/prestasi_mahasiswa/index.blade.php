@@ -4,9 +4,12 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+                  @if(Auth::user()->role == 'admin prodi')
+
       <a href="{{route('prestasi_mahasiswa.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -52,7 +55,9 @@
                   <th rowspan="2">Waktu Pencapaian</th>
                   <th colspan="3">Tingkat</th>
                   <th rowspan="2">Tautan</th>
+                  @if(Auth::user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>Internasional</th>
@@ -73,11 +78,14 @@
                   <td>{{ ($item->tingkat == 'nasional') ? 'X' : ''  }}</td>
                   <td>{{ ($item->tingkat == 'lokal') ? 'X' : ''  }}</td>
                   <td>@if(!empty($item->tautan))<a href="{{ $item->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
+                  
+                  @if(Auth::user()->role == 'admin prodi')
                   <td>
-                    <a href="{{route('prestasi_mahasiswa.edit',['id'=>$item->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    <a href="{{ route('prestasi_mahasiswa.edit',['id'=>$item->id]) }}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{ route('prestasi_mahasiswa.destroy',['id'=>$item->id]) }}" type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"> Hapus </a>
                   </td>
                 </tr>
+                @endif
                 @endforeach
               </tbody>
               

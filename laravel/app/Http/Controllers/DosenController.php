@@ -166,5 +166,11 @@ class DosenController extends Controller
 
         return redirect('/dosen')->with('success', 'Data Berhasil Dihapus');
     }
+
+    // Get all dosens from table_dosen by prodi_id
+    public function getSemuaDosenProdi($prodi_id)
+    {
+        return Dosen::where('prodi_id', $prodi_id)->get();
+    }
 }
 

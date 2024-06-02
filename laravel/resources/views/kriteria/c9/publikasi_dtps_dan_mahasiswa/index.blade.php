@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif LED</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.9 Tingkat Kepuasan Pengguna Lulusan</p>
+          <p class="m-0">K.9 Publikasi DTPS Dan Mahasiswa</p>
         </a>
       </div>
 
@@ -25,7 +25,7 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Tingkat Kepuasan Pengguna Lulusan</h5>
+          <h5 class="card-title">Tabel Publikasi DTPS Dan Mahasiswa</h5>
           @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                   <th>TS-2</th>
-                  <th>TS-1k</th>
+                  <th>TS-1</th>
                   <th>TS</th>
                 </tr>
               </thead>

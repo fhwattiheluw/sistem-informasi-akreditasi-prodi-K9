@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.update', ['id' => Crypt::encryptString($item->id)])  : route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.update', ['id' => $item->id])  : route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,38 +36,80 @@
             Edit data
             @endif
 
-            Produk Atau Jasa DTPS Dan Mahasiswa Yang Diadopsi Oleh Masyarakat</h4>
+
+            Produk Atau Jasa DTPS Dan Mahasiswa Yang Diadopsi Oleh Masyarakat</h4> 
+            
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
+
+          @if ($errors->any())
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Periksa kembali inputan anda
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
+
+          
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Dan/Atau Mahasiswa</label>
+            <label class="col-sm-3 col-form-label">Nama Dosen</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_dan_atau_mahasiswa" value="{{ isset($item->nama_dosen_dan_atau_mahasiswa) ? $item->nama_dosen_dan_atau_mahasiswa : old('nama_dosen_dan_atau_mahasiswa') }}" class="form-control" placeholder="Ketik disini">
-              @error('nama_dosen_dan_atau_mahasiswa')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
+              <select class="form-control @error('dosen_id') is-invalid @enderror" name="dosen_id">
+                <option value="">Pilih Dosen</option>
+                @foreach ($dosens as $dosen)
+                  <option value="{{ $dosen->nidn_nidk }}" {{ (isset($item) && $item->dosen_id  == $dosen->nidn_nidk) ? 'selected' : '' }}>{{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
+                @endforeach
+              </select>
+              @error('dosen_id')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
               @enderror
             </div>
           </div>
+          
+
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Produk/Jasa</label>
+            <label class="col-sm-3 col-form-label">Nama Mahasiswa</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_produk_jasa" value="{{ isset($item->nama_produk_jasa) ? $item->nama_produk_jasa : old('nama_produk_jasa') }}" class="form-control" placeholder="Ketik disini">
-              @error('nama_produk_jasa')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
+              <input type="text" name="nama_mahasiswa" value="{{ isset($item->nama_mahasiswa) ? $item->nama_mahasiswa : old('nama_mahasiswa') }}" class="form-control @error('nama_mahasiswa') is-invalid @enderror" placeholder="Ketik disini">
+              @error('nama_mahasiswa')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
               @enderror
             </div>
           </div>
+
+          
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Deskripsi Produk/Jasa</label>
+            <label class="col-sm-3 col-form-label">Nama Produk</label>
             <div class="col-sm-9">
-              <textarea name="deskripsi_produk_jasa" class="form-control" rows="3">{{ isset($item->deskripsi_produk_jasa) ? $item->deskripsi_produk_jasa : old('deskripsi_produk_jasa') }}</textarea>
-              @error('deskripsi_produk_jasa')
+              <input type="text" name="nama_produk" value="{{ isset($item->nama_produk) ? $item->nama_produk : old('nama_produk') }}" class="form-control @error('nama_produk') is-invalid @enderror" placeholder="Ketik disini">
+              @error('nama_produk')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Deskripsi Produk/Jasa <span class="text-danger">*</span></label>
+            <div class="col-sm-9">
+              <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="3">{{ isset($item->deskripsi) ? $item->deskripsi : old('deskripsi') }}</textarea>
+              @error('deskripsi')
                 <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
+                  {{ $message }}
                 </span>
               @enderror
             </div>
