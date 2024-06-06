@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('tabel_k9_kepuasan_penggunas', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_kemampuan');
-            $table->enum('tingkat',['sangat_baik','baik','cukup','kurang']);
+            $table->decimal('sangat_baik');
+            $table->decimal('baik');
+            $table->decimal('cukup');
+            $table->decimal('kurang');
             $table->string('tindak_lanjut');
             $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');

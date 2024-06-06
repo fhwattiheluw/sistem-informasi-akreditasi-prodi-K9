@@ -18,7 +18,9 @@ return new class extends Migration
             $table->integer('tahun_lulus');
             $table->string('jumlah_lulusan');
             $table->string('jumlah_terlacak');
-            $table->enum('relevansi',['tinggi','sedang','rendah']);
+            $table->integer('relevansi_tinggi');
+            $table->integer('relevansi_sedang');
+            $table->integer('relevansi_rendah');
             $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

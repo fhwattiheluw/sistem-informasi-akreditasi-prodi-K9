@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class TabelK6KepuasanMahasiswaSeeder extends Seeder
 {
     /**
@@ -14,6 +15,7 @@ class TabelK6KepuasanMahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        //
+       
+
     }
 }

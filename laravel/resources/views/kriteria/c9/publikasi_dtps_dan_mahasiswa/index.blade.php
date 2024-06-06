@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(Auth::user()->role == 'admin prodi')
       <a href="{{route('publikasi_dtps_dan_mahasiswa.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -14,7 +16,7 @@
           <p class="m-0 pr-3">Data Kuantitatif LED</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.9 Tingkat Kepuasan Pengguna Lulusan</p>
+          <p class="m-0">K.9 Publikasi DTPS Dan Mahasiswa</p>
         </a>
       </div>
 
@@ -25,7 +27,7 @@
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tabel Tingkat Kepuasan Pengguna Lulusan</h5>
+          <h5 class="card-title">Tabel Publikasi DTPS Dan Mahasiswa</h5>
           @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -55,31 +57,35 @@
                 </tr>
                 <tr>
                   <th>TS-2</th>
-                  <th>TS-1k</th>
+                  <th>TS-1</th>
                   <th>TS</th>
                 </tr>
               </thead>
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{$item->jenis}} </td>
+                  <td>{{$item->jumlah_ts_2}}</td>
+                  <td>{{$item->jumlah_ts_1}}</td>
+                  <td>{{$item->jumlah_ts}}</td>
+                  <td>{{$item->jumlah_ts_2 + $item->jumlah_ts_1 + $item->jumlah_ts }}</td>
+                  <td><a href="{{ $item->tautan }}" target="_blank" >Lihat</a></td>
+
                   <td>
-                    <a href="{{route('publikasi_dtps_dan_mahasiswa.edit', ['id'=>$i] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    @if(Auth::user()->role == 'admin prodi')
+
+                    <a href="{{route('publikasi_dtps_dan_mahasiswa.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{route('publikasi_dtps_dan_mahasiswa.destroy', ['id'=>$item->id] )}}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"> Hapus </a>
+                    @endif
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -92,4 +98,3 @@
 
 </div>
 @endsection
-

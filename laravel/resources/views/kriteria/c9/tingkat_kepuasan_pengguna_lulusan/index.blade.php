@@ -4,9 +4,12 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="{{route('tingkat_kepuasan_pengguna_lulusan.create')}}">
-        <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
+      @if(Auth::user()->role == 'admin prodi')
+
+      <a href="{{ route('tingkat_kepuasan_pengguna_lulusan.create') }}">
+          <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -63,25 +66,42 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
-                  <td>
-                    <a href="{{route('tingkat_kepuasan_pengguna_lulusan.edit', ['id'=>$i] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
-                  </td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->jenis_kemampuan}} </td>
+                    <td>{{$item->sangat_baik}} </td>
+                    <td>{{$item->baik}}</td>
+                    <td>{{$item->cukup}}</td>
+                    <td>{{$item->kurang}}</td>
+                    <td>{{$item->tindak_lanjut}}</td>
+                    <td>@if(!empty($item->tautan))<a href="{{ $item->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
+                    <td>
+                      @if(Auth::user()->role == 'admin prodi')
+
+                        <a href="{{route('tingkat_kepuasan_pengguna_lulusan.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                        <form id="delete-form-{{$item->id}}" action="{{ route('tingkat_kepuasan_pengguna_lulusan.destroy', ['id'=>$item->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" onclick="confirmDelete({{$item->id}})" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                        @endif
+                    </td>
                 </tr>
-                @endfor
+                @endforeach
+
+                <script>
+                    function confirmDelete(itemId) {
+                        if (confirm("Are you sure you want to delete this item?")) {
+                            document.getElementById('delete-form-' + itemId).submit();
+                        }
+                    }
+                </script>
+
+
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -94,4 +114,3 @@
 
 </div>
 @endsection
-

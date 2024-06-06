@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('prestasi_mahasiswa.update', ['id' => Crypt::encryptString($item->id)])  : route('prestasi_mahasiswa.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('prestasi_mahasiswa.update', ['id' => $item->id])  : route('prestasi_mahasiswa.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -37,6 +37,15 @@
             @endif
 
             Prestasi Mahasiswa</h4>
+
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
 
           @if ($errors->any())
               <div>
@@ -52,49 +61,61 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Nama Mahasiswa</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_mahasiswa" value="{{ isset($item->nama_mahasiswa) ? $item->nama_mahasiswa : old('nama_mahasiswa') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text"
+                     name="nama_mahasiswa"
+                     value="{{ isset($item->nama_mahasiswa) ? $item->nama_mahasiswa : old('nama_mahasiswa') }}"
+                     class="form-control {{ $errors->has('nama_mahasiswa') ? 'is-invalid' : '' }}"
+                     placeholder="Ketik disini">
               @error('nama_mahasiswa')
-                <span class="invalid-feedback" role="list">
-                  {{ $message }}
-                </span>
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
               @enderror
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Prestasi Yang Dicapai</label>
             <div class="col-sm-9">
-              <input type="text" name="prestasi_yang_dicapai" value="{{ isset($item->prestasi_yang_dicapai) ? $item->prestasi_yang_dicapai : old('prestasi_yang_dicapai') }}" class="form-control" placeholder="Ketik disini">
-              @error('prestasi_yang_dicapai')
-                <span class="invalid-feedback" role="list">
-                  {{ $message }}
-                </span>
+              <input type="text"
+                     name="prestasi"
+                     value="{{ isset($item->prestasi) ? $item->prestasi : old('prestasi') }}"
+                     class="form-control {{ $errors->has('prestasi') ? 'is-invalid' : '' }}"
+                     placeholder="Ketik disini">
+              @error('prestasi')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
               @enderror
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Waktu Pencapaian</label>
             <div class="col-sm-9">
-              <input type="text" name="waktu_pencapaian" value="{{ isset($item->waktu_pencapaian) ? $item->waktu_pencapaian : old('waktu_pencapaian') }}" class="form-control" placeholder="Ketik disini">
-              @error('waktu_pencapaian')
-                <span class="invalid-feedback" role="list">
-                  {{ $message }}
-                </span>
+              <input type="date"
+                     name="waktu"
+                     value="{{ isset($item->waktu) ? $item->waktu : old('waktu') }}"
+                     class="form-control {{ $errors->has('waktu') ? 'is-invalid' : '' }}"
+                     placeholder="Ketik disini">
+              @error('waktu')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
               @enderror
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tingkat</label>
             <div class="col-sm-9">
-              <select class="form-control" name="tingkat">
+              <select class="form-control {{ $errors->has('tingkat') ? 'is-invalid' : '' }}" name="tingkat">
                 <option value="">Pilih</option>
-                <option value="Internasional" {{ old('tingkat', isset($item->tingkat) ? $item->tingkat : null) === 'Internasional' ? 'selected' : '' }}>Internasional</option>
-                <option value="Nasional" {{ old('tingkat', isset($item->tingkat) ? $item->tingkat : null) === 'Nasional' ? 'selected' : '' }}>Nasional</option>
-                <option value="Lokal" {{ old('tingkat', isset($item->tingkat) ? $item->tingkat : null) === 'Lokal' ? 'selected' : '' }}>Lokal</option>
+                <option value="internasional" {{ old('tingkat', isset($item->tingkat) ? $item->tingkat : null) === 'internasional' ? 'selected' : '' }}>Internasional</option>
+                <option value="nasional" {{ old('tingkat', isset($item->tingkat) ? $item->tingkat : null) === 'nasional' ? 'selected' : '' }}>Nasional</option>
+                <option value="lokal" {{ old('tingkat', isset($item->tingkat) ? $item->tingkat : null) === 'lokal' ? 'selected' : '' }}>Lokal</option>
               </select>
               @error('tingkat')
-                <span class="invalid-feedback" role="list">
-                  {{ $message }}
-                </span>
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
               @enderror
             </div>
           </div>
