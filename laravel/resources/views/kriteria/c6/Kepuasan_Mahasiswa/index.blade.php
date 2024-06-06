@@ -39,36 +39,38 @@
               <thead class="text-center">
                 <tr>
                   <th rowspan="2">No</th>
-                  <th rowspan="2">Aspek Pengukuran Kepuasan</th>
-                  <th colspan="3">Objek Kepuasan Mahasiswa</th>
+                  <th rowspan="2">Aspek Pengukuran <br>Kepuasan</th>
+                  <th colspan="3">Objek <br>Kepuasan Mahasiswa</th>
                   <th rowspan="2">Tindak Lanjut</th>
                   <th rowspan="2">Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
                 <tr>
                   <th>Kinerja Mengajar DTPS</th>
-                  <th>Layanan Administrasi Akademik oleh PS</th>
-                  <th>Prasarana dan Sarana Pembelajaran di PS</th>
+                  <th>Layanan Administrasi <br>Akademik oleh PS</th>
+                  <th>Prasarana dan Sarana <br>Pembelajaran di PS</th>
                 </tr>
               </thead>
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->aspek }}</td>
+                  <td>{{ $item->kinerja_mengajar }}</td>
+                  <td>{{ $item->layanan_administrasi_ps }}</td>
+                  <td>{{ $item->sarana_prasarana_ps }}</td>
+                  <td>{{ $item->tindak_lanjut }}</td>
+                  <td><a href="{{ $item->tautan }}" class="btn btn-warning" target="_blank" rel="noopener noreferrer">link</a></td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="/kriteria6/kepuasan_mahasiswa/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria6/kepuasan_mahasiswa/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

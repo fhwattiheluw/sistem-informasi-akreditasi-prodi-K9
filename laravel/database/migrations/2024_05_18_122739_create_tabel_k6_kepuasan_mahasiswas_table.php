@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('tabel_k6_kepuasan_mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->string('aspek');
-            $table->enum('objek', ['mengajar_dtps','layanan_admin_ps','sarana_prasarana_ps']);
+            $table->decimal('kinerja_mengajar',4,2);
+            $table->decimal('layanan_administrasi_ps',4,2);
+            $table->decimal('sarana_prasarana_ps',4,2);
             $table->string('tindak_lanjut');
             $table->string('tautan');
             $table->unsignedBigInteger('prodi_id');

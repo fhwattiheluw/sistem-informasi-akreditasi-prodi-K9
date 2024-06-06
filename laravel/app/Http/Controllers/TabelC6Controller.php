@@ -3,8 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\tabelC6;
+use App\Models\TabelDosen;
+use App\Models\TabelK6Bimbingan;
+use App\Models\TabelK6BimbinganMagang;
+use App\Models\TabelK6BimbinganTA;
+use App\Models\TabelK6DosenTamuTenagaAhli;
+use App\Models\TabelK6IntegrasiPenelitianPKMPembelajaran;
+use App\Models\TabelK6KegiatanAkademik;
+use App\Models\TabelK6KepuasanMahasiswa;
+use App\Models\TabelMatakuliah;
+use Database\Seeders\tabelDosenSeeder;
+use Database\Seeders\TabelK6IntegrasiTridarmaSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 
 class TabelC6Controller extends Controller
@@ -27,9 +39,8 @@ class TabelC6Controller extends Controller
      */
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_index()
     {
-        //
-        $data = tabelC6::all();
-        return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.index', compact('data'));
+        $items = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
+        return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.index', compact('items'));
     }
 
     /**
@@ -51,12 +62,33 @@ class TabelC6Controller extends Controller
      */
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_store(Request $request)
     {
-        //
-        $data = new tabelC6;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->nama_mata_kuliah_cpl_dan_perangkat_pembelajaran = $request->nama_mata_kuliah_cPL_dan_perangkat_pembelajaran;
-        $data->save();
-        return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index');
+        $request->validate([
+            'kode_mk' => 'required', 
+            'nama' => 'required', 
+            'sks' => 'required|numeric', 
+            'semester' => 'required', 
+            'jenis_matakuliah' => 'required', 
+            'unit_penyelenggara' => 'required', 
+            'kesesuaian_cpl' => 'required', 
+            'perangkat_pembelajaran' => 'required', 
+            'tautan' => 'required', 
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+
+        TabelMatakuliah::create([
+            'kode_mk' => $request->kode_mk, 
+            'nama' => $request->nama, 
+            'sks' => $request->sks, 
+            'semester' => $request->semester, 
+            'jenis_matakuliah' => $request->jenis_matakuliah, 
+            'unit_penyelenggara' => $request->unit_penyelenggara, 
+            'kesesuaian_cpl' => $request->kesesuaian_cpl, 
+            'perangkat_pembelajaran' => $request->perangkat_pembelajaran, 
+            'prodi_id' => $prodiID,  
+        ]);
+        
+        return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index')->with('success', 'Data K6 Data Matakuliah ADDED successfully');
     }
 
     /**
@@ -67,9 +99,8 @@ class TabelC6Controller extends Controller
      */
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_edit($id)
     {
-        //
-        $data = tabelC6::find($id);
-        return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.edit', compact('data'));
+        $item = TabelMatakuliah::findOrFail($id);
+        return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.form', compact('item'));
     }
 
     /**
@@ -81,12 +112,38 @@ class TabelC6Controller extends Controller
      */
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_update(Request $request, $id)
     {
-        //
-        $data = tabelC6::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->nama_mata_kuliah_cpl_dan_perangkat_pembelajaran = $request->nama_mata_kuliah_cPL_dan_perangkat_pembelajaran;
-        $data->save();
-        return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'kode_mk' => 'required', 
+            'nama' => 'required', 
+            'sks' => 'required|numeric', 
+            'semester' => 'required', 
+            'jenis_matakuliah' => 'required', 
+            'unit_penyelenggara' => 'required', 
+            'kesesuaian_cpl' => 'required', 
+            'perangkat_pembelajaran' => 'required', 
+            'tautan' => 'required', 
+        ]);
+
+        $data = TabelMatakuliah::findOrFail($idx);
+
+        $prodiID = auth()->user()->prodi_id;
+
+        if (isset($prodiID)){
+            $data->update([
+                'kode_mk' => $request->kode_mk, 
+                'nama' => $request->nama, 
+                'sks' => $request->sks, 
+                'semester' => $request->semester, 
+                'jenis_matakuliah' => $request->jenis_matakuliah, 
+                'unit_penyelenggara' => $request->unit_penyelenggara, 
+                'kesesuaian_cpl' => $request->kesesuaian_cpl, 
+                'perangkat_pembelajaran' => $request->perangkat_pembelajaran, 
+            ]);
+        }
+
+        return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index')->with('success', 'Data K6 Data Matakuliah UPDATED successfully');
     }
 
     /**
@@ -97,10 +154,12 @@ class TabelC6Controller extends Controller
      */
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_destroy($id)
     {
-        //
-        $data = tabelC6::find($id);
-        $data->delete();
-        return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index');
+        $prodiID = auth()->user()->prodi_id;
+
+        if (isset($prodiID)){
+            TabelMatakuliah::destroy($id);
+        }
+        return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index')->with('success', 'Data K6 Data Matakuliah DELETED successfully');
     }
 
     /**
@@ -110,9 +169,9 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_index()
     {
-        //
-        $data = tabelC6::all();
-        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index', compact('data'));
+        $items = TabelK6IntegrasiPenelitianPKMPembelajaran::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index', compact('items'));
     }
 
     /**
@@ -122,8 +181,10 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_create()
     {
-        //
-        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.form');
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.form', compact('dosens','matakuliah'));
     }
 
     /**
@@ -134,12 +195,27 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_store(Request $request)
     {
-        //
-        $data = new tabelC6;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->nama_integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran = $request->nama_integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran;
-        $data->save();
-        return redirect()->route('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index');
+        $request->validate([
+            'judul' => 'required', 
+            'mk_id' => 'required',
+            'nidn_nidk' => 'required',
+            'bentuk_integrasi' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            TabelK6IntegrasiPenelitianPKMPembelajaran::create([
+                'judul' => $request->judul, 
+                'mk_id' => $request->mk_id,
+                'nidn_nidk' => $request->nidn_nidk,
+                'prodi_id' => $prodiID,
+                'bentuk_integrasi' => $request->bentuk_integrasi,
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('integrasi_pembelajaran.index')->with('success', 'Data K6 Integrasi Penelitian dan PKM dalam Pembelajaran ADDED successfully');
     }
 
     /**
@@ -151,9 +227,11 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_edit($id)
     {
-        //
-        $data = tabelC6::find($id);
-        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.edit', compact('data'));
+        
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
+        $item = TabelK6IntegrasiPenelitianPKMPembelajaran::findOrFail($id);
+        return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.form', compact('item','dosens','matakuliah'));
     }
 
     /**
@@ -165,12 +243,30 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_update(Request $request, $id)
     {
-        //
-        $data = tabelC6::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->nama_integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran = $request->nama_integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran;
-        $data->save();
-        return redirect()->route('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index');
+        $idx = Crypt::decryptString($id);
+        $data = TabelK6IntegrasiPenelitianPKMPembelajaran::findOrFail($idx);
+
+        $request->validate([
+            'judul' => 'required', 
+            'mk_id' => 'required',
+            'nidn_nidk' => 'required',
+            'bentuk_integrasi' => 'required',
+            'tautan' => 'required',
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            $data->update([
+                'judul' => $request->judul, 
+                'mk_id' => $request->mk_id,
+                'nidn_nidk' => $request->nidn_nidk,
+                'prodi_id' => $prodiID,
+                'bentuk_integrasi' => $request->bentuk_integrasi,
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('integrasi_pembelajaran.index')->with('success', 'Data K6 Integrasi Penelitian dan PKM dalam Pembelajaran UPDATED successfully');
     }
 
     /**
@@ -181,10 +277,9 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_destroy($id)
     {
-        //
-        $data = tabelC6::find($id);
+        $data = TabelK6IntegrasiPenelitianPKMPembelajaran::findOrFail($id);
         $data->delete();
-        return redirect()->route('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index');
+        return redirect()->route('integrasi_pembelajaran.index')->with('success', 'Data K6 Integrasi Penelitian dan PKM dalam Pembelajaran DELETED successfully');
     }
 
     /**
@@ -194,9 +289,9 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_index()
     {
-        //
-        // $data = jumlahMhsBimbinganDanFrekuensiPertemuan::all();
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index');
+        $items = TabelK6Bimbingan::where('prodi_id', auth()->user()->prodi_id)->get();
+        
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index', compact('items'));
     }
 
     /**
@@ -206,8 +301,8 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_create()
     {
-        //
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.form');
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.form', compact('dosens'));
     }
 
     /**
@@ -218,12 +313,27 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_store(Request $request)
     {
-        //
-        $data = new jumlahMhsBimbinganDanFrekuensiPertemuan;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan = $request->jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan;
-        $data->save();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index');
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'jumlah_bimbingan' => 'required|numeric', 
+            'rata_pertemuan_semester' => 'required|numeric', 
+            'tautan' => 'required',
+        ],[
+            'nidn_nidk' => 'Dosen harus diisi',
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            TabelK6Bimbingan::create([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'jumlah_bimbingan' => $request->jumlah_bimbingan, 
+                'rata_pertemuan_semester' => $request->rata_pertemuan_semester, 
+                'prodi_id' => $prodiID,
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index')->with('success', 'Data K6 Jumlah Bimbingan dan Frekuensi Pertemuan ADDED successfully');
     }
 
     /**
@@ -234,9 +344,10 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_edit($id)
     {
-        //
-        $data = jumlahMhsBimbinganDanFrekuensiPertemuan::find($id);
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.edit', compact('data'));
+        $item = TabelK6Bimbingan::findOrFail($id);
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.form', compact('item', 'dosens'));
     }
 
     /**
@@ -248,12 +359,32 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_update(Request $request, $id)
     {
-        //
-        $data = jumlahMhsBimbinganDanFrekuensiPertemuan::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan = $request->jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan;
-        $data->save();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'jumlah_bimbingan' => 'required|numeric', 
+            'rata_pertemuan_semester' => 'required|numeric', 
+            'tautan' => 'required',
+        ],[
+            'nidn_nidk' => 'Dosen harus diisi',
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        
+        $data = TabelK6Bimbingan::findOrFail($idx);
+
+        if (isset($prodiID) && isset($data)){
+            $data->update([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'jumlah_bimbingan' => $request->jumlah_bimbingan, 
+                'rata_pertemuan_semester' => $request->rata_pertemuan_semester, 
+                'prodi_id' => $prodiID,
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index')->with('success', 'Data K6 Jumlah Bimbingan dan Frekuensi Pertemuan UPDATED successfully');
     }
 
     /**
@@ -264,10 +395,13 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_destroy($id)
     {
-        //
-        $data = jumlahMhsBimbinganDanFrekuensiPertemuan::find($id);
-        $data->delete();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index');
+        $prodiID = auth()->user()->prodi_id;
+        $data = TabelK6Bimbingan::findOrFail($id);
+
+        if (isset($prodiID, $data)){
+            $data->delete();
+        }
+        return redirect()->route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index')->with('success', 'Data K6 Jumlah Bimbingan dan Frekuensi Pertemuan DELETED successfully');
     }
 
     /**
@@ -277,9 +411,8 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_index()
     {
-        //
-        // $data = jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan::all();
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
+        $items = TabelK6BimbinganMagang::where('prodi_id', auth()->user()->prodi_id)->get();
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index', compact('items'));
     }
 
     /**
@@ -289,8 +422,8 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_create()
     {
-        //
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.form');
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.form', compact('dosens'));
     }
 
     /**
@@ -301,12 +434,27 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_store(Request $request)
     {
-        //
-        $data = new jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan = $request->jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan;
-        $data->save();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'jumlah_bimbingan' => 'required|numeric', 
+            'rata_pertemuan_semester' => 'required|numeric', 
+            'tautan' => 'required',
+        ],[
+            'nidn_nidk' => 'Dosen harus diisi',
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            TabelK6BimbinganMagang::create([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'jumlah_bimbingan' => $request->jumlah_bimbingan, 
+                'rata_pertemuan_semester' => $request->rata_pertemuan_semester, 
+                'prodi_id' => $prodiID,
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index')->with('success', 'Data K6 Jumlah Bimbingan Magang dan Frekuensi Pertemuan ADDED successfully');
     }
 
     /**
@@ -317,9 +465,10 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_edit($id)
     {
-        //
-        $data = jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan::find($id);
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.edit', compact('data'));
+        $item = TabelK6BimbinganMagang::findOrFail($id);
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.form', compact('item','dosens'));
     }
 
     /**
@@ -331,12 +480,32 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_update(Request $request, $id)
     {
-        //
-        $data = jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan = $request->jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan;
-        $data->save();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'jumlah_bimbingan' => 'required|numeric', 
+            'rata_pertemuan_semester' => 'required|numeric', 
+            'tautan' => 'required',
+        ],[
+            'nidn_nidk' => 'Dosen harus diisi',
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        
+        $data = TabelK6BimbinganMagang::findOrFail($idx);
+
+        if (isset($prodiID) && isset($data)){
+            $data->update([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'jumlah_bimbingan' => $request->jumlah_bimbingan, 
+                'rata_pertemuan_semester' => $request->rata_pertemuan_semester, 
+                'prodi_id' => $prodiID,
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index')->with('success', 'Data K6 Jumlah Bimbingan Magang dan Frekuensi Pertemuan UPDATED successfully');
     }
 
     /**
@@ -347,10 +516,14 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_destroy($id)
     {
-        //
-        $data = jumlahMhsBimbinganMagangKependidikanDanFrekuensiPertemuan::find($id);
-        $data->delete();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index');
+        $prodiID = auth()->user()->prodi_id;
+        $data = TabelK6BimbinganMagang::findOrFail($id);
+
+        if (isset($prodiID, $data)){
+            $data->delete();
+        }
+                
+        return redirect()->route('jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index')->with('success', 'Data K6 Jumlah Bimbingan Magang dan Frekuensi Pertemuan DELETED successfully');
     }
 
     /**
@@ -360,8 +533,9 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_index()
     {
-        //
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.index');
+        $items = TabelK6BimbinganTA::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.index', compact('items'));
     }
 
     /**
@@ -371,8 +545,8 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_create()
     {
-        //
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.form');
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.form', compact('dosens'));
     }
 
     /**
@@ -383,12 +557,36 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_store(Request $request)
     {
-        //
-        $data = new jumlahMhsBimbinganTa;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->jumlah_mahasiswa_bimbingan_ta = $request->jumlah_mahasiswa_bimbingan_ta;
-        $data->save();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index');
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'jumlah_ps_sendiri_ts2' => 'required', 
+            'jumlah_ps_sendiri_ts1' => 'required', 
+            'jumlah_ps_sendiri_ts' => 'required', 
+            'jumlah_ps_lain_ts2' => 'required', 
+            'jumlah_ps_lain_ts1' => 'required', 
+            'jumlah_ps_lain_ts' => 'required', 
+            'rata_pertemuan' => 'required',
+            'tautan' => 'required',
+        ],['nidn_nidk' => 'harus memilih Dosen']);
+
+        $prodiID = auth()->user()->prodi_id;
+
+        if (isset($prodiID)){
+            TabelK6BimbinganTA::create([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'jumlah_ps_sendiri_ts2' => $request->jumlah_ps_sendiri_ts2, 
+                'jumlah_ps_sendiri_ts1' => $request->jumlah_ps_sendiri_ts1, 
+                'jumlah_ps_sendiri_ts' => $request->jumlah_ps_sendiri_ts, 
+                'jumlah_ps_lain_ts2' => $request->jumlah_ps_lain_ts2, 
+                'jumlah_ps_lain_ts1' => $request->jumlah_ps_lain_ts1, 
+                'jumlah_ps_lain_ts' => $request->jumlah_ps_lain_ts, 
+                'rata_pertemuan' => $request->rata_pertemuan,
+                'tautan' => $request->tautan,
+                'prodi_id' => $prodiID,
+            ]);
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index')->with('success', 'Data K6 Jumlah Bimbingan TA ADDED successfully');
     }
 
     /**
@@ -399,9 +597,10 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_edit($id)
     {
-        //
-        $data = jumlahMhsBimbinganTa::find($id);
-        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.edit', compact('data'));
+        $item = TabelK6BimbinganTA::findOrFail($id);
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.form', compact('item','dosens'));
     }
 
     /**
@@ -413,12 +612,39 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_update(Request $request, $id)
     {
-        //
-        $data = jumlahMhsBimbinganTa::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->jumlah_mahasiswa_bimbingan_ta = $request->jumlah_mahasiswa_bimbingan_ta;
-        $data->save();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'jumlah_ps_sendiri_ts2' => 'required', 
+            'jumlah_ps_sendiri_ts1' => 'required', 
+            'jumlah_ps_sendiri_ts' => 'required', 
+            'jumlah_ps_lain_ts2' => 'required', 
+            'jumlah_ps_lain_ts1' => 'required', 
+            'jumlah_ps_lain_ts' => 'required', 
+            'rata_pertemuan' => 'required',
+            'tautan' => 'required',
+        ],['nidn_nidk' => 'harus memilih Dosen']);
+
+        $prodiID = auth()->user()->prodi_id;
+        $data = TabelK6BimbinganTA::findOrFail($idx);
+
+        if (isset($prodiID, $data)){
+            $data->update([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'jumlah_ps_sendiri_ts2' => $request->jumlah_ps_sendiri_ts2, 
+                'jumlah_ps_sendiri_ts1' => $request->jumlah_ps_sendiri_ts1, 
+                'jumlah_ps_sendiri_ts' => $request->jumlah_ps_sendiri_ts, 
+                'jumlah_ps_lain_ts2' => $request->jumlah_ps_lain_ts2, 
+                'jumlah_ps_lain_ts1' => $request->jumlah_ps_lain_ts1, 
+                'jumlah_ps_lain_ts' => $request->jumlah_ps_lain_ts, 
+                'rata_pertemuan' => $request->rata_pertemuan,
+                'tautan' => $request->tautan,
+                'prodi_id' => $prodiID,
+            ]);
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index')->with('success', 'Data K6 Jumlah Bimbingan TA UPDATED successfully');
     }
 
     /**
@@ -429,10 +655,14 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_destroy($id)
     {
-        //
-        $data = jumlahMhsBimbinganTa::find($id);
-        $data->delete();
-        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index');
+        $prodiID = auth()->user()->prodi_id;
+
+        if (isset($prodiID)){
+            $data = TabelK6BimbinganTA::findOrFail($id);
+            $data->delete();
+        }
+
+        return redirect()->route('jumlah_mahasiswa_bimbingan_ta.index')->with('success', 'Data K6 Jumlah Bimbingan TA DELETED successfully');
     }
     /**
      * Display a listing of the resource.
@@ -441,9 +671,9 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_index()
     {
-        //
-        // $data = kegiatanAkademikDiLuarPerkuliahan::all();
-        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.index');
+        $items = TabelK6KegiatanAkademik::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.index', compact('items'));
     }
 
     /**
@@ -453,8 +683,9 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_create()
     {
-        //
-        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.form');
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.form', compact('dosens'));
     }
 
     /**
@@ -465,12 +696,28 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_store(Request $request)
     {
-        //
-        $data = new kegiatanAkademikDiLuarPerkuliahan;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->kegiatan_akademik_di_luar_perkuliahan = $request->kegiatan_akademik_di_luar_perkuliahan;
-        $data->save();
-        return redirect()->route('kegiatan_akademik_di_luar_perkuliahan.index');
+        $request->validate([
+            'nama_kegiatan' => 'required', 
+            'nidn_nidk' => 'required', 
+            'frekuensi' => 'required', 
+            'hasil' => 'required', 
+            'tautan' => 'required',
+        ], ['nidn_nidk' => 'dosen harus dipilih' ]);
+
+        $prodiID = auth()->user()->prodi_id;
+
+        if (isset($prodiID)){
+            TabelK6KegiatanAkademik::create([
+                'nama_kegiatan' => $request->nama_kegiatan, 
+                'nidn_nidk' => $request->nidn_nidk, 
+                'frekuensi' => $request->frekuensi, 
+                'hasil' => $request->hasil, 
+                'tautan' => $request->tautan,
+                'prodi_id' => $prodiID,
+            ]);
+        }
+
+        return redirect()->route('kegiatan_akademik_di_luar_perkuliahan.index')->with('success', 'Data K6 Kegiatan Akademik ADDED successfully');
     }
 
     /**
@@ -481,9 +728,9 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_edit($id)
     {
-        //
-        $data = kegiatanAkademikDiLuarPerkuliahan::find($id);
-        return view('kriteria.c6.ke aktivit_akademik_di_luar_perkuliahan.edit', compact('data'));
+        $item = TabelK6KegiatanAkademik::findOrFail($id);
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.form', compact('item','dosens'));
     }
 
     /**
@@ -495,12 +742,30 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_update(Request $request, $id)
     {
-        //
-        $data = kegiatanAkademikDiLuarPerkuliahan::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->kegiatan_akademik_di_luar_perkuliahan = $request->kegiatan_akademik_di_luar_perkuliahan;
-        $data->save();
-        return redirect()->route('ke aktivit_akademik_di_luar_perkuliahan.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'nama_kegiatan' => 'required', 
+            'nidn_nidk' => 'required', 
+            'frekuensi' => 'required', 
+            'hasil' => 'required', 
+            'tautan' => 'required',
+        ], ['nidn_nidk' => 'dosen harus dipilih' ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        $data = TabelK6KegiatanAkademik::findOrFail($idx);
+
+        if (isset($prodiID, $data)){
+            $data->update([
+                'nama_kegiatan' => $request->nama_kegiatan, 
+                'nidn_nidk' => $request->nidn_nidk, 
+                'frekuensi' => $request->frekuensi, 
+                'hasil' => $request->hasil, 
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('kegiatan_akademik_di_luar_perkuliahan.index')->with('success', 'Data K6 Kegiatan Akademik UPDATED successfully');
     }
 
     /**
@@ -511,10 +776,13 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_destroy($id)
     {
-        //
-        $data = kegiatanAkademikDiLuarPerkuliahan::find($id);
-        $data->delete();
-        return redirect()->route('ke activities_akademik_di_luar_perkuliahan.index');
+        $data = TabelK6KegiatanAkademik::findOrFail($id);
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($data, $prodiID)){
+            $data->delete();
+        }
+
+        return redirect()->route('kegiatan_akademik_di_luar_perkuliahan.index')->with('success', 'Data K6 Kegiatan Akademik DELETED successfully');
     }
 
     /**
@@ -524,9 +792,9 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_index()
     {
-        //
-        // $data = dosenTamuDanTenagaAhli::all();
-        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.index');
+        $items = TabelK6DosenTamuTenagaAhli::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.index', compact('items'));
     }
 
     /**
@@ -536,8 +804,10 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_create()
     {
-        //
-        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.form');
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.form', compact('dosens','matakuliah'));
     }
 
     /**
@@ -548,12 +818,28 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_store(Request $request)
     {
-        //
-        $data = new dosenTamuDanTenagaAhli;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->nama_dosen_tamu_dan_tenaga_ahli = $request->nama_dosen_tamu_dan_tenaga_ahli;
-        $data->save();
-        return redirect()->route('dosen_tamu_dan_tenaga_ahli.index');
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'nama_lembaga' => 'required', 
+            'kepakaran' => 'required', 
+            'waktu_kegiatan' => 'required', 
+            'tautan'  => 'required', 
+            'mk_id' => 'required',            
+        ]);
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            TabelK6DosenTamuTenagaAhli::create([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'nama_lembaga' => $request->nama_lembaga, 
+                'kepakaran' => $request->kepakaran, 
+                'waktu_kegiatan' => $request->waktu_kegiatan, 
+                'tautan'  => $request->tautan, 
+                'mk_id' => $request->mk_id,
+                'prodi_id' => $prodiID,
+            ]);
+        }
+
+        return redirect()->route('dosen_tamu_dan_tenaga_ahli.index')->with('success', 'Data K6 Dosen Tamu dan Tenaga Ahli ADDED successfully');
     }
 
     /**
@@ -564,9 +850,11 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_edit($id)
     {
-        //
-        $data = dosenTamuDanTenagaAhli::find($id);
-        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.edit', compact('data'));
+        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
+        $item = TabelK6DosenTamuTenagaAhli::findOrFail($id);
+
+        return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.form', compact('dosens','matakuliah','item'));
     }
 
     /**
@@ -578,12 +866,33 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_update(Request $request, $id)
     {
-        //
-        $data = dosenTamuDanTenagaAhli::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->nama_dosen_tamu_dan_tenaga_ahli = $request->nama_dosen_tamu_dan_tenaga_ahli;
-        $data->save();
-        return redirect()->route('dosen_tamu_dan_tenaga_ahli.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'nidn_nidk' => 'required', 
+            'nama_lembaga' => 'required', 
+            'kepakaran' => 'required', 
+            'waktu_kegiatan' => 'required', 
+            'tautan'  => 'required', 
+            'mk_id' => 'required',            
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        $data = TabelK6DosenTamuTenagaAhli::findOrFail($idx);
+
+        if (isset($prodiID, $data)){
+            $data->update([
+                'nidn_nidk' => $request->nidn_nidk, 
+                'nama_lembaga' => $request->nama_lembaga, 
+                'kepakaran' => $request->kepakaran, 
+                'waktu_kegiatan' => $request->waktu_kegiatan, 
+                'tautan'  => $request->tautan, 
+                'mk_id' => $request->mk_id,
+                'prodi_id' => $prodiID,
+            ]);
+        }
+
+        return redirect()->route('dosen_tamu_dan_tenaga_ahli.index')->with('success', 'Data K6 Dosen Tamu dan Tenaga Ahli UPDATED successfully');
     }
 
     /**
@@ -594,10 +903,12 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_destroy($id)
     {
-        //
-        $data = dosenTamuDanTenagaAhli::find($id);
-        $data->delete();
-        return redirect()->route('dosen_tamu_dan_tenaga_ahli.index');
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            TabelK6DosenTamuTenagaAhli::destroy($id);
+        }
+
+        return redirect()->route('dosen_tamu_dan_tenaga_ahli.index')->with('success', 'Data K6 Dosen Tamu dan Tenaga Ahli DELETED successfully');
     }
 
     /**
@@ -607,9 +918,9 @@ class TabelC6Controller extends Controller
      */
     public function kepuasan_mahasiswa_index()
     {
-        //
-        // $data = kepuasanMahasiswa::all();
-        return view('kriteria.c6.kepuasan_mahasiswa.index');
+        $items = TabelK6KepuasanMahasiswa::where('prodi_id', auth()->user()->prodi_id)->get();
+
+        return view('kriteria.c6.kepuasan_mahasiswa.index', compact('items'));
     }
 
     /**
@@ -631,12 +942,30 @@ class TabelC6Controller extends Controller
      */
     public function kepuasan_mahasiswa_store(Request $request)
     {
-        //
-        $data = new kepuasanMahasiswa;
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->kepuasan_mahasiswa = $request->kepuasan_mahasiswa;
-        $data->save();
-        return redirect()->route('kepuasan_mahasiswa.index');
+        $request->validate([
+            'aspek' => 'required', 
+            'kinerja_mengajar' => 'required|numeric', 
+            'layanan_administrasi_ps'  => 'required|numeric', 
+            'sarana_prasarana_ps' => 'required|numeric', 
+            'tindak_lanjut' => 'required', 
+            'tautan' => 'required',            
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+
+        if (isset($prodiID)){
+            TabelK6KepuasanMahasiswa::create([
+                'aspek' => $request->aspek, 
+                'kinerja_mengajar' => $request->kinerja_mengajar, 
+                'layanan_administrasi_ps'  => $request->layanan_administrasi_ps, 
+                'sarana_prasarana_ps' => $request->sarana_prasarana_ps, 
+                'tindak_lanjut' => $request->tindak_lanjut, 
+                'tautan' => $request->tautan,
+                'prodi_id' => $prodiID,  
+            ]);
+        }
+
+        return redirect()->route('kepuasan_mahasiswa.index')->with('success', 'Data K6 Kepuasan Mahasiswa ADDED successfully');
     }
 
     /**
@@ -647,9 +976,8 @@ class TabelC6Controller extends Controller
      */
     public function kepuasan_mahasiswa_edit($id)
     {
-        //
-        $data = kepuasanMahasiswa::find($id);
-        return view('kriteria.c6.kepuasan_mahasiswa.edit', compact('data'));
+        $item = TabelK6KepuasanMahasiswa::findOrFail($id);
+        return view('kriteria.c6.kepuasan_mahasiswa.form', compact('item'));
     }
 
     /**
@@ -661,12 +989,32 @@ class TabelC6Controller extends Controller
      */
     public function kepuasan_mahasiswa_update(Request $request, $id)
     {
-        //
-        $data = kepuasanMahasiswa::find($id);
-        $data->id_kriteria6 = $request->id_kriteria6;
-        $data->kepuasan_mahasiswa = $request->kepuasan_mahasiswa;
-        $data->save();
-        return redirect()->route('kepuasan_mahasiswa.index');
+        $idx = Crypt::decryptString($id);
+
+        $request->validate([
+            'aspek' => 'required', 
+            'kinerja_mengajar' => 'required|numeric', 
+            'layanan_administrasi_ps'  => 'required|numeric', 
+            'sarana_prasarana_ps' => 'required|numeric', 
+            'tindak_lanjut' => 'required', 
+            'tautan' => 'required',            
+        ]);
+
+        $prodiID = auth()->user()->prodi_id;
+        $data = TabelK6KepuasanMahasiswa::findOrFail($idx);
+
+        if (isset($prodiID, $data)){
+            $data->update([
+                'aspek' => $request->aspek, 
+                'kinerja_mengajar' => $request->kinerja_mengajar, 
+                'layanan_administrasi_ps'  => $request->layanan_administrasi_ps, 
+                'sarana_prasarana_ps' => $request->sarana_prasarana_ps, 
+                'tindak_lanjut' => $request->tindak_lanjut, 
+                'tautan' => $request->tautan,
+            ]);
+        }
+
+        return redirect()->route('kepuasan_mahasiswa.index')->with('success', 'Data K6 Kepuasan Mahasiswa UPDATED successfully');
     }
 
     /**
@@ -677,10 +1025,11 @@ class TabelC6Controller extends Controller
      */
     public function kepuasan_mahasiswa_destroy($id)
     {
-        //
-        $data = kepuasanMahasiswa::find($id);
-        $data->delete();
-        return redirect()->route('kepuasan_mahasiswa.index');
+        $prodiID = auth()->user()->prodi_id;
+        if (isset($prodiID)){
+            TabelK6KepuasanMahasiswa::destroy($id);
+        }
+        return redirect()->route('kepuasan_mahasiswa.index')->with('success', 'Data K6 Kepuasan Mahasiswa DELETED successfully');
     }
 
     

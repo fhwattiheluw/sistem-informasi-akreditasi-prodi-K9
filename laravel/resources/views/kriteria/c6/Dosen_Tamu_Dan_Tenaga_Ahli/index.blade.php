@@ -39,7 +39,7 @@
               <thead class="text-center">
                 <tr>
                   <th>No</th>
-                  <th>Nama Lengkap Dosen Tamu dan Tenaga Ahli</th>
+                  <th>Nama Dosen <br>Tamu dan Tenaga Ahli</th>
                   <th>Nama Lembaga</th>
                   <th>Kepakaran</th>
                   <th>Mata Kuliah</th>
@@ -51,21 +51,23 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->dosen->nama }}</td>
+                  <td>{{ $item->nama_lembaga }}</td>
+                  <td>{{ $item->kepakaran }}</td>
+                  <td>{{ $item->matakuliah->nama }}</td>
+                  <td>{{ $item->waktu_kegiatan }}</td>
+                  <td><a href="{{ $item->tautan }}" class="btn btn-warning" target="_blank" rel="noopener noreferrer">link</a></td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="/kriteria6/dosen_tamu_dan_tenaga_ahli/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria6/dosen_tamu_dan_tenaga_ahli/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

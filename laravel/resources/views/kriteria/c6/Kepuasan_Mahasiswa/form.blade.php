@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.6 Dosen Tamu Dan Tenaga Ahli</p>
+          <p class="m-0">K.6 Kepuasan Mahasiswa</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('kepuasan_mahasiswa.update', ['id' => Crypt::encryptString($item->id)])  : route('kepuasan_mahasiswa.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,7 +36,7 @@
             Edit data
             @endif
 
-            Dosen Tamu Dan Tenaga Ahli</h4>
+            Kepuasan Mahasiswa</h4>
 
           @if ($errors->any())
               <div>
@@ -50,29 +50,39 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Aspek Pengukuran Kepuasan</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="aspek" value="{{ isset($item->aspek) ? $item->aspek : old('aspek') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
+
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing</label>
+            <label class="col-sm-3 col-form-label">Objek Kepuasan Mahasiswa</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing" value="{{ isset($item->nama_dosen_pembimbing) ? $item->nama_dosen_pembimbing : old('nama_dosen_pembimbing') }}" class="form-control" placeholder="Ketik disini">
+                <div class="row">
+                    <div class="col">
+                        <label for="kinerja_mengajar">Kinerja Mengajar PS</label>
+                        <input type="number" step="0.01" id="kinerja_mengajar" name="kinerja_mengajar" value="{{ isset($item->kinerja_mengajar) ? $item->kinerja_mengajar : old('jumlah_ps_lain_ts2') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                    <div class="col">
+                        <label for="layanan_administrasi_ps">Layanan Administrasi Akademik</label>
+                        <input type="number" step="0.01" id="layanan_administrasi_ps" name="layanan_administrasi_ps" value="{{ isset($item->layanan_administrasi_ps) ? $item->layanan_administrasi_ps : old('jumlah_ps_lain_ts1') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                    <div class="col">
+                        <label for="sarana_prasarana_ps">Sarana Prasarana PS</label>
+                        <input type="number" step="0.01" id="sarana_prasarana_ps" name="sarana_prasarana_ps" value="{{ isset($item->sarana_prasarana_ps) ? $item->sarana_prasarana_ps : old('jumlah_ps_sendiri_ts') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                </div>
             </div>
           </div>
+
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
+            <label class="col-sm-3 col-form-label">Tindak Lanjut</label>
             <div class="col-sm-9">
-              <input type="text" name="frekuensi_kegiatan" value="{{ isset($item->frekuensi_kegiatan) ? $item->frekuensi_kegiatan : old('frekuensi_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="tindak_lanjut" value="{{ isset($item->tindak_lanjut) ? $item->tindak_lanjut : old('tindak_lanjut') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
-            <div class="col-sm-9">
-              <input type="text" name="hasil_kegiatan" value="{{ isset($item->hasil_kegiatan) ? $item->hasil_kegiatan : old('hasil_kegiatan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+          
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">
@@ -99,22 +109,18 @@
 
   </div>
   <script>
-    document.getElementById('nilai2').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                if (!/^\d*\.?\d*$/.test(e.target.value)) {
+                    e.target.value = e.target.value.slice(0, -1);
+                }
+            });
+        });
     });
-    document.getElementById('nilai1').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-</script>
+  </script>
+
 
   @endsection
 

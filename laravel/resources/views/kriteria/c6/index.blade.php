@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Integrasi Hasil Penelitian dan PkM dalam Proses Pembelajaran</h5>
-          <a href="{{route('integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index')}}" class="btn btn-primary">Go</a>
+          <a href="{{route('integrasi_pembelajaran.index')}}" class="btn btn-primary">Go</a>
         </div>
       </div>
     </div>

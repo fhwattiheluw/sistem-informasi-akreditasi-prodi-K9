@@ -39,9 +39,9 @@
               <thead class="text-center">
                 <tr>
                   <th>No</th>
-                  <th>Nama Dosen Pembimbing Magang Kependidikan</th>
+                  <th>Nama Dosen</th>
                   <th>Jumlah Mahasiswa Bimbingan</th>
-                  <th>Rata-Rata Banyaknya Pertemuan/ Mahasiswa/Periode Magang*</th>
+                  <th>Rata-Rata Pertemuan/Mahasiswa/Periode Magang*</th>
                   <th>Tautan</th>
                   <th>Aksi</th>
                 </tr>
@@ -49,19 +49,21 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 60; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->dosen->nama }}</td>
+                  <td>{{ $item->jumlah_bimbingan }}</td>
+                  <td>{{ $item->rata_pertemuan_semester }}</td>
+                  <td>{{ $item->tautan }}</td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria6/jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

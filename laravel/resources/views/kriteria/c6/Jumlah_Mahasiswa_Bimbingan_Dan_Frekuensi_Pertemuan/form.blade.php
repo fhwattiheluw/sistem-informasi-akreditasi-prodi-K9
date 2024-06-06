@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.update', ['id' => Crypt::encryptString($item->id)])  : route('jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -52,19 +52,27 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing_akademik" value="{{ isset($item->nama_dosen_pembimbing_akademik) ? $item->nama_dosen_pembimbing_akademik : old('nama_dosen_pembimbing_akademik') }}" class="form-control" placeholder="Ketik disini">
+              <select class="form-control" name="nidn_nidk">
+                <option value="">Pilih</option>
+                @foreach($dosens as $dosen)
+                <option value="{{ $dosen->nidn_nidk }}" 
+                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+                {{ $dosen->nama }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan</label>
             <div class="col-sm-9">
-              <input type="text" name="jumlah_mahasiswa_bimbingan" value="{{ isset($item->jumlah_mahasiswa_bimbingan) ? $item->jumlah_mahasiswa_bimbingan : old('jumlah_mahasiswa_bimbingan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="jumlah_bimbingan" value="{{ isset($item->jumlah_bimbingan) ? $item->jumlah_bimbingan : old('jumlah_mahasiswa_bimbingan') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Rata-Rata Banyaknya Pertemuan/ Mahasiswa/Semester</label>
             <div class="col-sm-9">
-              <input type="text" name="rata_rata_banyaknya_pertemuan_mahasiswa_semester" value="{{ isset($item->rata_rata_banyaknya_pertemuan_mahasiswa_semester) ? $item->rata_rata_banyaknya_pertemuan_mahasiswa_semester : old('rata_rata_banyaknya_pertemuan_mahasiswa_semester') }}" class="form-control" placeholder="Ketik disini">
+              <input type="number" name="rata_pertemuan_semester" value="{{ isset($item->rata_pertemuan_semester) ? $item->rata_pertemuan_semester : old('rata_pertemuan_semester') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">

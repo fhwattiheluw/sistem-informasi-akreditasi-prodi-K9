@@ -39,10 +39,10 @@
               <thead class="text-center">
                 <tr>
                   <th rowspan="3">No</th>
-                  <th rowspan="3">Nama Dosen Pembimbing Tugas Akhir</th>
+                  <th rowspan="3">Nama Dosen Pembimbing</th>
                   <th colspan="8">Banyaknya Mahasiswa Bimbingan</th>
-                  <th rowspan="3">Rata-Rata Jumlah  Bimbingan di semua Program</th>
-                  <th rowspan="3">Rata-Rata Banyaknya Pertemuan</th>
+                  <th rowspan="3">Rata-Rata Jumlah  Bimbingan <br>di semua Program</th>
+                  <th rowspan="3">Rata-Rata <br>Banyaknya Pertemuan</th>
                   <th rowspan="3">Tautan</th>
                   <th rowspan="3">Aksi</th>
                 </tr>
@@ -64,27 +64,33 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 2; $i++)
+                @foreach($items as $item)
+                  @php
+                    $rata_ps_sendiri = ($item->jumlah_ps_sendiri_ts2 + $item->jumlah_ps_sendiri_ts1 + $item->jumlah_ps_sendiri_ts)/3;
+                    $rata_ps_lain = ($item->jumlah_ps_lain_ts2 + $item->jumlah_ps_lain_ts1 + $item->jumlah_ps_lain_ts)/3;
+                  @endphp
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->dosen->nama }}</td>
+                  <td>{{ $item->jumlah_ps_sendiri_ts2 }}</td>
+                  <td>{{ $item->jumlah_ps_sendiri_ts1 }}</td>
+                  <td>{{ $item->jumlah_ps_sendiri_ts }}</td>
+                  <td>{{ number_format($rata_ps_sendiri, 1, '.',',') }}</td>
+                  <td>{{ $item->jumlah_ps_lain_ts2 }}</td>
+                  <td>{{ $item->jumlah_ps_lain_ts1 }}</td>
+                  <td>{{ $item->jumlah_ps_lain_ts }}</td>
+                  <td>{{ number_format($rata_ps_lain, 1, '.',',') }}</td>
+                  <td>{{ ($rata_ps_sendiri + $rata_ps_lain)/2 }}</td>
+                  <td>{{ $item->rata_pertemuan }}</td>
+                  <td><a href="{{ $item->tautan }}" target="_blank" class="btn btn-warning" rel="noopener noreferrer">link</a></td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="jumlah_mahasiswa_bimbingan_ta/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="jumlah_mahasiswa_bimbingan_ta/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

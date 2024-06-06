@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+    <form class="card forms-sample" action="{{isset($item->id) ?  route('jumlah_mahasiswa_bimbingan_ta.update', ['id' => Crypt::encryptString($item->id)])  : route('jumlah_mahasiswa_bimbingan_ta.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,7 +36,7 @@
             Edit data
             @endif
 
-            Jumlah Mahasiswa Bimbingan Tugas Akhir atau Skripsi dan Frekuensi Pertemuan</h4>
+            Jumlah Mahasiswa Bimbingan Magang Kependidikan dan Frekuensi Pertemuan</h4>
 
           @if ($errors->any())
               <div>
@@ -50,52 +50,68 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-1 col-form-label">No</label>
-            <div class="col-sm-1">
-              <input type="number" name="no" value="{{ isset($item->no) ? $item->no : old('no') }}" class="form-control" placeholder="Ketik disini">
+            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="nidn_nidk">
+                <option value="">Pilih</option>
+                @foreach($dosens as $dosen)
+                <option value="{{ $dosen->nidn_nidk }}" 
+                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+                {{ $dosen->nama }}</option>
+                @endforeach
+              </select>
             </div>
-            <label class="col-sm-2 col-form-label">Nama Dosen Pembimbing Tugas Akhir</label>
-            <div class="col-sm-4">
-              <input type="text" name="nama_dosen_pembimbing_tugas_akhir" value="{{ isset($item->nama_dosen_pembimbing_tugas_akhir) ? $item->nama_dosen_pembimbing_tugas_akhir : old('nama_dosen_pembimbing_tugas_akhir') }}" class="form-control" placeholder="Ketik disini">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan PS Sendiri</label>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col">
+                        <label for="jumlah_ps_sendiri_ts2">TS-2</label>
+                        <input type="number" id="jumlah_ps_sendiri_ts2" name="jumlah_ps_sendiri_ts2" value="{{ isset($item->jumlah_ps_sendiri_ts2) ? $item->jumlah_ps_sendiri_ts2 : old('jumlah_ps_sendiri_ts2') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                    <div class="col">
+                        <label for="jumlah_ps_sendiri_ts1">TS-1</label>
+                        <input type="number" id="jumlah_ps_sendiri_ts1" name="jumlah_ps_sendiri_ts1" value="{{ isset($item->jumlah_ps_sendiri_ts1) ? $item->jumlah_ps_sendiri_ts1 : old('jumlah_ps_sendiri_ts1') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                    <div class="col">
+                        <label for="jumlah_ps_sendiri_ts">TS</label>
+                        <input type="number" id="jumlah_ps_sendiri_ts" name="jumlah_ps_sendiri_ts" value="{{ isset($item->jumlah_ps_sendiri_ts) ? $item->jumlah_ps_sendiri_ts : old('jumlah_ps_sendiri_ts') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                </div>
             </div>
-            <label class="col-sm-2 col-form-label">Di PS Sendiri</label>
-            <div class="col-sm-2">
-              <input type="number" name="di_ps_sendiri_ts2" value="{{ isset($item->di_ps_sendiri_ts2) ? $item->di_ps_sendiri_ts2 : old('di_ps_sendiri_ts2') }}" class="form-control" placeholder="Ketik disini">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan PS Lain</label>
+            <div class="col-sm-9">
+                <div class="row">
+                    <div class="col">
+                        <label for="jumlah_ps_lain_ts2">TS-2</label>
+                        <input type="number" id="jumlah_ps_lain_ts2" name="jumlah_ps_lain_ts2" value="{{ isset($item->jumlah_ps_lain_ts2) ? $item->jumlah_ps_lain_ts2 : old('jumlah_ps_lain_ts2') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                    <div class="col">
+                        <label for="jumlah_ps_lain_ts1">TS-1</label>
+                        <input type="number" id="jumlah_ps_lain_ts1" name="jumlah_ps_lain_ts1" value="{{ isset($item->jumlah_ps_lain_ts1) ? $item->jumlah_ps_lain_ts1 : old('jumlah_ps_lain_ts1') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                    <div class="col">
+                        <label for="jumlah_ps_lain_ts">TS</label>
+                        <input type="number" id="jumlah_ps_lain_ts" name="jumlah_ps_lain_ts" value="{{ isset($item->jumlah_ps_lain_ts) ? $item->jumlah_ps_lain_ts : old('jumlah_ps_sendiri_ts') }}" class="form-control" placeholder="Ketik disini">
+                    </div>
+                </div>
             </div>
-            <label class="col-sm-1 col-form-label">Rata-Rata</label>
-            <div class="col-sm-1">
-              <input type="number" name="di_ps_sendiri_rata_rata" value="{{ isset($item->di_ps_sendiri_rata_rata) ? $item->di_ps_sendiri_rata_rata : old('di_ps_sendiri_rata_rata') }}" class="form-control" placeholder="Ketik disini">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Rata-Rata Banyaknya Pertemuan/Mahasiswa/Semester</label>
+            <div class="col-sm-9">
+              <input type="number" name="rata_pertemuan" value="{{ isset($item->rata_pertemuan) ? $item->rata_pertemuan : old('rata_pertemuan') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-1 col-form-label">TS-2</label>
-            <div class="col-sm-1">
-              <input type="number" name="di_ps_lain_ts2" value="{{ isset($item->di_ps_lain_ts2) ? $item->di_ps_lain_ts2 : old('di_ps_lain_ts2') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-            <label class="col-sm-2 col-form-label">TS-1</label>
-            <div class="col-sm-2">
-              <input type="number" name="di_ps_lain_ts1" value="{{ isset($item->di_ps_lain_ts1) ? $item->di_ps_lain_ts1 : old('di_ps_lain_ts1') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-            <label class="col-sm-1 col-form-label">TS</label>
-            <div class="col-sm-1">
-              <input type="number" name="di_ps_lain_ts" value="{{ isset($item->di_ps_lain_ts) ? $item->di_ps_lain_ts : old('di_ps_lain_ts') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-            <label class="col-sm-1 col-form-label">Rata-Rata</label>
-            <div class="col-sm-1">
-              <input type="number" name="di_ps_lain_rata_rata" value="{{ isset($item->di_ps_lain_rata_rata) ? $item->di_ps_lain_rata_rata : old('di_ps_lain_rata_rata') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Rata-Rata Jumlah  Bimbingan di semua Program</label>
-            <div class="col-sm-2">
-              <input type="number" name="rata_rata_jumlah_bimbingan_di_semua_program" value="{{ isset($item->rata_rata_jumlah_bimbingan_di_semua_program) ? $item->rata_rata_jumlah_bimbingan_di_semua_program : old('rata_rata_jumlah_bimbingan_di_semua_program') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-            <label class="col-sm-2 col-form-label">Rata-Rata Banyaknya Pertemuan</label>
-            <div class="col-sm-2">
-              <input type="number" name="rata_rata_banyaknya_pertemuan" value="{{ isset($item->rata_rata_banyaknya_pertemuan) ? $item->rata_rata_banyaknya_pertemuan : old('rata_rata_banyaknya_pertemuan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-            <label class="col-sm-2 col-form-label">Tautan</label>
-            <div class="col-sm-2">
+            <label class="col-sm-3 col-form-label">Tautan</label>
+            <div class="col-sm-9">
               <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
@@ -118,23 +134,6 @@
     <!-- last row starts here -->
 
   </div>
-  <script>
-    document.getElementById('nilai2').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai1').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-</script>
 
   @endsection
 

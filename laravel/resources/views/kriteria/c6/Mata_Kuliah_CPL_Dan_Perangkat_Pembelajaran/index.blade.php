@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/kriteria5/pemerolehan_dana/create">
+      <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
@@ -42,10 +42,12 @@
                   <th rowspan="2">Semester</th>
                   <th rowspan="2">Kode MK</th>
                   <th rowspan="2">Nama Mata Kuliah</th>
-                  <th colspan="3">Jenis Mata Kuliah</th>
+                  <th colspan="3">Jenis</th>
+                  <th rowspan="2">SKS</th>
                   <th colspan="3">Unit Penyelenggara*</th>
-                  <th rowspan="2">Kesesuaian dengan CPL</th>
+                  <th rowspan="2">Kesesuaian CPL</th>
                   <th rowspan="2">Perangkat Pembelajaran</th>
+                  <th rowspan="2">Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
                 <tr>
@@ -60,26 +62,28 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 60; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>Kode MK {{ $i }}</td>
-                  <td>Nama Mata Kuliah {{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->semester }}</td>
+                  <td>{{ $item->kode_mk }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ (isset($item->jenis_matakuliah) && $item->jenis_matakuliah == 'teori') ? 'V' : '' }}</td>
+                  <td>{{ (isset($item->jenis_matakuliah) && $item->jenis_matakuliah == 'praktikum') ? 'V' : '' }}</td>
+                  <td>{{ (isset($item->jenis_matakuliah) && $item->jenis_matakuliah == 'praktik') ? 'V' : '' }}</td>
+                  <td>{{ $item->sks }}</td>
+                  <td>{{ (isset($item->unit_penyelenggara) && $item->unit_penyelenggara == 'pt') ? 'V' : '' }}</td>
+                  <td>{{ (isset($item->unit_penyelenggara) && $item->unit_penyelenggara == 'upps') ? 'V' : '' }}</td>
+                  <td>{{ (isset($item->unit_penyelenggara) && $item->unit_penyelenggara == 'ps') ? 'V' : '' }}</td>
+                  <td>{{ $item->kesesuaian_cpl }}</td>
+                  <td>{{ $item->perangkat_pembelajaran }}</td>
+                  <td><a href="{{ $item->tautan }}" class="btn btn-warning"> link </a></td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{ $item->id }}/edit" class="btn btn-primary"> Edit </a>
+                    <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

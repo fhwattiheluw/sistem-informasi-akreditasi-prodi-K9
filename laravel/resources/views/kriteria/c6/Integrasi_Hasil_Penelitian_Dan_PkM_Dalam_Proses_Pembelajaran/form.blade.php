@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/kriteria5/pemerolehan_dana">
+      <a href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran">
         <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
       </a>
     </div>
@@ -13,8 +13,8 @@
         <a href="#">
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
-        <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.5 Keuangan, Sarana, dan Prasarana</p>
+        <a class="pl-3 mr-4" href="{{route('kriteria6')}}">
+          <p class="m-0">K.6 Integrasi Penelitian dan PKM dalam Pembelajaran</p>
         </a>
       </div>
 
@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('integrasi_pembelajaran.update', ['id' => Crypt::encryptString($item->id)])  : route('integrasi_pembelajaran.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -36,10 +36,10 @@
             Edit data
             @endif
 
-            Pemerolehan Dana
+            Integrasi Penelitian dan PKM
           </h4>
 
-          <p class="card-description">K.5 Investsi sarana pendidikan</p>
+          <p class="card-description">K.6 Integrasi Penelitian dan PKM dalam Pembelajaran</p>
           @if ($errors->any())
               <div>
                   <ul>
@@ -52,52 +52,47 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Sumber Dana</label>
+            <label class="col-sm-3 col-form-label">Judul Penelitian/PKM</label>
             <div class="col-sm-9">
-              <select class="form-control" name="sumber_dana">
+              <input type="text" name="judul" value="{{ isset($item->judul) ? $item->judul : old('judul') }}" class="form-control" placeholder="Ketik disini">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Dosen</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="nidn_nidk">
                 <option value="">Pilih</option>
-                <option value="Perguruan tinggi sendiri" 
-                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '')  == "Perguruan tinggi sendiri") selected @endif>
-                Perguruan tinggi sendiri</option>
-                <option value="Yayasan" 
-                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Yayasan") selected @endif>
-                Yayasan</option>
-                <option value="Kementerian"
-                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Kementerian") selected @endif>
-                  Kementerian</option>
-                <option value="Lembaga tertentu DN/LN"
-                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Lembaga tertentu DN/LN") selected @endif>
-                  Lembaga tertentu DN/LN</option>
-                <option value="Sumber lain"
-                  @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Sumber lain") selected @endif>
-                  Sumber lain</option>
+                @foreach($dosens as $dosen)
+                <option value="{{ $dosen->nidn_nidk }}" 
+                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+                {{ $dosen->nama }}</option>
+                @endforeach
               </select>
             </div>
           </div>
+
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jenis Dana</label>
+            <label class="col-sm-3 col-form-label">Matakuliah</label>
             <div class="col-sm-9">
-              <input type="text" name="jenis_dana" value="{{ isset($item->jenis_dana) ? $item->jenis_dana : old('jenis_dana') }}" class="form-control" placeholder="Ketik disini">
+              <select class="form-control" name="mk_id">
+                <option value="">Pilih</option>
+                @foreach($matakuliah as $mk)
+                <option value="{{ $mk->kode_mk }}" 
+                  @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->kode_mk) selected @endif>
+                {{ $mk->nama }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
+
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">TS-2 ({{date('Y') - 2}})</label>
+            <label class="col-sm-3 col-form-label">Bentuk Integrasi</label>
             <div class="col-sm-9">
-              <input type="text" name="jumlah_ts2" value="{{ isset($item->jumlah_ts2) ? $item->jumlah_ts2 : old('jumlah_ts2') }}" id="nilai2" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="bentuk_integrasi" value="{{ isset($item->bentuk_integrasi) ? $item->bentuk_integrasi : old('bentuk_integrasi') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">TS-1 ({{date('Y') - 1}})</label>
-            <div class="col-sm-9">
-              <input type="text" name="jumlah_ts1" id="nilai1" value="{{ isset($item->jumlah_ts1) ? $item->jumlah_ts1 : old('jumlah_ts1') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">TS ({{date('Y')}})</label>
-            <div class="col-sm-9">
-              <input type="text" name="jumlah_ts" id="nilai" value="{{ isset($item->jumlah_ts) ? $item->jumlah_ts : old('jumlah_ts') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+          
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">
@@ -123,23 +118,7 @@
     <!-- last row starts here -->
 
   </div>
-  <script>
-    document.getElementById('nilai2').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai1').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-</script>
+  
 
   @endsection
 
