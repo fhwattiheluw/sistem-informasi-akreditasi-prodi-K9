@@ -4,9 +4,12 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(Auth::user()->role == 'admin prodi')
+
       <a href="{{route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -69,14 +72,17 @@
                   <td>@if(!empty($d->tautan))<a href="{{ $d->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
 
                   <td>
+                    @if(Auth::user()->role == 'admin prodi')
+
                     <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit', ['id' => $d->id]) }}" class="btn btn-primary btn-sm" type="button">Edit</a>
                     <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.destroy', ['id' => $d->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</a>
+                    @endif
                   </td>
                 </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -89,4 +95,3 @@
 
 </div>
 @endsection
-

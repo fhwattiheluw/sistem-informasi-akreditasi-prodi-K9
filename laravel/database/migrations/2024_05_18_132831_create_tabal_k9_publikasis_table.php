@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('jumlah_ts_2');
             $table->string('jumlah_ts_1');
             $table->string('jumlah_ts');
-            $table->string('jumlah');
+            $table->string('jumlah')->nullable();
             $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

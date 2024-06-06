@@ -4,9 +4,12 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(Auth::user()->role == 'admin prodi')
+
       <a href="{{route('tingkat_relevansi_pekerjaan.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -67,24 +70,27 @@
                   <td>{{ $data->tahun_lulus }}</td>
                   <td>{{ $data->jumlah_lulusan }}</td>
                   <td>{{ $data->jumlah_terlacak }}</td>
-                  <td>{{ $data->relevansi }}</td>
-                  <td>{{ $data->relevansi }}</td>
-                  <td>{{ $data->relevansi }}</td>
+                  <td>{{ $data->relevansi_tinggi }}</td>
+                  <td>{{ $data->relevansi_sedang }}</td>
+                  <td>{{ $data->relevansi_rendah }}</td>
                   <td>@if(!empty($data->tautan))<a href="{{ $data->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
 
                   <td>
+                    @if(Auth::user()->role == 'admin prodi')
+
                     <a href="{{route('tingkat_relevansi_pekerjaan.edit', ['id' => $data->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
                     <form action="{{route('tingkat_relevansi_pekerjaan.destroy', ['id' => $data->id])}}" method="POST" class="d-inline">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</button>
                     </form>
+                    @endif
                   </td>
                 </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -97,4 +103,3 @@
 
 </div>
 @endsection
-

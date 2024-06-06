@@ -483,6 +483,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TabalK9KaryaDisitasiSeeder::class);
         $this->call(TabalK9ProdukSeeder::class);
         $this->call(TabalK9ProdukHkiSeeder::class);
+        $this->call(TabalK9KepuasanPenggunaSeeder::class);
+        $this->call(TabelK9MasaStudiSeeder::class);
+        $this->call(TabalK9PublikasiSeeder::class);
 
         $this->call(K5Seeder::class);
     }

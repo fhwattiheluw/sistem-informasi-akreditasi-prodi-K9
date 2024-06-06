@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tabel_k9_masa_studis', function (Blueprint $table) {
             $table->id();
-            $table->enum('tahun_masuk',['ts_6','ts_5','ts_4','ts_3']);
+            $table->enum('tahun_masuk',['ts_6','ts_5','ts_4','ts_3','ts_2','ts_1','ts']);
             $table->integer('jumlah_diterima');
             $table->integer('jumlah_lulus_ts_6');
             $table->integer('jumlah_lulus_ts_5');
@@ -23,9 +23,7 @@ return new class extends Migration
             $table->integer('jumlah_lulus_ts_3');
             $table->integer('jumlah_lulus_ts_2');
             $table->integer('jumlah_lulus_ts_1');
-            $table->integer('jumlah_lulus_ts');
-            $table->integer('jumlah_lulus');
-            $table->integer('rata_masa_studi');
+            $table->integer('jumlah_lulus_ts'); 
             $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

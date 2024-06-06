@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.update', ['id' => Crypt::encryptString($item->id)])  : route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.update', ['id' => $item->id])  : route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -110,7 +110,12 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">
-              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control @error('tautan') is-invalid @enderror" placeholder="Ketik disini">
+              @error('tautan')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
           </div>
 

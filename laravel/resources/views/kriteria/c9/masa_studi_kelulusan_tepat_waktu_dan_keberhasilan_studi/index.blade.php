@@ -10,9 +10,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(Auth::user()->role == 'admin prodi')
       <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -73,29 +75,40 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 10; $i++)
+                @foreach($items as $item)
+                @php
+                $total = $item->jumlah_lulus_ts_6 + $item->jumlah_lulus_ts_5 + $item->jumlah_lulus_ts_4 + $item->jumlah_lulus_ts_3 + $item->jumlah_lulus_ts_2 + $item->jumlah_lulus_ts_1 + $item->jumlah_lulus_ts;
+                $avg = $total / 7;
+                @endphp
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>lihat tautan</td>
+                  <td>{{ $item->tahun_masuk }}</td>
+                  <td>{{ $item->jumlah_diterima }}</td>
+                  <td>{{ $item->jumlah_lulus_ts_6 }}</td>
+                  <td>{{ $item->jumlah_lulus_ts_5 }}</td>
+                  <td>{{ $item->jumlah_lulus_ts_4 }}</td>
+                  <td>{{ $item->jumlah_lulus_ts_3 }}</td>
+                  <td>{{ $item->jumlah_lulus_ts_2 }}</td>
+                  <td>{{ $item->jumlah_lulus_ts_1 }}</td>
+                  <td>{{ $item->jumlah_lulus_ts }}</td>
+                  <td>{{ $total }}</td>
+                  <td>{{ $avg }}</td>
+                  <td>{!! $item->tautan ? '<a href="' . $item->tautan . '" target="_blank">Link</a>' : 'Tidak ada tautan' !!}</td>
                   <td>
-                    <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.edit', ['id' => $i])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                    @if(Auth::user()->role == 'admin prodi')
+
+                    <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.edit', ['id' => $item->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <form action="{{ route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.destroy', ['id' => $item->id]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                    @endif
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -108,4 +121,3 @@
 
 </div>
 @endsection
-

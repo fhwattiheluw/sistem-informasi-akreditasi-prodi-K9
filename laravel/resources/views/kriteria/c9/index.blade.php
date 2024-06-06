@@ -12,7 +12,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">C.9 Luaran dan Capaian Tridharma</p>
+          <p class="m-0">K.9 Luaran dan Capaian Tridharma</p>
         </a>
       </div>
 
@@ -41,7 +41,6 @@
         <div class="card-body">
           <h5 class="card-title">Tabel Masa Studi, Kelulusan Tepat Waktu, dan Keberhasilan Studi</h5>
           <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.index')}}" class="btn btn-primary">Go</a>
-          belum
         </div>
       </div>
     </div>
@@ -58,7 +57,6 @@
         <div class="card-body">
           <h5 class="card-title">Tabel Tingkat Relevansi Pekerjaan</h5>
           <a href="{{route('tingkat_relevansi_pekerjaan.index')}}" class="btn btn-primary">Go</a>
-          belum
         </div>
       </div>
     </div>
@@ -67,7 +65,6 @@
         <div class="card-body">
           <h5 class="card-title">Tabel Tingkat Kepuasan Pengguna Lulusan</h5>
           <a href="{{route('tingkat_kepuasan_pengguna_lulusan.index')}}" class="btn btn-primary">Go</a>
-          belum
         </div>
       </div>
     </div>
@@ -76,7 +73,6 @@
         <div class="card-body">
           <h5 class="card-title">Tabel Publikasi DTPS dan Mahasiswa</h5>
           <a href="{{route('publikasi_dtps_dan_mahasiswa.index')}}" class="btn btn-primary">Go</a>
-          belum
         </div>
       </div>
     </div>
@@ -101,7 +97,6 @@
         <div class="card-body">
           <h5 class="card-title">Tabel Produk atau Jasa DTPS dan Mahasiswa yang Ber-HKI atau Paten</h5>
           <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.index')}}" class="btn btn-primary">Go</a>
-          belum
         </div>
       </div>
     </div>

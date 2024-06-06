@@ -4,9 +4,12 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(Auth::user()->role == 'admin prodi')
+
       <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -43,7 +46,7 @@
                 </button>
             </div>
           @endif
-          
+
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -54,14 +57,14 @@
                   <th >Tahun (YYYY)</th>
                   <th >Tautan</th>
                   <th >Aksi</th>
-                </tr> 
+                </tr>
               </thead>
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
                 @foreach($items as $item)
                 <tr>
-                  <td>{{ $loop->iteration }}</td> 
+                  <td>{{ $loop->iteration }}</td>
                   <td>
                     Dosen : {{ $item->dosen->nama }} <br>
                     Mahasiswa : {{ $item->nama_mahasiswa }}
@@ -71,14 +74,17 @@
                   <td>@if(!empty($item->tautan))<a href="{{ $item->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
 
                   <td>
+                    @if(Auth::user()->role == 'admin prodi')
+
                     <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')"> Hapus </button>
+                    <a href="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.destroy', ['id'=>$item->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')"> Hapus </a>
+                    @endif
                   </td>
                 </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -91,4 +97,3 @@
 
 </div>
 @endsection
-
