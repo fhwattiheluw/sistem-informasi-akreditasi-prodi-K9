@@ -31,7 +31,7 @@
             @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
-            
+
             Prestasi DTPS
           </h4>
 
@@ -49,7 +49,7 @@
             <form action="{{isset($item->id) ?  route('prestasi_dtps.update', ['id' => Crypt::encryptString($item->id)])  : route('prestasi_dtps.store')}}" method="post">
               @if(isset($item->id))
                 @method('PUT')
-              @endif  
+              @endif
               @csrf
               <div class="table-responsive">
                 <table class="table table-striped table-bordered">
@@ -106,9 +106,9 @@
               </div>
 
                     @if (Request::segment(3) === 'create')
-                    <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Tambah data</button>
                     @elseif (Request::segment(4) === 'edit')
-                    <button type="submit" class="btn btn-primary mr-2"> Update data</button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Update data</button>
                     @endif
 
                   </form>

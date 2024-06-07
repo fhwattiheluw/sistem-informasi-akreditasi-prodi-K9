@@ -103,9 +103,9 @@
               </div>
 
                   @if (Request::segment(3) === 'create')
-                    <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Tambah data</button>
                   @elseif (Request::segment(4) === 'edit')
-                    <button type="submit" class="btn btn-primary mr-2"> Update data</button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Update data</button>
                   @endif
 
                   </form>

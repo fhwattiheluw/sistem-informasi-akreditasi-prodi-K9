@@ -20,6 +20,7 @@
           <h2 class="heading-section">Instrumen Akreditasi Program Studi (IAPS) <br> LAMDIK untuk program Sarjana</h2>
         </div>
       </div>
+
       <div class="row justify-content-center">
         <div class="col-md-12 col-lg-10">
           <div class="wrap d-md-flex">
@@ -31,23 +32,38 @@
                   <h3 class="mb-4">Forgot password</h3>
                 </div>
                 <div class="w-100">
-                  <!-- <p class="social-media d-flex justify-content-end">
-                  <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-                  <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
-                </p> -->
+                  <p class="social-media d-flex justify-content-end">
+                  <!-- <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a> -->
+                  <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a>
+                </p>
               </div>
             </div>
-            <form action="#" class="signin-form">
+            @if(session('info'))
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ session('info') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            <form action="{{route('password.reset')}}" class="signin-form" method="POST">
+              @csrf
               <div class="form-group mb-3">
                 <label class="label" for="name">Email user</label>
-                <input type="email" class="form-control" placeholder="ketik disini" autofocus required>
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="ketik disini" value="{{old('email')}}" autofocus>
+                @error('email')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
+
               <div class="form-group">
-                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Reset password</button>
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">Reset password</button>
               </div>
               <div class="form-group d-md-flex">
                 <div class="w-50 text-md-right">
-                  <a href="/">Login</a>
+                  <a href="{{route('login')}}">Login</a>
                 </div>
               </div>
             </form>

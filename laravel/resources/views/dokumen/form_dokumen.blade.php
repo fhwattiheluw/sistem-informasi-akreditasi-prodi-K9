@@ -62,8 +62,8 @@
               </div>
             @enderror
           </div>
-          
-          <button type="submit" class="btn btn-primary">{{ isset($repository) ? 'Simpan Perubahan' : 'Unggah' }}</button>
+
+          <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">{{ isset($repository) ? 'Simpan Perubahan' : 'Unggah' }}</button>
         </div>
       </form>
     </div>
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Mengunggah...';
     submitButton.disabled = true;
   };
-  
+
 });
 </script>
 @endsection

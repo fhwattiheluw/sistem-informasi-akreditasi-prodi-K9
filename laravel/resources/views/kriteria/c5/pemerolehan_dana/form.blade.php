@@ -26,7 +26,7 @@
       <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
-        @endif  
+        @endif
         @csrf
         <div class="card-body">
           <h4 class="card-title">
@@ -56,10 +56,10 @@
             <div class="col-sm-9">
               <select class="form-control" name="sumber_dana">
                 <option value="">Pilih</option>
-                <option value="Perguruan tinggi sendiri" 
+                <option value="Perguruan tinggi sendiri"
                   @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '')  == "Perguruan tinggi sendiri") selected @endif>
                 Perguruan tinggi sendiri</option>
-                <option value="Yayasan" 
+                <option value="Yayasan"
                   @if(old('sumber_dana', isset($item->sumber_dana) ? $item->sumber_dana : '') == "Yayasan") selected @endif>
                 Yayasan</option>
                 <option value="Kementerian"
@@ -109,7 +109,7 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
+            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
               @if (Request::segment(3) === 'create')
               Tambah data
               @elseif (Request::segment(4) === 'edit')
@@ -142,4 +142,3 @@
 </script>
 
   @endsection
-

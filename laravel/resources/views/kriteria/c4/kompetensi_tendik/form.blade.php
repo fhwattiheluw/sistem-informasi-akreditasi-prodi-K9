@@ -47,7 +47,7 @@
           <hr>
           @foreach($item as $item)
           <form action="{{isset($item->id) ?  route('kompetensi_tendik.update', ['id' => Crypt::encryptString($item->id)])  : route('kompetensi_tendik.store')}}" method="post">
-            
+
             @if(isset($item->id))
               @method('PUT')
             @endif
@@ -83,7 +83,7 @@
                     <td>
                       <input type="date" class="form-control" name="waktu_mulai" value="{{isset($item->waktu_mulai) ? $item->waktu_mulai : old('waktu_mulai')}}" placeholder="ketik disini">
                     </td>
-                  </tr>                  
+                  </tr>
                   <tr>
                     <td >Waktu Berakhir Kegiatan</td>
                     <td>
@@ -104,9 +104,9 @@
             </div>
 
             @if (Request::segment(3) === 'create')
-            <button type="submit" class="btn btn-primary mr-2"> Tambah data</button>
+            <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Tambah data</button>
             @elseif (Request::segment(4) === 'edit')
-            <button type="submit" class="btn btn-primary mr-2"> Update data</button>
+            <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Update data</button>
             @endif
 
           </form>

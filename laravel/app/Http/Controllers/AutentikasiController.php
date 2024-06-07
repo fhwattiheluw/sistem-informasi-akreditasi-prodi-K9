@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\autentikasi;
+use App\Models\User;
+use App\Http\Controllers\mailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AutentikasiController extends Controller
 {
@@ -20,12 +23,12 @@ class AutentikasiController extends Controller
         return view('login');
     }
 
-    
+
     public function logout()
     {
         Auth::logout();
         Session::forget('prodi');
-        
+
         return redirect()->route('login');
     }
 
@@ -35,23 +38,52 @@ class AutentikasiController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        
+
         $credentials = $request->only('email', 'password');
-    
+
         if (Auth::attempt($credentials)) {
             // Authentication passed...
             return redirect()->route('dashboard.index');
         }
-    
+
         return back()->withInput()->withErrors(['gagal' => 'Email atau password salah']);
     }
-    
+
 
 
     public function forgot_form()
     {
       // code...
       return view('forgot_password');
+    }
+
+
+    public function sendResetPassword(Request $input)
+    {
+      // dd($input->email);
+
+      $input->validate([
+        'email' => 'required|email',
+      ]);
+
+      $password_reset = Str::random(10);
+
+      $subject = "Reset password AkreSmart";
+      $title = "Reset password akun AkreSmart";
+      $body = "password baru anda : ".$password_reset;
+      $email = $input->email;
+
+      $cek_exists_email = User::where('email',$email)->first();
+      if ($cek_exists_email) {
+          User::where('email', $email)->update([
+            'password' => bcrypt($password_reset)
+          ]);
+
+          $emailController = new mailController();
+          $emailController->send_mail($subject,$title,$body,$email);
+      }
+
+      return redirect()->back()->with('info','Silahkan periksa kotak masuk email anda');
     }
 
     /**

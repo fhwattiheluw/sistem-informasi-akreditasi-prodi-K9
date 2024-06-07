@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+// controller untuk email
+use App\Http\Controllers\mailController;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\AkunCreated;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\DataProgramStudiController;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AkunController extends Controller
@@ -32,7 +35,7 @@ class AkunController extends Controller
      * @return Illuminate\View\View
      */
     public function index()
-    { 
+    {
         if(auth()->user()->role == 'fakultas') {
         $dataUser = User::where('id', '!=', 1)
         ->where('role', "!=", "asesor")
@@ -46,7 +49,7 @@ class AkunController extends Controller
         if($dataUser->count() == 0) {
             return view('akun.manag_akun', compact('dataUser'))->with('info', 'Tidak ada data user.');
         }
-        
+
         return view('akun.manag_akun', compact('dataUser'));
     }
 
@@ -56,7 +59,7 @@ class AkunController extends Controller
             return $session_prodi = session::get('prodi')['prodi']->id;
         }
 
-        
+
         session()->flash('info', 'Anda belum memilih prodi. Silahkan pilih prodi terlebih dahulu');
 
         return $session_prodi;
@@ -81,6 +84,7 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
+      // proses validasi data yang di input
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8',
@@ -88,18 +92,26 @@ class AkunController extends Controller
             'role' => 'required|in:admin prodi,asesor',
             'prodi_id' => 'required',
         ]);
-        
+
+        // proses insert
         $akun = User::create([
-                 'name' => $request->name,
+                'name' => $request->name,
                 'password' => bcrypt($request->password),
                 'email' => $request->email,
                 'role' => $request->role,
                 'prodi_id' => $request->prodi_id,
                 ]);
-        
-        // $email = new sendEmail($akun);
-        // Mail::to($validatedData['email'])->send($email);
-        
+
+        // proses mengirimkan email
+        $subject = "Akun AkreSmart";
+        $title = "Berhasil membuat akun baru AkreSmart";
+        $body = "email = ".$validatedData['email'].' password: '.$validatedData['password'].' otorisasi: '.$validatedData['role'];
+        $email = $request->email;
+
+        $emailController = new mailController();
+        $emailController->send_mail($subject,$title,$body,$email);
+
+        // redirect
         return redirect()->route('akun.index')->with('success', 'Akun berhasil dibuat');
     }
 
@@ -144,14 +156,14 @@ class AkunController extends Controller
             'prodi_id' => $request->prodi_id,
         ]);
 
-        
+
         return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui');
     }
 
     public function destroy($email)
     {
         $user = User::where('email', $email)->first();
-        
+
         if ($user) {
             $user->delete();
             return redirect()->route('akun.index')->with('success', 'Data pengguna berhasil dihapus');
@@ -170,7 +182,7 @@ class AkunController extends Controller
             return redirect()->route('dashboard.index')->with('error', 'Data pengguna tidak ditemukan');
         }
     }
-    
+
     public function profil()
     {
          // Mengambil ID pengguna yang sedang login
@@ -178,7 +190,7 @@ class AkunController extends Controller
 
         // Mencari pengguna berdasarkan ID atau gagal jika tidak ditemukan
         $user = User::findOrFail($id);
-        
+
         return view('akun.edit_profil', compact('user'));
     }
 
@@ -201,7 +213,7 @@ class AkunController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        
+
         return redirect()->route('akun.profil')->with('success', 'Akun berhasil diperbarui');
     }
 

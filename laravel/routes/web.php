@@ -20,13 +20,17 @@ use App\Http\Controllers\{
     DosenController,
     MatakuliahController,
     TendikController,
+    mailController,
 
 };
+
+Route::get('/reset/password',[mailController::class, 'reset_password'])->name('email.reset_password');
 
 // redirect route ke route login
 Route::redirect('/', '/login');
 // lupa password
 Route::get('/forgot',[AutentikasiController::class, 'forgot_form']);
+Route::post('/forgot/reset',[AutentikasiController::class, 'sendResetPassword'])->name('password.reset');
 
 // buatkan code route untuk login dan logout. sertakan nama route
 Route::get('/login', [AutentikasiController::class, 'index'])->name('login');

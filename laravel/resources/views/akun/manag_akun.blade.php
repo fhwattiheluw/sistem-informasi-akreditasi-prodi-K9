@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Akun Pengguna</h5>
-                    @if (session('successs'))
+                    @if (session('success'))
                     <div class="alert alert-success alert-dismissible flex-grow-1 mr-3 mb-3" role="alert">
                         <div class="d-flex w-100">
                             <div class="mr-auto">{{ session('success') }}</div>
@@ -34,7 +34,7 @@
                     </div>
                     @endif
 
-                    
+
                     @if (session('info'))
                     <div class="alert alert-info alert-dismissible flex-grow-1 mr-3 mb-3" role="alert">
                         <div class="d-flex w-100">

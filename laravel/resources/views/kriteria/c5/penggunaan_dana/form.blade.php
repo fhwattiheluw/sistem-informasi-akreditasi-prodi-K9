@@ -112,7 +112,7 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
+            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
               @if (Request::segment(3) === 'create')
               Tambah data
               @elseif (Request::segment(4) === 'edit')

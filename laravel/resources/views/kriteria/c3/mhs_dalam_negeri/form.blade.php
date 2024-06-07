@@ -46,7 +46,7 @@
               </div>
             @endif
             <hr>
-            <form 
+            <form
             action="{{isset($item->id) ?  route('mahasiswa_dalam_negeri.update', ['id' => Crypt::encryptString($item->id)])  : route('mahasiswa_dalam_negeri.store')}}"
             method="post">
               @if(isset($item->id))
@@ -85,9 +85,9 @@
               </div>
 
                     @if (Request::segment(3) === 'create')
-                    <button type="submit" class="btn btn-primary mr-2"> Tambah data Calon Mahasiswa Dalam negeri </button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Tambah data Calon Mahasiswa Dalam negeri </button>
                     @elseif (Request::segment(4) === 'edit')
-                    <button type="submit" class="btn btn-primary mr-2"> Update data Calon Mahasiswa Dalam negeri </button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Update data Calon Mahasiswa Dalam negeri </button>
                     @endif
 
                   </form>

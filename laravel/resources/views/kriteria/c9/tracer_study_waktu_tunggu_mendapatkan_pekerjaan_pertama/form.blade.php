@@ -26,7 +26,7 @@
       <form class="card forms-sample" action="{{isset($item->id) ?  route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.update', ['id' => $item->id])  : route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
-        @endif  
+        @endif
         @csrf
         <div class="card-body">
           <h4 class="card-title">
@@ -135,7 +135,7 @@
               @enderror
             </div>
           </div>
-          
+
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
@@ -148,7 +148,7 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
+            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
               @if (Request::segment(3) === 'create')
               Tambah data
               @elseif (Request::segment(4) === 'edit')
@@ -181,4 +181,3 @@
 </script>
 
   @endsection
-

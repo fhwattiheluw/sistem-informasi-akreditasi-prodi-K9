@@ -26,7 +26,7 @@
       <form class="card forms-sample" action="{{isset($item->id) ?  route('prestasi_mahasiswa.update', ['id' => $item->id])  : route('prestasi_mahasiswa.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
-        @endif  
+        @endif
         @csrf
         <div class="card-body">
           <h4 class="card-title">
@@ -131,7 +131,7 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
+            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
               @if (Request::segment(3) === 'create')
               Tambah data
               @elseif (Request::segment(4) === 'edit')
@@ -164,4 +164,3 @@
 </script>
 
   @endsection
-

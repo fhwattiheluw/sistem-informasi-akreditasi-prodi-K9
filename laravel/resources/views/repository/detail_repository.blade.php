@@ -45,7 +45,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                  <button type="submit" class="btn btn-primary">Upload</button>
+                  <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">Upload</button>
                 </div>
               </form>
             </div>
@@ -90,15 +90,15 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
     <div class="col grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Dokumen Repository 
-           @if(auth()->user()->role != 'asesor')  
+          <h5 class="card-title">Dokumen Repository
+           @if(auth()->user()->role != 'asesor')
           <button class="btn btn-outline-primary btn-sm mb-2 mb-md-0 mr-2" data-toggle="modal" data-target="#uploadModal">Upload Dokumen</button>
           @endif
         </h5>

@@ -26,7 +26,7 @@
       <form class="card forms-sample" action="{{isset($item->id) ?  route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.update', ['id' => $item->id])  : route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
-        @endif  
+        @endif
         @csrf
         <div class="card-body">
           <h4 class="card-title">
@@ -37,8 +37,8 @@
             @endif
 
 
-            Produk Atau Jasa DTPS Dan Mahasiswa Yang Diadopsi Oleh Masyarakat</h4> 
-            
+            Produk Atau Jasa DTPS Dan Mahasiswa Yang Diadopsi Oleh Masyarakat</h4>
+
             @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -57,7 +57,7 @@
             </div>
           @endif
 
-          
+
           <hr>
 
           <div class="form-group row">
@@ -76,7 +76,7 @@
               @enderror
             </div>
           </div>
-          
+
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Nama Mahasiswa</label>
@@ -90,7 +90,7 @@
             </div>
           </div>
 
-          
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Nama Produk</label>
             <div class="col-sm-9">
@@ -102,7 +102,7 @@
               @enderror
             </div>
           </div>
-          
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Deskripsi Produk/Jasa <span class="text-danger">*</span></label>
             <div class="col-sm-9">
@@ -126,7 +126,7 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
+            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
               @if (Request::segment(3) === 'create')
               Tambah data
               @elseif (Request::segment(4) === 'edit')
@@ -159,4 +159,3 @@
 </script>
 
   @endsection
-

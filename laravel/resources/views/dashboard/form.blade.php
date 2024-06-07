@@ -129,7 +129,7 @@
                           </tr>
                           <tr>
                             <td colspan="2">
-                              <button type="submit" class="btn btn-primary mr-2"> Perbaharui </button>
+                              <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Perbaharui </button>
                               <a href="/dashboard" class="btn btn-light">
                                 Cancel
                               </a>

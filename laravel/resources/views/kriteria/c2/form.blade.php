@@ -42,16 +42,16 @@
               </div>
             @endif
             <hr>
-            <form class="card" 
+            <form class="card"
               @if($bidang == "bidang%20pendidikan")
-                action="{{isset($item->id) ?  route('bidang_pendidikan.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pendidikan.store')}}" 
+                action="{{isset($item->id) ?  route('bidang_pendidikan.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pendidikan.store')}}"
               @elseif($bidang == "bidang%20penelitian")
-                action="{{isset($item->id) ?  route('bidang_penelitian.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_penelitian.store')}}" 
+                action="{{isset($item->id) ?  route('bidang_penelitian.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_penelitian.store')}}"
               @elseif($bidang == "bidang%20pkm")
-                action="{{isset($item->id) ?  route('bidang_pkm.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pkm.store')}}" 
+                action="{{isset($item->id) ?  route('bidang_pkm.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pkm.store')}}"
               @elseif($bidang == "Bidang%20Pengembangan%20Kelembagaan")
-                action="{{isset($item->id) ?  route('bidang_pengembangan_kelembagaan.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pengembangan_kelembagaan.store')}}" 
-              
+                action="{{isset($item->id) ?  route('bidang_pengembangan_kelembagaan.update', ['id' => Crypt::encryptString($item->id)])  : route('bidang_pengembangan_kelembagaan.store')}}"
+
               @endif
             method="post">
               @if(isset($item->id))
@@ -63,7 +63,7 @@
                 <label class="col-sm-3 col-form-label">Nama Lembaga Mitra</label>
                 <div class="col-sm-9">
                   <input type="text" name="nama_mitra" class="form-control" placeholder="Isi Nama Lembaga Mitra"
-                  value="{{isset($item->id) ? $item->nama_mitra : old('nama_mitra')}}" 
+                  value="{{isset($item->id) ? $item->nama_mitra : old('nama_mitra')}}"
                   autofocus>
                 </div>
               </div>
@@ -73,7 +73,7 @@
                   <div class="col">
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="tingkat" 
+                        <input type="radio" class="form-check-input" name="tingkat"
                         @if(isset($item->id) && $item->tingkat == "Internasional") checked @endif
                         value="Internasional">Internasional<i class="input-helper"></i></label>
                       </div>
@@ -81,7 +81,7 @@
                     <div class="col">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="tingkat" 
+                          <input type="radio" class="form-check-input" name="tingkat"
                           @if(isset($item->id) && $item->tingkat == "Nasional") checked @endif
                           value="Nasional">Nasional<i class="input-helper"></i></label>
                         </div>
@@ -89,7 +89,7 @@
                       <div class="col">
                         <div class="form-check">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="tingkat" 
+                            <input type="radio" class="form-check-input" name="tingkat"
                             @if(isset($item->id) && $item->tingkat == "Lokal") checked @endif
                              value="Lokal">Lokal<i class="input-helper"></i></label>
                           </div>
@@ -99,7 +99,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Judul dan Ruang Lingkup Kerjasama</label>
                       <div class="col-sm-9">
-                        <input type="text" name="judul_ruang_lingkup" class="form-control" 
+                        <input type="text" name="judul_ruang_lingkup" class="form-control"
                         value="{{isset($item->id) ? $item->judul_ruang_lingkup : old('judul_ruang_lingkup')}}"
                         placeholder="Isi Judul dan Ruang Lingkup Kerjasama">
                       </div>
@@ -107,7 +107,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Manfaat/Output</label>
                       <div class="col-sm-9">
-                        <input type="text" name="manfaat_output" class="form-control" 
+                        <input type="text" name="manfaat_output" class="form-control"
                         value="{{isset($item->id) ? $item->manfaat_output : old('manfaat_output')}}"
                          placeholder="Isi Manfaat/Output">
                       </div>
@@ -126,9 +126,9 @@
                     </div>
 
                     @if (Request::segment(3) === 'create')
-                    <button type="submit" class="btn btn-primary mr-2"> Tambah data {{$bidang}} </button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Tambah data {{$bidang}} </button>
                     @elseif (Request::segment(4) === 'edit')
-                    <button type="submit" class="btn btn-primary mr-2"> Update data {{$bidang}}  </button>
+                    <button type="submit" class="btn btn-primary mr-2" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';"> Update data {{$bidang}}  </button>
                     @endif
 
                   </form>

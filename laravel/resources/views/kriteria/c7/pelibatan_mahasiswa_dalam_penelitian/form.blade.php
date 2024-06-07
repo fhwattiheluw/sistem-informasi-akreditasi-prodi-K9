@@ -102,7 +102,7 @@
               <input type="text" name="mahasiswa" value="{{ isset($item->mahasiswa) ? $item->mahasiswa : old('mahasiswa') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
-          
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Bukti/Tautan</label>
             <div class="col-sm-9">
@@ -111,7 +111,7 @@
           </div>
 
           <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
+            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
               @if (Request::segment(3) === 'create')
               Tambah data
               @elseif (Request::segment(4) === 'edit')
