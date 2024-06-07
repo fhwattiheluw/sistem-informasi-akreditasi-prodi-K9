@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('jumlah_ps_lain_ts1')->default(0);
             $table->integer('jumlah_ps_lain_ts')->default(0);
             $table->integer('rata_pertemuan')->default(0);
+            $table->string('tautan')->default('#');
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

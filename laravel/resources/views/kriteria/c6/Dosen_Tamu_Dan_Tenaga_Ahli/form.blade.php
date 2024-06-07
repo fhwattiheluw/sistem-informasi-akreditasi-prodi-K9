@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('dosen_tamu_dan_tenaga_ahli.update', ['id' => Crypt::encryptString($item->id)])  : route('dosen_tamu_dan_tenaga_ahli.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -48,13 +48,21 @@
               </div>
             @endif
           <hr>
-
+          
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Lengkap Dosen Tamu dan Tenaga Ahli</label>
+            <label class="col-sm-3 col-form-label">Dosen</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_lengkap_dosen_tamu_dan_tenaga_ahli" value="{{ isset($item->nama_lengkap_dosen_tamu_dan_tenaga_ahli) ? $item->nama_lengkap_dosen_tamu_dan_tenaga_ahli : old('nama_lengkap_dosen_tamu_dan_tenaga_ahli') }}" class="form-control" placeholder="Ketik disini">
+              <select class="form-control" name="nidn_nidk">
+                <option value="">Pilih</option>
+                @foreach($dosens as $dosen)
+                <option value="{{ $dosen->nidn_nidk }}" 
+                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+                {{ $dosen->nama }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Nama Lembaga</label>
             <div class="col-sm-9">
@@ -67,18 +75,28 @@
               <input type="text" name="kepakaran" value="{{ isset($item->kepakaran) ? $item->kepakaran : old('kepakaran') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
+
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Mata Kuliah</label>
+            <label class="col-sm-3 col-form-label">Matakuliah</label>
             <div class="col-sm-9">
-              <input type="text" name="mata_kuliah" value="{{ isset($item->mata_kuliah) ? $item->mata_kuliah : old('mata_kuliah') }}" class="form-control" placeholder="Ketik disini">
+              <select class="form-control" name="mk_id">
+                <option value="">Pilih</option>
+                @foreach($matakuliah as $mk)
+                <option value="{{ $mk->kode_mk }}" 
+                  @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->kode_mk) selected @endif>
+                {{ $mk->nama }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Waktu Kegiatan</label>
             <div class="col-sm-9">
-              <input type="text" name="waktu_kegiatan" value="{{ isset($item->waktu_kegiatan) ? $item->waktu_kegiatan : old('waktu_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="date" name="waktu_kegiatan" value="{{ isset($item->waktu_kegiatan) ? $item->waktu_kegiatan : old('waktu_kegiatan') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kegiatan');
             $table->string('nidn_nidk');
-            $table->integer('frekuensi');
+            $table->string('frekuensi');
             $table->string('hasil');
             $table->string('tautan');
             $table->unsignedBigInteger('prodi_id');

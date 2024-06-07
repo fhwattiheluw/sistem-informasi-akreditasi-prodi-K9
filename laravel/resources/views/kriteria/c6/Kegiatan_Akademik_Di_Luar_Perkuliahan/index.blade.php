@@ -50,20 +50,22 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 60; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->nama_kegiatan }}</td>
+                  <td>{{ $item->dosen->nama }}</td>
+                  <td>{{ $item->frekuensi }}</td>
+                  <td>{{ $item->hasil }}</td>
+                  <td><a href="{{ $item->tautan }}" class="btn btn-warning" target="_blank" rel="noopener noreferrer">link</a></td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="/kriteria6/kegiatan_akademik_di_luar_perkuliahan/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria6/kegiatan_akademik_di_luar_perkuliahan/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                 </tr>
-                @endfor
+                @endforeach
               </tbody>
               
               

@@ -23,7 +23,7 @@
   <!-- first row starts here -->
   <div class="row">
     <div class="col grid-margin stretch-card">
-      <form class="card forms-sample" action="{{isset($item->id) ?  route('pemerolehan_dana.update', ['id' => Crypt::encryptString($item->id)])  : route('pemerolehan_dana.store')}}" method="post">
+      <form class="card forms-sample" action="{{isset($item->id) ?  route('kegiatan_akademik_di_luar_perkuliahan.update', ['id' => Crypt::encryptString($item->id)])  : route('kegiatan_akademik_di_luar_perkuliahan.store')}}" method="post">
         @if(isset($item->id))
           @method('PUT')
         @endif  
@@ -56,21 +56,39 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing</label>
+            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
             <div class="col-sm-9">
-              <input type="text" name="nama_dosen_pembimbing" value="{{ isset($item->nama_dosen_pembimbing) ? $item->nama_dosen_pembimbing : old('nama_dosen_pembimbing') }}" class="form-control" placeholder="Ketik disini">
+              <select class="form-control" name="nidn_nidk">
+                <option value="">Pilih</option>
+                @foreach($dosens as $dosen)
+                <option value="{{ $dosen->nidn_nidk }}" 
+                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+                {{ $dosen->nama }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
             <div class="col-sm-9">
-              <input type="text" name="frekuensi_kegiatan" value="{{ isset($item->frekuensi_kegiatan) ? $item->frekuensi_kegiatan : old('frekuensi_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+            <select class="form-control" name="frekuensi">
+                <option value="">Pilih</option>
+                <option value="setiap bulan" 
+                  @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap bulan') selected @endif>
+                Setiap bulan</option>
+                <option value="setiap 3 bulan" 
+                  @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap 3 bulan') selected @endif>
+                Setiap 3 bulan</option>
+                <option value="setiap semester" 
+                  @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap semester') selected @endif>
+                Setiap semester</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
             <div class="col-sm-9">
-              <input type="text" name="hasil_kegiatan" value="{{ isset($item->hasil_kegiatan) ? $item->hasil_kegiatan : old('hasil_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+              <input type="text" name="hasil" value="{{ isset($item->hasil) ? $item->hasil : old('hasil') }}" class="form-control" placeholder="Ketik disini">
             </div>
           </div>
           <div class="form-group row">

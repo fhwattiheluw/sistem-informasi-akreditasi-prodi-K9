@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      <a href="/kriteria5/pemerolehan_dana/create">
+      <a href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
     </div>
@@ -13,7 +13,7 @@
         <a href="#">
           <p class="m-0 pr-3">Data Kuantitatif LED</p>
         </a>
-        <a class="pl-3 mr-4" href="#">
+        <a class="pl-3 mr-4" href="{{route('kriteria6')}}">
           <p class="m-0">K.6 Integrasi Hasil Penelitian dan PkM dalam Proses Pembelajaran</p>
         </a>
       </div>
@@ -50,20 +50,22 @@
 
               <tbody style="overflow-y: auto;" class="text-center" >
 
-                @for($i = 1; $i <= 60; $i++)
+                @foreach($items as $item)
                 <tr>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>{{ $i }}</td>
-                  <td>lihat tautan</td>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->dosen->nama }}</td>
+                  <td>{{ $item->judul }}</td>
+                  <td>{{ $item->matakuliah->nama }}</td>
+                  <td>{{ $item->bentuk_integrasi }}</td>
+                  <td><a href="{{ $item->tautan }}" class="btn btn-warning">link</a></td>
                   <td>
-                    <button type="button" class="btn btn-primary"> Edit </button>
-                    <button type="button" class="btn btn-danger"> Hapus </button>
+                    <a href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{{$item->id}}/edit">
+                      <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
+                    </a>
+                    <a type="button" href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
-                </tr>
-                @endfor
+                </tr> 
+                @endforeach
               </tbody>
               
               
