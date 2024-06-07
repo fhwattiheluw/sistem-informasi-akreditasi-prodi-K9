@@ -4,7 +4,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Sistem informasi laporan evaluasi diri</title>
+  <title>AkreSmart</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
@@ -93,7 +93,7 @@
   <!-- Custom js for this page -->
   <script src="/assets/js/dashboard.js"></script>
   <!-- End custom js for this page -->
-  
+
     @yield('js')
 </body>
 </html>
