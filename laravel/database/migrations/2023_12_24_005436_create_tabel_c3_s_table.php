@@ -55,7 +55,7 @@ return new class extends Migration
 
         Schema::create('tabel_k3_layanan_pembinaan_mahasiswa', function (Blueprint $table) {
             $table->id();
-            $table->year('tahun_akademik')->unique();
+            $table->year('tahun_akademik');
             $table->integer('minat');
             $table->integer('bakat');
             $table->integer('penalaran');

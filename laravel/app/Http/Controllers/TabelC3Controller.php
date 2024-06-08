@@ -8,6 +8,7 @@ use App\Models\TabelK3MahasiswaDalamNegeri;
 use App\Models\TabelK3MahasiswaLuarNegeri;
 use App\Models\TabelK3MahasiswaReguler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC3Controller extends Controller
@@ -17,6 +18,11 @@ class TabelC3Controller extends Controller
   *
   * @return \Illuminate\Http\Response
   */
+  public function __construct()
+  {
+      $this->akunController = new AkunController();
+  }
+
   public function index()
   {
     //
@@ -54,25 +60,16 @@ class TabelC3Controller extends Controller
   // ===========================
   public function mahasiswa_reguler_index()
   {
-    $items = TabelK3MahasiswaReguler::latest('tahun_akademik')->take(4)->get();
-    
-    $tahun_sekarang = date('Y');
-    foreach($items as $item){
-      $selisih = $tahun_sekarang - $item->tahun_akademik;
-      $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
-
-      $data = new \stdClass;
-
-      $data->id = $item->id;
-      $data->ta = $ta;
-      $data->daya_tampung = $item->daya_tampung;
-      $data->pendaftar = $item->pendaftar;
-      $data->lulus_seleksi = $item->lulus_seleksi;
-      $data->jum_mahasiswa_baru = $item->jum_mahasiswa_baru;
-      $data->total = $item->total;  
-      $data->tautan = $item->tautan;  
-
-      $datas[] = $data;
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK3MahasiswaReguler::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
+    }else{
+      $items = TabelK3MahasiswaReguler::where('prodi_id', auth()->user()->prodi_id)
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
     }
 
     $tot[0] = $items->sum('daya_tampung');
@@ -80,7 +77,7 @@ class TabelC3Controller extends Controller
     $tot[2] = $items->sum('lulus_seleksi');
     $tot[3] = $items->sum('jum_mahasiswa_baru');
     $tot[4] = $items->sum('total');
-    return view('kriteria.c3.mahasiswa_reguler.index', ['items' => $datas, 'total' => $tot]);
+    return view('kriteria.c3.mahasiswa_reguler.index', ['items' => $items, 'total' => $tot]);
   }
 
   public function mahasiswa_reguler_create()
@@ -92,7 +89,7 @@ class TabelC3Controller extends Controller
   public function mahasiswa_reguler_store(Request $request)
   {
     $request->validate([
-      'tahun_akademik' => 'unique:tabel_k3_mahasiswa_reguler,tahun_akademik',
+      'tahun_akademik' => 'required|numeric',
       'daya_tampung' => 'required',
       'pendaftar' => 'required',
       'lulus_seleksi' => 'required',
@@ -107,7 +104,8 @@ class TabelC3Controller extends Controller
       'lulus_seleksi' =>  $request->lulus_seleksi,
       'jum_mahasiswa_baru' => $request->jum_mahasiswa_baru,
       'total' => $request->total,
-      'tautan' => $request->tautan
+      'tautan' => $request->tautan,
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
 
     return redirect('/kriteria3/mahasiswa_reguler')->with('success', 'Data K3 Mahasiswa Reguler created successfully');
@@ -130,7 +128,7 @@ class TabelC3Controller extends Controller
     $data = TabelK3MahasiswaReguler::find($idx);
 
     $request->validate([
-      'tahun_akademik' => 'required',
+      'tahun_akademik' => 'required|numeric',
       'daya_tampung' => 'required',
       'pendaftar' => 'required',
       'lulus_seleksi' => 'required',
@@ -153,7 +151,11 @@ class TabelC3Controller extends Controller
 
   public function mahasiswa_reguler_destroy($id)
   {
-    TabelK3MahasiswaReguler::destroy($id);
+    $prodiID = auth()->user()->prodi_id;
+    if (isset($prodiID)){
+      TabelK3MahasiswaReguler::destroy($id);
+    }
+
     return redirect('/kriteria3/mahasiswa_reguler')->with('success', 'Data K3 Mahasiswa Reguler DELETED successfully');
   }
 
@@ -162,31 +164,23 @@ class TabelC3Controller extends Controller
   // ===============================
   public function mahasiswa_dalam_negeri_index()
   {
-    $items = TabelK3MahasiswaDalamNegeri::latest('tahun_akademik')->take(4)->get();
-    
-    $tahun_sekarang = date('Y');
-    foreach($items as $item){
-      $selisih = $tahun_sekarang - $item->tahun_akademik;
-      $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
-
-      $data = new \stdClass;
-
-      $data->id = $item->id;
-      $data->ta = $ta;
-      $data->jumlah_provinsi = $item->jumlah_provinsi;
-      $data->laki_laki = $item->laki_laki;
-      $data->perempuan = $item->perempuan;
-      $data->total_mahasiswa = $item->total_mahasiswa;
-      $data->tautan = $item->tautan;  
-
-      $datas[] = $data;
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK3MahasiswaDalamNegeri::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
+    }else{
+      $items = TabelK3MahasiswaDalamNegeri::where('prodi_id', auth()->user()->prodi_id)
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
     }
 
     $tot[0] = $items->sum('jumlah_provinsi');
     $tot[1] = $items->sum('laki_laki');
     $tot[2] = $items->sum('perempuan');
     $tot[3] = $items->sum('total_mahasiswa');
-    return view('kriteria.c3.mhs_dalam_negeri.index', ['items' => $datas, 'total' => $tot]);
+    return view('kriteria.c3.mhs_dalam_negeri.index', ['items' => $items, 'total' => $tot]);
   }
 
   public function mahasiswa_dalam_negeri_create()
@@ -197,7 +191,7 @@ class TabelC3Controller extends Controller
   public function mahasiswa_dalam_negeri_store(Request $request)
   {    
     $request->validate([
-      'tahun_akademik' => 'unique:tabel_k3_mhs_dalam_negeri,tahun_akademik',
+      'tahun_akademik' => 'required|numeric',
       'jumlah_provinsi' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
@@ -210,7 +204,8 @@ class TabelC3Controller extends Controller
       'laki_laki' => $request->laki_laki,
       'perempuan' =>  $request->perempuan,
       'total_mahasiswa' => $request->total_mahasiswa,
-      'tautan' => $request->tautan
+      'tautan' => $request->tautan,
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
 
     return redirect('/kriteria3/mahasiswa_dalam_negeri')->with('success', 'Data K3 Mahasiswa Dalam Negeri CREATED successfully');
@@ -261,31 +256,23 @@ class TabelC3Controller extends Controller
   // ===============================
   public function mahasiswa_luar_negeri_index()
   {
-    $items = TabelK3MahasiswaLuarNegeri::latest('tahun_akademik')->take(4)->get();
-    
-    $tahun_sekarang = date('Y');
-    foreach($items as $item){
-      $selisih = $tahun_sekarang - $item->tahun_akademik;
-      $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
-
-      $data = new \stdClass;
-
-      $data->id = $item->id;
-      $data->ta = $ta;
-      $data->jumlah_provinsi = $item->jumlah_provinsi;
-      $data->laki_laki = $item->laki_laki;
-      $data->perempuan = $item->perempuan;
-      $data->total_mahasiswa = $item->total_mahasiswa;
-      $data->tautan = $item->tautan;  
-
-      $datas[] = $data;
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK3MahasiswaLuarNegeri::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
+    }else{
+      $items = TabelK3MahasiswaLuarNegeri::where('prodi_id', auth()->user()->prodi_id)
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
     }
 
     $tot[0] = $items->sum('jumlah_provinsi');
     $tot[1] = $items->sum('laki_laki');
     $tot[2] = $items->sum('perempuan');
     $tot[3] = $items->sum('total_mahasiswa');
-    return view('kriteria.c3.mhs_luar_negeri.index', ['items' => $datas, 'total' => $tot]);
+    return view('kriteria.c3.mhs_luar_negeri.index', ['items' => $items, 'total' => $tot]);
   }
 
   public function mahasiswa_luar_negeri_create()
@@ -296,7 +283,7 @@ class TabelC3Controller extends Controller
   public function mahasiswa_luar_negeri_store(Request $request)
   {    
     $request->validate([
-      'tahun_akademik' => 'unique:tabel_k3_mhs_luar_negeri,tahun_akademik',
+      'tahun_akademik' => 'required|numeric',
       'jumlah_provinsi' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
@@ -309,7 +296,8 @@ class TabelC3Controller extends Controller
       'laki_laki' => $request->laki_laki,
       'perempuan' =>  $request->perempuan,
       'total_mahasiswa' => $request->total_mahasiswa,
-      'tautan' => $request->tautan
+      'tautan' => $request->tautan,
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
 
     return redirect('/kriteria3/mahasiswa_luar_negeri')->with('success', 'Data K3 Mahasiswa Luar Negeri CREATED successfully');
@@ -330,7 +318,7 @@ class TabelC3Controller extends Controller
     $data = TabelK3MahasiswaLuarNegeri::find($idx);
 
     $request->validate([
-      'tahun_akademik' => 'required',
+      'tahun_akademik' => 'required|numeric',
       'jumlah_provinsi' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
@@ -360,25 +348,16 @@ class TabelC3Controller extends Controller
   // ===============================
   public function program_layanan_index()
   {
-    $items = TabelK3LayananPembinaanMahasiswa::latest('tahun_akademik')->take(4)->get();
-    
-    $tahun_sekarang = date('Y');
-    foreach($items as $item){
-      $selisih = $tahun_sekarang - $item->tahun_akademik;
-      $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
-
-      $data = new \stdClass;
-
-      $data->id = $item->id;
-      $data->tahun_akademik = $ta;
-      $data->minat = $item->minat;
-      $data->bakat = $item->bakat;
-      $data->penalaran = $item->penalaran;
-      $data->kesejahteraan = $item->kesejahteraan;
-      $data->keprofesian = $item->keprofesian;
-      $data->tautan = $item->tautan;  
-
-      $datas[] = $data;
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK3LayananPembinaanMahasiswa::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
+    }else{
+      $items = TabelK3LayananPembinaanMahasiswa::where('prodi_id', auth()->user()->prodi_id)
+      ->take(5)
+      ->orderBy('tahun_akademik', 'desc')
+      ->get();
     }
 
     $tot[0] = $items->sum('minat');
@@ -387,7 +366,7 @@ class TabelC3Controller extends Controller
     $tot[3] = $items->sum('kesejahteraan');
     $tot[4] = $items->sum('keprofesian');
 
-    return view('kriteria.c3.program_layanan.index', ['items' => $datas, 'total' => $tot]);
+    return view('kriteria.c3.program_layanan.index', ['items' => $items, 'total' => $tot]);
   }
   
   public function program_layanan_create()
@@ -398,7 +377,7 @@ class TabelC3Controller extends Controller
   public function program_layanan_store(Request $request)
   {  
     $request->validate([
-      'tahun_akademik' => 'unique:tabel_k3_layanan_pembinaan_mahasiswa,tahun_akademik',
+      'tahun_akademik' => 'required|numeric',
       'minat' => 'required',
       'bakat' => 'required',
       'penalaran' => 'required',
@@ -413,7 +392,8 @@ class TabelC3Controller extends Controller
       'penalaran' =>  $request->penalaran,
       'kesejahteraan' => $request->kesejahteraan,
       'keprofesian' => $request->keprofesian,
-      'tautan' => $request->tautan
+      'tautan' => $request->tautan,
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
 
     return redirect('/kriteria3/program_layanan')->with('success', 'Data K3 Program Layanan dan Pembinaan CREATED successfully');
@@ -434,7 +414,7 @@ class TabelC3Controller extends Controller
     $data = TabelK3LayananPembinaanMahasiswa::find($idx);
 
     $request->validate([
-      'tahun_akademik' => 'required',
+      'tahun_akademik' => 'required|numeric',
       'minat' => 'required',
       'bakat' => 'required',
       'penalaran' => 'required',

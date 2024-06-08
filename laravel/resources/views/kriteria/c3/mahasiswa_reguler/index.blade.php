@@ -34,6 +34,15 @@
                 </button>
             </div>
           @endif
+          
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -41,8 +50,8 @@
                   <th rowspan="2">Tahun Akademik</th>
                   <th rowspan="2">Daya Tampung</th>
                   <th colspan="2">Jumlah Calon Mahasiswa Reguler</th>
-                  <th rowspan="2">Jumlah Mahasiswa Baru Reguler</th>
-                  <th rowspan="2">Jumlah Total Mahasiswa Reguler</th>
+                  <th rowspan="2">Jumlah <br>Mahasiswa Baru</th>
+                  <th rowspan="2">Jumlah <br>Total Mahasiswa Reguler</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
@@ -53,8 +62,14 @@
               </thead>
               <tbody class="text-justify">
                 @foreach($items as $item)
+                @php 
+                  $tahun_sekarang = date('Y');
+                  $selisih = $tahun_sekarang - $item->tahun_akademik; 
+                  $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
+                @endphp
+
                 <tr>
-                  <td>{{$item->ta}}</td>
+                  <td>{{$ta}}</td>
                   <td>{{$item->daya_tampung}}</td>
                   <td>{{$item->pendaftar}}</td>
                   <td>{{$item->lulus_seleksi}}</td>

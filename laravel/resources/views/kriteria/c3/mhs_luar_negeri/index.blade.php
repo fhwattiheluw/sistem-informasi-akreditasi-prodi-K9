@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -52,8 +60,13 @@
               </thead>
               <tbody class="text-center">
                 @foreach($items as $item)
+                @php 
+                  $tahun_sekarang = date('Y');
+                  $selisih = $tahun_sekarang - $item->tahun_akademik; 
+                  $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
+                @endphp
                 <tr>
-                  <td>{{$item->ta}}</td>
+                  <td>{{$ta}}</td>
                   <td>{{$item->jumlah_provinsi}}</td>
                   <td>{{$item->laki_laki}}</td>
                   <td>{{$item->perempuan}}</td>
