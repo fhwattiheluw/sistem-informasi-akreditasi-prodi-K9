@@ -7,7 +7,9 @@ use App\Models\TabelK2BidangKelembagaan;
 use App\Models\TabelK2BidangPendidikan;
 use App\Models\TabelK2BidangPenelitian;
 use App\Models\TabelK2BidangPkm;
+use App\Models\TabelK9IpkLulusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC2Controller extends Controller
@@ -17,6 +19,12 @@ class TabelC2Controller extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  public function __construct()
+  {
+      $this->akunController = new AkunController();
+  }
+
   public function index()
   {
     return view('kriteria.c2.index');
@@ -25,11 +33,13 @@ class TabelC2Controller extends Controller
   // bidang pendidikan
   public function bidang_pendidikan_index()
   {
-    $items = TabelK2BidangPendidikan::all();
-    $jum_inter = TabelK2BidangPendidikan::where('tingkat', 'Internasional')->count();
-    $jum_nasional = TabelK2BidangPendidikan::where('tingkat', 'Nasional')->count();
-    $jum_lokal = TabelK2BidangPendidikan::where('tingkat', 'Lokal')->count();
-    return view('kriteria.c2.bidang_pendidikan.index', ['items' => $items, 'jum_inter' => $jum_inter, 'jum_nasional' => $jum_nasional, 'jum_lokal' => $jum_lokal]);
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK2BidangPendidikan::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+    }else{
+      $items = TabelK2BidangPendidikan::where('prodi_id', auth()->user()->prodi_id)->get();
+    }
+
+    return view('kriteria.c2.bidang_pendidikan.index', compact('items'));
   }
   public function bidang_pendidikan_create($bidang)
   {
@@ -40,10 +50,12 @@ class TabelC2Controller extends Controller
     $request->validate([
       'nama_mitra' => 'required',
       'tingkat' => 'required',
-      'judul_ruang_lingkup' => 'required|min:6',
+      'judul_ruang_lingkup' => 'required',
       'manfaat_output' => 'required',
       'durasi' => 'required'
     ]);
+
+    $prodiID = auth()->user()->prodi_id;
 
     TabelK2BidangPendidikan::create([
       'nama_mitra' => $request->input('nama_mitra'),
@@ -51,7 +63,8 @@ class TabelC2Controller extends Controller
       'judul_ruang_lingkup' => $request->input('judul_ruang_lingkup'),
       'manfaat_output' => $request->input('manfaat_output'),
       'durasi' => $request->input('durasi'),
-      'tautan' => $request->input('tautan')
+      'tautan' => $request->input('tautan'),
+      'prodi_id' => $prodiID,
     ]);
 
     return redirect('/kriteria2/bidang_pendidikan')->with('success', 'Data K2 Bidang Pendidikan created successfully');
@@ -92,11 +105,14 @@ class TabelC2Controller extends Controller
   // bidang Penelitian
   public function bidang_penelitian_index()
   {
-    $items = TabelK2BidangPenelitian::all();
-    $jum_inter = TabelK2BidangPenelitian::where('tingkat', 'Internasional')->count();
-    $jum_nasional = TabelK2BidangPenelitian::where('tingkat', 'Nasional')->count();
-    $jum_lokal = TabelK2BidangPenelitian::where('tingkat', 'Lokal')->count();
-    return view('kriteria.c2.bidang_penelitian.index', ['items' => $items, 'jum_inter' => $jum_inter, 'jum_nasional' => $jum_nasional, 'jum_lokal' => $jum_lokal]);
+    
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK2BidangPenelitian::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+    }else{
+        $items = TabelK2BidangPenelitian::where('prodi_id', Auth::user()->prodi->id)->get();
+    }
+    
+    return view('kriteria.c2.bidang_penelitian.index', compact('items'));
   }
 
   public function bidang_penelitian_create($bidang)
@@ -121,7 +137,8 @@ class TabelC2Controller extends Controller
       'judul_ruang_lingkup' => $request->input('judul_ruang_lingkup'),
       'manfaat_output' => $request->input('manfaat_output'),
       'durasi' => $request->input('durasi'),
-      'tautan' => $request->input('tautan')
+      'tautan' => $request->input('tautan'),
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
     return redirect('/kriteria2/bidang_penelitian')->with('success', 'Data K2 Bidang Penelitian created successfully');
   }
@@ -162,10 +179,8 @@ class TabelC2Controller extends Controller
   public function bidang_pkm_index()
   {
     $items = TabelK2BidangPkm::all();
-    $jum_inter = TabelK2BidangPkm::where('tingkat', 'Internasional')->count();
-    $jum_nasional = TabelK2BidangPkm::where('tingkat', 'Nasional')->count();
-    $jum_lokal = TabelK2BidangPkm::where('tingkat', 'Lokal')->count();
-    return view('kriteria.c2.bidang_Pkm.index', ['items' => $items, 'jum_inter' => $jum_inter, 'jum_nasional' => $jum_nasional, 'jum_lokal' => $jum_lokal]);
+    
+    return view('kriteria.c2.bidang_Pkm.index', ['items' => $items]);
   }
 
   public function bidang_pkm_create($bidang)
@@ -190,7 +205,7 @@ class TabelC2Controller extends Controller
       'judul_ruang_lingkup' => $request->input('judul_ruang_lingkup'),
       'manfaat_output' => $request->input('manfaat_output'),
       'durasi' => $request->input('durasi'),
-      'tautan' => $request->input('tautan')
+      'tautan' => $request->input('tautan'),
     ]);
     return redirect('/kriteria2/bidang_pkm')->with('success', 'Data K2 Bidang PKM created successfully');
   }
@@ -232,11 +247,13 @@ class TabelC2Controller extends Controller
   // bidang Pengembangan Kelembagaan
   public function bidang_pengembangan_kelembagaan_index()
   {
-    $items = TabelK2BidangKelembagaan::all();
-    $jum_inter = TabelK2BidangKelembagaan::where('tingkat', 'Internasional')->count();
-    $jum_nasional = TabelK2BidangKelembagaan::where('tingkat', 'Nasional')->count();
-    $jum_lokal = TabelK2BidangKelembagaan::where('tingkat', 'Lokal')->count();
-    return view('kriteria.c2.bidang_pengembangan_kelembagaan.index', ['items' => $items, 'jum_inter' => $jum_inter, 'jum_nasional' => $jum_nasional, 'jum_lokal' => $jum_lokal]);
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK2BidangPenelitian::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+    }else{
+        $items = TabelK2BidangPenelitian::where('prodi_id', Auth::user()->prodi->id)->get();
+    }
+
+    return view('kriteria.c2.bidang_pengembangan_kelembagaan.index', ['items' => $items]);
   }
   public function bidang_pengembangan_kelembagaan_create($bidang)
   {
@@ -260,7 +277,8 @@ class TabelC2Controller extends Controller
       'judul_ruang_lingkup' => $request->input('judul_ruang_lingkup'),
       'manfaat_output' => $request->input('manfaat_output'),
       'durasi' => $request->input('durasi'),
-      'tautan' => $request->input('tautan')
+      'tautan' => $request->input('tautan'),
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
     return redirect('/kriteria2/bidang_pengembangan_kelembagaan')->with('success', 'Data K2 Bidang Pengembangan Kelembagaan created successfully');
   }

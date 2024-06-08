@@ -6,6 +6,7 @@ use App\Models\tabelC8;
 use App\Models\TabelDosen;
 use App\Models\TabelK8PelibatanMhsPkm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC8Controller extends Controller
@@ -23,14 +24,14 @@ class TabelC8Controller extends Controller
 
     public function pelibatan_mahasiswa_dalam_pkm_index()
     {
-        $items = TabelK8PelibatanMhsPkm::where('prodi_id', auth()->user()->prodi_id)->get();
+        $items = TabelK8PelibatanMhsPkm::where('prodi_id', Auth::user()->prodi->id)->get();
         return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.index', compact('items'));
     }
 
     public function pelibatan_mahasiswa_dalam_pkm_create()
     {
         $items = TabelK8PelibatanMhsPkm::where('prodi_id', auth()->user()->prodi_id)->get();
-        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        $dosens = TabelDosen::where('prodi_id', Auth::user()->prodi->id)->get();
         return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.form', compact('items', 'dosens'));
     }
 

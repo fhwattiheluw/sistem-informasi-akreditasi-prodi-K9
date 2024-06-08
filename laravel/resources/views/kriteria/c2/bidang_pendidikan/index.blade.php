@@ -35,6 +35,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -55,21 +63,20 @@
                 </tr>
               </thead>
               <tbody class="text-justify">
-                @php $n = 1 @endphp
+                @php $jum_inter = 0; $jum_nasional = 0; $jum_lokal = 0; @endphp
                 @foreach($items as $item)
                 <tr>
-                  <td>{{$n++;}}</td>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{$item->nama_mitra}}</td>
-                  <td> @if($item->tingkat == "Internasional") <b>X</b> @endif </td>
-                  <td> @if($item->tingkat == "Nasional") <b>X</b> @endif </td>
-                  <td> @if($item->tingkat == "Lokal") <b>X</b> @endif </td>
+                  <td> @if($item->tingkat == "Internasional") <b>V</b> @php $jum_inter += 1 @endphp  @endif </td>
+                  <td> @if($item->tingkat == "Nasional") <b>V</b> @php $jum_nasional += 1 @endphp  @endif </td>
+                  <td> @if($item->tingkat == "Lokal") <b>V</b> @php $jum_lokal += 1 @endphp @endif </td>
                   <td>{{$item->judul_ruang_lingkup}}</td>
                   <td>{{$item->manfaat_output}}</td>
                   <td>{{$item->durasi}}</td>
-                  <td>{{$item->tautan}}</td>
                   <td>
                     <a href="#">
-                      <a href="#">
+                      <a href="{{$item->tautan}}" target="_blank">
                       <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                     </a>
 
