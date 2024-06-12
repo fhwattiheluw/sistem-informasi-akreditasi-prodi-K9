@@ -24,6 +24,15 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tabel Rasio DTPS terhadap Mahasiswa Reguler</h5>
+          
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -35,9 +44,9 @@
               </thead>
               <tbody class="text-center">
                 <tr>
-                  <td>{{$dtps = 20}}</td>
-                  <td>{{$mhs = 1000}}</td>
-                  <td>{{$dtps / $mhs}}</td>
+                  <td>{{ $jumlah_dtps }}</td>
+                  <td>{{ $Jumlah_mhs_reguler }}</td>
+                  <td>{{ (($jumlah_dtps && $Jumlah_mhs_reguler) > 0) ? $Jumlah_mhs_reguler/$jumlah_dtps : '0' }}</td>
                 </tr>
               </tbody>
 

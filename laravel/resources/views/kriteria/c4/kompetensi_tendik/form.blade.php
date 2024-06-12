@@ -45,7 +45,7 @@
               </div>
             @endif
           <hr>
-          @foreach($item as $item)
+          
           <form action="{{isset($item->id) ?  route('kompetensi_tendik.update', ['id' => Crypt::encryptString($item->id)])  : route('kompetensi_tendik.store')}}" method="post">
 
             @if(isset($item->id))
@@ -110,7 +110,7 @@
             @endif
 
           </form>
-          @endforeach
+          
         </div>
       </div>
     </div>

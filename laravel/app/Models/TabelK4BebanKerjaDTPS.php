@@ -16,7 +16,7 @@ class TabelK4BebanKerjaDTPS extends Model
 
     public function dosen(): BelongsTo
     {
-        return $this->belongsTo(TabelDosen::class, 'nidn_nidk');
+        return $this->belongsTo(TabelDosen::class, 'nidn_nidk', 'nidn_nidk');
     }
 }
 

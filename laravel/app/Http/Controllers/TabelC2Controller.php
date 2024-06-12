@@ -178,7 +178,7 @@ class TabelC2Controller extends Controller
   // bidang Pengabdian Kepada Masyarakat (PKM)
   public function bidang_pkm_index()
   {
-    $items = TabelK2BidangPkm::all();
+    $items = TabelK2BidangPkm::where('prodi_id', auth()->user()->prodi_id);
     
     return view('kriteria.c2.bidang_Pkm.index', ['items' => $items]);
   }

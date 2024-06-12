@@ -14,6 +14,4 @@ class TabelDosen extends Model
 
     protected $table = 'tabel_dosen';
     protected $guarded = ['id'];
-
-    protected $fillable = [];
 }

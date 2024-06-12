@@ -28,7 +28,7 @@
           <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
-            @elseif (Request::segment(3) === 'edit')
+            @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
 
@@ -65,8 +65,8 @@
                       <th rowspan="2">Sertifikat Pendidik</th>
                       <th rowspan="2">Jabatan Fungsional</th>
                       <th rowspan="2">Gelar Akademik</th>
-                      <th rowspan="2">Pendidikan S1, S2, S3  dan Asal PT </th>
-                      <th rowspan="2">Bidang Keahlian Setiap Jenjang Pendidikan</th>
+                      <th rowspan="2">Pendidikan <br>S1, S2, S3  dan Asal PT </th>
+                      <th rowspan="2">Bidang Keahlian <br>Setiap Jenjang Pendidikan</th>
                       <th rowspan="2">Bukti/Tautan</th>
                     </tr>
                   </thead>

@@ -34,22 +34,32 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
-                  <th rowspan="2">NIDN - Nama Lengkap</th>
+                  <th rowspan="2">NO</th>
+                  <th rowspan="2">Nama Lengkap</th>
+                  <th rowspan="2">NIDN</th>
                   <th colspan="3">sks Pembelajaran pada</th>
                   <th rowspan="2">sks Penelitian</th>
                   <th rowspan="2">sks P2M</th>
                   <th colspan="2">sks Manajemen</th>
-                  <th rowspan="2">Jumlah sks Beban Kerja</th>
+                  <th rowspan="2">Jumlah sks <br>Beban Kerja</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
                 <tr>
                   <th>PS Sendiri (S1, S2, dan S3)</th>
-                  <th>"PS Lain di PT Sendiri"</th>
+                  <th>PS Lain di PT Sendiri</th>
                   <th>PT Lain</th>
                   <th>PT Sendiri</th>
                   <th>PT Lain</th>
@@ -58,7 +68,9 @@
               <tbody class="text-center">
                 @foreach($items as $item)
                 <tr>
-                  <td>{{$item->nidn_nidk}} - {{$item->dosen->nama}} </td>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->dosen->nama}} </td>
+                  <td>{{$item->nidn_nidk}}</td>
                   <td>{{$item->sks_ps_sendiri}}</td>
                   <td>{{$item->sks_ps_luar}}</td>
                   <td>{{$item->sks_pt_luar}}</td>
@@ -69,10 +81,9 @@
                   <td>{{$item->sks_manajemen_luar + $item->sks_manajemen_sendiri + $item->sks_p2m + $item->sks_penelitian + $item->sks_pt_luar + $item->sks_ps_luar + $item->sks_ps_sendiri }}</td>
                   <td>
                     <a href="#">
-                      <a href="#">
+                      <a href="{{$item->tautan}}">
                         <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                       </a>
-
                     </a>
                   </td>
                   <td>

@@ -34,6 +34,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -60,8 +68,8 @@
                   <td>{{$item->ts_2}}</td>
                   <td>{{$item->ts_1}}</td>
                   <td>{{$item->ts}}</td>
-                  <td>{{$item->ts_2 + $item->ts_1 + $item->ts}}</td>
-                  <td>{{($item->ts_2 + $item->ts_1 + $item->ts)/3}}</td>
+                  <td>{{ $item->ts_2 + $item->ts_1 + $item->ts}}</td>
+                  <td>{{ number_format(($item->ts_2 + $item->ts_1 + $item->ts)/3, 2)}}</td>
                   <td>
                     <a href="#">
                       <a href="{{$item->tautan}}">
