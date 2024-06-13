@@ -446,7 +446,6 @@ class TabelC4Controller extends Controller
     {
         if(Auth::user()->role == 'fakultas'){
             $items = TabelK4BimbinganTA::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
-
         }else{
             $items = TabelK4BimbinganTA::where('prodi_id', auth()->user()->prodi_id)->get();
         }

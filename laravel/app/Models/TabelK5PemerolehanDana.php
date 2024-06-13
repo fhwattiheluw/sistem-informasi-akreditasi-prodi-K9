@@ -9,5 +9,6 @@ class TabelK5PemerolehanDana extends Model
 {
     use HasFactory;
 
+    protected $table = 'tabel_k5_pemerolehan_danas';
     protected $guarded = ['id'];
 }

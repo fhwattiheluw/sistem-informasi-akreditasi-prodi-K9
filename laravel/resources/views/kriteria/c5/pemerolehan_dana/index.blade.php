@@ -34,10 +34,19 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
+                  <th rowspan="2">No</th>
                   <th rowspan="2">Sumber Dana</th>
                   <th rowspan="2">Jenis data</th>
                   <th colspan="3">Jumlah Dana (dalam jutaan)</th>
@@ -53,15 +62,20 @@
               </thead>
               <tfoot>
                 <tr>
+                  <th></th>
                   <th colspan="2">TOTAL</th>
                   <th>{{ number_format($total_ts2) }}</th>
                   <th>{{ number_format($total_ts1) }}</th>
                   <th>{{ number_format($total_ts) }}</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </tfoot>
               <tbody class="text-center">
                 @foreach ($data as $item)                  
                 <tr>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->sumber_dana }}</td>
                   <td>{{ $item->jenis_dana }}</td>
                   <td>{{ number_format($item->jumlah_ts2) }}</td>

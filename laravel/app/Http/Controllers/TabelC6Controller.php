@@ -26,7 +26,12 @@ class TabelC6Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
+    {
+        $this->akunController = new AkunController();
+    }
+    
+     public function index()
     {
         //
         return view('kriteria.c6.index');
@@ -39,7 +44,14 @@ class TabelC6Controller extends Controller
      */
     public function mata_kuliah_cpl_dan_perangkat_pembelajaran_index()
     {
-        $items = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelMatakuliah::where('prodi_id', $prodiID)->get();
+
         return view('kriteria.c6.mata_kuliah_cpl_dan_perangkat_pembelajaran.index', compact('items'));
     }
 
@@ -86,6 +98,7 @@ class TabelC6Controller extends Controller
             'kesesuaian_cpl' => $request->kesesuaian_cpl, 
             'perangkat_pembelajaran' => $request->perangkat_pembelajaran, 
             'prodi_id' => $prodiID,  
+            'tautan' => $request->tautan,  
         ]);
         
         return redirect()->route('mata_kuliah_cpl_dan_perangkat_pembelajaran.index')->with('success', 'Data K6 Data Matakuliah ADDED successfully');
@@ -169,7 +182,13 @@ class TabelC6Controller extends Controller
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_index()
     {
-        $items = TabelK6IntegrasiPenelitianPKMPembelajaran::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6IntegrasiPenelitianPKMPembelajaran::where('prodi_id', $prodiID)->get();
 
         return view('kriteria.c6.integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran.index', compact('items'));
     }
@@ -226,8 +245,7 @@ class TabelC6Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran_edit($id)
-    {
-        
+    {   
         $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
         $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
         $item = TabelK6IntegrasiPenelitianPKMPembelajaran::findOrFail($id);
@@ -289,7 +307,13 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan_index()
     {
-        $items = TabelK6Bimbingan::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6Bimbingan::where('prodi_id', $prodiID)->get();
         
         return view('kriteria.c6.jumlah_mahasiswa_bimbingan_dan_frekuensi_pertemuan.index', compact('items'));
     }
@@ -411,7 +435,13 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan_index()
     {
-        $items = TabelK6BimbinganMagang::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6BimbinganMagang::where('prodi_id', $prodiID)->get();
         return view('kriteria.c6.jumlah_mahasiswa_bimbingan_magang_kependidikan_dan_frekuensi_pertemuan.index', compact('items'));
     }
 
@@ -533,7 +563,13 @@ class TabelC6Controller extends Controller
      */
     public function jumlah_mahasiswa_bimbingan_ta_index()
     {
-        $items = TabelK6BimbinganTA::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6BimbinganTA::where('prodi_id', $prodiID)->get();
 
         return view('kriteria.c6.jumlah_mahasiswa_bimbingan_ta.index', compact('items'));
     }
@@ -671,7 +707,13 @@ class TabelC6Controller extends Controller
      */
     public function kegiatan_akademik_di_luar_perkuliahan_index()
     {
-        $items = TabelK6KegiatanAkademik::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6KegiatanAkademik::where('prodi_id', $prodiID)->get();
 
         return view('kriteria.c6.kegiatan_akademik_di_luar_perkuliahan.index', compact('items'));
     }
@@ -792,7 +834,13 @@ class TabelC6Controller extends Controller
      */
     public function dosen_tamu_dan_tenaga_ahli_index()
     {
-        $items = TabelK6DosenTamuTenagaAhli::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6DosenTamuTenagaAhli::where('prodi_id', $prodiID)->get();
 
         return view('kriteria.c6.dosen_tamu_dan_tenaga_ahli.index', compact('items'));
     }
@@ -918,7 +966,13 @@ class TabelC6Controller extends Controller
      */
     public function kepuasan_mahasiswa_index()
     {
-        $items = TabelK6KepuasanMahasiswa::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK6KepuasanMahasiswa::where('prodi_id', $prodiID)->get();
 
         return view('kriteria.c6.kepuasan_mahasiswa.index', compact('items'));
     }

@@ -30,12 +30,13 @@ class TabelC7Controller extends Controller
 
     public function pelibatan_mahasiswa_dalam_penelitian_index()
     {
-        
         if(Auth::user()->role == 'fakultas'){
-            $items = TabelK7PelibatanMahasiswaPenelitian::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
         }else{
-            $items = TabelK7PelibatanMahasiswaPenelitian::where('prodi_id', auth()->user()->prodi_id)->get();
+            $prodiID = auth()->user()->prodi_id;
         }
+
+        $items = TabelK7PelibatanMahasiswaPenelitian::where('prodi_id', $prodiID)->get();
         
         return view('kriteria.c7.pelibatan_mahasiswa_dalam_penelitian.index', compact('items'));
     }

@@ -16,6 +16,11 @@ class TabelC8Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->akunController = new AkunController();
+    }
+
     public function index()
     {
         //
@@ -24,7 +29,13 @@ class TabelC8Controller extends Controller
 
     public function pelibatan_mahasiswa_dalam_pkm_index()
     {
-        $items = TabelK8PelibatanMhsPkm::where('prodi_id', Auth::user()->prodi->id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK8PelibatanMhsPkm::where('prodi_id', $prodiID)->get();
         return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.index', compact('items'));
     }
 

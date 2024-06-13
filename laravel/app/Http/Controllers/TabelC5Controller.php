@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Session;
 
 class TabelC5Controller extends Controller
 {
+  public function __construct()
+  {
+      $this->akunController = new AkunController();
+  }
 
   public function index()
   {
@@ -28,17 +32,24 @@ class TabelC5Controller extends Controller
 
   public function pemerolehan_dana_index()
   {
-    $prodiId = Auth::user()->prodi_id;
-    $data = TabelK5PemerolehanDana::where('prodi_id', $prodiId)->get();
-    $total_ts2 = 0;
-    $total_ts1 = 0;
-    $total_ts = 0;
-    foreach($data as $d){
-      $total_ts2 += $d->jumlah_ts2;
-      $total_ts1 += $d->jumlah_ts1;
-      $total_ts += $d->jumlah_ts;
+    if(Auth::user()->role == 'fakultas'){
+      $data = TabelK5PemerolehanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+      $total_ts2 = TabelK5PemerolehanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+        ->sum('jumlah_ts2');
+      $total_ts1 = TabelK5PemerolehanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+        ->sum('jumlah_ts1');
+      $total_ts = TabelK5PemerolehanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+        ->sum('jumlah_ts');
+    }else{
+      $data = TabelK5PemerolehanDana::where('prodi_id', auth()->user()->prodi_id)->get();
+      $total_ts2 = TabelK5PemerolehanDana::where('prodi_id', auth()->user()->prodi_id)
+        ->sum('jumlah_ts2');
+      $total_ts1 = TabelK5PemerolehanDana::where('prodi_id', auth()->user()->prodi_id)
+        ->sum('jumlah_ts1');
+      $total_ts = TabelK5PemerolehanDana::where('prodi_id', auth()->user()->prodi_id)
+        ->sum('jumlah_ts');
     }
-
+    
     return view('kriteria.c5.pemerolehan_dana.index', compact('data','total_ts2','total_ts1','total_ts'));
   }
   public function pemerolehan_dana_create()
@@ -158,18 +169,24 @@ class TabelC5Controller extends Controller
 
   public function penggunaan_dana_index()
   {
-    // $items = TabelK5PenggunaanDana::where('prodi_id', auth()->user()->prodi_id)->get();
-    $prodiId = Auth::user()->prodi_id;
-    $items = TabelK5PenggunaanDana::where('prodi_id', $prodiId)->get();
-    $total_ts2 = 0;
-    $total_ts1 = 0;
-    $total_ts = 0;
-    foreach($items as $d){
-      $total_ts2 += $d->jumlah_ts2;
-      $total_ts1 += $d->jumlah_ts1;
-      $total_ts += $d->jumlah_ts;
+    if(Auth::user()->role == 'fakultas'){
+      $items = TabelK5PenggunaanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+      $total_ts2 = TabelK5PenggunaanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+        ->sum('jumlah_ts2');
+      $total_ts1 = TabelK5PenggunaanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+        ->sum('jumlah_ts1');
+      $total_ts = TabelK5PenggunaanDana::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
+        ->sum('jumlah_ts');
+    }else{
+      $items = TabelK5PenggunaanDana::where('prodi_id', auth()->user()->prodi_id)->get();
+      $total_ts2 = TabelK5PenggunaanDana::where('prodi_id', auth()->user()->prodi_id)
+        ->sum('jumlah_ts2');
+      $total_ts1 = TabelK5PenggunaanDana::where('prodi_id', auth()->user()->prodi_id)
+        ->sum('jumlah_ts1');
+      $total_ts = TabelK5PenggunaanDana::where('prodi_id', auth()->user()->prodi_id)
+        ->sum('jumlah_ts');
     }
-
+    
     return view('kriteria.c5.penggunaan_dana.index', compact('items','total_ts2','total_ts1','total_ts'));
   }
   public function penggunaan_dana_create()
@@ -280,15 +297,16 @@ class TabelC5Controller extends Controller
 
   public function dana_penelitian_index()
   {
-    $items = TabelK5DanaPenelitian::where('prodi_id', auth()->user()->prodi_id)->get();
-    $jumlah_dana_ts2 = 0;
-    $jumlah_dana_ts1 = 0;
-    $jumlah_dana_ts = 0;
-    foreach($items as $item){
-      $jumlah_dana_ts2 += $item->jumlah_dana_ts2;
-      $jumlah_dana_ts1 += $item->jumlah_dana_ts1;
-      $jumlah_dana_ts += $item->jumlah_dana_ts;
+    if(Auth::user()->role == 'fakultas'){
+      $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+    }else{
+      $prodiID = auth()->user()->prodi_id;
     }
+
+    $items = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->get();
+    $jumlah_dana_ts2 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts2');
+    $jumlah_dana_ts1 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts1');
+    $jumlah_dana_ts = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts');
 
     return view('kriteria.c5.dana_penelitian.index', compact('items','jumlah_dana_ts2','jumlah_dana_ts1','jumlah_dana_ts'));
   }
@@ -401,16 +419,16 @@ class TabelC5Controller extends Controller
 
   public function dana_pkm_index()
   {
-    // $items = TabelK5DanaPenelitian::where('prodi_id', auth()->user()->id)->get();
-    $items = TabelK5DanaPKM::where('prodi_id', auth()->user()->prodi_id)->get();
-    $jumlah_dana_ts2 = 0;
-    $jumlah_dana_ts1 = 0;
-    $jumlah_dana_ts = 0;
-    foreach($items as $item){
-      $jumlah_dana_ts2 = $jumlah_dana_ts2 + $item->jumlah_dana_ts2;
-      $jumlah_dana_ts1 = $jumlah_dana_ts1 + $item->jumlah_dana_ts1;
-      $jumlah_dana_ts = $jumlah_dana_ts + $item->jumlah_dana_ts;
+    if(Auth::user()->role == 'fakultas'){
+      $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+    }else{
+      $prodiID = auth()->user()->prodi_id;
     }
+
+    $items = TabelK5DanaPKM::where('prodi_id', $prodiID)->get();    
+    $jumlah_dana_ts2 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts2');
+    $jumlah_dana_ts1 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts1');
+    $jumlah_dana_ts = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts');
 
     return view('kriteria.c5.dana_pkm.index', compact('items','jumlah_dana_ts2','jumlah_dana_ts1','jumlah_dana_ts'));
   }
@@ -603,7 +621,13 @@ class TabelC5Controller extends Controller
 
   public function sarana_pendidikan_index()
   {
-    $items = TabelK5SaranaPendidikan::all();
+    if(Auth::user()->role == 'fakultas'){
+      $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+    }else{
+      $prodiID = auth()->user()->prodi_id;
+    }
+
+    $items = TabelK5SaranaPendidikan::where('prodi_id', $prodiID)->get();
     return view('kriteria.c5.sarana_pendidikan.index', ['items'=>$items]);
   }
   public function sarana_pendidikan_create()

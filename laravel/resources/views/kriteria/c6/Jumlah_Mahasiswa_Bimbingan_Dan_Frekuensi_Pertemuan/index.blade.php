@@ -34,14 +34,22 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
                   <th>No</th>
                   <th>Nama Dosen Pembimbing Akademik</th>
-                  <th>Jumlah Mahasiswa Bimbingan</th>
-                  <th>Rata-Rata Pertemuan/Mahasiswa/Semester</th>
+                  <th>Jumlah <br>Mahasiswa Bimbingan</th>
+                  <th>Rata-Rata <br>Pertemuan/Mahasiswa/Semester</th>
                   <th>Tautan</th>
                   <th>Aksi</th>
                 </tr>
