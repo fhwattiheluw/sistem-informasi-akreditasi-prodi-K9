@@ -49,20 +49,20 @@
                 <span class="menu-title">Data Dosen</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('matakuliah.index') }}">
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#">
                 <i class="mdi mdi-book menu-icon"></i>
                 <span class="menu-title">Data Matakuliah</span>
             </a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="{{ route('tendik.index') }}">
+         <li class="nav-item">
+            <a class="nav-link" href="#">
                 <i class="mdi mdi-briefcase menu-icon"></i>
                 <span class="menu-title">Data Tenik</span>
             </a>
         </li> -->
         @endif
-        
+
         <li class="pt-2 pb-1">
             <span class="nav-item-head">DATA KUANTITATIF LED</span>
         </li>
@@ -156,7 +156,7 @@
             </a>
         </li>
         @endif
-       
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('akun.profil') }}">
                 <i class="mdi mdi-account-card-details-outline menu-icon"></i>
@@ -165,4 +165,3 @@
         </li>
     </ul>
 </nav>
-
