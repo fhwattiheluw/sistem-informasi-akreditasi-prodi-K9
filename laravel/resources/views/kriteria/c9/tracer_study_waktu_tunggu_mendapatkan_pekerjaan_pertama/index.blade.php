@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      @if(Auth::user()->role == 'admin prodi')      
+      @if(Auth::user()->role == 'admin prodi')
       <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
@@ -77,20 +77,20 @@
                   <td>{{ $d->waktu_tunggu_wt612 }}</td>
                   <td>{{ $d->waktu_tunggu_wt12 }}</td>
                    <td>@if(!empty($d->tautan))<a href="{{ $d->tautan }}" target="_blank" rel="noopener noreferrer">Lihat</a>@else - @endif</td>
-                  
+
                    @if(Auth::user()->role == 'admin prodi')
                   <td>
-                    <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.edit',['id'=>$d->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.edit',['id'=>$d->id])}}" type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i> </a>
                     <a href="{{route('tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama.destroy',['id'=>$d->id])}}" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')">
-                      <button type="button" class="btn btn-danger btn-sm"> Hapus </button>
+                      <button type="button" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i>  </button>
                     </a>
                   </td>
                   @endif
                 </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -103,4 +103,3 @@
 
 </div>
 @endsection
-

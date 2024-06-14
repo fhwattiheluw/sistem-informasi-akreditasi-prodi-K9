@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @if(auth()->user()->role == 'admin prodi')
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -44,7 +46,9 @@
                   <th>Nama Mata Kuliah</th>
                   <th>Bentuk Integrasi</th>
                   <th>Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th>Aksi</th>
+                  @endif
                 </tr>
               </thead>
 
@@ -57,18 +61,24 @@
                   <td>{{ $item->judul }}</td>
                   <td>{{ $item->matakuliah->nama }}</td>
                   <td>{{ $item->bentuk_integrasi }}</td>
-                  <td><a href="{{ $item->tautan }}" class="btn btn-warning">link</a></td>
+                  <td>
+                      <a href="{{$item->tautan}}">
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                    </a>
+                  </td>
+                  @if(auth()->user()->role == 'admin prodi')
                   <td>
                     <a href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
                     <a type="button" href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
-                </tr> 
+                  @endif
+                </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -81,4 +91,3 @@
 
 </div>
 @endsection
-

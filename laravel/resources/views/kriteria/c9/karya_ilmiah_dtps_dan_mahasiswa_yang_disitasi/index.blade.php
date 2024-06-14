@@ -74,8 +74,8 @@
                   <td>
                     @if(Auth::user()->role == 'admin prodi')
 
-                    <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit', ['id' => $d->id]) }}" class="btn btn-primary btn-sm" type="button">Edit</a>
-                    <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.destroy', ['id' => $d->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</a>
+                    <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.edit', ['id' => $d->id]) }}" type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></a>
+                    <a href="{{ route('karya_ilmiah_dtps_dan_mahasiswa_yang_disitasi.destroy', ['id' => $d->id]) }}"  onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                     @endif
                   </td>
                 </tr>

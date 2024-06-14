@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="/kriteria4/kegiatan_mengajar_dosen_tetap/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -47,7 +49,9 @@
                   <th rowspan="2">Jumlah Pertemuan (Rencana)</th>
                   <th rowspan="2">Jumlah Pertemuan (Terlaksana)</th>
                   <th rowspan="2">Bukti/Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -63,13 +67,11 @@
                   <td>{{$item->jum_pertemuan_rencana}}</td>
                   <td>{{$item->jum_pertemuan_terlaksana}}</td>
                   <td>
-                    <a href="#">
-                      <a href="#">
-                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
-                      </a>
-
+                      <a href="{{$item->tautan}}">
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                     </a>
                   </td>
+                  @if(auth()->user()->role == 'admin prodi')
                   <td>
                     <a href="/kriteria4/kegiatan_mengajar_dosen_tetap/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
@@ -77,6 +79,7 @@
                     <a type="button" href="/kriteria4/kegiatan_mengajar_dosen_tetap/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
+                  @endif
                 </tr>
                 @endif
                 @endforeach
@@ -126,13 +129,12 @@
                   <td>{{$item->jum_pertemuan_rencana}}</td>
                   <td>{{$item->jum_pertemuan_terlaksana}}</td>
                   <td>
-                    <a href="#">
-                      <a href="#">
-                        <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
-                      </a>
-
+                      <a href="{{$item->tautan}}">
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                     </a>
                   </td>
+                  @if(auth()->user()->role == 'admin prodi')
+
                   <td>
                     <a href="/kriteria4/kegiatan_mengajar_dosen_tetap/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
@@ -140,6 +142,7 @@
                     <a type="button" href="/kriteria4/kegiatan_mengajar_dosen_tetap/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
+                  @endif
                 </tr>
                 @endif
                 @endforeach

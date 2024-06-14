@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -48,7 +50,9 @@
                   <th rowspan="2">Kesesuaian CPL</th>
                   <th rowspan="2">Perangkat Pembelajaran</th>
                   <th rowspan="2">Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>Teori</th>
@@ -77,16 +81,22 @@
                   <td>{{ (isset($item->unit_penyelenggara) && $item->unit_penyelenggara == 'ps') ? 'V' : '' }}</td>
                   <td>{{ $item->kesesuaian_cpl }}</td>
                   <td>{{ $item->perangkat_pembelajaran }}</td>
-                  <td><a href="{{ $item->tautan }}" class="btn btn-warning"> link </a></td>
+                  <td>
+                      <a href="{{$item->tautan}}">
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                    </a>
+                  </td>
+                  @if(auth()->user()->role == 'admin prodi')
                   <td>
                     <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{ $item->id }}/edit" class="btn btn-primary"> Edit </a>
                     <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
+                  @endif
                 </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -99,4 +109,3 @@
 
 </div>
 @endsection
-

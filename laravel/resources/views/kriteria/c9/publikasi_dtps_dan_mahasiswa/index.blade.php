@@ -53,7 +53,9 @@
                   <th colspan="3">Jumlah Judul</th>
                   <th rowspan="2">Jumlah</th>
                   <th rowspan="2">Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>TS-2</th>
@@ -77,8 +79,8 @@
                   <td>
                     @if(Auth::user()->role == 'admin prodi')
 
-                    <a href="{{route('publikasi_dtps_dan_mahasiswa.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <a href="{{route('publikasi_dtps_dan_mahasiswa.destroy', ['id'=>$item->id] )}}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"> Hapus </a>
+                    <a href="{{route('publikasi_dtps_dan_mahasiswa.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i> </a>
+                    <a href="{{route('publikasi_dtps_dan_mahasiswa.destroy', ['id'=>$item->id] )}}"  onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i>  </a>
                     @endif
                   </td>
                 </tr>

@@ -96,11 +96,11 @@
                   <td>
                     @if(Auth::user()->role == 'admin prodi')
 
-                    <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.edit', ['id' => $item->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.edit', ['id' => $item->id])}}" type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></a>
                     <form action="{{ route('masa_studi_kelulusan_tepat_waktu_dan_keberhasilan_studi.destroy', ['id' => $item->id]) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </button>
                     </form>
                     @endif
                   </td>

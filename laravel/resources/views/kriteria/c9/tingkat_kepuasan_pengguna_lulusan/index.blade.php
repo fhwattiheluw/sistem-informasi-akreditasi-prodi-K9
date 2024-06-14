@@ -54,7 +54,9 @@
                   <th colspan="4">Tingkat Kepuasan Pengguna (%)</th>
                   <th rowspan="2">Rencana Tindak Lanjut oleh PS dan/atau UPPS</th>
                   <th rowspan="2">Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>Sangat Baik</th>
@@ -79,11 +81,11 @@
                     <td>
                       @if(Auth::user()->role == 'admin prodi')
 
-                        <a href="{{route('tingkat_kepuasan_pengguna_lulusan.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                        <a href="{{route('tingkat_kepuasan_pengguna_lulusan.edit', ['id'=>$item->id] )}}"  type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i> </a>
                         <form id="delete-form-{{$item->id}}" action="{{ route('tingkat_kepuasan_pengguna_lulusan.destroy', ['id'=>$item->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="button" onclick="confirmDelete({{$item->id}})" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="button" onclick="confirmDelete({{$item->id}})" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </button>
                         </form>
                         @endif
                     </td>

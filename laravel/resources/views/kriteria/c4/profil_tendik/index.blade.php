@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="/kriteria4/profil_tendik/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -45,7 +47,9 @@
                   <th rowspan="2">Pendidikan <br> <small>(SLTA, Diploma, S1, S2, S3)</small></th>
                   <th rowspan="2">Unit Kerja <br> <small>(PS, UPPS, PT)</small></th>
                   <th rowspan="2">Bukti/Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -65,6 +69,7 @@
 
                     </a>
                   </td>
+                  @if(auth()->user()->role == 'admin prodi')
                   <td>
                     <a href="/kriteria4/profil_tendik/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
@@ -72,6 +77,7 @@
                     <a type="button" href="/kriteria4/profil_tendik/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
+                  @endif
                 </tr>
                 @endforeach
               </tbody>

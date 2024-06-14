@@ -54,7 +54,9 @@
                   <th >Nama Produk/Jasa</th>
                   <th >Deskripsi Produk/Jasa</th>
                   <th >Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th >Aksi</th>
+                  @endif
                 </tr>
               </thead>
 
@@ -75,12 +77,12 @@
                     @if(Auth::user()->role == 'admin prodi')
 
                     <a href="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.edit', [$item->id]) }}">
-                      <button type="button" class="btn btn-primary btn-sm"> Edit </button>
+                      <button type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i> </button>
                     </a>
                     <form action="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_diadopsi_oleh_masyarakat.destroy', [$item->id]) }}" method="POST" style="display: inline">
                       @method('DELETE')
                       @csrf
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin untuk menghapus data ini?')">Hapus</button>
+                      <button type="submit" onclick="return confirm('Apakah anda yakin untuk menghapus data ini?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </button>
                     </form>
                     @endif
                   </td>
