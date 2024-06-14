@@ -77,7 +77,7 @@ class TabelC9Controller extends Controller
         //
 
         $request->validate([
-            'tahun' => 'required|unique:tabel_k9_ipk_lulusans',
+            'tahun' => 'required',
             'jumlah_lulusan' => 'required',
             'minimum' => 'required',
             'rata_rata' => 'required',
@@ -458,7 +458,7 @@ class TabelC9Controller extends Controller
     public function tracer_study_waktu_tunggu_mendapatkan_pekerjaan_pertama_store(Request $request)
     {
         $request->validate([
-            'tahun_lulus' => 'required|integer|unique:tabel_k9_tracer_studis',
+            'tahun_lulus' => 'required|integer',
             'jumlah_lulusan' => 'required|integer',
             'jumlah_terlacak' => 'required|integer',
             'waktu_tunggu_wt3' => 'required|integer',
@@ -576,7 +576,7 @@ class TabelC9Controller extends Controller
     public function tingkat_relevansi_pekerjaan_store(Request $request)
     {
         $request->validate([
-            'tahun_lulus' => 'required|integer|unique:tabel_k9_relevansi_pekerjaans',
+            'tahun_lulus' => 'required|integer',
             'jumlah_lulusan' => 'required|integer',
             'jumlah_terlacak' => 'required|integer',
             'relevansi_tinggi' => 'required|integer',
@@ -704,7 +704,7 @@ class TabelC9Controller extends Controller
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
-            'jenis_kemampuan' => 'required|unique:tabel_k9_kepuasan_penggunas,jenis_kemampuan',
+            'jenis_kemampuan' => 'required',
             'sangat_baik' => 'required',
             'baik' => 'required',
             'cukup' => 'required',
@@ -984,7 +984,7 @@ class TabelC9Controller extends Controller
         $request->validate([
             'penulis_dosen_id' => 'required',
             'penulis_mahasiswa' => 'required',
-            'judul' => 'required|unique:tabel_k9_karya_disitasis',
+            'judul' => 'required',
             'tahun' => 'required|numeric',
             'nama_penerbit' => 'required',
             'nomor_halaman' => 'required',

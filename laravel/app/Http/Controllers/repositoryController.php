@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Repository; // Import model Repository
 use App\Models\Dokumen; // Import model Dokumen
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class RepositoryController extends Controller
@@ -99,12 +99,16 @@ class RepositoryController extends Controller
     public function destroy($id)
     {
         // Kode untuk menghapus data berdasarkan id
+        $repository = Repository::findOrFail($id);
+        $repository->delete();
+
+        return redirect()->back()->with('success', 'Matakuliah berhasil dihapus!');
     }
 
     // Menampilkan form untuk menambah repository
     public function formRepository()
     {
-        
+
         return view('repository.form_repository');
     }
 

@@ -56,7 +56,7 @@
                     <td>{{$prodi->id}}</td>
                     <td>{{$prodi->nama}}</td>
                     <td>
-                      <a href="{{route('dataprodi.editById', Crypt::encryptString($prodi->id) )}}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit data">edit</a>
+                      <a href="{{route('dataprodi.editById', Crypt::encryptString($prodi->id) )}}" class="btn btn-sm btn-primary"><i class="mdi mdi-table-edit" ></i></a>
                       <form action="{{ route('dataprodi.delete', Crypt::encryptString($prodi->id) )}}" method="post" class="d-inline" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         @method('delete')
                         @csrf
