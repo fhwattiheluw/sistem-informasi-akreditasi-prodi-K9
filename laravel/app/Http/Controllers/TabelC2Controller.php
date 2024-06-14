@@ -178,7 +178,13 @@ class TabelC2Controller extends Controller
   // bidang Pengabdian Kepada Masyarakat (PKM)
   public function bidang_pkm_index()
   {
-    $items = TabelK2BidangPkm::where('prodi_id', auth()->user()->prodi_id);
+    if(Auth::user()->role == 'fakultas'){
+      $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+    }else{
+      $prodiID = Auth::user()->prodi->id;
+    }
+    
+    $items = TabelK2BidangPkm::where('prodi_id', $prodiID)->get();
     
     return view('kriteria.c2.bidang_Pkm.index', ['items' => $items]);
   }
@@ -206,6 +212,7 @@ class TabelC2Controller extends Controller
       'manfaat_output' => $request->input('manfaat_output'),
       'durasi' => $request->input('durasi'),
       'tautan' => $request->input('tautan'),
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
     return redirect('/kriteria2/bidang_pkm')->with('success', 'Data K2 Bidang PKM created successfully');
   }
@@ -248,10 +255,12 @@ class TabelC2Controller extends Controller
   public function bidang_pengembangan_kelembagaan_index()
   {
     if(Auth::user()->role == 'fakultas'){
-      $items = TabelK2BidangPenelitian::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
+      $prodiID = $this->akunController->get_session_prodi_by_fakultas();
     }else{
-        $items = TabelK2BidangPenelitian::where('prodi_id', Auth::user()->prodi->id)->get();
+      $prodiID = auth()->user()->prodi_id;
     }
+
+    $items = TabelK2BidangKelembagaan::where('prodi_id', $prodiID)->get();
 
     return view('kriteria.c2.bidang_pengembangan_kelembagaan.index', ['items' => $items]);
   }
