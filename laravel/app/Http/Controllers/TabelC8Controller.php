@@ -6,6 +6,7 @@ use App\Models\tabelC8;
 use App\Models\TabelDosen;
 use App\Models\TabelK8PelibatanMhsPkm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC8Controller extends Controller
@@ -15,6 +16,11 @@ class TabelC8Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->akunController = new AkunController();
+    }
+
     public function index()
     {
         //
@@ -23,14 +29,20 @@ class TabelC8Controller extends Controller
 
     public function pelibatan_mahasiswa_dalam_pkm_index()
     {
-        $items = TabelK8PelibatanMhsPkm::where('prodi_id', auth()->user()->prodi_id)->get();
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK8PelibatanMhsPkm::where('prodi_id', $prodiID)->get();
         return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.index', compact('items'));
     }
 
     public function pelibatan_mahasiswa_dalam_pkm_create()
     {
         $items = TabelK8PelibatanMhsPkm::where('prodi_id', auth()->user()->prodi_id)->get();
-        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
+        $dosens = TabelDosen::where('prodi_id', Auth::user()->prodi->id)->get();
         return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.form', compact('items', 'dosens'));
     }
 

@@ -58,14 +58,14 @@
                 </tr>
               </thead>
               <tbody class="text-justify">
-                @php $n = 1 @endphp
+                @php $jum_inter = 0; $jum_nasional = 0; $jum_lokal = 0; @endphp
                 @foreach($items as $item)
                 <tr>
-                  <td>{{$n++;}}</td>
+                  <td>{{ $loop->iteration }}</td>
                   <td>{{$item->nama_mitra}}</td>
-                  <td> @if($item->tingkat == "Internasional") <b>X</b> @endif </td>
-                  <td> @if($item->tingkat == "Nasional") <b>X</b> @endif </td>
-                  <td> @if($item->tingkat == "Lokal") <b>X</b> @endif </td>
+                  <td> @if($item->tingkat == "Internasional") <b>V</b> @php $jum_inter += 1 @endphp  @endif </td>
+                  <td> @if($item->tingkat == "Nasional") <b>V</b> @php $jum_nasional += 1 @endphp  @endif </td>
+                  <td> @if($item->tingkat == "Lokal") <b>V</b> @php $jum_lokal += 1 @endphp @endif </td>
                   <td>{{$item->judul_ruang_lingkup}}</td>
                   <td>{{$item->manfaat_output}}</td>
                   <td>{{$item->durasi}}</td>

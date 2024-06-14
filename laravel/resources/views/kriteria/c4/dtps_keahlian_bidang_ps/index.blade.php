@@ -36,18 +36,27 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
                 <tr>
-                  <th rowspan="2">Nama Lengkap Dosen Tetap</th>
+                  <th rowspan="2">No</th>
+                  <th rowspan="2">Nama Lengkap</th>
                   <th rowspan="2">NIDN/NIDK</th>
                   <th rowspan="2">Tanggal Lahir</th>
                   <th rowspan="2">Sertifikat Pendidik</th>
                   <th rowspan="2">Jabatan Fungsional</th>
                   <th rowspan="2">Gelar Akademik</th>
-                  <th rowspan="2">Pendidikan S1, S2, S3  dan Asal PT </th>
-                  <th rowspan="2">Bidang Keahlian Setiap Jenjang Pendidikan</th>
+                  <th rowspan="2">Pendidikan <br>S1,S2,S3 dan Asal PT</th>
+                  <th rowspan="2">Bidang Keahlian <br>Setiap Jenjang Pendidikan</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
@@ -57,11 +66,13 @@
               <tbody class="text-center">
                 @foreach($items as $item)
                 <tr>
+                  <td>{{$loop->iteration}}</td>
                   <td>{{$item->nama}}</td>
                   <td>{{$item->nidn_nidk}}</td>
                   <td>{{$item->tanggal_lahir}}</td>
                   <td>{{$item->sertifikat_pendidik}}</td>
                   <td>{{$item->jabatan_fungsional}}</td>
+                  <td>{{$item->gelar_akademik}}</td>
                   <td>{{$item->pendidikan}}</td>
                   <td>{{$item->bidang_keahlian}}</td>
                   <td>

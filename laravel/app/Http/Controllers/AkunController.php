@@ -60,7 +60,7 @@ class AkunController extends Controller
         }
 
 
-        session()->flash('info', 'Anda belum memilih prodi. Silahkan pilih prodi terlebih dahulu');
+        session()->flash('info', "Anda belum memilih prodi.");
 
         return $session_prodi;
     }

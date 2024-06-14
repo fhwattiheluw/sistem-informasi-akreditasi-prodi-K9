@@ -57,18 +57,14 @@
               <tr>
                 <td><label class="col-form-label">Nama Lengkap Dosen Tetap</label></td>
                 <td colspan="2">
-                <select name="nidn_nidk" id="nidn_nidk" class="form-control">
-                  <option value="" disabled>Pilih</option>
-                  @if(isset($item->nidn_nidk))
-                    <option value="{{$item->nidn_nidk}}" selected>{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
-                  @else
-                    @foreach($dosens as $dosen)
-                    <option value="{{$dosen->nidn_nidk}}">
-                        {{$dosen->nama}}
-                    </option>
-                    @endforeach
-                  @endif
-              </select>
+                <select class="form-control" name="dosen_ketua_id">
+                  <option value="">Pilih</option>
+                  @foreach($dosens as $dosen)
+                    <option value="{{ $dosen->nidn_nidk }}"
+                      @if(old('dosen_ketua_id', isset($item->dosen_ketua_id) ? $dosen->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
+                      {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
+                  @endforeach
+                </select>
                 </td>
               </tr>
               <tr>

@@ -6,6 +6,7 @@ use App\Models\tabelC7;
 use App\Models\TabelDosen;
 use App\Models\TabelK7PelibatanMahasiswaPenelitian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class TabelC7Controller extends Controller
@@ -15,6 +16,12 @@ class TabelC7Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->akunController = new AkunController();
+    }
+
     public function index()
     {
         //
@@ -23,9 +30,15 @@ class TabelC7Controller extends Controller
 
     public function pelibatan_mahasiswa_dalam_penelitian_index()
     {
-        $items = TabelK7PelibatanMahasiswaPenelitian::where('prodi_id', auth()->user()->prodi_id)->get();
-        $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
-        return view('kriteria.c7.pelibatan_mahasiswa_dalam_penelitian.index', compact('dosens', 'items'));
+        if(Auth::user()->role == 'fakultas'){
+            $prodiID = $this->akunController->get_session_prodi_by_fakultas();
+        }else{
+            $prodiID = auth()->user()->prodi_id;
+        }
+
+        $items = TabelK7PelibatanMahasiswaPenelitian::where('prodi_id', $prodiID)->get();
+        
+        return view('kriteria.c7.pelibatan_mahasiswa_dalam_penelitian.index', compact('items'));
     }
 
     public function pelibatan_mahasiswa_dalam_penelitian_create()

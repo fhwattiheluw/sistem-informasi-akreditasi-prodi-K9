@@ -36,6 +36,14 @@
                 </button>
             </div>
           @endif
+          @if(session('info'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+          @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
               <thead class="text-center">
@@ -46,8 +54,8 @@
                   <th rowspan="2">Jumlah sks</th>
                   <th rowspan="2">Kode  Mata Kuliah</th>
                   <th rowspan="2">Nama Mata Kuliah</th>
-                  <th rowspan="2">Jumlah Pertemuan (Rencana)</th>
-                  <th rowspan="2">Jumlah Pertemuan (Terlaksana)</th>
+                  <th rowspan="2">Jumlah Pertemuan <br>(Direncanakan)</th>
+                  <th rowspan="2">Jumlah Pertemuan <br>(Terlaksana)</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
@@ -110,22 +118,23 @@
                   <th rowspan="2">Jumlah sks</th>
                   <th rowspan="2">Kode  Mata Kuliah</th>
                   <th rowspan="2">Nama Mata Kuliah</th>
-                  <th rowspan="2">Jumlah Pertemuan yang Direncanakan</th>
-                  <th rowspan="2">Jumlah Pertemuan yang Dilaksanakan</th>
+                  <th rowspan="2">Jumlah Pertemuan <br>(Direncanakan)</th>
+                  <th rowspan="2">Jumlah Pertemuan <br>(Dilaksanakan)</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   <th rowspan="2">Aksi</th>
                 </tr>
               </thead>
               <tbody class="text-center">
-                @foreach($items as $item)
-                @if($item->semester == "Genap")
+                @php $i = 1 @endphp
+                @foreach($items as $item) 
+                @if($item->semester == "Genap") 
                 <tr>
-                  <td>{{$loop->iteration}}</td>
+                  <td>{{ $i++ }}</td>
                   <td>{{$item->dosen->nama}}</td>
                   <td>{{$item->jumlah_kelas}}</td>
-                  <td>{{$item->sks}}</td>
+                  <td>{{$item->matakuliah->sks}}</td>
                   <td>{{$item->kode_mk}}</td>
-                  <td>{{$item->nama_mk}}</td>
+                  <td>{{$item->matakuliah->nama}}</td>
                   <td>{{$item->jum_pertemuan_rencana}}</td>
                   <td>{{$item->jum_pertemuan_terlaksana}}</td>
                   <td>
