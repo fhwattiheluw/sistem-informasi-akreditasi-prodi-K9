@@ -27,6 +27,14 @@
         <div class="card-body">
           <h4 class="card-title">{{ isset($dokumen) ? 'Edit Dokumen' : 'Unggah Dokumen Baru' }}</h4>
           <div class="form-group">
+            <label for="">Nama Repository</label>
+            <input type="text" class="form-control" value="{{$dokumen->repository->nama_repository}}" disabled>
+          </div>
+          <div class="form-group">
+            <label for="">Kriteria</label>
+            <input type="text" class="form-control" value="{{$dokumen->repository->kriteria}}" disabled>
+          </div>
+          <div class="form-group">
             <label for="dokumen">Dokumen</label>
             <input type="file" class="form-control-file" id="dokumen" name="dokumen">
             @error('dokumen')
@@ -64,6 +72,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">{{ isset($repository) ? 'Simpan Perubahan' : 'Unggah' }}</button>
+          <a href="{{route('repository.show',['id' => $dokumen->repository->id])}}" type="button" class="btn btn-secondary">Batal</a>
         </div>
       </form>
     </div>
