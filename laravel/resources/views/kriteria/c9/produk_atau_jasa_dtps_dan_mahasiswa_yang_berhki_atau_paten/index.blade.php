@@ -39,12 +39,12 @@
           @endif
 
           @if(session('info'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('info') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
           @endif
 
           <div class="table-responsive">
@@ -76,8 +76,8 @@
                   <td>
                     @if(Auth::user()->role == 'admin prodi')
 
-                    <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.edit', ['id'=>$item->id] )}}" class="btn btn-primary btn-sm" type="button" class="btn btn-primary btn-sm"> Edit </a>
-                    <a href="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.destroy', ['id'=>$item->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')"> Hapus </a>
+                    <a href="{{route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.edit', ['id'=>$item->id] )}}"  type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></a>
+                    <a href="{{ route('produk_atau_jasa_dtps_dan_mahasiswa_yang_berhki_atau_paten.destroy', ['id'=>$item->id]) }}"  onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                     @endif
                   </td>
                 </tr>

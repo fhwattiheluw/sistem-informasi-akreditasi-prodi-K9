@@ -4,7 +4,7 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-      
+
     <a href="{{ route('dataprodi.create') }}" class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Tambah program studi</a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
@@ -56,7 +56,7 @@
                     <td>{{$prodi->id}}</td>
                     <td>{{$prodi->nama}}</td>
                     <td>
-                      <a href="{{route('dataprodi.editById', Crypt::encryptString($prodi->id) )}}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit data"><i class="fas fa-pencil-alt"></i></a>
+                      <a href="{{route('dataprodi.editById', Crypt::encryptString($prodi->id) )}}" class="btn btn-sm btn-primary"><i class="mdi mdi-table-edit" ></i></a>
                       <form action="{{ route('dataprodi.delete', Crypt::encryptString($prodi->id) )}}" method="post" class="d-inline" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                         @method('delete')
                         @csrf

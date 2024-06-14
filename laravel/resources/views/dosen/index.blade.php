@@ -34,7 +34,7 @@
                     </div>
                     @endif
 
-                    
+
                     @if (session('info'))
                     <div class="alert alert-info alert-dismissible flex-grow-1 mr-3 mb-3" role="alert">
                         <div class="d-flex w-100">
@@ -95,15 +95,15 @@
                                         @else
                                             <a href="{{ $user->tautan }}" target="_blank" class="btn btn-primary btn-sm">Lihat</a>
                                         @endif
-                                    
+
                                     </td>
                                     <td>
-                                        <a href="{{ route('dosen.edit',$user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ route('dosen.edit',$user->id) }}"class="btn btn-sm btn-primary"><i class="mdi mdi-table-edit" ></i></a>
 
                                         <form action="{{ route('dosen.delete',$user->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button type="submit"  class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')"><i class="mdi mdi-delete"></i</button>
                                         </form>
                                     </td>
                                 </tr>

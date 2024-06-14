@@ -38,12 +38,12 @@
             </div>
           @endif
           @if(session('info'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('info') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('info') }} Silakan <a href="/dashboard">klik disini.</a>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
           @endif
           <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -54,7 +54,9 @@
                   <th rowspan="2">Jumlah Lulusan yang Terlacak</th>
                   <th colspan="3">Jumlah Lulusan Terlacak dengan Tingkat Relevansi Bidang Kerja	</th>
                   <th rowspan="2">Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>Tinggi</th>
@@ -78,11 +80,11 @@
                   <td>
                     @if(Auth::user()->role == 'admin prodi')
 
-                    <a href="{{route('tingkat_relevansi_pekerjaan.edit', ['id' => $data->id])}}" type="button" class="btn btn-primary btn-sm"> Edit </a>
+                    <a href="{{route('tingkat_relevansi_pekerjaan.edit', ['id' => $data->id])}}" type="button"  class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></a>
                     <form action="{{route('tingkat_relevansi_pekerjaan.destroy', ['id' => $data->id])}}" method="POST" class="d-inline">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Hapus</button>
+                      <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </button>
                     </form>
                     @endif
                   </td>

@@ -4,9 +4,11 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="{{route('kepuasan_mahasiswa.create')}}">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -51,7 +53,9 @@
                   <th colspan="3">Objek <br>Kepuasan Mahasiswa</th>
                   <th rowspan="2">Tindak Lanjut</th>
                   <th rowspan="2">Tautan</th>
+                  @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
+                  @endif
                 </tr>
                 <tr>
                   <th>Kinerja Mengajar DTPS</th>
@@ -70,18 +74,24 @@
                   <td>{{ $item->layanan_administrasi_ps }}</td>
                   <td>{{ $item->sarana_prasarana_ps }}</td>
                   <td>{{ $item->tindak_lanjut }}</td>
-                  <td><a href="{{ $item->tautan }}" class="btn btn-warning" target="_blank" rel="noopener noreferrer">link</a></td>
+                  <td>
+                      <a href="{{$item->tautan}}">
+                      <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
+                    </a>
+                  </td>
+                  @if(auth()->user()->role == 'admin prodi')
                   <td>
                     <a href="/kriteria6/kepuasan_mahasiswa/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
                     <a type="button" href="/kriteria6/kepuasan_mahasiswa/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
+                  @endif
                 </tr>
                 @endforeach
               </tbody>
-              
-              
+
+
 
             </table>
           </div>
@@ -94,4 +104,3 @@
 
 </div>
 @endsection
-

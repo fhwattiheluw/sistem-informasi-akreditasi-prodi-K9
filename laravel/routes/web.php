@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/repository/store', [RepositoryController::class, 'store'])->name('repository.store');
     Route::get('/repository/{id}/edit', [RepositoryController::class, 'edit'])->name('repository.edit');
     Route::put('/repository/{id}', [RepositoryController::class, 'update'])->name('repository.update');
-    Route::delete('/repository/{id}', [RepositoryController::class, 'destroy'])->name('repository.delete');
+    Route::get('/repository/delete{id}', [RepositoryController::class, 'destroy'])->name('repository.delete');
     Route::get('/repository/show/{id}', [RepositoryController::class, 'show'])->name('repository.show');
 });
 

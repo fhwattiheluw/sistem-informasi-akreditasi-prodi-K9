@@ -87,7 +87,7 @@
                                     @endif
 
                                     <td>
-                                        <a href="{{ route('akun.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="mdi mdi-table-edit"></i></a>
+                                        <a href="{{ route('akun.edit', $user->id) }}" class="btn btn-sm btn-primary"><i class="mdi mdi-table-edit" ></i></a>
                                         <a href="{{ route('akun.destroy', $user->email) }}" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')"><i class="mdi mdi-delete"></i></a>
                                     </td>
                                 </tr>
