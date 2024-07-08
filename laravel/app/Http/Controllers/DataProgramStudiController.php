@@ -70,7 +70,7 @@ class DataProgramStudiController extends Controller
     public function semua()
     {
         $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
-        return view('kriteria.dataprodi.kelola', ['data_prodi' => $data_prodi]);
+        return view('kriteria.dataProdi.kelola', ['data_prodi' => $data_prodi]);
     }
 
     
@@ -87,7 +87,7 @@ class DataProgramStudiController extends Controller
         if ($data_prodi === null) {
             return redirect()->back()->with('error', 'Data tidak ditemukan');
         }
-        return view('kriteria.dataprodi.create', ['dataProdi' => $data_prodi]);
+        return view('kriteria.dataProdi.create', ['dataProdi' => $data_prodi]);
     }
 
     /**
@@ -98,7 +98,7 @@ class DataProgramStudiController extends Controller
     public function create()
     {
         //
-        return view('kriteria.dataprodi.create');
+        return view('kriteria.dataProdi.create');
     }
 
     /**
@@ -160,7 +160,7 @@ class DataProgramStudiController extends Controller
     public function edit(dataProgramStudi $dataProgramStudi)
     {
         $item =  dataProgramStudi::findorfail( Auth::user()->prodi->id);
-        return view('kriteria.dataprodi.form', ['item'=>$item]);
+        return view('kriteria.dataProdi.form', ['item'=>$item]);
     }
 
     /**
