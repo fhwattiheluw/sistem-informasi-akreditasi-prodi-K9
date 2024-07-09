@@ -412,6 +412,7 @@
   </div>
 </div>
 
+<!-- statistik untuk dashboard admin fakultas -->
 <div class="row">
   <!-- Card Jumlah User -->
   <div class="col-md-4">
@@ -446,6 +447,46 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- untuk dashboard user prodi -->
+<div class="row">
+  <!-- Card Jumlah Mahasiswa saat TS -->
+<div class="col-md-4">
+  <div class="card text-white bg-primary mb-3">
+    <div class="card-header">Jumlah Mahasiswa saat TS</div>
+    <div class="card-body">
+      <i class="fas fa-user-graduate icon"></i>
+      <h5 class="card-title icon-text" id="studentCount">1000</h5>
+      <p class="card-text">Total mahasiswa terdaftar</p>
+    </div>
+  </div>
+</div>
+
+<!-- Card Jumlah DTPS saat TS -->
+<div class="col-md-4">
+  <div class="card text-white bg-success mb-3">
+    <div class="card-header">Jumlah DTPS saat TS</div>
+    <div class="card-body">
+      <i class="fas fa-chalkboard-teacher icon"></i>
+      <h5 class="card-title icon-text" id="dtpsCount">50</h5>
+      <p class="card-text">Total DTPS terdaftar</p>
+    </div>
+  </div>
+</div>
+
+<!-- Card Rerata IPK -->
+<div class="col-md-4">
+  <div class="card text-white bg-warning mb-3">
+    <div class="card-header">Rerata IPK</div>
+    <div class="card-body">
+      <i class="fas fa-graduation-cap icon"></i>
+      <h5 class="card-title icon-text" id="averageGPA">3.5</h5>
+      <p class="card-text">Rerata IPK mahasiswa</p>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <div class="row">
