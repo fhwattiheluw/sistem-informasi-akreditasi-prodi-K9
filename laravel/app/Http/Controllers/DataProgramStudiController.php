@@ -35,7 +35,8 @@ class DataProgramStudiController extends Controller
         Session::put('prodi', compact('prodi'));
 
         // Redirect back to the page where this function was called
-        return redirect()->back();
+
+        return redirect()->back()->with('pilihProdi','success');
     }
 
     /**
