@@ -16,6 +16,7 @@ return new class extends Migration
         // create table data_program_studis
         Schema::create('data_program_studis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('fakultas_id')->default(1);
             $table->enum('jenis', ['S1','S2','S3'])->nullable();;
             $table->string('nama');
             $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL'])->nullable();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->integer('jumlah_dtps_ts')->nullable();
             $table->double('rerata_ipk')->nullable();
             $table->double('rerata_masa_studi')->nullable();
+            $table->foreign('fakultas_id')->references('id')->on('fakultas')->onDelete('cascade');
             $table->timestamps();
         });
         

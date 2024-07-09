@@ -140,7 +140,7 @@
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Menu akun</span>
         </li>
-        @if(auth()->user()->role == 'fakultas')
+        @if(auth()->user()->role == 'super admin')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dataprodi.semua') }}">
                 <i class="mdi mdi-domain menu-icon"></i>

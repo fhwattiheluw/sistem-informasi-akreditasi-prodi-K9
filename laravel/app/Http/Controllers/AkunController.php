@@ -37,9 +37,9 @@ class AkunController extends Controller
     public function index()
     {
         if(auth()->user()->role == 'fakultas') {
-        $dataUser = User::where('id', '!=', 1)
-        ->where('role', "!=", "asesor")
-        ->get();
+            $dataUser = User::where('id', '!=', 1)
+            ->where('role', "!=", "asesor")
+            ->get();
         } else {
             $dataUser = User::where('id', '!=', 1)
             ->where('prodi_id', auth()->user()->prodi->id)

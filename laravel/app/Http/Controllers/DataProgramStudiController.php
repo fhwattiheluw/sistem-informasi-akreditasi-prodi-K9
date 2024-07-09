@@ -16,7 +16,9 @@ class DataProgramStudiController extends Controller
 
     // fungsi yang digunakan untuk mengambil data semua program studi
     public function getSemuaProdi(){
-        $data_prodi = dataProgramStudi::where('id', '!=', 1)->get();
+        $data_prodi = dataProgramStudi::where('id', '!=', 1)
+        ->where('fakultas_id', '=', Auth::user()->prodi->fakultas_id)
+        ->get();
         return $data_prodi;
     }
 
