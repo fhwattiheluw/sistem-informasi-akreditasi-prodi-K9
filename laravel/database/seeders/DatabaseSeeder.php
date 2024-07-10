@@ -25,6 +25,7 @@ use App\Models\TabelK4PrestasiDTPS;
 use App\Models\TabelK4Tendik;
 use App\Models\TabelK5SaranaPendidikan;
 use App\Models\TabelMatakuliah;
+use App\Models\Fakultas;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -37,6 +38,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //data fakultas
+        Fakultas::create([
+          'id' => 1,
+          'nama_fakultas' => 'Ilmu Tarbiyah dan Keguruan'
+        ]);
         
         // menjalankan faker class data program studi
         \App\Models\dataProgramStudi::factory(1)->create();
