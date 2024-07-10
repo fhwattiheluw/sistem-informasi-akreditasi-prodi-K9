@@ -31,6 +31,7 @@ class dataProgramStudiFactory extends Factory
             'jumlah_dtps_ts' => 1000,
             'rerata_ipk' => 3.8,
             'rerata_masa_studi' => 7.5,
+            'fakultas_id' => 1,
 
         ];
     }
@@ -51,6 +52,7 @@ class dataProgramStudiFactory extends Factory
             'jumlah_dtps_ts' => 1000,
             'rerata_ipk' => 3.8,
             'rerata_masa_studi' => 7.5,
+            'fakultas_id' => 1,
 
         ];
          });
@@ -74,6 +76,7 @@ class dataProgramStudiFactory extends Factory
             'jumlah_dtps_ts' => 1000,
             'rerata_ipk' => 3.8,
             'rerata_masa_studi' => 7.5,
+            'fakultas_id' => 1,
 
         ];
          });

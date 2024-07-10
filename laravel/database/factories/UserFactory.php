@@ -36,14 +36,14 @@ class UserFactory extends Factory
         // admin fakultas tidak bisa di tambahkan
         return $this->state(function (array $attributes) {  
             return [
-                        'name' => "Admin prodi bahasa arab",
-                        'email' => "prodibahasaarab@admin.ac.id",
-                        'email_verified_at' => now(),
-                        'role' => 'admin prodi',
-                        'prodi_id' => 123,
-                        'password' => bcrypt("123123123"),
-                        'remember_token' => Str::random(10),
-                    ];
+                'name' => "Admin prodi bahasa arab",
+                'email' => "prodibahasaarab@admin.ac.id",
+                'email_verified_at' => now(),
+                'role' => 'admin prodi',
+                'prodi_id' => 123,
+                'password' => bcrypt("123123123"),
+                'remember_token' => Str::random(10),
+            ];
         });
         
     }
@@ -55,32 +55,32 @@ class UserFactory extends Factory
         // admin fakultas tidak bisa di tambahkan
         return $this->state(function (array $attributes) {  
             return [
-                        'name' => "Admin prodi IPA",
-                        'email' => "prodipa@admin.ac.id",
-                        'email_verified_at' => now(),
-                        'role' => 'admin prodi',
-                        'prodi_id' => 321,
-                        'password' => bcrypt("123123123"),
-                        'remember_token' => Str::random(10),
-                    ];
+                'name' => "Admin prodi IPA",
+                'email' => "prodipa@admin.ac.id",
+                'email_verified_at' => now(),
+                'role' => 'admin prodi',
+                'prodi_id' => 321,
+                'password' => bcrypt("123123123"),
+                'remember_token' => Str::random(10),
+            ];
         });
         
     }
 
-        public function asesor()
+    public function asesor()
     {
         // merupakan user default untuk admin fakutlas
         // admin fakultas tidak bisa di tambahkan
         return $this->state(function (array $attributes) {  
             return [
                 'name' => "asesor prodi bahasa arab",
-                        'email' => "asesorprodibahasaarab@admin.ac.id",
-                        'email_verified_at' => now(),
-                        'role' => 'asesor',
-                        'prodi_id' => 321,
-                        'password' => bcrypt("123123123"),
-                        'remember_token' => Str::random(10),
-                    ];
+                'email' => "asesorprodibahasaarab@admin.ac.id",
+                'email_verified_at' => now(),
+                'role' => 'asesor',
+                'prodi_id' => 321,
+                'password' => bcrypt("123123123"),
+                'remember_token' => Str::random(10),
+            ];
         });
         
     }
