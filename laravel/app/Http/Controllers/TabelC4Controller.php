@@ -279,7 +279,7 @@ class TabelC4Controller extends Controller
     public function beban_kerja_dosen_dtps_store(Request $request)
     {
         $request->validate([
-            'nidn_nidk' => 'unique:tabel_k4_beban_kerja_dtps,nidn_nidk',
+            'nidn_nidk' => 'required',
             'sks_ps_sendiri' => 'required',
             'sks_ps_luar' => 'required',
             'sks_pt_luar' => 'required',
@@ -287,6 +287,7 @@ class TabelC4Controller extends Controller
             'sks_p2m' => 'required',
             'sks_manajemen_sendiri' => 'required',
             'sks_manajemen_luar' => 'required',
+            'tautan' => 'required',
         ]);
 
         TabelK4BebanKerjaDTPS::create([

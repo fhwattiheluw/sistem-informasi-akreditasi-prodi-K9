@@ -1,11 +1,17 @@
 @extends('template')
 
+@section('style')
+  <!-- pencarian dosen -->
+  <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css" /> -->
+  <link rel="stylesheet" href="/assets/css/select2.min.css" />
+@endsection
+
 @section('content-wrapper')
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
       <a href="/kriteria4/beban_kerja_dosen_dtps">
-        <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
+        <button class="btn btn-secondary mb-2 mb-md-0 mr-2">Kembali </button>
       </a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
@@ -55,13 +61,13 @@
 
             <table class="table table-bordered">
               <tr>
-                <td><label class="col-form-label">Nama Lengkap Dosen Tetap</label></td>
+                <td><label class="col-form-label">Nama Dosen Tetap</label></td>
                 <td colspan="2">
-                <select class="form-control" name="dosen_ketua_id">
-                  <option value="">Pilih</option>
+                <select class="form-control" name="nidn_nidk" id="dosen_ketua_id">
+                  <option value="">Pilih dosen</option>
                   @foreach($dosens as $dosen)
                     <option value="{{ $dosen->nidn_nidk }}"
-                      @if(old('dosen_ketua_id', isset($item->dosen_ketua_id) ? $dosen->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
+                      @if(old('nidn_nidk', isset($item->nidn_nidk) ? $dosen->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
                       {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
                   @endforeach
                 </select>
@@ -105,6 +111,10 @@
                 <td><label class="col-form-label">PT Lain</label></td>
                 <td><input type="text" name="sks_manajemen_luar" value="{{isset($item->sks_manajemen_luar) ? $item->sks_manajemen_luar : old('sks_manajemen_luar')}}" class="form-control"  placeholder="Belum di isi"></td>
               </tr>
+              <tr>
+                <td><label class="col-form-label">Tautan</label></td>
+                <td><input type="text" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" class="form-control"  placeholder="Belum di isi"></td>
+              </tr>
             </table>
 
             @if (Request::segment(3) === 'create')
@@ -114,6 +124,8 @@
             @endif
 
           </form>
+
+          
         </div>
       </div>
     </div>
@@ -121,4 +133,16 @@
   <!-- last row starts here -->
 
 </div>
+@endsection
+
+
+@section('js')
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#dosen_ketua_id').select2({
+          placeholder: "Pilih Dosen",
+          allowClear: true
+      });
+  });
+  </script>
 @endsection

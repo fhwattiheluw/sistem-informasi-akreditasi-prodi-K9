@@ -21,7 +21,10 @@
   <!-- End layout styles -->
   <link rel="shortcut icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEweNHo97nHl3B-gQnvmWrzEbDPVPRu4HtHVe9okR-DUVS7Sfj3kfI3w4esGZp9VGsYcoUu2COT1Khu-OvQQfKjJ6-SuykTXR4j8_mIae3zHkS-5XzGZUs-pKF4tM1c9S6q_t3dpFVnah24b5b_0n9p4E8IXcTQCyFLpygD_fMCDC6cId6rf_qOqFE/s320/GKL16_Logo%20IAIN%20Ambon%20-%20Koleksilogo.com.jpg" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  
+  @yield('style')
+
   <style media="screen">
     .table thead th {
       font-weight: bold;
@@ -94,6 +97,11 @@
   <script src="/assets/js/dashboard.js"></script>
   <!-- End custom js for this page -->
 
-    @yield('js')
+  <!-- jquery pencarioan listbox -->
+  <script src="/assets/js/jquery-3.5.1.min.js"></script>
+  <script src="/assets/js/select2.min.js"></script>
+
+  @yield('js')
+
 </body>
 </html>

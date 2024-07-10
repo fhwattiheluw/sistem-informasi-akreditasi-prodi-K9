@@ -84,7 +84,7 @@
                   <td>{{$item->sks_manajemen_luar}}</td>
                   <td>{{$item->sks_manajemen_luar + $item->sks_manajemen_sendiri + $item->sks_p2m + $item->sks_penelitian + $item->sks_pt_luar + $item->sks_ps_luar + $item->sks_ps_sendiri }}</td>
                   <td>
-                      <a href="{{$item->tautan}}">
+                      <a href="{{$item->tautan}}" target="_blank">
                       <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
                     </a>
                   </td>

@@ -13,10 +13,10 @@
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
-        <a href="#">
+        <a href="/kriteria2">
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
-        <a class="pl-3 mr-4" href="#">
+        <a class="pl-3 mr-4" href="/kriteria2">
           <p class="m-0">C.2 Tata Pamong, Tata Kelola, dan Kerjasama</p>
         </a>
       </div>
