@@ -43,6 +43,26 @@ class DatabaseSeeder extends Seeder
           'id' => 1,
           'nama_fakultas' => 'Ilmu Tarbiyah dan Keguruan'
         ]);
+
+        Fakultas::create([
+          'id' => 2,
+          'nama_fakultas' => 'Syahria dan ekonomi islam'
+        ]);
+
+        dataProgramStudi::create([
+            'id' => 444,
+            'jenis' => 'S1',
+            'nama' => 'SOSIOLOGI AGAMA',
+            'status_peringkat' => 'BAIK SEKALI',
+            'nomor_sk' => Str::random(5),
+            'tanggal_sk' => '2019-01-01 12:12',
+            'tanggal_kadaluarsa' => '2024-02-3 12:12',
+            'jumlah_mhs_ts' => 1000,
+            'jumlah_dtps_ts' => 1000,
+            'rerata_ipk' => 3.8,
+            'rerata_masa_studi' => 7.5,
+            'fakultas_id' => 2,
+        ]);
         
         // menjalankan faker class data program studi
         \App\Models\dataProgramStudi::factory(1)->create();
@@ -54,6 +74,16 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->AdminProdiBahasaArab()->create();
         \App\Models\User::factory()->AdminProdiIPA()->create();
         \App\Models\User::factory()->asesor()->create();
+
+        User::create([
+            'name' => "admin root",
+            'email' => "root@root.com",
+            'email_verified_at' => now(),
+            'role' => 'root',
+            'prodi_id' => 0,
+            'password' => bcrypt("qwerty123456!@#$%^"),
+            'remember_token' => Str::random(10),
+        ]);
 
         //data keuangan
         dataKeuangan::create([

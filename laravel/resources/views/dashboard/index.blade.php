@@ -379,6 +379,18 @@
         </div>
     @endif
 
+    @if(Auth::user()->role == 'fakultas')
+          @error('pesan')
+          <div class="alert alert-danger alert-dismissible fade show col-xl-12" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ $message }}
+
+          </div>
+          @enderror
+          @endif
+
     <div class="col-xl-12 stretch-card grid-margin">
       <div class="card card-img">
       <div class="card-body d-flex align-items-center">
@@ -391,18 +403,6 @@
 
           @if(Auth::user()->role == 'admin prodi')
           <a class="btn bg-white font-12" href="{{ route('dataprodi.index') }}">data program studi</a>
-          @endif
-
-          @if(Auth::user()->role == 'fakultas')
-          @error('pesan')
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            {{ $message }}
-
-          </div>
-          @enderror
           @endif
 
           

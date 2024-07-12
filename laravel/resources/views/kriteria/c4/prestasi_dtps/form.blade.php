@@ -69,37 +69,77 @@
                   </thead>
                   <tbody class="text-justify">
 
-                    <tr>
-                      <td>
-                        <select name="nidn_nidk" id="nidn_nidk" class="form-control">
-                          @if(isset($item->nidn_nidk))
-                            <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
-                          @else
-                            <option value="" selected>Pilih dosen</option>
-                            @foreach($dosens as $dosen)
-                            <option value="{{$dosen->nidn_nidk}}">
-                                {{$dosen->nama}}
-                            </option>
-                            @endforeach
-                          @endif
-                        </select>
-                      </td>
-                      <td><textarea class="form-control" name="prestasi" rows="8" cols="80" placeholder="ketik disini">{{isset($item->prestasi) ? $item->prestasi : old('prestasi')}}</textarea> </td>
-                      <td><input type="text" class="form-control" name="tahun" value="{{isset($item->tahun) ? $item->tahun : old('tahun')}}" placeholder="ketik disini"></td>
-                      <td><div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="tingkat" id="tingkat1" value="Internasional" @if(isset($item->tingkat) && $item->tingkat == "Internasional") checked @endif ></label>
-                            </div></td>
-                            <td><div class="form-check">
-                                    <label class="form-check-label">
-                                      <input type="radio" class="form-check-input" name="tingkat" id="tingkat1" value="Nasional" @if(isset($item->tingkat) && $item->tingkat == "Nasional") checked @endif></label>
-                                  </div></td>
-                                  <td><div class="form-check">
-                                          <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="tingkat" id="tingkat1" value="Lokal" @if(isset($item->tingkat) && $item->tingkat == "Lokal") checked @endif></label>
-                                        </div></td>
-                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
-                    </tr>
+                   <tr>
+  <td>
+    <div class="form-group">
+      <select name="nidn_nidk" id="nidn_nidk" class="form-control @error('nidn_nidk') is-invalid @enderror">
+        @if(isset($item->nidn_nidk))
+          <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
+        @else
+          <option value="" selected>Pilih dosen</option>
+          @foreach($dosens as $dosen)
+            <option value="{{$dosen->nidn_nidk}}">
+              {{$dosen->nama}}
+            </option>
+          @endforeach
+        @endif
+      </select>
+      @error('nidn_nidk')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </td>
+  <td>
+    <div class="form-group">
+      <textarea class="form-control @error('prestasi') is-invalid @enderror" name="prestasi" rows="8" placeholder="ketik disini">{{ old('prestasi', $item->prestasi ?? '') }}</textarea>
+      @error('prestasi')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </td>
+  <td>
+    <div class="form-group">
+      <input type="text" class="form-control @error('tahun') is-invalid @enderror" name="tahun" value="{{ old('tahun', $item->tahun ?? '') }}" placeholder="ketik disini">
+      @error('tahun')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </td>
+  <td>
+    <div class="form-group">
+      <div class="form-check">
+        <input type="radio" class="form-check-input @error('tingkat') is-invalid @enderror" name="tingkat" id="tingkat1" value="Internasional" @if(isset($item->tingkat) && $item->tingkat == "Internasional") checked @endif>
+        <!-- <label class="form-check-label" for="tingkat1">Internasional</label> -->
+      </div>
+      
+      @error('tingkat')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </td>
+  <td>
+    <div class="form-check">
+        <input type="radio" class="form-check-input @error('tingkat') is-invalid @enderror" name="tingkat" id="tingkat2" value="Nasional" @if(isset($item->tingkat) && $item->tingkat == "Nasional") checked @endif>
+        <!-- <label class="form-check-label" for="tingkat2">Nasional</label> -->
+      </div>
+      
+  </td>
+  <td>
+    <div class="form-check">
+        <input type="radio" class="form-check-input @error('tingkat') is-invalid @enderror" name="tingkat" id="tingkat3" value="Lokal" @if(isset($item->tingkat) && $item->tingkat == "Lokal") checked @endif>
+        <!-- <label class="form-check-label" for="tingkat3">Lokal</label> -->
+      </div>
+  </td>
+  <td>
+    <div class="form-group">
+      <input type="text" class="form-control @error('tautan') is-invalid @enderror" name="tautan" value="{{ old('tautan', $item->tautan ?? '') }}" placeholder="ketik disini">
+      @error('tautan')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </td>
+</tr>
+
                   </tbody>
 
                 </table>

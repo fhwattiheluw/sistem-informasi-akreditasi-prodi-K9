@@ -56,48 +56,71 @@
               <table class="table table-striped table-bordered">
                 <tbody class="text-justify">
                   <tr>
-                    <td >Nama Tenaga Kependidikan</td>
-                    <td>
-                    <select name="id_tendik" id="id_tendik" class="form-control">
-                      @if(isset($item->id_tendik))
-                        <option value="{{$item->id_tendik}}">{{$item->id_tendik}} | {{$item->nama}}</option>
-                      @else
-                        <option value="" disabled>Pilih tendik</option>
-                        @foreach($tendiks as $tendik)
-                        <option value="{{$tendik->id_tendik}}">
-                            {{$tendik->nama}}
-                        </option>
-                        @endforeach
-                      @endif
-                    </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td >Nama Kegiatan <br> Pengembangan Kompetensi</td>
-                    <td>
-                      <input type="text" class="form-control" name="nama_kegiatan" value="{{isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan')}}" placeholder="ketik disini">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td >Waktu Mulai <br> Kegiatan</td>
-                    <td>
-                      <input type="date" class="form-control" name="waktu_mulai" value="{{isset($item->waktu_mulai) ? $item->waktu_mulai : old('waktu_mulai')}}" placeholder="ketik disini">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td >Waktu Berakhir Kegiatan</td>
-                    <td>
-                      <input type="date" class="form-control" name="waktu_selesai" value="{{isset($item->waktu_selesai) ? $item->waktu_selesai : old('waktu_selesai')}}" placeholder="ketik disini">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td >Tempat Kegiatan</td>
-                    <td><input type="text" class="form-control" name="tempat" value="{{isset($item->tempat) ? $item->tempat : old('tempat')}}" placeholder="ketik disini"></td>
-                  </tr>
-                  <tr>
-                    <td >Bukti/Tautan</td>
-                    <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
-                  </tr>
+  <td>Nama Tenaga Kependidikan</td>
+  <td>
+    <select name="id_tendik" id="id_tendik" class="form-control @error('id_tendik') is-invalid @enderror">
+      @if(isset($item->id_tendik))
+        <option value="{{$item->id_tendik}}">{{$item->id_tendik}} | {{$item->nama}}</option>
+      @else
+        <option value="" disabled>Pilih tendik</option>
+        @foreach($tendiks as $tendik)
+        <option value="{{$tendik->id_tendik}}">
+          {{$tendik->nama}}
+        </option>
+        @endforeach
+      @endif
+    </select>
+    @error('id_tendik')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Nama Kegiatan <br> Pengembangan Kompetensi</td>
+  <td>
+    <input type="text" class="form-control @error('nama_kegiatan') is-invalid @enderror" name="nama_kegiatan" value="{{isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan')}}" placeholder="ketik disini">
+    @error('nama_kegiatan')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Waktu Mulai <br> Kegiatan</td>
+  <td>
+    <input type="date" class="form-control @error('waktu_mulai') is-invalid @enderror" name="waktu_mulai" value="{{isset($item->waktu_mulai) ? $item->waktu_mulai : old('waktu_mulai')}}" placeholder="ketik disini">
+    @error('waktu_mulai')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Waktu Berakhir Kegiatan</td>
+  <td>
+    <input type="date" class="form-control @error('waktu_selesai') is-invalid @enderror" name="waktu_selesai" value="{{isset($item->waktu_selesai) ? $item->waktu_selesai : old('waktu_selesai')}}" placeholder="ketik disini">
+    @error('waktu_selesai')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Tempat Kegiatan</td>
+  <td>
+    <input type="text" class="form-control @error('tempat') is-invalid @enderror" name="tempat" value="{{isset($item->tempat) ? $item->tempat : old('tempat')}}" placeholder="ketik disini">
+    @error('tempat')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Bukti/Tautan</td>
+  <td>
+    <input type="text" class="form-control @error('tautan') is-invalid @enderror" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini">
+    @error('tautan')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+
                 </tbody>
 
               </table>

@@ -72,11 +72,11 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><input type="text" class="form-control" name="tahun_akademik" value="{{isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik')}}" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="text" class="form-control" name="jumlah_provinsi" value="{{isset($item->jumlah_provinsi) ? $item->jumlah_provinsi : old('jumlah_provinsi')}}" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="laki_laki" value="{{isset($item->laki_laki) ? $item->laki_laki : old('laki_laki')}}" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="perempuan" value="{{isset($item->perempuan) ? $item->perempuan : old('perempuan')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="total_mahasiswa" value="{{isset($item->total_mahasiswa) ? $item->total_mahasiswa : old('total_mahasiswa')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control @error('tahun_akademik') is-invalid @enderror" name="tahun_akademik" value="{{isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik')}}" placeholder="ketik disini" autofocus>                      </td>
+                      <td><input type="text" class="form-control @error('jumlah_provinsi') is-invalid @enderror" name="jumlah_provinsi" value="{{isset($item->jumlah_provinsi) ? $item->jumlah_provinsi : old('jumlah_provinsi')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="text" class="form-control @error('laki_laki') is-invalid @enderror" name="laki_laki" value="{{isset($item->laki_laki) ? $item->laki_laki : old('laki_laki')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="text" class="form-control @error('perempuan') is-invalid @enderror" name="perempuan" value="{{isset($item->perempuan) ? $item->perempuan : old('perempuan')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control @error('total_mahasiswa') is-invalid @enderror" name="total_mahasiswa" value="{{isset($item->total_mahasiswa) ? $item->total_mahasiswa : old('total_mahasiswa')}}" placeholder="ketik disini"></td>
                       <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tahun_akademik : old('tautan')}}" placeholder="ketik disini"></td>
                     </tr>
                   </tbody>

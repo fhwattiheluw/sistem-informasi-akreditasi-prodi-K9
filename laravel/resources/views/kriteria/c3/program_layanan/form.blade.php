@@ -70,13 +70,13 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><input type="number" class="form-control" name="tahun_akademik" value="{{isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik')}}" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="number" class="form-control" name="minat" value="{{isset($item->minat) ? $item->minat : old('minat')}}" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="number" class="form-control" name="bakat" value="{{isset($item->bakat) ? $item->bakat : old('bakat')}}" placeholder="ketik disini">                      </td>
-                      <td><input type="number" class="form-control" name="penalaran" value="{{isset($item->penalaran) ? $item->penalaran : old('penalaran')}}" placeholder="ketik disini">                      </td>
-                      <td><input type="number" class="form-control" name="kesejahteraan" value="{{isset($item->kesejahteraan) ? $item->kesejahteraan : old('kesejahteraan')}}" placeholder="ketik disini"></td>
-                      <td><input type="number" class="form-control" name="keprofesian" value="{{isset($item->keprofesian) ? $item->keprofesian : old('keprofesian')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
+                      <td><input type="number" class="form-control @error('tahun_akademik') is-invalid @enderror" name="tahun_akademik" value="{{isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik')}}" placeholder="ketik disini" autofocus>                      </td>
+                      <td><input type="number" class="form-control @error('minat') is-invalid @enderror" name="minat" value="{{isset($item->minat) ? $item->minat : old('minat')}}" placeholder="ketik disini" autofocus>                      </td>
+                      <td><input type="number" class="form-control @error('bakat') is-invalid @enderror" name="bakat" value="{{isset($item->bakat) ? $item->bakat : old('bakat')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="number" class="form-control @error('penalaran') is-invalid @enderror" name="penalaran" value="{{isset($item->penalaran) ? $item->penalaran : old('penalaran')}}" placeholder="ketik disini">                      </td>
+                      <td><input type="number" class="form-control @error('kesejahteraan') is-invalid @enderror" name="kesejahteraan" value="{{isset($item->kesejahteraan) ? $item->kesejahteraan : old('kesejahteraan')}}" placeholder="ketik disini"></td>
+                      <td><input type="number" class="form-control @error('keprofesian') is-invalid @enderror" name="keprofesian" value="{{isset($item->keprofesian) ? $item->keprofesian : old('keprofesian')}}" placeholder="ketik disini"></td>
+                      <td><input type="text" class="form-control " name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
                     </tr>
                   </tbody>
 

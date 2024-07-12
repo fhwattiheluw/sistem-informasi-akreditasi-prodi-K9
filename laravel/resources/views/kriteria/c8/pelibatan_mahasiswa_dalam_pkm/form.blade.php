@@ -25,7 +25,7 @@
     <div class="col grid-margin stretch-card">
       <form class="card forms-sample" action="{{isset($item->id) ?  route('pelibatan_mahasiswa_dalam_pkm.update', ['id' => Crypt::encryptString($item->id)])  : route('pelibatan_mahasiswa_dalam_pkm.store')}}" method="post">
         @if(isset($item->id))
-          @method('PUT')
+        @method('PUT')
         @endif
         @csrf
         <div class="card-body">
@@ -40,15 +40,15 @@
           </h4>
 
           <p class="card-description">K.8 Pelibatan Mahasiswa dalam PKM</p>
-            @if ($errors->any())
-              <div>
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li style="color: red;">{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-            @endif
+          @if ($errors->any())
+          <div>
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li style="color: red;">{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
           <hr>
 
           <div class="form-group row">
@@ -69,61 +69,62 @@
               <select class="form-control" name="dosen_ketua_id">
                 <option value="">Pilih</option>
                 @foreach($dosens as $dosen)
-                  <option value="{{ $dosen->nidn_nidk }}"
-                    @if(old('dosen_ketua_id', isset($item->dosen_ketua_id) ? $dosen->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
-                    {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
+                <option value="{{ $dosen->nidn_nidk }}"
+                  @if(old('dosen_ketua_id', isset($item->dosen_ketua_id) ? $dosen->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
+                  {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
+                  @endforeach
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Kepakaran ketua</label>
-            <div class="col-sm-9">
-              <input type="text" name="kepakaran_ketua" value="{{ isset($item->kepakaran_ketua) ? $item->kepakaran_ketua : old('kepakaran_ketua') }}" class="form-control" placeholder="Ketik disini">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Kepakaran ketua</label>
+              <div class="col-sm-9">
+                <input type="text" name="kepakaran_ketua" value="{{ isset($item->kepakaran_ketua) ? $item->kepakaran_ketua : old('kepakaran_ketua') }}" class="form-control" placeholder="Ketik disini">
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Dosen Anggota</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="dosen_anggota_id">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Dosen Anggota</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="dosen_anggota_id">
+                  <option value="">Pilih</option>
+                  @foreach($dosens as $dosen)
                   <option value="{{ $dosen->nidn_nidk }}"
                     @if(old('dosen_anggota_id', isset($item->dosen_anggota_id) ? $item->dosen_anggota_id : '') == $dosen->nidn_nidk) selected @endif>
                     {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Mahasiswa</label>
-            <div class="col-sm-9">
-              <input type="text" name="mahasiswa" value="{{ isset($item->mahasiswa) ? $item->mahasiswa : old('mahasiswa') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Mahasiswa</label>
+                <div class="col-sm-9">
+                  <input type="text" name="mahasiswa" value="{{ isset($item->mahasiswa) ? $item->mahasiswa : old('mahasiswa') }}" class="form-control" placeholder="Ketik disini">
+                </div>
+              </div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Bukti/Tautan</label>
-            <div class="col-sm-9">
-              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Bukti/Tautan</label>
+                <div class="col-sm-9">
+                  <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
-              @if (Request::segment(3) === 'create')
-              Tambah data
-              @elseif (Request::segment(4) === 'edit')
-              Update data
-              @endif
-            </button>
+              <div class="card-footer">
+                <button class="btn btn-primary" type="submit" name="button" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">
+                  @if (Request::segment(3) === 'create')
+                  Tambah data
+                  @elseif (Request::segment(4) === 'edit')
+                  Update data
+                  @endif
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
+        <!-- last row starts here -->
+
       </div>
-    </div>
-    <!-- last row starts here -->
 
-  </div>
-
-  @endsection
+      @endsection
