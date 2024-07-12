@@ -8,7 +8,7 @@
       <a href="/kriteria6/integrasi_hasil_penelitian_dan_pkM_dalam_proses_pembelajaran/create">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2"> Tambah data </button>
       </a>
-      @if(auth()->user()->role == 'admin prodi')
+      @endif
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">

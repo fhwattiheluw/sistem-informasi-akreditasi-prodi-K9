@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DataProgramStudiController;
+use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
@@ -17,6 +19,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $id_fakultas = Auth::user()->prodi->fakultas_id;
+        
         $programStudiController = new DataProgramStudiController();
         $semuaProdi = $programStudiController->getSemuaProdi();
 
