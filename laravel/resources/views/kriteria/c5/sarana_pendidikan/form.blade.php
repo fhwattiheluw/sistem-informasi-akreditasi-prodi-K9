@@ -4,9 +4,9 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
-<a href="/kriteria5/sarana_pendidikan">
-  <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
-</a>
+      <a href="/kriteria5/sarana_pendidikan">
+        <button class="btn btn-secondary mb-2 mb-md-0 mr-2"> Kembali </button>
+      </a>
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -24,83 +24,71 @@
   <div class="row">
     <div class="col grid-margin stretch-card">
       <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">
+          
+          <form action="{{isset($item->id) ?  route('sarana_pendidikan.update', ['id' => Crypt::encryptString($item->id)])  : route('sarana_pendidikan.store')}}" method="post">
+            @if(isset($item->id))
+            @method('PUT')
+            @endif
+            @csrf
+            <div class="card-body">
+              <h4 class="card-title">
             @if (Request::segment(3) === 'create')
             Tambah data
             @elseif (Request::segment(4) === 'edit')
             Edit data
             @endif
-             Sarana Pendidikan
+            Sarana Pendidikan
           </h4>
 
-            <p class="card-description">K.5 Sarana Pendidikan</p>
-            @if ($errors->any())
-              <div>
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li style="color: red;">{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-            @endif
-            <hr>
-      <form action="{{isset($item->id) ?  route('sarana_pendidikan.update', ['id' => Crypt::encryptString($item->id)])  : route('sarana_pendidikan.store')}}" method="post">
-      @if(isset($item->id))
-        @method('PUT')
-      @endif
-      @csrf
-        <div class="card-body">
-          <h4 class="card-title">
-            @if (Request::segment(3) === 'create')
-            Tambah data
-            @elseif (Request::segment(4) === 'edit')
-            Edit data
-            @endif
-
-            Dana PkM
-          </h4>
-
-          <p class="card-description">K.5 Tabel Data Sarana Pendidikan</p>
+          <p class="card-description">K.5 Sarana Pendidikan</p>
+          @if ($errors->any())
+          <div>
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li style="color: red;">{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
           <hr>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jenis Sarana</label>
-            <div class="col-sm-9">
-              <input type="text" name="jenis_sarana" value="{{isset($item->jenis_sarana) ? $item->jenis_sarana : old('jenis_sarana')}}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jumlah Unit</label>
-            <div class="col-sm-9">
-              <input type="number" name="jumlah_unit" value="{{isset($item->jumlah_unit) ? $item->jumlah_unit : old('jumlah_unit')}}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-
-          <div class="form-group row" style="margin: 0px; padding:0px;">
-            <label class="col-sm-3 col-form-label">Kualitas</label>
-            <div class="col-sm-9">
-              <div class="form-group">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" id="baik" name="kualitas" value="Baik" @if(isset($item->kualitas) && $item->kualitas == 'Baik') checked @endif>
-                    Baik<i class="input-helper"></i>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" id="kurang_baik" name="kualitas" value="Kurang Baik" @if(isset($item->kualitas) && $item->kualitas == 'Kurang Baik') checked @endif>
-                    Kurang Baik<i class="input-helper"></i>
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" id="tidak_baik" name="kualitas" value="Tidak Baik" @if(isset($item->kualitas) && $item->kualitas == 'Tidak Baik') checked @endif>
-                    Tidak Baik
-                  </label>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Jenis Sarana</label>
+                <div class="col-sm-9">
+                  <input type="text" name="jenis_sarana" value="{{isset($item->jenis_sarana) ? $item->jenis_sarana : old('jenis_sarana')}}" class="form-control" placeholder="Ketik disini">
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Jumlah Unit</label>
+                <div class="col-sm-9">
+                  <input type="number" name="jumlah_unit" value="{{isset($item->jumlah_unit) ? $item->jumlah_unit : old('jumlah_unit')}}" class="form-control" placeholder="Ketik disini">
+                </div>
+              </div>
+
+              <div class="form-group row" style="margin: 0px; padding:0px;">
+                <label class="col-sm-3 col-form-label">Kualitas</label>
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" id="baik" name="kualitas" value="Baik" @if(isset($item->kualitas) && $item->kualitas == 'Baik') checked @endif>
+                        Baik<i class="input-helper"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" id="kurang_baik" name="kualitas" value="Kurang Baik" @if(isset($item->kualitas) && $item->kualitas == 'Kurang Baik') checked @endif>
+                        Kurang Baik<i class="input-helper"></i>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" id="tidak_baik" name="kualitas" value="Tidak Baik" @if(isset($item->kualitas) && $item->kualitas == 'Tidak Baik') checked @endif>
+                        Tidak Baik
+                      </label>
+                    </div>
+                  </div>
 
               <!-- <select class="form-control" name="kualitas">
                 <option value="">--Pilih--</option>
@@ -151,9 +139,8 @@
           </button>
         </div>
       </form>
-      </div>
-    </div>
   </div>
+</div>
 </div>
 <!-- last row starts here -->
 

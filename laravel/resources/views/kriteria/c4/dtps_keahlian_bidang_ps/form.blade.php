@@ -73,16 +73,62 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td><input type="text" class="form-control" name="nama" value="{{isset($item->nama) ? $item->nama : old('nama')}}" placeholder="ketik disini" autofocus>                      </td>
-                      <td><input type="text" class="form-control" name="nidn_nidk" value="{{isset($item->nidn_nidk) ? $item->nidn_nidk : old('nidn_nidk')}}" placeholder="ketik disini">                      </td>
-                      <td><input type="date" class="form-control" name="tanggal_lahir" value="{{isset($item->tanggal_lahir) ? $item->tanggal_lahir : old('tanggal_lahir')}}" placeholder="ketik disini">                      </td>
-                      <td><input type="text" class="form-control" name="sertifikat_pendidik" value="{{isset($item->sertifikat_pendidik) ? $item->sertifikat_pendidik : old('sertifikat_pendidik')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="jabatan_fungsional" value="{{isset($item->jabatan_fungsional) ? $item->jabatan_fungsional : old('jabatan_fungsional')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="gelar_akademik" value="{{isset($item->gelar_akademik) ? $item->gelar_akademik : old('gelar_akademik')}}" placeholder="ketik disini"></td>
-                      <td><textarea class="form-control" name="pendidikan" placeholder="ketik disini" rows="8" cols="80">{{isset($item->pendidikan) ? $item->pendidikan : old('pendidikan')}}</textarea> </td>
-                      <td><textarea class="form-control" name="bidang_keahlian" placeholder="ketik disini" rows="8" cols="80">{{isset($item->bidang_keahlian) ? $item->bidang_keahlian : old('bidang_keahlian')}}</textarea> </td>
-                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
-                    </tr>
+    <td>
+        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{isset($item->nama) ? $item->nama : old('nama')}}" placeholder="ketik disini" autofocus>
+        @error('nama')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <input type="text" class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk" value="{{isset($item->nidn_nidk) ? $item->nidn_nidk : old('nidn_nidk')}}" placeholder="ketik disini">
+        @error('nidn_nidk')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" name="tanggal_lahir" value="{{isset($item->tanggal_lahir) ? $item->tanggal_lahir : old('tanggal_lahir')}}" placeholder="ketik disini">
+        @error('tanggal_lahir')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <input type="text" class="form-control @error('sertifikat_pendidik') is-invalid @enderror" name="sertifikat_pendidik" value="{{isset($item->sertifikat_pendidik) ? $item->sertifikat_pendidik : old('sertifikat_pendidik')}}" placeholder="ketik disini">
+        @error('sertifikat_pendidik')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <input type="text" class="form-control @error('jabatan_fungsional') is-invalid @enderror" name="jabatan_fungsional" value="{{isset($item->jabatan_fungsional) ? $item->jabatan_fungsional : old('jabatan_fungsional')}}" placeholder="ketik disini">
+        @error('jabatan_fungsional')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <input type="text" class="form-control @error('gelar_akademik') is-invalid @enderror" name="gelar_akademik" value="{{isset($item->gelar_akademik) ? $item->gelar_akademik : old('gelar_akademik')}}" placeholder="ketik disini">
+        @error('gelar_akademik')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <textarea class="form-control @error('pendidikan') is-invalid @enderror" name="pendidikan" placeholder="ketik disini" rows="8" cols="80">{{isset($item->pendidikan) ? $item->pendidikan : old('pendidikan')}}</textarea>
+        @error('pendidikan')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <textarea class="form-control @error('bidang_keahlian') is-invalid @enderror" name="bidang_keahlian" placeholder="ketik disini" rows="8" cols="80">{{isset($item->bidang_keahlian) ? $item->bidang_keahlian : old('bidang_keahlian')}}</textarea>
+        @error('bidang_keahlian')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+    <td>
+        <input type="text" class="form-control @error('tautan') is-invalid @enderror" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini">
+        @error('tautan')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </td>
+</tr>
+
                   </tbody>
 
                 </table>

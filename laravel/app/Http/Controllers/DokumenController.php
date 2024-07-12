@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage; // Menambahkan use statement untuk mengg
 use Illuminate\Support\Facades\Auth; 
 
 
-class dokumenController extends Controller
+class DokumenController extends Controller
 {
     /**
      * Menampilkan daftar dokumen.

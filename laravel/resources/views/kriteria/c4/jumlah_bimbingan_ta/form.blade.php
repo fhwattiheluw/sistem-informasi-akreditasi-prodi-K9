@@ -68,25 +68,49 @@
                   <tbody class="text-justify">
 
                     <tr>
-                      <td>
-                        <select name="nidn_nidk" id="nidn_nidk" class="form-control">
-                          @if(isset($item->nidn_nidk))
-                            <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
-                          @else
-                            <option value="" selected>Pilih dosen</option>
-                            @foreach($dosens as $dosen)
-                            <option value="{{$dosen->nidn_nidk}}">
-                                {{$dosen->nama}}
-                            </option>
-                            @endforeach
-                          @endif
-                        </select>
-                      </td>
-                      <td><input type="text" class="form-control" name="ts_2" value="{{isset($item->ts_2) ? $item->ts_2 : old('ts_2')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="ts_1" value="{{isset($item->ts_1) ? $item->ts_1 : old('ts_1')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="ts" value="{{isset($item->ts) ? $item->ts : old('ts')}}" placeholder="ketik disini"></td>
-                      <td><input type="text" class="form-control" name="tautan" value="{{isset($item->tautan) ? $item->tautan : old('tautan')}}" placeholder="ketik disini"></td>
-                    </tr>
+  <td>
+    <select name="nidn_nidk" id="nidn_nidk" class="form-control @error('nidn_nidk') is-invalid @enderror">
+      @if(isset($item->nidn_nidk))
+        <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
+      @else
+        <option value="" selected>Pilih dosen</option>
+        @foreach($dosens as $dosen)
+        <option value="{{$dosen->nidn_nidk}}">
+            {{$dosen->nama}}
+        </option>
+        @endforeach
+      @endif
+    </select>
+    @error('nidn_nidk')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+  <td>
+    <input type="text" class="form-control @error('ts_2') is-invalid @enderror" name="ts_2" value="{{ isset($item->ts_2) ? $item->ts_2 : old('ts_2') }}" placeholder="ketik disini">
+    @error('ts_2')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+  <td>
+    <input type="text" class="form-control @error('ts_1') is-invalid @enderror" name="ts_1" value="{{ isset($item->ts_1) ? $item->ts_1 : old('ts_1') }}" placeholder="ketik disini">
+    @error('ts_1')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+  <td>
+    <input type="text" class="form-control @error('ts') is-invalid @enderror" name="ts" value="{{ isset($item->ts) ? $item->ts : old('ts') }}" placeholder="ketik disini">
+    @error('ts')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+  <td>
+    <input type="text" class="form-control @error('tautan') is-invalid @enderror" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" placeholder="ketik disini">
+    @error('tautan')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </td>
+</tr>
+
                   </tbody>
 
                 </table>

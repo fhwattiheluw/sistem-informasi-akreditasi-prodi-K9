@@ -54,43 +54,83 @@
                 <table class="table table-striped table-bordered">
                   <tbody class="text-justify">
                     <tr>
-                      <td >Nama Dosen</td>
-                      <td>
-                        <select name="nidn_nidk" id="nidn_nidk" class="form-control">
-                          @if(isset($item->nidn_nidk))
-                            <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
-                          @else
-                            <option value="" selected>Pilih dosen</option>
-                            @foreach($dosens as $dosen)
-                            <option value="{{$dosen->nidn_nidk}}">
-                                {{$dosen->nama}}
-                            </option>
-                            @endforeach
-                          @endif
-                        </select>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td >Bidang Keahlian</td>
-                      <td><input type="text" class="form-control" name="bidang_keahlian" value="{{isset($item->bidang_keahlian) ? $item->bidang_keahlian : old('bidang_keahlian')}}" placeholder="ketik disini"></td>
-                    </tr>
-                    <tr>
-                      <td >Nama Kegiatan</td>
-                      <td><input type="text" class="form-control" name="nama_kegiatan" value="{{isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan')}}" placeholder="ketik disini"></td>
-                    </tr>
-                    <tr>
-                      <td >Tempat Kegiatan</td>
-                      <td><input type="text" class="form-control" name="tempat" value="{{isset($item->tempat) ? $item->tempat : old('tempat')}}" placeholder="ketik disini"></td>
-                    </tr>
-                    <tr>
-                      <td >Waktu Kegiatan</td>
-                      <td><input type="date" class="form-control" name="waktu" value="{{isset($item->waktu) ? $item->waktu : old('waktu')}}" placeholder="ketik disini"></td>
-                    </tr>
-                    <tr>
-                      <td >Manfaat Kegiatan</td>
-                      <td><input type="text" class="form-control" name="manfaat" value="{{isset($item->manfaat) ? $item->manfaat : old('manfaat')}}" placeholder="ketik disini"></td>
+  <td>Nama Dosen</td>
+  <td>
+    <select name="nidn_nidk" id="nidn_nidk" class="form-control @error('nidn_nidk') is-invalid @enderror">
+      @if(isset($item->nidn_nidk))
+        <option value="{{$item->nidn_nidk}}">{{$item->nidn_nidk}} | {{$item->dosen->nama}}</option>
+      @else
+        <option value="" selected>Pilih dosen</option>
+        @foreach($dosens as $dosen)
+        <option value="{{$dosen->nidn_nidk}}">
+          {{$dosen->nama}}
+        </option>
+        @endforeach
+      @endif
+    </select>
+    @error('nidn_nidk')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Bidang Keahlian</td>
+  <td>
+    <input type="text" class="form-control @error('bidang_keahlian') is-invalid @enderror" name="bidang_keahlian" value="{{ old('bidang_keahlian', isset($item->bidang_keahlian) ? $item->bidang_keahlian : '') }}" placeholder="ketik disini">
+    @error('bidang_keahlian')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Nama Kegiatan</td>
+  <td>
+    <input type="text" class="form-control @error('nama_kegiatan') is-invalid @enderror" name="nama_kegiatan" value="{{ old('nama_kegiatan', isset($item->nama_kegiatan) ? $item->nama_kegiatan : '') }}" placeholder="ketik disini">
+    @error('nama_kegiatan')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Tempat Kegiatan</td>
+  <td>
+    <input type="text" class="form-control @error('tempat') is-invalid @enderror" name="tempat" value="{{ old('tempat', isset($item->tempat) ? $item->tempat : '') }}" placeholder="ketik disini">
+    @error('tempat')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Waktu Kegiatan</td>
+  <td>
+    <input type="date" class="form-control @error('waktu') is-invalid @enderror" name="waktu" value="{{ old('waktu', isset($item->waktu) ? $item->waktu : '') }}" placeholder="ketik disini">
+    @error('waktu')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </td>
+</tr>
+<tr>
+  <td>Manfaat Kegiatan</td>
+  <td>
+    <input type="text" class="form-control @error('manfaat') is-invalid @enderror" name="manfaat" value="{{ old('manfaat', isset($item->manfaat) ? $item->manfaat : '') }}" placeholder="ketik disini">
+    @error('manfaat')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </td>
+</tr>
 
-                    </tr>
 
                     <tr>
                       <td >Bukti/Tautan</td>
