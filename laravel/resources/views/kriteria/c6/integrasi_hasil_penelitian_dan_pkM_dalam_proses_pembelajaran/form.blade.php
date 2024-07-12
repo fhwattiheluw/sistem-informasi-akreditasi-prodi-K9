@@ -52,46 +52,59 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Judul Penelitian/PKM</label>
-            <div class="col-sm-9">
-              <input type="text" name="judul" value="{{ isset($item->judul) ? $item->judul : old('judul') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+  <label class="col-sm-3 col-form-label">Judul Penelitian/PKM</label>
+  <div class="col-sm-9">
+    <input type="text" name="judul" value="{{ old('judul', isset($item->judul) ? $item->judul : '') }}" class="form-control @error('judul') is-invalid @enderror" placeholder="Ketik disini">
+    @error('judul')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Dosen</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="nidn_nidk">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
-                <option value="{{ $dosen->nidn_nidk }}" 
-                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
-                {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Dosen</label>
+  <div class="col-sm-9">
+    <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
+      <option value="">Pilih</option>
+      @foreach($dosens as $dosen)
+      <option value="{{ $dosen->nidn_nidk }}" 
+        @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
+      {{ $dosen->nama }}</option>
+      @endforeach
+    </select>
+    @error('nidn_nidk')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Matakuliah</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="mk_id">
-                <option value="">Pilih</option>
-                @foreach($matakuliah as $mk)
-                <option value="{{ $mk->kode_mk }}" 
-                  @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->kode_mk) selected @endif>
-                {{ $mk->nama }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Matakuliah</label>
+  <div class="col-sm-9">
+    <select class="form-control @error('mk_id') is-invalid @enderror" name="mk_id">
+      <option value="">Pilih</option>
+      @foreach($matakuliah as $mk)
+      <option value="{{ $mk->kode_mk }}" 
+        @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '') == $mk->kode_mk) selected @endif>
+      {{ $mk->nama }}</option>
+      @endforeach
+    </select>
+    @error('mk_id')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Bentuk Integrasi</label>
-            <div class="col-sm-9">
-              <input type="text" name="bentuk_integrasi" value="{{ isset($item->bentuk_integrasi) ? $item->bentuk_integrasi : old('bentuk_integrasi') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Bentuk Integrasi</label>
+  <div class="col-sm-9">
+    <input type="text" name="bentuk_integrasi" value="{{ old('bentuk_integrasi', isset($item->bentuk_integrasi) ? $item->bentuk_integrasi : '') }}" class="form-control @error('bentuk_integrasi') is-invalid @enderror" placeholder="Ketik disini">
+    @error('bentuk_integrasi')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+
           
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>

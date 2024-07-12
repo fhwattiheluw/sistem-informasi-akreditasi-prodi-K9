@@ -14,7 +14,7 @@
           <p class="m-0 pr-3">Data Kuantitatif</p>
         </a>
         <a class="pl-3 mr-4" href="#">
-          <p class="m-0">K.9 tingkat_relevansi_pekerjaan</p>
+          <p class="m-0">K.9 tingkat relevansi pekerjaan</p>
         </a>
       </div>
 
@@ -36,7 +36,7 @@
             Edit data
             @endif
 
-            tingkat_relevansi_pekerjaan</h4>
+            tingkat relevansi pekerjaan</h4>
 
            @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -48,7 +48,7 @@
           @endif
 
           @if ($errors->any())
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 Periksa kembali inputan anda
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

@@ -52,56 +52,76 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Tahun Akademik</label>
-            <div class="col-sm-9">
-              <input type="number" name="tahun_akademik" value="{{ isset($item->tahun_akademik) ? $item->tahun_akademik : old('tahun_akademik') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Judul</label>
-            <div class="col-sm-9">
-              <input type="text" name="judul" value="{{ isset($item->judul) ? $item->judul : old('judul') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Ketua Tim</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="dosen_ketua_id">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
+    <label class="col-sm-3 col-form-label">Tahun Akademik</label>
+    <div class="col-sm-9">
+        <input type="number" name="tahun_akademik" value="{{ old('tahun_akademik', $item->tahun_akademik ?? '') }}" class="form-control @error('tahun_akademik') is-invalid @enderror" placeholder="Ketik disini">
+        @error('tahun_akademik')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Judul</label>
+    <div class="col-sm-9">
+        <input type="text" name="judul" value="{{ old('judul', $item->judul ?? '') }}" class="form-control @error('judul') is-invalid @enderror" placeholder="Ketik disini">
+        @error('judul')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Ketua Tim</label>
+    <div class="col-sm-9">
+        <select class="form-control @error('dosen_ketua_id') is-invalid @enderror" name="dosen_ketua_id">
+            <option value="">Pilih</option>
+            @foreach($dosens as $dosen)
                 <option value="{{ $dosen->nidn_nidk }}"
-                  @if(old('dosen_ketua_id', isset($item->dosen_ketua_id) ? $dosen->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
-                  {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Kepakaran ketua</label>
-              <div class="col-sm-9">
-                <input type="text" name="kepakaran_ketua" value="{{ isset($item->kepakaran_ketua) ? $item->kepakaran_ketua : old('kepakaran_ketua') }}" class="form-control" placeholder="Ketik disini">
-              </div>
-            </div>
+                    @if(old('dosen_ketua_id', $item->dosen_ketua_id ?? '') == $dosen->nidn_nidk) selected @endif>
+                    {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}
+                </option>
+            @endforeach
+        </select>
+        @error('dosen_ketua_id')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Kepakaran ketua</label>
+    <div class="col-sm-9">
+        <input type="text" name="kepakaran_ketua" value="{{ old('kepakaran_ketua', $item->kepakaran_ketua ?? '') }}" class="form-control @error('kepakaran_ketua') is-invalid @enderror" placeholder="Ketik disini">
+        @error('kepakaran_ketua')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Dosen Anggota</label>
+    <div class="col-sm-9">
+        <select class="form-control @error('dosen_anggota_id') is-invalid @enderror" name="dosen_anggota_id">
+            <option value="">Pilih</option>
+            @foreach($dosens as $dosen)
+                <option value="{{ $dosen->nidn_nidk }}"
+                    @if(old('dosen_anggota_id', $item->dosen_anggota_id ?? '') == $dosen->nidn_nidk) selected @endif>
+                    {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}
+                </option>
+            @endforeach
+        </select>
+        @error('dosen_anggota_id')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Mahasiswa</label>
+    <div class="col-sm-9">
+        <input type="text" name="mahasiswa" value="{{ old('mahasiswa', $item->mahasiswa ?? '') }}" class="form-control @error('mahasiswa') is-invalid @enderror" placeholder="Ketik disini">
+        @error('mahasiswa')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
 
-            <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Dosen Anggota</label>
-              <div class="col-sm-9">
-                <select class="form-control" name="dosen_anggota_id">
-                  <option value="">Pilih</option>
-                  @foreach($dosens as $dosen)
-                  <option value="{{ $dosen->nidn_nidk }}"
-                    @if(old('dosen_anggota_id', isset($item->dosen_anggota_id) ? $item->dosen_anggota_id : '') == $dosen->nidn_nidk) selected @endif>
-                    {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Mahasiswa</label>
-                <div class="col-sm-9">
-                  <input type="text" name="mahasiswa" value="{{ isset($item->mahasiswa) ? $item->mahasiswa : old('mahasiswa') }}" class="form-control" placeholder="Ketik disini">
-                </div>
-              </div>
 
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Bukti/Tautan</label>

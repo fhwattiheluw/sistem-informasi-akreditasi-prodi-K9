@@ -25,7 +25,7 @@
     <div class="col grid-margin stretch-card">
       <form class="card forms-sample" action="{{isset($item->id) ?  route('dosen_tamu_dan_tenaga_ahli.update', ['id' => Crypt::encryptString($item->id)])  : route('dosen_tamu_dan_tenaga_ahli.store')}}" method="post">
         @if(isset($item->id))
-          @method('PUT')
+        @method('PUT')
         @endif  
         @csrf
         <div class="card-body">
@@ -36,109 +36,126 @@
             Edit data
             @endif
 
-            Dosen Tamu Dan Tenaga Ahli</h4>
+          Dosen Tamu Dan Tenaga Ahli</h4>
 
           @if ($errors->any())
-              <div>
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li style="color: red;">{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-            @endif
+          <div>
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li style="color: red;">{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
           <hr>
           
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Dosen</label>
             <div class="col-sm-9">
-              <select class="form-control" name="nidn_nidk">
+              <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
                 <option value="">Pilih</option>
                 @foreach($dosens as $dosen)
                 <option value="{{ $dosen->nidn_nidk }}" 
                   @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
-                {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
+                  {{ $dosen->nama }}</option>
+                  @endforeach
+                </select>
+                @error('nidn_nidk')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Lembaga</label>
-            <div class="col-sm-9">
-              <input type="text" name="nama_lembaga" value="{{ isset($item->nama_lembaga) ? $item->nama_lembaga : old('nama_lembaga') }}" class="form-control" placeholder="Ketik disini">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nama Lembaga</label>
+              <div class="col-sm-9">
+                <input type="text" name="nama_lembaga" value="{{ isset($item->nama_lembaga) ? $item->nama_lembaga : old('nama_lembaga') }}" class="form-control @error('nama_lembaga') is-invalid @enderror" placeholder="Ketik disini">
+                @error('nama_lembaga')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Kepakaran</label>
-            <div class="col-sm-9">
-              <input type="text" name="kepakaran" value="{{ isset($item->kepakaran) ? $item->kepakaran : old('kepakaran') }}" class="form-control" placeholder="Ketik disini">
+
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Kepakaran</label>
+              <div class="col-sm-9">
+                <input type="text" name="kepakaran" value="{{ isset($item->kepakaran) ? $item->kepakaran : old('kepakaran') }}" class="form-control @error('kepakaran') is-invalid @enderror" placeholder="Ketik disini">
+                @error('kepakaran')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Matakuliah</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="mk_id">
-                <option value="">Pilih</option>
-                @foreach($matakuliah as $mk)
-                <option value="{{ $mk->kode_mk }}" 
-                  @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->kode_mk) selected @endif>
-                {{ $mk->nama }}</option>
-                @endforeach
-              </select>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Matakuliah</label>
+              <div class="col-sm-9">
+                <select class="form-control @error('mk_id') is-invalid @enderror" name="mk_id">
+                  <option value="">Pilih</option>
+                  @foreach($matakuliah as $mk)
+                  <option value="{{ $mk->kode_mk }}" 
+                    @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->kode_mk) selected @endif>
+                    {{ $mk->nama }}</option>
+                    @endforeach
+                  </select>
+                  @error('mk_id')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Waktu Kegiatan</label>
+                <div class="col-sm-9">
+                  <input type="date" name="waktu_kegiatan" value="{{ isset($item->waktu_kegiatan) ? $item->waktu_kegiatan : old('waktu_kegiatan') }}" class="form-control @error('waktu_kegiatan') is-invalid @enderror" placeholder="Ketik disini">
+                  @error('waktu_kegiatan')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Tautan</label>
+                <div class="col-sm-9">
+                  <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
+                </div>
+              </div>
+
+
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Waktu Kegiatan</label>
-            <div class="col-sm-9">
-              <input type="date" name="waktu_kegiatan" value="{{ isset($item->waktu_kegiatan) ? $item->waktu_kegiatan : old('waktu_kegiatan') }}" class="form-control" placeholder="Ketik disini">
+            <div class="card-footer">
+              <button class="btn btn-primary" type="submit" name="button">
+                @if (Request::segment(3) === 'create')
+                Tambah data
+                @elseif (Request::segment(4) === 'edit')
+                Update data
+                @endif
+              </button>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Tautan</label>
-            <div class="col-sm-9">
-              <input type="text" name="tautan" value="{{ isset($item->tautan) ? $item->tautan : old('tautan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-
-
-          </div>
-
-          <div class="card-footer">
-            <button class="btn btn-primary" type="submit" name="button">
-              @if (Request::segment(3) === 'create')
-              Tambah data
-              @elseif (Request::segment(4) === 'edit')
-              Update data
-              @endif
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
+      <!-- last row starts here -->
+
     </div>
-    <!-- last row starts here -->
+    <script>
+      document.getElementById('nilai2').addEventListener('input', function (e) {
+        let value = e.target.value;
+        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.target.value = value;
+      });
+      document.getElementById('nilai1').addEventListener('input', function (e) {
+        let value = e.target.value;
+        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.target.value = value;
+      });
+      document.getElementById('nilai').addEventListener('input', function (e) {
+        let value = e.target.value;
+        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        e.target.value = value;
+      });
+    </script>
 
-  </div>
-  <script>
-    document.getElementById('nilai2').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai1').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-    document.getElementById('nilai').addEventListener('input', function (e) {
-        let value = e.target.value;
-        value = value.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        e.target.value = value;
-    });
-</script>
-
-  @endsection
+    @endsection
 

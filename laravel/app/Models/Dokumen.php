@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Repository;
 
-class dokumen extends Model
+class Dokumen extends Model
 {
     use HasFactory;
 

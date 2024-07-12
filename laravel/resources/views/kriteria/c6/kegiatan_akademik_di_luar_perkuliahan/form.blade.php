@@ -50,47 +50,64 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
-            <div class="col-sm-9">
-              <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="nidn_nidk">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
-                <option value="{{ $dosen->nidn_nidk }}" 
-                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
-                {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
-            <div class="col-sm-9">
-            <select class="form-control" name="frekuensi">
-                <option value="">Pilih</option>
-                <option value="setiap bulan" 
-                  @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap bulan') selected @endif>
-                Setiap bulan</option>
-                <option value="setiap 3 bulan" 
-                  @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap 3 bulan') selected @endif>
-                Setiap 3 bulan</option>
-                <option value="setiap semester" 
-                  @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap semester') selected @endif>
-                Setiap semester</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
-            <div class="col-sm-9">
-              <input type="text" name="hasil" value="{{ isset($item->hasil) ? $item->hasil : old('hasil') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+  <label class="col-sm-3 col-form-label">Nama Kegiatan</label>
+  <div class="col-sm-9">
+    <input type="text" name="nama_kegiatan" value="{{ isset($item->nama_kegiatan) ? $item->nama_kegiatan : old('nama_kegiatan') }}" class="form-control @error('nama_kegiatan') is-invalid @enderror" placeholder="Ketik disini">
+    @error('nama_kegiatan')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
+  <div class="col-sm-9">
+    <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
+      <option value="">Pilih</option>
+      @foreach($dosens as $dosen)
+        <option value="{{ $dosen->nidn_nidk }}" 
+          @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+          {{ $dosen->nama }}
+        </option>
+      @endforeach
+    </select>
+    @error('nidn_nidk')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Frekuensi Kegiatan</label>
+  <div class="col-sm-9">
+    <select class="form-control @error('frekuensi') is-invalid @enderror" name="frekuensi">
+      <option value="">Pilih</option>
+      <option value="setiap bulan" 
+        @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap bulan') selected @endif>
+        Setiap bulan
+      </option>
+      <option value="setiap 3 bulan" 
+        @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap 3 bulan') selected @endif>
+        Setiap 3 bulan
+      </option>
+      <option value="setiap semester" 
+        @if(old('frekuensi', isset($item->frekuensi) ? $item->frekuensi : '')  == 'setiap semester') selected @endif>
+        Setiap semester
+      </option>
+    </select>
+    @error('frekuensi')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Hasil Kegiatan</label>
+  <div class="col-sm-9">
+    <input type="text" name="hasil" value="{{ isset($item->hasil) ? $item->hasil : old('hasil') }}" class="form-control @error('hasil') is-invalid @enderror" placeholder="Ketik disini">
+    @error('hasil')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">
