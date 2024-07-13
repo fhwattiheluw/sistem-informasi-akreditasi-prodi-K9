@@ -538,7 +538,7 @@ class TabelC4Controller extends Controller
     public function prestasi_dtps_store(Request $request)
     {
         $request->validate([
-            'nidn_nidk' => 'required|unique:tabel_k4_prestasi_dtps,nidn_nidk',
+            'nidn_nidk' => 'required',
             'prestasi' => 'required',
             'tahun' => 'required',
             'tingkat' => 'required',

@@ -49,7 +49,7 @@
               <thead class="text-center">
                 <tr>
                   <th rowspan="2">Tahun Akademik</th>
-                  <th rowspan="2">Jumlah Provinsi</th>
+                  <th rowspan="2">Jumlah Negara</th>
                   <th colspan="2">Jumlah Calon Mahasiswa Reguler</th>
                   <th rowspan="2">Jumlah Total Mahasiswa Reguler</th>
                   <th rowspan="2">Bukti/Tautan</th>
@@ -71,7 +71,7 @@
                 @endphp
                 <tr>
                   <td>{{$ta}}</td>
-                  <td>{{$item->jumlah_provinsi}}</td>
+                  <td>{{$item->jumlah_negara}}</td>
                   <td>{{$item->laki_laki}}</td>
                   <td>{{$item->perempuan}}</td>
                   <td>{{$item->total_mahasiswa}}</td>

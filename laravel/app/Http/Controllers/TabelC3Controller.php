@@ -284,7 +284,7 @@ class TabelC3Controller extends Controller
   {    
     $request->validate([
       'tahun_akademik' => 'required|numeric',
-      'jumlah_provinsi' => 'required',
+      'jumlah_negara' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
       'total_mahasiswa' => 'required'
@@ -292,7 +292,7 @@ class TabelC3Controller extends Controller
 
     TabelK3MahasiswaLuarNegeri::create([
       'tahun_akademik' => $request->tahun_akademik,
-      'jumlah_provinsi' => $request->jumlah_provinsi,
+      'jumlah_negara' => $request->jumlah_negara,
       'laki_laki' => $request->laki_laki,
       'perempuan' =>  $request->perempuan,
       'total_mahasiswa' => $request->total_mahasiswa,
@@ -319,7 +319,7 @@ class TabelC3Controller extends Controller
 
     $request->validate([
       'tahun_akademik' => 'required|numeric',
-      'jumlah_provinsi' => 'required',
+      'jumlah_negara' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
       'total_mahasiswa' => 'required'
@@ -327,7 +327,7 @@ class TabelC3Controller extends Controller
 
     $data->update([
       'tahun_akademik' => $request->tahun_akademik,
-      'jumlah_provinsi' => $request->jumlah_provinsi,
+      'jumlah_negara' => $request->jumlah_negara,
       'laki_laki' => $request->laki_laki,
       'perempuan' =>  $request->perempuan,
       'total_mahasiswa' => $request->total_mahasiswa,

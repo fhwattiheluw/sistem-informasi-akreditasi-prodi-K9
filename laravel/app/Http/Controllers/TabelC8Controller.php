@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tabelC8;
 use App\Models\TabelDosen;
 use App\Models\TabelK8PelibatanMhsPkm;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -29,13 +30,19 @@ class TabelC8Controller extends Controller
 
     public function pelibatan_mahasiswa_dalam_pkm_index()
     {
+        $tahun_sekarang = Carbon::now()->year;
+        $tahun_terakhir = $tahun_sekarang - 5;
+
         if(Auth::user()->role == 'fakultas'){
             $prodiID = $this->akunController->get_session_prodi_by_fakultas();
         }else{
             $prodiID = auth()->user()->prodi_id;
         }
 
-        $items = TabelK8PelibatanMhsPkm::where('prodi_id', $prodiID)->get();
+        $items = TabelK8PelibatanMhsPkm::where('prodi_id', $prodiID)
+        ->whereBetween('tahun_akademik', [$tahun_terakhir, $tahun_sekarang])
+        ->orderBy('tahun_akademik')
+        ->get();
         return view('kriteria.c8.pelibatan_mahasiswa_dalam_pkm.index', compact('items'));
     }
 

@@ -42,8 +42,8 @@ return new class extends Migration
 
         Schema::create('tabel_k3_mhs_luar_negeri', function (Blueprint $table) {
             $table->id();
-            $table->year('tahun_akademik')->unique();
-            $table->integer('jumlah_provinsi');
+            $table->year('tahun_akademik');
+            $table->integer('jumlah_negara');
             $table->integer('laki_laki');
             $table->integer('perempuan');
             $table->integer('total_mahasiswa');

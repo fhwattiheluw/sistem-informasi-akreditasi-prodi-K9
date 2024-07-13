@@ -1,208 +1,6 @@
 @extends('template')
 
-@section('js')
-<script src="/assets/js/chart.js"></script>
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-   // Data untuk Chart Penelitian
-        var ctxPenelitian = document.getElementById('chartPenelitian').getContext('2d');
-        var chartPenelitian = new Chart(ctxPenelitian, {
-            type: 'bar',
-            data: {
-                labels: ['Aktivitas 1', 'Aktivitas 2', 'Aktivitas 3'],
-                datasets: [
-                    {
-                        label: 'Aktivitas Penelitian',
-                        data: [30, 50, 70],
-                        backgroundColor: '#1e90ff',
-                        borderColor: '#1c86ee',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Relevansi Penelitian',
-                        data: [40, 60, 80],
-                        backgroundColor: '#87cefa',
-                        borderColor: '#00bfff',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Pelibatan Mahasiswa',
-                        data: [25, 45, 65],
-                        backgroundColor: '#00bfff',
-                        borderColor: '#1e90ff',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false
-                        },
-                        ticks: {
-                            fontColor: '#495057'
-                        }
-                    }],
-                    yAxes: [{
-                        stacked: true,
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: '#495057'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: '#dee2e6'
-                        }
-                    }]
-                },
-                tooltips: {
-                    backgroundColor: '#343a40',
-                    titleFontColor: '#ffffff',
-                    bodyFontColor: '#ffffff',
-                    borderColor: '#6c757d',
-                    borderWidth: 1
-                }
-            }
-        });
-
-        // Data untuk Chart Pengabdian
-        var ctxPengabdian = document.getElementById('chartPengabdian').getContext('2d');
-        var chartPengabdian = new Chart(ctxPengabdian, {
-            type: 'bar',
-            data: {
-                labels: ['PKM 1', 'PKM 2', 'PKM 3'],
-                datasets: [
-                    {
-                        label: 'Aktivitas PKM',
-                        data: [20, 40, 60],
-                        backgroundColor: '#28a745',
-                        borderColor: '#218838',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Relevansi PKM',
-                        data: [35, 55, 75],
-                        backgroundColor: '#90ee90',
-                        borderColor: '#7cfc00',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Pelibatan Mahasiswa',
-                        data: [45, 65, 85],
-                        backgroundColor: '#7cfc00',
-                        borderColor: '#3cb371',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: false
-                        },
-                        ticks: {
-                            fontColor: '#495057'
-                        }
-                    }],
-                    yAxes: [{
-                        stacked: true,
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: '#495057'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: '#dee2e6'
-                        }
-                    }]
-                },
-                tooltips: {
-                    backgroundColor: '#343a40',
-                    titleFontColor: '#ffffff',
-                    bodyFontColor: '#ffffff',
-                    borderColor: '#6c757d',
-                    borderWidth: 1
-                }
-            }
-        });
-
-        // Data untuk Chart Total Mahasiswa Reguler
-        var ctxMahasiswa = document.getElementById('chartMahasiswa').getContext('2d');
-        var chartMahasiswa = new Chart(ctxMahasiswa, {
-            type: 'line',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023'],
-                datasets: [
-                    {
-                        label: 'Program Studi A',
-                        data: [100, 150, 200, 250, 300],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 2,
-                        fill: true
-                    },
-                    {
-                        label: 'Program Studi B',
-                        data: [80, 130, 180, 230, 280],
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 2,
-                        fill: true
-                    },
-                    {
-                        label: 'Program Studi C',
-                        data: [90, 140, 190, 240, 290],
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2,
-                        fill: true
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        },
-                        ticks: {
-                            fontColor: '#495057'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: '#495057'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: '#dee2e6'
-                        }
-                    }]
-                },
-                tooltips: {
-                    backgroundColor: '#343a40',
-                    titleFontColor: '#ffffff',
-                    bodyFontColor: '#ffffff',
-                    borderColor: '#6c757d',
-                    borderWidth: 1
-                }
-            }
-        });
-</script>
-@endsection
 
 @section('css')
 <style type="text/css">/* Chart.js */
@@ -415,7 +213,7 @@
 <!-- statistik untuk dashboard admin fakultas -->
 <div class="row">
   <!-- Card Jumlah User -->
-  <div class="col-md-4">
+  <!-- <div class="col-md-3">
     <div class="card text-white bg-primary mb-3">
       <div class="card-header">Jumlah User</div>
       <div class="card-body">
@@ -424,9 +222,9 @@
         <p class="card-text">Total pengguna terdaftar</p>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Card Jumlah Prodi -->
-  <div class="col-md-4">
+  <!-- <div class="col-md-3">
     <div class="card text-white bg-success mb-3">
       <div class="card-header">Jumlah Prodi</div>
       <div class="card-body">
@@ -435,9 +233,9 @@
         <p class="card-text">Total program studi</p>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Card Jumlah Dokumen -->
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <div class="card text-white bg-warning mb-3">
       <div class="card-header">Jumlah Dokumen</div>
       <div class="card-body">
@@ -447,135 +245,266 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- untuk dashboard user prodi -->
 <div class="row">
   <!-- Card Jumlah Mahasiswa saat TS -->
-<div class="col-md-4">
-  <div class="card text-white bg-primary mb-3">
-    <div class="card-header">Jumlah Mahasiswa saat TS</div>
-    <div class="card-body">
-      <i class="fas fa-user-graduate icon"></i>
-      <h5 class="card-title icon-text" id="studentCount">1000</h5>
-      <p class="card-text">Total mahasiswa terdaftar</p>
+  <div class="col-md-3">
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-header">Jumlah User</div>
+      <div class="card-body">
+        <i class="fas fa-users icon"></i>
+        <h5 class="card-title icon-text" id="userCount">{{ $jumlah_user }}</h5>
+        <p class="card-text">Total pengguna terdaftar</p>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- Card Jumlah DTPS saat TS -->
-<div class="col-md-4">
-  <div class="card text-white bg-success mb-3">
-    <div class="card-header">Jumlah DTPS saat TS</div>
-    <div class="card-body">
-      <i class="fas fa-chalkboard-teacher icon"></i>
-      <h5 class="card-title icon-text" id="dtpsCount">50</h5>
-      <p class="card-text">Total DTPS terdaftar</p>
+    <div class="col-md-3">
+    <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Mahasiswa Reguler</div>
+        <div class="card-body">
+        <i class="fas fa-user-graduate icon"></i>
+        <h5 class="card-title icon-text" id="studentCount">{{ $totalMhsReguler }}</h5>
+        <p class="card-text">Total mahasiswa terdaftar</p>
+        </div>
     </div>
-  </div>
-</div>
-
-<!-- Card Rerata IPK -->
-<div class="col-md-4">
-  <div class="card text-white bg-warning mb-3">
-    <div class="card-header">Rerata IPK</div>
-    <div class="card-body">
-      <i class="fas fa-graduation-cap icon"></i>
-      <h5 class="card-title icon-text" id="averageGPA">3.5</h5>
-      <p class="card-text">Rerata IPK mahasiswa</p>
     </div>
-  </div>
-</div>
-
-</div>
-
-<div class="row">
-     <div class="row justify-content-center">
-            <!-- Chart Penelitian -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-header card-jumlah-penelitian">
-                        <div class="icon-container">
-                            <i class="fas fa-flask"></i> <!-- Ikon Penelitian -->
-                        </div>
-                        <div>Jumlah Aktivitas, Relevansi, Dan Pelibatan Mahasiswa Dalam Penelitian</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="chartPenelitian"></canvas>
-                        </div>
-                        <div class="chart-legend mt-2 text-center">
-                            <div class="legend-item">
-                                <span></span> Aktivitas Penelitian
-                            </div>
-                            <div class="legend-item">
-                                <span></span> Relevansi Penelitian
-                            </div>
-                            <div class="legend-item">
-                                <span></span> Pelibatan Mahasiswa
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Card Rerata IPK -->
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Mahasiswa Luar Negeri</div>
+            <div class="card-body">
+            <i class="fas fa-graduation-cap icon"></i>
+            <h5 class="card-title icon-text" id="averageGPA">{{$totalMhsLN}}</h5>
+            <p class="card-text">Total MHS LN Terdaftar</p>
             </div>
+        </div>
+    </div>
 
-            <!-- Chart Pengabdian -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-header card-jumlah-pkm">
-                        <div class="icon-container">
-                            <i class="fas fa-hands-helping"></i> <!-- Ikon Pengabdian -->
-                        </div>
-                        <div>Jumlah Aktivitas, Relevansi, Dan Pelibatan Mahasiswa Dalam PkM</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="chartPengabdian"></canvas>
-                        </div>
-                        <div class="chart-legend mt-2 text-center">
-                            <div class="legend-item">
-                                <span></span> Aktivitas PKM
-                            </div>
-                            <div class="legend-item">
-                                <span></span> Relevansi PKM
-                            </div>
-                            <div class="legend-item">
-                                <span></span> Pelibatan Mahasiswa
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Card Jumlah DTPS saat TS -->
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">DTPS Sesuai Bidang</div>
+            <div class="card-body">
+            <i class="fas fa-chalkboard-teacher icon"></i>
+            <h5 class="card-title icon-text" id="dtpsCount">{{ $dtpsSesuaiBidang }}</h5>
+            <p class="card-text">Total DTPS terdaftar</p>
             </div>
-
-            <!-- Chart Total Mahasiswa Reguler -->
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-header card-jumlah-mhs-reguler">
-                        <div class="icon-container">
-                            <i class="fas fa-user-graduate"></i> <!-- Ikon Mahasiswa -->
-                        </div>
-                        <div>Total Mahasiswa Reguler</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="chartMahasiswa"></canvas>
-                        </div>
-                        <div class="chart-legend mt-2 text-center">
-                            <div class="legend-item">
-                                <span></span> Program Studi A
-                            </div>
-                            <div class="legend-item">
-                                <span></span> Program Studi B
-                            </div>
-                            <div class="legend-item">
-                                <span></span> Program Studi C
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    
+<div class="col-md-6">
+    <div class="card mb-6">
+        <div class="card-header card-jumlah-penelitian">
+            <div class="icon-container">
+                <i class="fas fa-flask"></i> <!-- Ikon Penelitian -->
+            </div>
+            <div>Jumlah Aktivitas, Relevansi, Dan Pelibatan Mahasiswa Dalam Penelitian</div>
+        </div>
+        <div class="card-body">
+            <div class="chart-container">
+                <canvas id="chartPenelitian"></canvas>
+            </div>
+            <div class="chart-legend mt-2 text-center">
+                <div class="legend-item">
+                    <span></span> Aktivitas Penelitian
+                </div>
+                <div class="legend-item">
+                    <span></span> Relevansi PKM
                 </div>
             </div>
         </div>
-  </div>
+    </div>
+</div>
+
+<!-- Chart Pengabdian -->
+<div class="col-md-6">
+    <div class="card mb-6">
+        <div class="card-header card-jumlah-pkm">
+            <div class="icon-container">
+                <i class="fas fa-hands-helping"></i> <!-- Ikon Pengabdian -->
+            </div>
+            <div>Prestrasi Mahasiswa</div>
+        </div>
+        <div class="card-body">
+            <div class="chart-container">
+                <canvas id="chartPengabdian"></canvas>
+            </div>
+            <div class="chart-legend mt-2 text-center">
+                <div class="legend-item">
+                    <span></span> Internasional<span>
+                </div>
+                <div class="legend-item">
+                    <span></span> Nasional
+                </div>
+                <div class="legend-item">
+                    <span></span> Lokal
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
+
+@endsection
+
+@section('js')
+<script src="/assets/js/chart.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+   // Data untuk Chart Penelitian
+        var ctxPenelitian = document.getElementById('chartPenelitian').getContext('2d');
+        var chartPenelitian = new Chart(ctxPenelitian, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode(array_column($jumlah_penelitian, 'tahun_akademik')) !!},
+                datasets: [
+                    {
+                        label: 'Aktifitas Penelitian',
+                        data: {!! json_encode(array_column($jumlah_penelitian, 'jumlah')) !!},
+                        backgroundColor: '#1e900f',
+                        borderColor: '#1c860e',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Aktifitas PKM',
+                        data: {!! json_encode(array_column($jumlah_pkm, 'jumlah')) !!},
+                        backgroundColor: '#87cefa',
+                        borderColor: '#00bfff',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            fontColor: '#495057'
+                        }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#495057'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: '#dee2e6'
+                        }
+                    }]
+                },
+                tooltips: {
+                    backgroundColor: '#343a40',
+                    titleFontColor: '#ffffff',
+                    bodyFontColor: '#ffffff',
+                    borderColor: '#6c757d',
+                    borderWidth: 1
+                }
+            }
+        });
+
+        // Data untuk Chart Pengabdian
+        var ctxPengabdian = document.getElementById('chartPengabdian').getContext('2d');
+        var chartPengabdian = new Chart(ctxPengabdian, {
+            type: 'bar',
+            data: {
+                labels: @json($years),
+                datasets:  @json($prestasiMhs)
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            fontColor: '#495057'
+                        }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#495057'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: '#dee2e6'
+                        }
+                    }]
+                },
+                tooltips: {
+                    backgroundColor: '#343a40',
+                    titleFontColor: '#ffffff',
+                    bodyFontColor: '#ffffff',
+                    borderColor: '#6c757d',
+                    borderWidth: 1
+                }
+            }
+        });
+
+        // Data untuk Chart Total Mahasiswa Reguler
+        var ctxMahasiswa = document.getElementById('chartMahasiswa').getContext('2d');
+        var chartMahasiswa = new Chart(ctxMahasiswa, {
+            type: 'line',
+            data: {
+                labels: ['Prodi A', 'Prodi B', 'Prodi C', 'Prodi D'],
+                datasets: [
+                    {
+                        label: 'Jumlah : ',
+                        data: [100, 150, 200, 250],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            fontColor: '#495057'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: '#495057'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: '#dee2e6'
+                        }
+                    }]
+                },
+                tooltips: {
+                    backgroundColor: '#343a40',
+                    titleFontColor: '#ffffff',
+                    bodyFontColor: '#ffffff',
+                    borderColor: '#6c757d',
+                    borderWidth: 1
+                }
+            }
+        });
+</script>
 @endsection
