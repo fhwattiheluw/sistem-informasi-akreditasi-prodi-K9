@@ -96,7 +96,7 @@
                   </td>
                   @if(auth()->user()->role == 'admin prodi')
                   <td>
-                    <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{ $item->id }}/edit" class="btn btn-primary"> Edit </a>
+                    <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{ $item->id }}/edit" class="btn btn-outline-primary"> <i class="mdi mdi-table-edit" ></i></a>
                     <a href="/kriteria6/mata_kuliah_cpl_dan_perangkat_pembelajaran/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
                   </td>
                   @endif

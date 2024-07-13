@@ -19,7 +19,6 @@
           <p class="m-0">K.6 Integrasi Hasil Penelitian dan PkM dalam Proses Pembelajaran</p>
         </a>
       </div>
-
     </div>
   </div>
   <!-- first row starts here -->
@@ -85,12 +84,8 @@
                 </tr>
                 @endforeach
               </tbody>
-
-
-
             </table>
           </div>
-
         </div>
       </div>
     </div>

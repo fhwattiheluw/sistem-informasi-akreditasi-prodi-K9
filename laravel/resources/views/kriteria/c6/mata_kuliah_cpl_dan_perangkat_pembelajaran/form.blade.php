@@ -52,97 +52,123 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Semester</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="semester">
-                <option value="">Pilih</option>
-                @for ($a = 1; $a <= 8; $a++)
+    <label class="col-sm-3 col-form-label">Semester</label>
+    <div class="col-sm-9">
+        <select class="form-control @error('semester') is-invalid @enderror" name="semester">
+            <option value="">Pilih</option>
+            @for ($a = 1; $a <= 8; $a++)
                 <option value="{{ $a }}" 
-                  @if(old('semester', isset($item->semester) ? $item->semester : '')  == $a) selected @endif>
+                  @if(old('semester', isset($item->semester) ? $item->semester : '') == $a) selected @endif>
                   {{$a}}</option>
-                @endfor
-              </select>
-            </div>
-          </div>
+            @endfor
+        </select>
+        @error('semester')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Kode Matakuliah</label>
-            <div class="col-sm-9">
-              <input type="text" name="kode_mk" value="{{ isset($item->kode_mk) ? $item->kode_mk : old('kode_mk') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Matakuliah</label>
-            <div class="col-sm-9">
-              <input type="text" name="nama" value="{{ isset($item->nama) ? $item->nama : old('nama') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">SKS</label>
-            <div class="col-sm-9">
-              <input type="number" name="sks" value="{{ isset($item->sks) ? $item->sks : old('sks') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Kode Matakuliah</label>
+    <div class="col-sm-9">
+        <input type="text" name="kode_mk" value="{{ isset($item->kode_mk) ? $item->kode_mk : old('kode_mk') }}" class="form-control @error('kode_mk') is-invalid @enderror" placeholder="Ketik disini">
+        @error('kode_mk')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jenis Matakuliah</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="jenis_matakuliah">
-                <option value="">Pilih</option>
-                <option value="teori" 
-                  @if(old('jenis_matakuliah', isset($item->jenis_matakuliah) ? $item->jenis_matakuliah : '')  == "teori") selected @endif>
-                  Teori</option>
-                <option value="praktikum" 
-                  @if(old('jenis_matakuliah', isset($item->jenis_matakuliah) ? $item->jenis_matakuliah : '') == "praktikum") selected @endif>
-                  Praktikum</option>
-                <option value="praktik"
-                  @if(old('jenis_matakuliah', isset($item->jenis_matakuliah) ? $item->jenis_matakuliah : '') == "praktik") selected @endif>
-                  Praktik</option>              
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Unit Penyelenggara</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="unit_penyelenggara">
-                <option value="">Pilih</option>
-                <option value="pt" 
-                  @if(old('unit_penyelenggara', isset($item->unit_penyelenggara) ? $item->unit_penyelenggara : '')  == "pt") selected @endif>
-                  PT</option>
-                <option value="upps" 
-                  @if(old('unit_penyelenggara', isset($item->unit_penyelenggara) ? $item->unit_penyelenggara : '') == "upps") selected @endif>
-                  UPPS</option>
-                <option value="ps"
-                  @if(old('unit_penyelenggara', isset($item->unit_penyelenggara) ? $item->unit_penyelenggara : '') == "ps") selected @endif>
-                  PS</option>              
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Kesesuaian CPL</label>
-            <div class="col-sm-9">
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="kesesuaian_cpl" id="kesesuaian_cpl_ya" value="ya" 
-                          {{ (isset($item->kesesuaian_cpl) && $item->kesesuaian_cpl == 'ya') ? 'checked' : (old('kesesuaian_cpl') == 'ya' ? 'checked' : '') }}>
-                    <label class="form-check-label" for="kesesuaian_cpl_ya">Ya</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" class="form-check-input" name="kesesuaian_cpl" id="kesesuaian_cpl_tidak" value="tidak" 
-                          {{ (isset($item->kesesuaian_cpl) && $item->kesesuaian_cpl == 'tidak') ? 'checked' : (old('kesesuaian_cpl') == 'tidak' ? 'checked' : '') }}>
-                    <label class="form-check-label" for="kesesuaian_cpl_tidak">Tidak</label>
-                </div>
-            </div>
-          </div>
-          
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Perangkat Pembelajaran</label>
-            <div class="col-sm-9">
-              <input type="text" name="perangkat_pembelajaran" value="{{ isset($item->perangkat_pembelajaran) ? $item->perangkat_pembelajaran : old('perangkat_pembelajaran') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Nama Matakuliah</label>
+    <div class="col-sm-9">
+        <input type="text" name="nama" value="{{ isset($item->nama) ? $item->nama : old('nama') }}" class="form-control @error('nama') is-invalid @enderror" placeholder="Ketik disini">
+        @error('nama')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">SKS</label>
+    <div class="col-sm-9">
+        <input type="number" name="sks" value="{{ isset($item->sks) ? $item->sks : old('sks') }}" class="form-control @error('sks') is-invalid @enderror" placeholder="Ketik disini">
+        @error('sks')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Jenis Matakuliah</label>
+    <div class="col-sm-9">
+        <select class="form-control @error('jenis_matakuliah') is-invalid @enderror" name="jenis_matakuliah">
+            <option value="">Pilih</option>
+            <option value="teori" 
+              @if(old('jenis_matakuliah', isset($item->jenis_matakuliah) ? $item->jenis_matakuliah : '') == "teori") selected @endif>
+              Teori</option>
+            <option value="praktikum" 
+              @if(old('jenis_matakuliah', isset($item->jenis_matakuliah) ? $item->jenis_matakuliah : '') == "praktikum") selected @endif>
+              Praktikum</option>
+            <option value="praktik"
+              @if(old('jenis_matakuliah', isset($item->jenis_matakuliah) ? $item->jenis_matakuliah : '') == "praktik") selected @endif>
+              Praktik</option>              
+        </select>
+        @error('jenis_matakuliah')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Unit Penyelenggara</label>
+    <div class="col-sm-9">
+        <select class="form-control @error('unit_penyelenggara') is-invalid @enderror" name="unit_penyelenggara">
+            <option value="">Pilih</option>
+            <option value="pt" 
+              @if(old('unit_penyelenggara', isset($item->unit_penyelenggara) ? $item->unit_penyelenggara : '') == "pt") selected @endif>
+              PT</option>
+            <option value="upps" 
+              @if(old('unit_penyelenggara', isset($item->unit_penyelenggara) ? $item->unit_penyelenggara : '') == "upps") selected @endif>
+              UPPS</option>
+            <option value="ps"
+              @if(old('unit_penyelenggara', isset($item->unit_penyelenggara) ? $item->unit_penyelenggara : '') == "ps") selected @endif>
+              PS</option>              
+        </select>
+        @error('unit_penyelenggara')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Kesesuaian CPL</label>
+    <div class="col-sm-9">
+        <div class="form-check">
+            <input type="radio" class="form-check-input @error('kesesuaian_cpl') is-invalid @enderror" name="kesesuaian_cpl" id="kesesuaian_cpl_ya" value="ya" 
+                  {{ (isset($item->kesesuaian_cpl) && $item->kesesuaian_cpl == 'ya') ? 'checked' : (old('kesesuaian_cpl') == 'ya' ? 'checked' : '') }}>
+            <label class="form-check-label" for="kesesuaian_cpl_ya">Ya</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input @error('kesesuaian_cpl') is-invalid @enderror" name="kesesuaian_cpl" id="kesesuaian_cpl_tidak" value="tidak" 
+                  {{ (isset($item->kesesuaian_cpl) && $item->kesesuaian_cpl == 'tidak') ? 'checked' : (old('kesesuaian_cpl') == 'tidak' ? 'checked' : '') }}>
+            <label class="form-check-label" for="kesesuaian_cpl_tidak">Tidak</label>
+        </div>
+        @error('kesesuaian_cpl')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Perangkat Pembelajaran</label>
+    <div class="col-sm-9">
+        <input type="text" name="perangkat_pembelajaran" value="{{ isset($item->perangkat_pembelajaran) ? $item->perangkat_pembelajaran : old('perangkat_pembelajaran') }}" class="form-control @error('perangkat_pembelajaran') is-invalid @enderror" placeholder="Ketik disini">
+        @error('perangkat_pembelajaran')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">

@@ -50,31 +50,48 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="nidn_nidk">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
-                <option value="{{ $dosen->nidn_nidk }}" 
-                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
-                {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
+  <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
+  <div class="col-sm-9">
+    <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
+      <option value="">Pilih</option>
+      @foreach($dosens as $dosen)
+      <option value="{{ $dosen->nidn_nidk }}" 
+        @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
+      {{ $dosen->nama }}</option>
+      @endforeach
+    </select>
+    @error('nidn_nidk')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan</label>
-            <div class="col-sm-9">
-              <input type="number" name="jumlah_bimbingan" value="{{ isset($item->jumlah_bimbingan) ? $item->jumlah_bimbingan : old('jumlah_mahasiswa_bimbingan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Rata-Rata Banyaknya Pertemuan/ Mahasiswa/Semester</label>
-            <div class="col-sm-9">
-              <input type="number" name="rata_pertemuan_semester" value="{{ isset($item->rata_pertemuan_semester) ? $item->rata_pertemuan_semester : old('rata_pertemuan_semester') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan</label>
+  <div class="col-sm-9">
+    <input type="number" name="jumlah_bimbingan" value="{{ isset($item->jumlah_bimbingan) ? $item->jumlah_bimbingan : old('jumlah_mahasiswa_bimbingan') }}" class="form-control @error('jumlah_bimbingan') is-invalid @enderror" placeholder="Ketik disini">
+    @error('jumlah_bimbingan')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Rata-Rata Banyaknya Pertemuan/ Mahasiswa/Semester</label>
+  <div class="col-sm-9">
+    <input type="number" name="rata_pertemuan_semester" value="{{ isset($item->rata_pertemuan_semester) ? $item->rata_pertemuan_semester : old('rata_pertemuan_semester') }}" class="form-control @error('rata_pertemuan_semester') is-invalid @enderror" placeholder="Ketik disini">
+    @error('rata_pertemuan_semester')
+    <div class="invalid-feedback">
+      {{ $message }}
+    </div>
+    @enderror
+  </div>
+</div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">

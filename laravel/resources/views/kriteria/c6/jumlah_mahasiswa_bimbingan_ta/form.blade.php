@@ -50,65 +50,91 @@
           <hr>
 
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
-            <div class="col-sm-9">
-              <select class="form-control" name="nidn_nidk">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
-                <option value="{{ $dosen->nidn_nidk }}" 
-                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
-                {{ $dosen->nama }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
+  <label class="col-sm-3 col-form-label">Nama Dosen Pembimbing Akademik</label>
+  <div class="col-sm-9">
+    <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
+      <option value="">Pilih</option>
+      @foreach($dosens as $dosen)
+        <option value="{{ $dosen->nidn_nidk }}" 
+          @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
+          {{ $dosen->nama }}
+        </option>
+      @endforeach
+    </select>
+    @error('nidn_nidk')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan PS Sendiri</label>
-            <div class="col-sm-9">
-                <div class="row">
-                    <div class="col">
-                        <label for="jumlah_ps_sendiri_ts2">TS-2</label>
-                        <input type="number" id="jumlah_ps_sendiri_ts2" name="jumlah_ps_sendiri_ts2" value="{{ isset($item->jumlah_ps_sendiri_ts2) ? $item->jumlah_ps_sendiri_ts2 : old('jumlah_ps_sendiri_ts2') }}" class="form-control" placeholder="Ketik disini">
-                    </div>
-                    <div class="col">
-                        <label for="jumlah_ps_sendiri_ts1">TS-1</label>
-                        <input type="number" id="jumlah_ps_sendiri_ts1" name="jumlah_ps_sendiri_ts1" value="{{ isset($item->jumlah_ps_sendiri_ts1) ? $item->jumlah_ps_sendiri_ts1 : old('jumlah_ps_sendiri_ts1') }}" class="form-control" placeholder="Ketik disini">
-                    </div>
-                    <div class="col">
-                        <label for="jumlah_ps_sendiri_ts">TS</label>
-                        <input type="number" id="jumlah_ps_sendiri_ts" name="jumlah_ps_sendiri_ts" value="{{ isset($item->jumlah_ps_sendiri_ts) ? $item->jumlah_ps_sendiri_ts : old('jumlah_ps_sendiri_ts') }}" class="form-control" placeholder="Ketik disini">
-                    </div>
-                </div>
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan PS Sendiri</label>
+  <div class="col-sm-9">
+    <div class="row">
+      <div class="col">
+        <label for="jumlah_ps_sendiri_ts2">TS-2</label>
+        <input type="number" id="jumlah_ps_sendiri_ts2" name="jumlah_ps_sendiri_ts2" value="{{ isset($item->jumlah_ps_sendiri_ts2) ? $item->jumlah_ps_sendiri_ts2 : old('jumlah_ps_sendiri_ts2') }}" class="form-control @error('jumlah_ps_sendiri_ts2') is-invalid @enderror" placeholder="Ketik disini">
+        @error('jumlah_ps_sendiri_ts2')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+      <div class="col">
+        <label for="jumlah_ps_sendiri_ts1">TS-1</label>
+        <input type="number" id="jumlah_ps_sendiri_ts1" name="jumlah_ps_sendiri_ts1" value="{{ isset($item->jumlah_ps_sendiri_ts1) ? $item->jumlah_ps_sendiri_ts1 : old('jumlah_ps_sendiri_ts1') }}" class="form-control @error('jumlah_ps_sendiri_ts1') is-invalid @enderror" placeholder="Ketik disini">
+        @error('jumlah_ps_sendiri_ts1')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+      <div class="col">
+        <label for="jumlah_ps_sendiri_ts">TS</label>
+        <input type="number" id="jumlah_ps_sendiri_ts" name="jumlah_ps_sendiri_ts" value="{{ isset($item->jumlah_ps_sendiri_ts) ? $item->jumlah_ps_sendiri_ts : old('jumlah_ps_sendiri_ts') }}" class="form-control @error('jumlah_ps_sendiri_ts') is-invalid @enderror" placeholder="Ketik disini">
+        @error('jumlah_ps_sendiri_ts')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+    </div>
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan PS Lain</label>
-            <div class="col-sm-9">
-                <div class="row">
-                    <div class="col">
-                        <label for="jumlah_ps_lain_ts2">TS-2</label>
-                        <input type="number" id="jumlah_ps_lain_ts2" name="jumlah_ps_lain_ts2" value="{{ isset($item->jumlah_ps_lain_ts2) ? $item->jumlah_ps_lain_ts2 : old('jumlah_ps_lain_ts2') }}" class="form-control" placeholder="Ketik disini">
-                    </div>
-                    <div class="col">
-                        <label for="jumlah_ps_lain_ts1">TS-1</label>
-                        <input type="number" id="jumlah_ps_lain_ts1" name="jumlah_ps_lain_ts1" value="{{ isset($item->jumlah_ps_lain_ts1) ? $item->jumlah_ps_lain_ts1 : old('jumlah_ps_lain_ts1') }}" class="form-control" placeholder="Ketik disini">
-                    </div>
-                    <div class="col">
-                        <label for="jumlah_ps_lain_ts">TS</label>
-                        <input type="number" id="jumlah_ps_lain_ts" name="jumlah_ps_lain_ts" value="{{ isset($item->jumlah_ps_lain_ts) ? $item->jumlah_ps_lain_ts : old('jumlah_ps_sendiri_ts') }}" class="form-control" placeholder="Ketik disini">
-                    </div>
-                </div>
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Jumlah Mahasiswa Bimbingan PS Lain</label>
+  <div class="col-sm-9">
+    <div class="row">
+      <div class="col">
+        <label for="jumlah_ps_lain_ts2">TS-2</label>
+        <input type="number" id="jumlah_ps_lain_ts2" name="jumlah_ps_lain_ts2" value="{{ isset($item->jumlah_ps_lain_ts2) ? $item->jumlah_ps_lain_ts2 : old('jumlah_ps_lain_ts2') }}" class="form-control @error('jumlah_ps_lain_ts2') is-invalid @enderror" placeholder="Ketik disini">
+        @error('jumlah_ps_lain_ts2')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+      <div class="col">
+        <label for="jumlah_ps_lain_ts1">TS-1</label>
+        <input type="number" id="jumlah_ps_lain_ts1" name="jumlah_ps_lain_ts1" value="{{ isset($item->jumlah_ps_lain_ts1) ? $item->jumlah_ps_lain_ts1 : old('jumlah_ps_lain_ts1') }}" class="form-control @error('jumlah_ps_lain_ts1') is-invalid @enderror" placeholder="Ketik disini">
+        @error('jumlah_ps_lain_ts1')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+      <div class="col">
+        <label for="jumlah_ps_lain_ts">TS</label>
+        <input type="number" id="jumlah_ps_lain_ts" name="jumlah_ps_lain_ts" value="{{ isset($item->jumlah_ps_lain_ts) ? $item->jumlah_ps_lain_ts : old('jumlah_ps_sendiri_ts') }}" class="form-control @error('jumlah_ps_lain_ts') is-invalid @enderror" placeholder="Ketik disini">
+        @error('jumlah_ps_lain_ts')
+          <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+      </div>
+    </div>
+  </div>
+</div>
 
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Rata-Rata Banyaknya Pertemuan/Mahasiswa/Semester</label>
-            <div class="col-sm-9">
-              <input type="number" name="rata_pertemuan" value="{{ isset($item->rata_pertemuan) ? $item->rata_pertemuan : old('rata_pertemuan') }}" class="form-control" placeholder="Ketik disini">
-            </div>
-          </div>
+<div class="form-group row">
+  <label class="col-sm-3 col-form-label">Rata-Rata Banyaknya Pertemuan/Mahasiswa/Semester</label>
+  <div class="col-sm-9">
+    <input type="number" name="rata_pertemuan" value="{{ isset($item->rata_pertemuan) ? $item->rata_pertemuan : old('rata_pertemuan') }}" class="form-control @error('rata_pertemuan') is-invalid @enderror" placeholder="Ketik disini">
+    @error('rata_pertemuan')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+</div>
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tautan</label>
             <div class="col-sm-9">
