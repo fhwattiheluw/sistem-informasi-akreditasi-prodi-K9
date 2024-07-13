@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 // controller untuk email
-use App\Http\Controllers\mailController;
+use App\Http\Controllers\MailController;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -108,7 +108,7 @@ class AkunController extends Controller
         $body = "email = ".$validatedData['email'].' password: '.$validatedData['password'].' otorisasi: '.$validatedData['role'];
         $email = $request->email;
 
-        $emailController = new mailController();
+        $emailController = new MailController();
         $emailController->send_mail($subject,$title,$body,$email);
 
         // redirect
