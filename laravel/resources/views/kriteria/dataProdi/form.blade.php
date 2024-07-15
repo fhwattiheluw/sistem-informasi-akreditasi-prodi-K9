@@ -122,11 +122,11 @@
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Tanggal SK</td>
-                                  <td><input type="text" name="tanggal_sk" class="form-control {{ $errors->has('tanggal_sk') ? 'is-invalid' : '' }}" id="exampleInputUsername1" placeholder="Ketik Ketik Tanggal SK" value="{{$item->tanggal_sk}}"></td>
+                                  <td><input type="date" name="tanggal_sk" class="form-control {{ $errors->has('tanggal_sk') ? 'is-invalid' : '' }}" id="exampleInputUsername1" placeholder="Ketik Ketik Tanggal SK" value="{{$item->tanggal_sk}}"></td>
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Tgl. Kadaluarsa</td>
-                                  <td><input type="text" name="tanggal_kadaluarsa" class="form-control {{ $errors->has('tanggal_kadaluarsa') ? 'is-invalid' : '' }}" id="exampleInputUsername1" placeholder="Ketik Tanggal Kadaluarsa" value="{{$item->tanggal_kadaluarsa}}"></td>
+                                  <td><input type="date" name="tanggal_kadaluarsa" class="form-control {{ $errors->has('tanggal_kadaluarsa') ? 'is-invalid' : '' }}" id="exampleInputUsername1" placeholder="Ketik Tanggal Kadaluarsa" value="{{$item->tanggal_kadaluarsa}}"></td>
                                 </tr>
                                 <tr>
                                   <td style="font-weight:bold">Jumlah Mahasiswa saat TS</td>
