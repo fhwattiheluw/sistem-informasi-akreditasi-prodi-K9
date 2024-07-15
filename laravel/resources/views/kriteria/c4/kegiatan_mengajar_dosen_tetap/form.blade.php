@@ -32,7 +32,7 @@
             Edit data
             @endif
 
-            Beban Kerja Dosen DTPS
+            Kegiatan Mengajar DTPS
           </h4>
 
           <p class="card-description">K.4 Sumber Daya Manusia</p>
@@ -79,15 +79,15 @@
 <tr>
     <td><label class="col-form-label">Nama Lengkap</label></td>
     <td colspan="2">
-        <select class="form-control @error('dosen_ketua_id') is-invalid @enderror" name="dosen_ketua_id">
+        <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
             <option value="">Pilih</option>
             @foreach($dosens as $dosen)
                 <option value="{{ $dosen->nidn_nidk }}"
-                    @if(old('dosen_ketua_id', isset($item->dosen_ketua_id) ? $item->dosen_ketua_id : '') == $dosen->nidn_nidk) selected @endif>
+                    @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '') == $dosen->nidn_nidk) selected @endif>
                     {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}</option>
             @endforeach
         </select>
-        @error('dosen_ketua_id')
+        @error('nidn_nidk')
             <div class="text-danger">{{ $message }}</div>
         @enderror
     </td>
@@ -106,7 +106,7 @@
     <td colspan="2">
         <select name="kode_mk" id="kode_mk" class="form-control @error('kode_mk') is-invalid @enderror">
             @if(isset($item->kode_mk))
-                <option value="{{ $item->kode_mk }}">{{ $item->kode_mk }} | {{ $item->dosen->nama }}</option>
+                <option value="{{ $item->kode_mk }}">{{ $item->kode_mk }} | {{ $item->matakuliah->nama }}</option>
             @else
                 <option value="" disabled>Pilih Mata Kuliah</option>
                 @foreach($matakuliah as $mk)

@@ -352,7 +352,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/kriteria5/dana_pkm/store', [TabelC5Controller::class, 'dana_pkm_store'])->name('dana_pkm.store');
     Route::get('/kriteria5/dana_pkm/{id}/edit', [TabelC5Controller::class, 'dana_pkm_edit'])->name('dana_pkm.edit');
     Route::put('/kriteria5/dana_pkm/{id}/update', [TabelC5Controller::class, 'dana_pkm_update'])->name('dana_pkm.update');
-    Route::get('/kriteria5/dana_pkm/{id}/delete', [TabelC5Controller::class, 'dana_pkm_destory'])->name('dana_pkm.delete');
+    Route::get('/kriteria5/dana_pkm/{id}/delete', [TabelC5Controller::class, 'dana_pkm_destroy'])->name('dana_pkm.delete');
 
     // Kriteria 5 > Tabel Data Prasarana Pendidikan
     Route::get('/kriteria5/prasarana_pendidikan', [TabelC5Controller::class, 'prasarana_pendidikan_index'])->name('prasarana_pendidikan.index');

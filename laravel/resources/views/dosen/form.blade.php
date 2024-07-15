@@ -117,9 +117,9 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="tautan_link">Tautan Link</label>
-            <input type="text" class="form-control @error('tautan_link') is-invalid @enderror" id="tautan_link" name="tautan_link" placeholder="Masukkan tautan link" value="{{ old('tautan_link', isset($dosen) ? $dosen->tautan : '') }}">
-            @error('tautan_link')
+            <label for="tautan">Tautan Link</label>
+            <input type="text" class="form-control @error('tautan') is-invalid @enderror" id="tautan" name="tautan" placeholder="Masukkan tautan link" value="{{ old('tautan', isset($dosen) ? $dosen->tautan : '') }}">
+            @error('tautan')
               <small class="form-text text-danger">{{ $message }}</small>
             @enderror
           </div>

@@ -15,11 +15,11 @@ class TabelK4KegiatanMengajar extends Model
 
     public function dosen(): BelongsTo
     {
-        return $this->belongsTo(TabelDosen::class, 'nidn_nidk');
+        return $this->belongsTo(TabelDosen::class, 'nidn_nidk', 'nidn_nidk');
     }
 
     public function matakuliah(): BelongsTo
     {
-        return $this->belongsTo(TabelMatakuliah::class, 'kode_mk');
+        return $this->belongsTo(TabelMatakuliah::class, 'kode_mk', 'kode_mk');
     }
 }

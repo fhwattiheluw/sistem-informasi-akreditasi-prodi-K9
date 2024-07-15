@@ -153,6 +153,7 @@ class TabelC6Controller extends Controller
                 'unit_penyelenggara' => $request->unit_penyelenggara, 
                 'kesesuaian_cpl' => $request->kesesuaian_cpl, 
                 'perangkat_pembelajaran' => $request->perangkat_pembelajaran, 
+                'tautan' => $request->tautan,
             ]);
         }
 

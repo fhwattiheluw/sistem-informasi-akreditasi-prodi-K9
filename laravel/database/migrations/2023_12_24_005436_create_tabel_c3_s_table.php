@@ -29,11 +29,11 @@ return new class extends Migration
 
         Schema::create('tabel_k3_mhs_dalam_negeri', function (Blueprint $table) {
             $table->id();
-            $table->year('tahun_akademik')->unique();
+            $table->year('tahun_akademik');
             $table->integer('jumlah_provinsi');
             $table->integer('laki_laki');
             $table->integer('perempuan');
-            $table->integer('total_mahasiswa');
+            // $table->integer('total_mahasiswa');
             $table->string('tautan')->nullable();
             $table->unsignedBigInteger('prodi_id')->default(1);
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

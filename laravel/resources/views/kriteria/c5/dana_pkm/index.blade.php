@@ -64,16 +64,19 @@
                   <th>TS</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th colspan="3">TOTAL</th>
-                  <th>{{ number_format($jumlah_dana_ts2) }}</th>
-                  <th>{{ number_format($jumlah_dana_ts1) }}</th>
-                  <th>{{ number_format($jumlah_dana_ts) }}</th>
-                </tr>
-              </tfoot>
               <tbody class="text-center">
+              @php
+              $jumlah_dana_ts2 = 0;
+              $jumlah_dana_ts1 = 0;
+              $jumlah_dana_ts = 0;
+              @endphp
+
                 @foreach($items as $item)
+                @php
+                  $jumlah_dana_ts2 += $item->jumlah_dana_ts2;
+                  $jumlah_dana_ts1 += $item->jumlah_dana_ts1;
+                  $jumlah_dana_ts += $item->jumlah_dana_ts;
+                @endphp
                 <tr>
                   <td>{{ $item->judul_pkm}}</td>
                   <td>{{ $item->dosen->nama}}</td>
@@ -92,13 +95,21 @@
                     <a href="/kriteria5/dana_pkm/{{$item->id}}/edit">
                       <button type="button" class="btn btn-outline-primary btn-sm"><i class="mdi mdi-table-edit" ></i></button>
                     </a>
-                    <a type="button" href="/kriteria5/dana_pkm/{{$item->id}}/delete" onclick="confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
+                    <a type="button" href="/kriteria5/dana_pkm/{{$item->id}}/delete" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?')" class="btn btn-outline-danger btn-sm"><i class="mdi mdi-delete icon" ></i> </a>
 
                   </td>
                   @endif
                 </tr>
                 @endforeach
               </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="3">TOTAL</th>
+                  <th>{{ number_format($jumlah_dana_ts2) }}</th>
+                  <th>{{ number_format($jumlah_dana_ts1) }}</th>
+                  <th>{{ number_format($jumlah_dana_ts) }}</th>
+                </tr>
+              </tfoot>
 
             </table>
           </div>

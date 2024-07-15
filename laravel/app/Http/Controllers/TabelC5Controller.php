@@ -426,11 +426,11 @@ class TabelC5Controller extends Controller
     }
 
     $items = TabelK5DanaPKM::where('prodi_id', $prodiID)->get();    
-    $jumlah_dana_ts2 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts2');
-    $jumlah_dana_ts1 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts1');
-    $jumlah_dana_ts = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts');
+    // $jumlah_dana_ts2 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts2');
+    // $jumlah_dana_ts1 = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts1');
+    // $jumlah_dana_ts = TabelK5DanaPenelitian::where('prodi_id', $prodiID)->sum('jumlah_dana_ts');
 
-    return view('kriteria.c5.dana_pkm.index', compact('items','jumlah_dana_ts2','jumlah_dana_ts1','jumlah_dana_ts'));
+    return view('kriteria.c5.dana_pkm.index', compact('items'));
   }
   public function dana_pkm_create()
   {
@@ -654,7 +654,9 @@ class TabelC5Controller extends Controller
       'kondisi' => $request->kondisi,
       'unit_pengelola' => $request->unit_pengelola,
       'tautan' => $request->tautan,
+      'prodi_id' => auth()->user()->prodi_id,
     ]);
+
     return redirect()->route('sarana_pendidikan.index')->with('success', 'Data K5 Sarana Pendidikan ADDED successfully');
   }
 

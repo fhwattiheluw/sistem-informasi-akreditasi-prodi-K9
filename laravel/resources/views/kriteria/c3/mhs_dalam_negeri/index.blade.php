@@ -51,7 +51,7 @@
                   <th rowspan="2">Tahun Akademik</th>
                   <th rowspan="2">Jumlah Provinsi</th>
                   <th colspan="2">Jumlah Calon Mahasiswa Reguler</th>
-                  <th rowspan="2">Jumlah Total Mahasiswa Reguler</th>
+                  <th rowspan="2">Total Mahasiswa Reguler</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
@@ -63,18 +63,21 @@
                 </tr>
               </thead>
               <tbody class="text-center">
+                @php $total_mhs =0; @endphp
                 @foreach($items as $item)
                 @php 
                   $tahun_sekarang = date('Y');
                   $selisih = $tahun_sekarang - $item->tahun_akademik; 
                   $ta = ($selisih == 0) ? 'TS' : 'TS-' . $selisih;
+                  
+                  $total_mhs += $item->laki_laki + $item->perempuan;
                 @endphp
                 <tr>
                   <td>{{$ta}}</td>
                   <td>{{$item->jumlah_provinsi}}</td>
                   <td>{{$item->laki_laki}}</td>
                   <td>{{$item->perempuan}}</td>
-                  <td>{{$item->total_mahasiswa}}</td>
+                  <td>{{$item->laki_laki + $item->perempuan}}</td>
                   <td>
                       <a href="{{$item->tautan}}">
                       <button type="button" class="btn btn-outline-success btn-sm"><i class="mdi mdi-link"></i></button>
@@ -97,7 +100,7 @@
                   <th>{{$total[0]}}</th>
                   <th>{{$total[1]}}</th>
                   <th>{{$total[2]}}</th>
-                  <th>{{$total[3]}}</th>
+                  <th>{{$total_mhs}}</th>
                 </tr>
               </tfoot>
 

@@ -79,10 +79,10 @@ class TabelC9Controller extends Controller
         $request->validate([
             'tahun' => 'required',
             'jumlah_lulusan' => 'required',
-            'minimum' => 'required',
-            'rata_rata' => 'required',
-            'maksimum' => 'required',
             'tautan' => 'nullable',
+            'minimum' => 'required|numeric|between:0,4.00',
+            'rata_rata' => 'required|numeric|between:0,4.00',
+            'maksimum' => 'required|numeric|between:0,4.00',
         ]);
 
 
@@ -128,9 +128,9 @@ class TabelC9Controller extends Controller
 
          $request->validate([
             'jumlah_lulusan' => 'required',
-            'minimum' => 'required',
-            'rata_rata' => 'required',
-            'maksimum' => 'required',
+            'minimum' => 'required|numeric|between:0,4.00',
+            'rata_rata' => 'required|numeric|between:0,4.00',
+            'maksimum' => 'required|numeric|between:0,4.00',
             'tautan' => 'nullable',
         ]);
 

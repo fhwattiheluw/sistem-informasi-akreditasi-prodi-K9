@@ -414,9 +414,7 @@ class TabelC4Controller extends Controller
         $request->validate([
             'nidn_nidk' => 'required',
             'jumlah_kelas' => 'required',
-            'sks' => 'required',
             'kode_mk' => 'required',
-            'nama_mk' => "required",
             'jum_pertemuan_rencana' => 'required',
             'jum_pertemuan_terlaksana' => 'required',
             'semester' => 'required',
@@ -425,9 +423,7 @@ class TabelC4Controller extends Controller
         $data->update([
             'nidn_nidk' => $request->nidn_nidk,
             'jumlah_kelas' => $request->jumlah_kelas,
-            'sks' => $request->sks,
             'kode_mk' => $request->kode_mk,
-            'nama_mk' => $request->nama_mk,
             'jum_pertemuan_rencana' => $request->jum_pertemuan_rencana,
             'jum_pertemuan_terlaksana' => $request->jum_pertemuan_terlaksana,
             'semester' => $request->semester,
@@ -712,7 +708,7 @@ class TabelC4Controller extends Controller
     public function profil_tendik_store(Request $request)
     {
         $request->validate([
-            'id_tendik' => 'required|unique:tabel_k4_prestasi_dtps,id_tendik',
+            'id_tendik' => 'required',
             'nama' => 'required',
             'status' => 'required',
             'bidang_keahlian' => 'required',
@@ -833,11 +829,13 @@ class TabelC4Controller extends Controller
     }
     public function kompetensi_tendik_edit($id)
     {
-        $item = DB::table('tabel_k4_kompetensi_tendik')
-            ->join('tabel_tendik', 'tabel_k4_kompetensi_tendik.id_tendik', '=', 'tabel_tendik.id_tendik')
-            ->select('tabel_k4_kompetensi_tendik.*', 'tabel_tendik.nama')
-            ->where('tabel_k4_kompetensi_tendik.id', $id)
-            ->get();
+        // $item = DB::table('tabel_k4_kompetensi_tendik')
+        //     ->join('tabel_tendik', 'tabel_k4_kompetensi_tendik.id_tendik', '=', 'tabel_tendik.id_tendik')
+        //     ->select('tabel_k4_kompetensi_tendik.*', 'tabel_tendik.nama')
+        //     ->where('tabel_k4_kompetensi_tendik.id', $id)
+        //     ->get();
+        $item = TabelK4KompetensiTendik::findOrFail($id);
+
         $tendiks = TabelK4Tendik::where('prodi_id', auth()->user()->prodi_id)->get();
         return view('kriteria.c4.kompetensi_tendik.form', ['item' => $item, 'tendiks' => $tendiks]);
         

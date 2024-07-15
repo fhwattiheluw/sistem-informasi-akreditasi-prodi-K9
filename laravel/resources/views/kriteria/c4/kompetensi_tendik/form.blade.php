@@ -60,7 +60,7 @@
   <td>
     <select name="id_tendik" id="id_tendik" class="form-control @error('id_tendik') is-invalid @enderror">
       @if(isset($item->id_tendik))
-        <option value="{{$item->id_tendik}}">{{$item->id_tendik}} | {{$item->nama}}</option>
+        <option value="{{$item->id_tendik}}">{{$item->id_tendik}} | {{$item->tendik->nama}}</option>
       @else
         <option value="" disabled>Pilih tendik</option>
         @foreach($tendiks as $tendik)

@@ -16,6 +16,6 @@ class TabelK4KompetensiTendik extends Model
     
     public function tendik()
     {
-        return $this->belongsTo(TabelK4Tendik::class, 'id_tendik');
+        return $this->belongsTo(TabelK4Tendik::class, 'id_tendik','id_tendik');
     }
 }

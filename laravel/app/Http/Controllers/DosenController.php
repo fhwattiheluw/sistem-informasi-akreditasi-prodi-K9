@@ -66,7 +66,7 @@ class DosenController extends Controller
             'pendidikan' => 'required',
             'bidang_keahlian' => 'required',
             'sesuai_ps' => 'required',
-            'tautan_link' => 'nullable|url',
+            'tautan' => 'nullable|url',
             
         ]);
 
@@ -87,6 +87,7 @@ class DosenController extends Controller
         $dosen->bidang_keahlian = $request->input('bidang_keahlian');
         $dosen->sesuai_ps = $request->input('sesuai_ps');
         $dosen->prodi_id = auth()->user()->prodi_id;
+        $dosen->tautan = $request->input('tautan');
 
         $dosen->save();
 
@@ -126,7 +127,7 @@ class DosenController extends Controller
             'pendidikan' => 'required',
             'bidang_keahlian' => 'required',
             'sesuai_ps' => 'required',
-            'tautan_link' => 'nullable|url',
+            'tautan' => 'nullable|url',
         ]);
 
         if ($validator->fails()) {
@@ -145,6 +146,7 @@ class DosenController extends Controller
         $dosen->bidang_keahlian = $request->input('bidang_keahlian');
         $dosen->tautan = $request->input('tautan_link');
         $dosen->sesuai_ps = $request->input('sesuai_ps');
+        $dosen->tautan = $request->input('tautan');
 
         $dosen->save();
 

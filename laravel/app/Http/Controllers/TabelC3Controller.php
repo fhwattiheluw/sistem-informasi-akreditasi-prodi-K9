@@ -195,7 +195,7 @@ class TabelC3Controller extends Controller
       'jumlah_provinsi' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
-      'total_mahasiswa' => 'required'
+      // 'total_mahasiswa' => 'required'
     ]);
 
     TabelK3MahasiswaDalamNegeri::create([
@@ -203,7 +203,7 @@ class TabelC3Controller extends Controller
       'jumlah_provinsi' => $request->jumlah_provinsi,
       'laki_laki' => $request->laki_laki,
       'perempuan' =>  $request->perempuan,
-      'total_mahasiswa' => $request->total_mahasiswa,
+      // 'total_mahasiswa' => $request->total_mahasiswa,
       'tautan' => $request->tautan,
       'prodi_id' => auth()->user()->prodi_id,
     ]);
@@ -230,7 +230,6 @@ class TabelC3Controller extends Controller
       'jumlah_provinsi' => 'required',
       'laki_laki' => 'required',
       'perempuan' => 'required',
-      'total_mahasiswa' => 'required'
     ]);
 
     $data->update([
@@ -238,7 +237,7 @@ class TabelC3Controller extends Controller
       'jumlah_provinsi' => $request->jumlah_provinsi,
       'laki_laki' => $request->laki_laki,
       'perempuan' =>  $request->perempuan,
-      'total_mahasiswa' => $request->total_mahasiswa,
+      // 'total_mahasiswa' => $request->total_mahasiswa,
       'tautan' => $request->tautan
     ]);
 
