@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 // controller untuk email
-use App\Http\Controllers\mailController;
+use App\Http\Controllers\MailController;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,10 +39,12 @@ class AkunController extends Controller
         if(auth()->user()->role == 'fakultas') {
             $dataUser = User::where('id', '!=', 1)
             ->where('role', "!=", "asesor")
+            ->where('role', '!=', 'root')
             ->get();
         } else {
             $dataUser = User::where('id', '!=', 1)
             ->where('prodi_id', auth()->user()->prodi->id)
+            ->where('role', '!=', 'root')
             ->get();
         }
 
@@ -108,7 +110,7 @@ class AkunController extends Controller
         $body = "email = ".$validatedData['email'].' password: '.$validatedData['password'].' otorisasi: '.$validatedData['role'];
         $email = $request->email;
 
-        $emailController = new mailController();
+        $emailController = new MailController();
         $emailController->send_mail($subject,$title,$body,$email);
 
         // redirect

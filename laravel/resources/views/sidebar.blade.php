@@ -140,12 +140,14 @@
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Menu akun</span>
         </li>
+         @if(auth()->user()->role == 'root')
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dataprodi.semua') }}">
                 <i class="mdi mdi-domain menu-icon"></i>
                 <span class="menu-title">Kelola prodi</span>
             </a>
         </li>
+         @endif
          @if(auth()->user()->role != 'asesor')
         <li class="nav-item">
             <a class="nav-link" href="/akun/index">

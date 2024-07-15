@@ -16,7 +16,7 @@ return new class extends Migration
         // create table data_program_studis
         Schema::create('data_program_studis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fakultas_id')->default(1);
+            $table->unsignedBigInteger('fakultas_id')->default(1)->nullable();
             $table->enum('jenis', ['S1','S2','S3'])->nullable();;
             $table->string('nama');
             $table->enum('status_peringkat', ['C','B','A','BAIK','BAIK SEKALI','UNGGUL'])->nullable();
@@ -39,8 +39,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('prodi_id');
-            $table->enum('role',['fakultas','admin prodi','asesor'])->nullable();
+            $table->unsignedBigInteger('prodi_id')->nullable();;
+            $table->enum('role',['fakultas','admin prodi','asesor','root'])->nullable();
             $table->rememberToken();
             $table->timestamps();            
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');

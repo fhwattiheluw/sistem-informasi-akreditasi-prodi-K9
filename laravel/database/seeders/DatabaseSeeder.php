@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+// load MODEL
 use App\Models\User;
 use App\Models\dataProgramStudi;
 use App\Models\dataKeuangan;
@@ -26,8 +27,13 @@ use App\Models\TabelK4Tendik;
 use App\Models\TabelK5SaranaPendidikan;
 use App\Models\TabelMatakuliah;
 use App\Models\Fakultas;
+// Library
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,12 +48,12 @@ class DatabaseSeeder extends Seeder
         Fakultas::create([
           'id' => 1,
           'nama_fakultas' => 'Ilmu Tarbiyah dan Keguruan'
-        ]);
+      ]);
 
         Fakultas::create([
           'id' => 2,
           'nama_fakultas' => 'Syahria dan ekonomi islam'
-        ]);
+      ]);
 
         dataProgramStudi::create([
             'id' => 444,
@@ -80,7 +86,7 @@ class DatabaseSeeder extends Seeder
             'email' => "root@root.com",
             'email_verified_at' => now(),
             'role' => 'root',
-            'prodi_id' => 0,
+            'prodi_id' => 1,
             'password' => bcrypt("qwerty123456!@#$%^"),
             'remember_token' => Str::random(10),
         ]);
@@ -95,9 +101,9 @@ class DatabaseSeeder extends Seeder
           'investasi' => 250000.50,
           'prodi_id' => 123,
           'tautan' => 'https://example.com',
-        ]);
+      ]);
 
-              dataKeuangan::create([
+        dataKeuangan::create([
           'tahun' => 2024,
           'pendidikan_per_mahasiswa' => 5000,
           'penelitian_per_dosen' => 10000,
@@ -106,7 +112,7 @@ class DatabaseSeeder extends Seeder
           'investasi' => 250000.50,
           'prodi_id' => 123,
           'tautan' => 'https://example.com',
-        ]);
+      ]);
 
         //K2 Kerjasama
         TabelK2BidangPendidikan::create([
@@ -227,19 +233,27 @@ class DatabaseSeeder extends Seeder
             'total_mahasiswa' => 300
         ]);
         TabelK3MahasiswaLuarNegeri::create([
-            'tahun_akademik' => 2021,
-            'jumlah_provinsi' => 3,
-            'laki_laki' => 100,
-            'perempuan' => 200,
-            'total_mahasiswa' => 300
-        ]);
-        TabelK3MahasiswaLuarNegeri::create([
             'tahun_akademik' => 2023,
-            'jumlah_provinsi' => 2,
+            'jumlah_negara' => 10,
             'laki_laki' => 100,
-            'perempuan' => 200,
-            'total_mahasiswa' => 300
-        ]);
+            'perempuan' => 120,
+            'total_mahasiswa' => 220,
+            'tautan' => 'http://example.com',
+                'prodi_id' => 123, // Ensure this ID exists in the data_program_studis table
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'tahun_akademik' => 2024,
+                'jumlah_negara' => 15,
+                'laki_laki' => 110,
+                'perempuan' => 130,
+                'total_mahasiswa' => 240,
+                'tautan' => null,
+                'prodi_id' => 123,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
         TabelK3LayananPembinaanMahasiswa::create([
             'tahun_akademik' => 2021,
             'minat' => 3,
