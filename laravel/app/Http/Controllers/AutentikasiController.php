@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\autentikasi;
 use App\Models\User;
-use App\Http\Controllers\mailController;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -79,7 +79,7 @@ class AutentikasiController extends Controller
             'password' => bcrypt($password_reset)
           ]);
 
-          $emailController = new mailController();
+          $emailController = new MailController();
           $emailController->send_mail($subject,$title,$body,$email);
       }
 

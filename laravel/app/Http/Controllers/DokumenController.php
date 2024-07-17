@@ -19,9 +19,9 @@ class DokumenController extends Controller
         $kriteria = $request->input('kriteria', 2);
 
         $repository = Repository::where('kriteria', $kriteria)
-                        ->where('prodi_id', Auth::user()->prodi->id)
-                        ->with('documents')
-                        ->get();
+        ->where('prodi_id', Auth::user()->prodi->id)
+        ->with('documents')
+        ->get();
 
         if ($repository->isEmpty()) {
             return view('dokumen.semua_dokumen', compact('repository'))->with('error', 'Data dokumen tidak tersedia.');
@@ -45,28 +45,41 @@ class DokumenController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'document' => 'required|file|mimes:pdf|max:2048', // Hanya file PDF dan maksimal 2MB
-            'documentName' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'repository_id' => 'required|integer' // Menambahkan validasi untuk repository_id
-        ]);
+        'document' => 'required|file|mimes:pdf|max:2048', // Hanya file PDF dan maksimal 2MB
+        'documentName' => 'required|string|max:255',
+        'description' => 'required|string|max:1000',
+        'repository_id' => 'required|integer' // Menambahkan validasi untuk repository_id
+    ]);
 
         if ($request->hasFile('document')) {
             $file = $request->file('document');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/documents', $filename); // Memperbaiki path penyimpanan file
+        $destinationPath = public_path('documents'); // Menggunakan public path
 
-            $dokumen = new Dokumen();
-            $dokumen->nama_dokumen = $validatedData['documentName'];
-            $dokumen->keterangan = $validatedData['description'];
-            $dokumen->path = 'storage/documents/' . $filename; // Menyesuaikan path yang disimpan di database
-            $dokumen->repository_id = $validatedData['repository_id']; // Menetapkan repository_id dari data yang divalidasi
-            $dokumen->save();
-            return back()->with('success', 'Dokumen berhasil disimpan.');
-        } else {
-            return back()->with('error', 'Gagal mengupload dokumen.');
+        // Memastikan direktori ada atau membuatnya jika tidak ada
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
         }
+
+        // Memindahkan file ke direktori public/documents
+        $file->move($destinationPath, $filename);
+
+        // Menyimpan path yang relatif terhadap public path
+        $path = 'documents/' . $filename;
+
+        $dokumen = new Dokumen();
+        $dokumen->nama_dokumen = $validatedData['documentName'];
+        $dokumen->keterangan = $validatedData['description'];
+        $dokumen->path = $path; // Menyesuaikan path yang disimpan di database
+        $dokumen->repository_id = $validatedData['repository_id']; // Menetapkan repository_id dari data yang divalidasi
+        $dokumen->save();
+
+        return back()->with('success', 'Dokumen berhasil disimpan.');
+    } else {
+        return back()->with('error', 'Gagal mengupload dokumen.');
     }
+}
+
 
     /**
      * Menghapus dokumen berdasarkan ID.
@@ -114,10 +127,10 @@ class DokumenController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'dokumen' => 'file|mimes:pdf|max:2048', // Validasi untuk file dokumen
-            'namaDokumen' => 'required|string|max:255',
-            'keterangan' => 'required|string|max:1000',
-        ]);
+        'dokumen' => 'file|mimes:pdf|max:2048', // Validasi untuk file dokumen
+        'namaDokumen' => 'required|string|max:255',
+        'keterangan' => 'required|string|max:1000',
+    ]);
 
         $dokumen = Dokumen::find($id);
 
@@ -128,17 +141,32 @@ class DokumenController extends Controller
         if ($request->hasFile('dokumen')) {
             $file = $request->file('dokumen');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/documents', $filename); // Simpan file dokumen
+        $destinationPath = public_path('documents'); // Menggunakan public path
 
-            Storage::delete('public/documents/' . basename($dokumen->path)); // Hapus file dokumen sebelumnya
-            $dokumen->path = 'storage/documents/' . $filename; // Update path dokumen di database
+        // Memastikan direktori ada atau membuatnya jika tidak ada
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
         }
 
-        $dokumen->nama_dokumen = $validatedData['namaDokumen'];
-        $dokumen->keterangan = $validatedData['keterangan'];
-        $dokumen->save();
+        // Hapus file dokumen sebelumnya jika ada
+        $oldFilePath = public_path($dokumen->path);
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath);
+        }
 
-        return back()->with('success', 'Dokumen berhasil diperbarui.');
+        // Memindahkan file ke direktori public/documents
+        $file->move($destinationPath, $filename);
+
+        // Update path dokumen di database
+        $dokumen->path = 'documents/' . $filename;
     }
+
+    $dokumen->nama_dokumen = $validatedData['namaDokumen'];
+    $dokumen->keterangan = $validatedData['keterangan'];
+    $dokumen->save();
+
+    return back()->with('success', 'Dokumen berhasil diperbarui.');
+}
+
 }
 
