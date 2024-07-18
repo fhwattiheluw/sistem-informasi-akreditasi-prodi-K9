@@ -223,14 +223,12 @@ class DatabaseSeeder extends Seeder
             'jumlah_provinsi' => 2,
             'laki_laki' => 20,
             'perempuan' => 20,
-            'total_mahasiswa' => 120
         ]);
         TabelK3MahasiswaDalamNegeri::create([
             'tahun_akademik' => 2022,
             'jumlah_provinsi' => 3,
             'laki_laki' => 100,
             'perempuan' => 200,
-            'total_mahasiswa' => 300
         ]);
         TabelK3MahasiswaLuarNegeri::create([
             'tahun_akademik' => 2023,
