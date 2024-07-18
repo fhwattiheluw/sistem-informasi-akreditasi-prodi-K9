@@ -40,6 +40,9 @@ class AkunController extends Controller
             $dataUser = User::where('id', '!=', 1)
             ->where('role', "!=", "asesor")
             ->where('role', '!=', 'root')
+            ->whereHas('prodi', function ($query) {
+                $query->where('fakultas_id', Auth::user()->prodi->fakultas_id);
+            })
             ->get();
         } else {
             $dataUser = User::where('id', '!=', 1)
