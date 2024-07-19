@@ -68,7 +68,7 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => 'required',
             'gelar_akademik' => 'required',
             'pendidikan' => 'required',
-            'bidang_keahlian' => 'required', 
+            'bidang_keahlian' => 'required',
         ]);
 
         TabelK4DtpsKeahlianPS::create([
@@ -79,8 +79,8 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => $request->jabatan_fungsional,
             'gelar_akademik' => $request->gelar_akademik,
             'pendidikan' => $request->pendidikan,
-            'bidang_keahlian' => $request->bidang_keahlian, 
-            'sesuai_ps' => 'ya', 
+            'bidang_keahlian' => $request->bidang_keahlian,
+            'sesuai_ps' => 'ya',
             'tautan' => $request->tautan,
             'prodi_id' => auth()->user()->prodi_id,
         ]);
@@ -110,7 +110,7 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => 'required',
             'gelar_akademik' => 'required',
             'pendidikan' => 'required',
-            'bidang_keahlian' => 'required', 
+            'bidang_keahlian' => 'required',
         ]);
 
         $data->update([
@@ -121,7 +121,7 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => $request->jabatan_fungsional,
             'gelar_akademik' => $request->gelar_akademik,
             'pendidikan' => $request->pendidikan,
-            'bidang_keahlian' => $request->bidang_keahlian, 
+            'bidang_keahlian' => $request->bidang_keahlian,
             'tautan' => $request->tautan,
         ]);
 
@@ -165,7 +165,7 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => 'required',
             'gelar_akademik' => 'required',
             'pendidikan' => 'required',
-            'bidang_keahlian' => 'required', 
+            'bidang_keahlian' => 'required',
         ]);
 
         TabelK4DtpsLuarPS::create([
@@ -176,8 +176,8 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => $request->jabatan_fungsional,
             'gelar_akademik' => $request->gelar_akademik,
             'pendidikan' => $request->pendidikan,
-            'bidang_keahlian' => $request->bidang_keahlian, 
-            'sesuai_ps' => 'tidak', 
+            'bidang_keahlian' => $request->bidang_keahlian,
+            'sesuai_ps' => 'tidak',
             'prodi_id' => auth()->user()->prodi_id,
         ]);
 
@@ -204,7 +204,7 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => 'required',
             'gelar_akademik' => 'required',
             'pendidikan' => 'required',
-            'bidang_keahlian' => 'required', 
+            'bidang_keahlian' => 'required',
         ]);
 
         $data->update([
@@ -215,7 +215,7 @@ class TabelC4Controller extends Controller
             'jabatan_fungsional' => $request->jabatan_fungsional,
             'gelar_akademik' => $request->gelar_akademik,
             'pendidikan' => $request->pendidikan,
-            'bidang_keahlian' => $request->bidang_keahlian, 
+            'bidang_keahlian' => $request->bidang_keahlian,
             'tautan' => $request->tautan,
         ]);
 
@@ -318,7 +318,7 @@ class TabelC4Controller extends Controller
     {
         $idx =Crypt::decryptString($id);
         $data = TabelK4BebanKerjaDTPS::findOrFail($idx);
-        
+
         $request->validate([
             'nidn_nidk' => 'required',
             'sks_ps_sendiri' => 'required',
@@ -342,19 +342,19 @@ class TabelC4Controller extends Controller
         ]);
 
         return redirect()->route('beban_kerja_dosen_dtps.index')->with('success', 'Data K4 Beban kerja PS UPDATED successfully');
-        
+
     }
     public function beban_kerja_dosen_dtps_destroy($id)
     {
         TabelK4BebanKerjaDTPS::destroy($id);
-        
+
         return redirect()->route('beban_kerja_dosen_dtps.index')->with('success', 'Data K4 Beban kerja PS DELETED successfully');
     }
 
     // Tabel 4.1.2.6 Kegiatan Mengajar Dosen Tetap - Semester Gasal & Semester Genap
     public function kegiatan_mengajar_dosen_tetap_index()
     {
-        if(Auth::user()->role == 'fakultas'){            
+        if(Auth::user()->role == 'fakultas'){
             $matakuliah = TabelMatakuliah::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
             $items = TabelK4KegiatanMengajar::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
 
@@ -362,25 +362,26 @@ class TabelC4Controller extends Controller
             $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
             $items = TabelK4KegiatanMengajar::where('prodi_id', auth()->user()->prodi_id)->get();
         }
-        
+
         return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.index', ['items' => $items, 'matakuliah' => $matakuliah]);
     }
     public function kegiatan_mengajar_dosen_tetap_create()
     {
         $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
         $matakuliah = TabelMatakuliah::where('prodi_id', auth()->user()->prodi_id)->get();
-        
+
         return view('kriteria.c4.kegiatan_mengajar_dosen_tetap.form', ['dosens'=>$dosens, 'matakuliah'=>$matakuliah]);
     }
     public function kegiatan_mengajar_dosen_tetap_store(Request $request)
     {
         $request->validate([
-            'nidn_nidk' => 'required|unique:tabel_k4_kegiatan_mengajar,nidn_nidk',
+            'nidn_nidk' => 'required',
             'jumlah_kelas' => 'required',
             'kode_mk' => 'required',
             'jum_pertemuan_rencana' => 'required',
             'jum_pertemuan_terlaksana' => 'required',
             'semester' => 'required',
+            'tautan' => 'required',
         ]);
 
         TabelK4KegiatanMengajar::create([
@@ -429,7 +430,7 @@ class TabelC4Controller extends Controller
             'semester' => $request->semester,
             'tautan' => $request->tautan,
         ]);
-        
+
         return redirect()->route('kegiatan_mengajar_dosen_tetap.index')->with('success', 'Data K4 Kegiatan Mengajar Dosen Tetap updated successfully');
     }
     public function kegiatan_mengajar_dosen_tetap_destroy($id)
@@ -451,14 +452,14 @@ class TabelC4Controller extends Controller
     public function jumlah_bimbingan_ta_create()
     {
         $dosens = TabelDosen::where('prodi_id', auth()->user()->prodi_id)->get();
-           
+
         return view('kriteria.c4.jumlah_bimbingan_ta.form', ['dosens' => $dosens]);
 
     }
     public function jumlah_bimbingan_ta_store(Request $request)
     {
         $request->validate([
-            'nidn_nidk' => 'required|unique:tabel_k4_bimbingan_ta,nidn_nidk',
+            'nidn_nidk' => 'required',
             'ts_2' => 'required',
             'ts_1' => 'required',
             'ts' => 'required',
@@ -587,7 +588,7 @@ class TabelC4Controller extends Controller
     public function prestasi_dtps_destroy($id)
     {
         TabelK4PrestasiDTPS::destroy($id);
-        
+
         return redirect()->route('prestasi_dtps.index')->with('success', 'Data K4 Prestasi Dosen DTPS DELETED successfully');
     }
 
@@ -598,7 +599,7 @@ class TabelC4Controller extends Controller
         $tahun_ts1 = date('Y') - 1;
         $tahun_ts2 = date('Y') - 2;
 
-        if(Auth::user()->role == 'fakultas'){            
+        if(Auth::user()->role == 'fakultas'){
             $items_ts = TabelK4PengembanganKompetensiDTPS::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
                 ->whereYear('waktu',$tahun_sekarang)
                 ->get();
@@ -658,7 +659,7 @@ class TabelC4Controller extends Controller
     {
         $idx = Crypt::decryptString($id);
         $data = TabelK4PengembanganKompetensiDTPS::findOrFail($idx);
-        
+
         $request->validate([
             'nidn_nidk' => 'required',
             'bidang_keahlian' => 'required',
@@ -762,7 +763,7 @@ class TabelC4Controller extends Controller
         ]);
 
         return redirect()->route('profil_tendik.index')->with('success', 'Data K4 Data Tendik UPDATED successfully');
-        
+
     }
     public function profil_tendik_destroy($id)
     {
@@ -779,7 +780,7 @@ class TabelC4Controller extends Controller
             ->select('tabel_k4_kompetensi_tendik.*', 'tabel_tendik.nama')
             ->where('tabel_k4_kompetensi_tendik.prodi_id', $this->akunController->get_session_prodi_by_fakultas())
             ->get();
-            
+
             // $items = TabelK4Tendik::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())->get();
 
         }else{
@@ -788,11 +789,11 @@ class TabelC4Controller extends Controller
             ->select('tabel_k4_kompetensi_tendik.*', 'tabel_tendik.nama')
             ->where('tabel_k4_kompetensi_tendik.prodi_id', auth()->user()->prodi_id)
             ->get();
-            
+
             // $items = TabelK4Tendik::where('prodi_id', auth()->user()->prodi_id)->get();
         }
 
-        
+
         return view('kriteria.c4.kompetensi_tendik.index', ['items' => $items]);
     }
     public function kompetensi_tendik_create()
@@ -838,7 +839,7 @@ class TabelC4Controller extends Controller
 
         $tendiks = TabelK4Tendik::where('prodi_id', auth()->user()->prodi_id)->get();
         return view('kriteria.c4.kompetensi_tendik.form', ['item' => $item, 'tendiks' => $tendiks]);
-        
+
     }
     public function kompetensi_tendik_update(Request $request, $id)
     {

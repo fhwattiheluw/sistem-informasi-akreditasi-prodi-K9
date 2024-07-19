@@ -41,7 +41,7 @@ class RepositoryController extends Controller
     {
         // Validasi data input
         $validatedData = $request->validate([
-            'namaRepository' => 'required|string|max:255|unique:repository,nama_repository',
+            'namaRepository' => 'required|string|max:255',
             'kriteria' => 'required|integer'
         ]);
 
