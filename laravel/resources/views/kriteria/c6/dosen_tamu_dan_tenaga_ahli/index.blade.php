@@ -66,10 +66,10 @@
                 @foreach($items as $item)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $item->dosen->nama }}</td>
+                  <td>{{ $item->nama }}</td>
                   <td>{{ $item->nama_lembaga }}</td>
                   <td>{{ $item->kepakaran }}</td>
-                  <td>{{ $item->matakuliah->nama }}</td>
+                  <td>kode : {{$item->matakuliah->kode_mk}}<br> matkul : {{ $item->matakuliah->nama }}<br>sks : {{$item->matakuliah->sks}}<br>Semester : {{$item->matakuliah->semester}}</td>
                   <td>{{ $item->waktu_kegiatan }}</td>
                   <td>
                       <a href="{{$item->tautan}}">
