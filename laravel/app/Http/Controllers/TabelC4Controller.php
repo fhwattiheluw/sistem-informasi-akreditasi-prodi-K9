@@ -596,12 +596,13 @@ class TabelC4Controller extends Controller
     public function pengembangan_kompetensi_dtps_index()
     {
         $tahun_sekarang = date('Y');
-        $tahun_ts1 = date('Y') - 1;
-        $tahun_ts2 = date('Y') - 2;
+        $tahun_ts = date('Y') - 1;
+        $tahun_ts1 = date('Y') - 2;
+        $tahun_ts2 = date('Y') - 3;
 
         if(Auth::user()->role == 'fakultas'){
             $items_ts = TabelK4PengembanganKompetensiDTPS::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
-                ->whereYear('waktu',$tahun_sekarang)
+                ->whereYear('waktu','>=',$tahun_ts)
                 ->get();
             $items_ts1 = TabelK4PengembanganKompetensiDTPS::where('prodi_id', $this->akunController->get_session_prodi_by_fakultas())
                 ->whereYear('waktu',$tahun_ts1)
@@ -610,7 +611,7 @@ class TabelC4Controller extends Controller
                 ->whereYear('waktu',$tahun_ts2)
                 ->get();
         }else{
-            $items_ts = TabelK4PengembanganKompetensiDTPS::where('prodi_id', auth()->user()->prodi_id)->whereYear('waktu',$tahun_sekarang)->get();
+            $items_ts = TabelK4PengembanganKompetensiDTPS::where('prodi_id', auth()->user()->prodi_id)->whereYear('waktu','>=',$tahun_ts)->get();
             $items_ts1 = TabelK4PengembanganKompetensiDTPS::where('prodi_id', auth()->user()->prodi_id)->whereYear('waktu',$tahun_ts1)->get();
             $items_ts2 = TabelK4PengembanganKompetensiDTPS::where('prodi_id', auth()->user()->prodi_id)->whereYear('waktu',$tahun_ts2)->get();
         }
