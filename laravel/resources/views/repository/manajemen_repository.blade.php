@@ -4,9 +4,12 @@
 <div class="content-wrapper pb-0">
   <div class="page-header flex-wrap">
     <div class="header-left">
+      @if(auth()->user()->role == 'admin prodi')
       <a href="/repository/form">
         <button class="btn btn-outline-primary mb-2 mb-md-0 mr-2">Buat repository</button>
       </a>
+      @endif
+
     </div>
     <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
       <div class="d-flex align-items-center">
@@ -24,13 +27,14 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <form action="{{ route('repository.semua') }}" method="GET"> 
+          <form action="{{ route('repository.semua') }}" method="GET">
             <div class="form-group">
               <label for="kriteria">Filter Kriteria:</label>
               <select class="form-control" id="kriteria" name="kriteria">
-                @for ($i = 2; $i <= 9; $i++)
-                  <option value="{{ $i }}" {{ request('kriteria') == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
+                @for ($i = 1; $i <= 9; $i++)
+                <option value="{{ $i }}" {{ request('kriteria') == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
                 @endfor
+
               </select>
             </div>
             <button type="submit" class="btn btn-primary">Filter</button>
@@ -46,20 +50,20 @@
         <div class="card-body">
           <h5 class="card-title">Manajemen repository</h5>
           @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              {{ session('success') }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           @endif
           @if(session('error'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              {{ session('error') }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           @endif
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -67,6 +71,9 @@
                 <tr>
                   <th>Nama Repository</th>
                   <th>Kriteria</th>
+                  @if(auth()->user()->role == 'admin prodi')
+                  <th>Atur untuk menampilkan repository</th>
+                  @endif
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -75,19 +82,24 @@
                 <tr>
                   <td>
                     @if(strlen($repository->nama_repository) > 20)
-                      <div class="text-wrap">{{ $repository->nama_repository }}</div>
+                    <div class="text-wrap">{{ $repository->nama_repository }}</div>
                     @else
-                      {{ $repository->nama_repository }}
+                    {{ $repository->nama_repository }}
                     @endif
                   </td>
                   <td>Kriteria {{ $repository->kriteria }}</td>
+                  @if(auth()->user()->role == 'admin prodi')
+                  <td>{{ $repository->view == 'true' ? 'asesor diperbolehkan untuk melihat' : 'hanya khusus admin prodi' }}</td>
+                  @endif
                   <td>
-                    <a href="/repository/show/{{ $repository->id }}" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-folder-open"></i></a>
+                    <a href="/repository/show/{{ $repository->encrypted_id }}" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-folder-open"></i></a>
+                    @if(auth()->user()->role == 'admin prodi')
                     <a href="{{ route('repository.edit', $repository->id) }}" class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
                     <a href="{{ route('repository.delete', $repository->id) }}" class="btn btn-danger btn-xs" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
-                    <button onclick="navigator.clipboard.writeText('{{ route('repository.show', $repository->id) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank">
+                    <button onclick="navigator.clipboard.writeText('{{ route('repository.show',  $repository->encrypted_id) }}'); alert('Tautan telah disalin ke papan klip.');" class="btn btn-info btn-xs" target="_blank">
                       <i class="fa fa-link"></i>
-                  </button>
+                    </button>
+                    @endif
                   </td>
                 </tr>
                 @empty
@@ -119,8 +131,7 @@
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('.table').DataTable();
+  $('.table').DataTable();
 });
 </script>
 @endsection
-
