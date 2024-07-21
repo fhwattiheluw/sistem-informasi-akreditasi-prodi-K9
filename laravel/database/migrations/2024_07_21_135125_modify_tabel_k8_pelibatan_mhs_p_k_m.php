@@ -32,16 +32,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tabel_k8_pelibatan_mhs_pkms', function (Blueprint $table) {
-            // Change the column back to INT and rename it
-            $table->integer('dosen_anggota')->nullable(false)->change();
-            $table->renameColumn('dosen_anggota', 'dosen_anggota_id');
-
-            // Add the foreign key constraint back
-            $table->foreign('dosen_anggota_id')
-                  ->references('id')
-                  ->on('tabel_dosen')
-                  ->onDelete('cascade');
-        });
+        
+        Schema::dropIfExists('tabel_k8_pelibatan_mhs_pkms');
     }
 };
