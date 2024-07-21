@@ -21,7 +21,7 @@ return new class extends Migration
             $table->renameColumn('dosen_anggota_id', 'dosen_anggota');
 
             // Change the column type to VARCHAR(255) and allow NULL
-            $table->string('dosen_anggota', 255)->nullable()->change();
+            // $table->string('dosen_anggota', 255)->nullable()->change();
         });
     }
 
