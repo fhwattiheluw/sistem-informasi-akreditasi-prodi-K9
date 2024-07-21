@@ -26,7 +26,7 @@
       <form class="card forms-sample" action="{{isset($item->id) ?  route('dosen_tamu_dan_tenaga_ahli.update', ['id' => Crypt::encryptString($item->id)])  : route('dosen_tamu_dan_tenaga_ahli.store')}}" method="post">
         @if(isset($item->id))
         @method('PUT')
-        @endif  
+        @endif
         @csrf
         <div class="card-body">
           <h4 class="card-title">
@@ -48,19 +48,12 @@
           </div>
           @endif
           <hr>
-          
+
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Dosen</label>
             <div class="col-sm-9">
-              <select class="form-control @error('nidn_nidk') is-invalid @enderror" name="nidn_nidk">
-                <option value="">Pilih</option>
-                @foreach($dosens as $dosen)
-                <option value="{{ $dosen->nidn_nidk }}" 
-                  @if(old('nidn_nidk', isset($item->nidn_nidk) ? $item->nidn_nidk : '')  == $dosen->nidn_nidk) selected @endif>
-                  {{ $dosen->nama }}</option>
-                  @endforeach
-                </select>
-                @error('nidn_nidk')
+              <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', isset($item->nama) ? $item->nama : '') }}" placeholder="ketik disini" autofocus>
+                @error('nama')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
@@ -92,9 +85,9 @@
                 <select class="form-control @error('mk_id') is-invalid @enderror" name="mk_id">
                   <option value="">Pilih</option>
                   @foreach($matakuliah as $mk)
-                  <option value="{{ $mk->kode_mk }}" 
-                    @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->kode_mk) selected @endif>
-                    {{ $mk->nama }}</option>
+                  <option value="{{ $mk->id }}"
+                    @if(old('mk_id', isset($item->mk_id) ? $item->mk_id : '')  == $mk->id) selected @endif>
+                    kode : {{$mk->kode_mk}}|matkul : {{ $mk->nama }}|sks : {{$mk->sks}}|Semester : {{$mk->semester}}</option>
                     @endforeach
                   </select>
                   @error('mk_id')
@@ -158,4 +151,3 @@
     </script>
 
     @endsection
-

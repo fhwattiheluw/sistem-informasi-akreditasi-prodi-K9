@@ -66,8 +66,8 @@ class DosenController extends Controller
             'pendidikan' => 'required',
             'bidang_keahlian' => 'required',
             'sesuai_ps' => 'required',
-            'tautan' => 'nullable|url',
-            
+            'tautan' => 'nullable',
+
         ]);
 
         if ($validator->fails()) {
@@ -127,7 +127,7 @@ class DosenController extends Controller
             'pendidikan' => 'required',
             'bidang_keahlian' => 'required',
             'sesuai_ps' => 'required',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -175,4 +175,3 @@ class DosenController extends Controller
         return Dosen::where('prodi_id', $prodi_id)->get();
     }
 }
-

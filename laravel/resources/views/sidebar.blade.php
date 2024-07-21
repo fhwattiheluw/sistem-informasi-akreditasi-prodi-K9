@@ -114,28 +114,34 @@
                 <span class="menu-title">K.9 Luaran dan Capaian Tridharma</span>
             </a>
         </li>
-        @if(auth()->user()->role == 'admin prodi')
+        @if(auth()->user()->role != 'fakultas')
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Repository</span>
         </li>
+          @if(auth()->user()->role == 'admin prodi')
         <li class="nav-item">
             <a class="nav-link" href="/repository/form">
                 <i class="mdi mdi-folder-plus menu-icon"></i>
                 <span class="menu-title">Tambah repository</span>
             </a>
         </li>
+        @endif
+        
         <li class="nav-item">
             <a class="nav-link" href="/repository/semua">
                 <i class="mdi mdi-database menu-icon"></i>
                 <span class="menu-title">Manajemen repository</span>
             </a>
         </li>
+
+        @if(auth()->user()->role == 'admin prodi')
         <li class="nav-item">
             <a class="nav-link" href="/dokumen">
                 <i class="mdi mdi-file-document-outline menu-icon"></i>
                 <span class="menu-title">Semua dokumen</span>
             </a>
         </li>
+        @endif
         @endif
         <li class="pt-2 pb-1">
             <span class="nav-item-head">Menu akun</span>

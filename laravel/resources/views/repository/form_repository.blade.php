@@ -25,48 +25,53 @@
       <form class="card" action="{{ isset($repository) ? route('repository.update', $repository->id) : route('repository.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if(isset($repository))
-          @method('PUT')
+        @method('PUT')
         @endif
         <div class="card-body">
 
-      <!-- Tempat untuk notifikasi -->
-      @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong><i class="bi bi-check-circle-fill"></i> Berhasil!</strong> {{ session('success') }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      @endif
+          <!-- Tempat untuk notifikasi -->
+          @if (session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-check-circle-fill"></i> Berhasil!</strong> {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          @endif
 
-          <h4 class="card-title">{{ isset($repository) ? 'Edit Repository' : 'Unggah Repository Baru' }}</h4>
+          <h4 class="card-title">{{ isset($repository) ? 'Edit Repository' : 'Tambah Repository Baru' }}</h4>
           <div class="form-group">
             <label for="namaRepository">Nama Repository</label>
-            <input type="text" class="form-control" id="namaRepository" name="namaRepository" placeholder="Masukkan nama repository" autofocus value="{{ isset($repository) ? $repository->nama_repository : '' }}">
+            <input type="text" class="form-control @error('namaRepository') is-invalid @enderror" id="namaRepository" name="namaRepository" placeholder="Masukkan nama repository" autofocus value="{{ isset($repository) ? $repository->nama_repository : old('namaRepository') }}" autofocus>
             @error('namaRepository')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+            <small style="color:red">{{$message}}</small>
             @enderror
           </div>
           <div class="form-group">
             <label for="kriteria">Kriteria</label>
-            <select class="form-control" id="kriteria" name="kriteria">
-              @for ($i = 2; $i <= 9; $i++)
-                <option value="{{ $i }}" {{ isset($repository) && $repository->kriteria == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
+            <select class="form-control @error('kriteria') is-invalid @enderror" id="kriteria" name="kriteria">
+              <option value="">Pilih</option>
+              @for ($i = 1; $i <= 9; $i++)
+              <option value="{{ $i }}" {{ isset($repository) && $repository->kriteria == $i ? 'selected' : '' }}>Kriteria {{ $i }}</option>
               @endfor
+
+
             </select>
             @error('kriteria')
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error!</strong> {{ $message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+            <small style="color:red">{{$message}}</small>
             @enderror
+          </div>
+          <div class="form-group">
+            <label for="">Atur untuk menampilkan repository:</label>
+            <select class="form-control @error('view') is-invalid @enderror" name="view">
+              <option value="" >pilih</option>
+              <option value="true"  {{ isset($repository) && $repository->view == 'true' ? 'selected' : '' }}>asesor diperbolehkan untuk melihat</option>
+              <option value="false" {{ isset($repository) && $repository->view == 'false' ? 'selected' : '' }}>hanya khusus admin prodi</option>
+            </select>
+            @error('view')
+            <small style="color:red">{{$message}}</small>
+            @enderror
+
           </div>
           <button type="submit" class="btn btn-primary" onclick="this.disabled=true;this.form.submit();this.innerText='Loading...';">{{ isset($repository) ? 'Simpan Perubahan' : 'Unggah' }}</button>
         </div>

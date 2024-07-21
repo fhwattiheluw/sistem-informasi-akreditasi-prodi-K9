@@ -34,7 +34,7 @@ class UserFactory extends Factory
     {
         // merupakan user default untuk admin fakutlas
         // admin fakultas tidak bisa di tambahkan
-        return $this->state(function (array $attributes) {  
+        return $this->state(function (array $attributes) {
             return [
                 'name' => "Admin prodi bahasa arab",
                 'email' => "prodibahasaarab@admin.ac.id",
@@ -45,15 +45,15 @@ class UserFactory extends Factory
                 'remember_token' => Str::random(10),
             ];
         });
-        
+
     }
 
-    
+
     public function AdminProdiIPA()
     {
         // merupakan user default untuk admin fakutlas
         // admin fakultas tidak bisa di tambahkan
-        return $this->state(function (array $attributes) {  
+        return $this->state(function (array $attributes) {
             return [
                 'name' => "Admin prodi IPA",
                 'email' => "prodipa@admin.ac.id",
@@ -64,14 +64,14 @@ class UserFactory extends Factory
                 'remember_token' => Str::random(10),
             ];
         });
-        
+
     }
 
     public function asesor()
     {
         // merupakan user default untuk admin fakutlas
         // admin fakultas tidak bisa di tambahkan
-        return $this->state(function (array $attributes) {  
+        return $this->state(function (array $attributes) {
             return [
                 'name' => "asesor prodi bahasa arab",
                 'email' => "asesorprodibahasaarab@admin.ac.id",
@@ -82,11 +82,11 @@ class UserFactory extends Factory
                 'remember_token' => Str::random(10),
             ];
         });
-        
+
     }
 
 
-    
+
 
 
 

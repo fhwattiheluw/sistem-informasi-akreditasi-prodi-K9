@@ -317,7 +317,7 @@ class TabelC9Controller extends Controller
             'jumlah_lulus_ts_2' => 'required|integer',
             'jumlah_lulus_ts_1' => 'required|integer',
             'jumlah_lulus_ts' => 'required|integer',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         $existingRecord = tabelK9masaStudi::where('tahun_masuk', $request->tahun_masuk)
@@ -377,7 +377,7 @@ class TabelC9Controller extends Controller
           'jumlah_lulus_ts_2' => 'required|integer',
           'jumlah_lulus_ts_1' => 'required|integer',
           'jumlah_lulus_ts' => 'required|integer',
-          'tautan' => 'nullable|url',
+          'tautan' => 'nullable',
       ]);
 
       // Temukan record berdasarkan ID dan prodi_id dari user yang sedang login
@@ -465,7 +465,7 @@ class TabelC9Controller extends Controller
             'waktu_tunggu_wt36' => 'required|integer',
             'waktu_tunggu_wt612' => 'required|integer',
             'waktu_tunggu_wt12' => 'required|integer',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
 
@@ -513,7 +513,7 @@ class TabelC9Controller extends Controller
             'waktu_tunggu_wt36' => 'required|integer',
             'waktu_tunggu_wt612' => 'required|integer',
             'waktu_tunggu_wt12' => 'required|integer',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         TabelK9TracerStudi::findorfail($id)->update([
@@ -582,7 +582,7 @@ class TabelC9Controller extends Controller
             'relevansi_tinggi' => 'required|integer',
             'relevansi_sedang' => 'required|integer',
             'relevansi_rendah' => 'required|integer',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
 
@@ -628,7 +628,7 @@ class TabelC9Controller extends Controller
             'relevansi_tinggi' => 'required|integer',
             'relevansi_sedang' => 'required|integer',
             'relevansi_rendah' => 'required|integer',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
 
@@ -710,7 +710,7 @@ class TabelC9Controller extends Controller
             'cukup' => 'required',
             'kurang' => 'required',
             'tindak_lanjut' => 'required',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         // Add 'prodi_id' to the validated data
@@ -762,7 +762,7 @@ class TabelC9Controller extends Controller
             'cukup' => 'required',
             'kurang' => 'required',
             'tindak_lanjut' => 'required',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         // Find the record based on the $id
@@ -989,7 +989,7 @@ class TabelC9Controller extends Controller
             'nama_penerbit' => 'required',
             'nomor_halaman' => 'required',
             'jumlah_sitasi' => 'required|numeric',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         TabelK9KaryaDisitasi::create([
@@ -1041,7 +1041,7 @@ class TabelC9Controller extends Controller
             'nama_penerbit' => 'required',
             'nomor_halaman' => 'required',
             'jumlah_sitasi' => 'required|numeric',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         // dd("berhasil");
@@ -1116,7 +1116,7 @@ class TabelC9Controller extends Controller
             'nama_mahasiswa' => 'required|string|max:255',
             'nama_produk' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
 
@@ -1162,7 +1162,7 @@ class TabelC9Controller extends Controller
             'nama_mahasiswa' => 'required|string|max:255',
             'nama_produk' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
 
@@ -1232,7 +1232,7 @@ class TabelC9Controller extends Controller
             'nama_mahasiswa' => 'required',
             'identitas_produk' => 'required',
             'tahun' => 'required|numeric',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         TabelK9ProdukHki::create([
@@ -1279,7 +1279,7 @@ class TabelC9Controller extends Controller
             'nama_mahasiswa' => 'required',
             'identitas_produk' => 'required',
             'tahun' => 'required|numeric',
-            'tautan' => 'nullable|url',
+            'tautan' => 'nullable',
         ]);
 
         TabelK9ProdukHki::where('id', $id)->update([

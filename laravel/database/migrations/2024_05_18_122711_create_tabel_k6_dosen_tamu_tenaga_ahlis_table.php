@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tabel_k6_dosen_tamu_tenaga_ahlis', function (Blueprint $table) {
             $table->id();
-            $table->string('nidn_nidk');
+            $table->string('nama');
             $table->string('nama_lembaga');
             $table->string('kepakaran');
             $table->date('waktu_kegiatan');
@@ -23,7 +23,6 @@ return new class extends Migration
             $table->unsignedBigInteger('mk_id');
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('mk_id')->references('id')->on('tabel_matakuliah')->onDelete('cascade');
-            $table->foreign('nidn_nidk')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });

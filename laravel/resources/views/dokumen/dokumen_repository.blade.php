@@ -52,7 +52,7 @@
                   <td>2023</td>
                   <td>Keterangan untuk Repository {{ $i }}</td>
                   <td>
-                    <button class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-eye"></i></button>
+                    <a href="#" onclick="openPopupDokumen('{{ asset($doc->path) }}')" class="btn btn-primary btn-xs" title="Lihat"><i class="fa fa-eye"></i></a>
                     <button class="btn btn-info btn-xs" title="Lihat Folder"><i class="fa fa-folder-open"></i></button>
                     <button class="btn btn-warning btn-xs" title="Edit"><i class="fa fa-edit"></i></button>
                     <button class="btn btn-danger btn-xs" title="Hapus"><i class="fa fa-trash"></i></button>
@@ -85,5 +85,15 @@
 $(document).ready(function() {
     $('.table').DataTable();
 });
+
+function openPopupDokumen(url) {
+    var width = 500; // Width of the popup window
+    var height = 600; // Height of the popup window
+    var leftPosition = (screen.width - width) / 2;
+    var topPosition = (screen.height - height) / 2;
+    var popupOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=' + width + ', height=' + height + ', top=' + topPosition + ', left=' + leftPosition;
+
+    window.open(url, 'Popup', popupOptions);
+}
 </script>
 @endsection

@@ -81,12 +81,12 @@
                     @endif
                   </td>
                   <td>
-                     @if(strlen($doc->nama_dokumen) > 20) 
+                     @if(strlen($doc->nama_dokumen) > 20)
                      <div class="text-wrap">
-                      <a href="/repository/show/{{ $repo->id }}"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a>
+                      <a href="/repository/show/@encrypt($repo->id)"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a>
                     </div>
                     @else
-                    <a href="/repository/show/{{ $repo->id }}"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a>
+                    <a href="/repository/show/@encrypt($repo->id)"><i class="fa fa-folder-open"></i>{{ $repo->nama_repository }}</a>
                       @endif
                   </td>
                   <td>Kriteria {{ $repo->kriteria }}</td>

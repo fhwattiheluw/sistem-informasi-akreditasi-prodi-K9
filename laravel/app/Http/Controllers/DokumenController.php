@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dokumen;
 use App\Models\Repository; // Menambahkan model Repository
 use Illuminate\Support\Facades\Storage; // Menambahkan use statement untuk menggunakan kelas Storage
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 
 class DokumenController extends Controller
@@ -37,7 +37,7 @@ class DokumenController extends Controller
     {
         return view('dokumen.form_dokumen');
     }
-    
+
 
     /**
      * Menyimpan dokumen baru.
@@ -169,4 +169,3 @@ class DokumenController extends Controller
 }
 
 }
-
