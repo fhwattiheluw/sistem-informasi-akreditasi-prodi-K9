@@ -52,8 +52,8 @@
                   <th rowspan="2">Judul Penelitian</th>
                   <th rowspan="2">Nama Ketua Tim</th>
                   <th rowspan="2">Kepakaran Ketua Tim*</th>
-                  <th rowspan="2">Nama dan Identitas Dosen Anggota Penelitian</th>
-                  <th rowspan="2">Nama dan Identitas Mahasiswa yang dilibatkan</th>
+                  <th rowspan="2">Nama dan Identitas Dosen Anggota</th>
+                  <th rowspan="2">Nama dan Identitas Mahasiswa</th>
                   <th rowspan="2">Bukti/Tautan</th>
                   @if(auth()->user()->role == 'admin prodi')
                   <th rowspan="2">Aksi</th>
@@ -67,7 +67,7 @@
                   <td>{{$item->judul}}</td>
                   <td>{{$item->dosen_ketua->nama}}</td>
                   <td>{{$item->kepakaran_ketua}}</td>
-                  <td>{{$item->dosen_anggota->nama}}</td>
+                  <td>{{$item->dosen_anggota != NULL ? $item->dosen_anggota : '-'}}</td>
                   <td>{{$item->mahasiswa}}</td>
                   <td> 
                       <a href="{{$item->tautan}}">

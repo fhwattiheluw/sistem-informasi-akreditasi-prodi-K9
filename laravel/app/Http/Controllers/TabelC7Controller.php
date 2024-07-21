@@ -62,7 +62,6 @@ class TabelC7Controller extends Controller
             'judul' => 'required', 
             'dosen_ketua_id' => 'required', 
             'kepakaran_ketua' => 'required', 
-            'dosen_anggota_id' => 'required', 
             'mahasiswa' => 'required', 
             'tautan' => 'required', 
         ], [
@@ -77,7 +76,7 @@ class TabelC7Controller extends Controller
                 'judul' => $request->judul,
                 'dosen_ketua_id' => $request->dosen_ketua_id,
                 'kepakaran_ketua' => $request->kepakaran_ketua,
-                'dosen_anggota_id' => $request->dosen_anggota_id,
+                'dosen_anggota' => $request->dosen_anggota,
                 'mahasiswa' => $request->mahasiswa,
                 'tautan' => $request->tautan,
                 'prodi_id' => $prodiId
@@ -108,7 +107,6 @@ class TabelC7Controller extends Controller
             'judul' => 'required', 
             'dosen_ketua_id' => 'required', 
             'kepakaran_ketua' => 'required', 
-            'dosen_anggota_id' => 'required', 
             'mahasiswa' => 'required', 
             'tautan' => 'required', 
         ], [
@@ -123,7 +121,7 @@ class TabelC7Controller extends Controller
                 'judul' => $request->judul,
                 'dosen_ketua_id' => $request->dosen_ketua_id,
                 'kepakaran_ketua' => $request->kepakaran_ketua,
-                'dosen_anggota_id' => $request->dosen_anggota_id,
+                'dosen_anggota' => $request->dosen_anggota,
                 'mahasiswa' => $request->mahasiswa,
                 'tautan' => $request->tautan,
             ]);

@@ -19,12 +19,11 @@ return new class extends Migration
             $table->string('judul');
             $table->string('dosen_ketua_id');
             $table->string('kepakaran_ketua');
-            $table->string('dosen_anggota_id');
+            $table->string('dosen_anggota')->nullable();
             $table->string('mahasiswa');
             $table->string('tautan');
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('dosen_ketua_id')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
-            $table->foreign('dosen_anggota_id')->references('nidn_nidk')->on('tabel_dosen')->onDelete('cascade');
             $table->foreign('prodi_id')->references('id')->on('data_program_studis')->onDelete('cascade');
             $table->timestamps();
         });

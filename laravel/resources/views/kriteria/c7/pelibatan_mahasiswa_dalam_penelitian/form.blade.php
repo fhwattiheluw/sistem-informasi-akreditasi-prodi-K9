@@ -102,16 +102,8 @@
 <div class="form-group row">
   <label class="col-sm-3 col-form-label">Dosen Anggota</label>
   <div class="col-sm-9">
-    <select class="form-control @error('dosen_anggota_id') is-invalid @enderror" name="dosen_anggota_id">
-      <option value="">Pilih</option>
-      @foreach($dosens as $dosen)
-        <option value="{{ $dosen->nidn_nidk }}"
-          @if(old('dosen_anggota_id', isset($item->dosen_anggota_id) ? $item->dosen_anggota_id : '') == $dosen->nidn_nidk) selected @endif>
-          {{ $dosen->nidn_nidk }} | {{ $dosen->nama }}
-        </option>
-      @endforeach
-    </select>
-    @error('dosen_anggota_id')
+  <input type="text" name="dosen_anggota" value="{{ old('dosen_anggota', isset($item->dosen_anggota) ? $item->dosen_anggota : '') }}" class="form-control @error('kepakaran_ketua') is-invalid @enderror" placeholder="Ketik disini">    
+    @error('dosen_anggota')
       <div class="invalid-feedback">{{ $message }}</div>
     @enderror
   </div>

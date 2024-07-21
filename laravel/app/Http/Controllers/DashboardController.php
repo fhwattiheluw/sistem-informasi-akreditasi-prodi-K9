@@ -44,7 +44,23 @@ class DashboardController extends Controller
             $prodiID = auth()->user()->prodi_id;
         }
 
-        $jumlah_user = User::where('prodi_id', $prodiID)->count();
+        // $jumlah_user = User::where('prodi_id', $prodiID)->count();
+        if(auth()->user()->role == 'fakultas') {
+            $jumlah_user = User::where('id', '!=', 1)
+            ->where('role', "!=", "asesor")
+            ->where('role', '!=', 'root')
+            ->whereHas('prodi', function ($query) {
+                $query->where('fakultas_id', Auth::user()->prodi->fakultas_id);
+            })
+            ->count();
+        } else {
+            $jumlah_user = User::where('id', '!=', 1)
+            ->where('prodi_id', auth()->user()->prodi->id)
+            ->where('role', "!=", "fakultas")
+            ->where('role', '!=', 'root')
+            ->count();
+        }
+
 
         $data_mhs = $items = TabelK3MahasiswaReguler::where('prodi_id', $prodiID)
             ->whereBetween('tahun_akademik', [$tahun_terakhir, $tahun_sekarang])
