@@ -32,7 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        
-        Schema::dropIfExists('tabel_k8_pelibatan_mhs_pkms');
+        // Schema::dropIfExists('tabel_k8_pelibatan_mhs_pkms');
     }
 };
